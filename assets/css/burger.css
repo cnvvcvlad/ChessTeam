@@ -1,0 +1,116 @@
+@media all and (max-width: 1024px) {
+
+    /*style du burger*/
+    #menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 30px;
+        margin: 15px 0 20px 2px;
+        cursor: pointer;
+    }
+
+    .bar {
+        height: 5px;
+        width: 100%;
+        background-color: #b81568;
+        display: block;
+        border-radius: 5px;
+        transition: 0.5s ease;
+    }
+
+    #bar1 {
+        transform: translateY(-4px);
+    }
+
+    #bar3 {
+        transform: translateY(4px);
+    }
+
+    /*style du menu*/
+    .navigate li a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .navigate li a:hover {
+        font-weight: bold;
+    }
+
+    .navigate li {
+        list-style: none;
+        padding: 1px 0;
+    }
+
+    .navigate {
+        padding: 0;
+        transition: 0.3s ease;
+        display: none;
+        margin-left: -100px;
+    }
+
+    #menu-bar {
+        position: absolute;
+        top: 0;
+
+    }
+
+    .menu-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 0;
+        height: 0;
+        margin: 20px 0 10px 10px;
+        background: radial-gradient(circle, #ee9944, #b8b8b8);
+        transition: 0.3s ease;
+        border-radius: 50%;
+    }
+
+    #menu-bar {
+        z-index: 2;
+    }
+
+    .change-bg {
+        width: 500px;
+        height: 500px;
+        transform: translate(-40%, -40%);
+        opacity: 0.7;
+        top: 130px;
+    }
+
+    ul .sous-menu {
+        margin-left: -2px;
+        margin-top: 28px;
+        min-width: 35vw;
+    }
+
+    /*Instruction JS*/
+    .change {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .change .bar {
+        background-color: blue;
+    }
+
+    .change #bar1 {
+        transform: translateY(4px) rotateZ(-45deg);
+    }
+
+    .change #bar3 {
+        transform: translateY(-6px) rotateZ(45deg);
+    }
+
+    .change #bar2 {
+        opacity: 0;
+    }
+
+}
+  
+  
