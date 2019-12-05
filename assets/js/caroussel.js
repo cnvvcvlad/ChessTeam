@@ -101,6 +101,6 @@ function playPauseSlides() {
     }else {
         clearInterval(timer);
         timer = null;
-        playPauseBtn.style.backgroundPositionY = "-33px";
+        playPauseBtn.style.backgroundPositionY = "-40px";
     }
 }
