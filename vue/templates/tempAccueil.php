@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title><?= $title; ?></title>
-    <meta name="description" content="<?= $description; ?>" />
+    <meta name="description" content="<?= $description; ?>"/>
     <!-- css perso -->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/caroussel.css" type="text/css">
@@ -19,84 +19,123 @@
         <div class="en-tete">
 
             <div class="logo">
-                <a  href="?action=home"><img src="assets/img/logo/logo.png" alt="Le logo du Chess Team Nogent sur Marne" title="Logo"/></a>
+                <a href="?action=home"><img src="assets/img/logo/logo.png" alt="Le logo du Chess Team Nogent sur Marne"
+                                            title="Logo"/></a>
             </div>
-            <nav class="navigation">
-                <div id="menu-bar">
-                    <div id="menu" onclick="onClickMenu()">
-                        <div id="bar1" class="bar"></div>
-                        <div id="bar2" class="bar"></div>
-                        <div id="bar3" class="bar"></div>
-                    </div>
-                    <ul class="navigate" id="navigate">
-                        <li><a href="?action=home">Page d'accueil</a></li>
-                        
-                        
-                        
-                        <?php if (isConnected()) : ?>
-                            <li><a href="?action=myAccount&amp;id=<?= $_SESSION['id_user'] ?>">Mon Compte</a></li>
-                            <li><a href="?action=myArticlesId&amp;id=<?= $_SESSION['id_user'] ?>">Mes articles</a></li>
-                            <li><a href="?action=createArticleId">Créer un article</a></li>
+            <object>
+                <nav class="navigation">
+                    <div id="menu-bar">
+                        <div id="menu" onclick="onClickMenu()">
+                            <div id="bar1" class="bar"></div>
+                            <div id="bar2" class="bar"></div>
+                            <div id="bar3" class="bar"></div>
+                        </div>
+                        <ul class="navigate" id="navigate">
+                            <li>
+                                <div class="list_style"><a href="?action=home">Accueil</a></div>
+                            </li>
 
-                            <?php if (isAdmin()) : ?>
-                                <li><a href="?action=allMembers">Membres</a></li>
-                                <li><a href="?action=deconnect">Déconnexion</a></li>
+
+                            <?php if (isConnected()) : ?>
+                                <li>
+                                    <div class="list_style"><a
+                                            href="?action=myAccount&amp;id=<?= $_SESSION['id_user'] ?>">Mon Compte</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list_style"><a
+                                            href="?action=myArticlesId&amp;id=<?= $_SESSION['id_user'] ?>">Mes
+                                            articles</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list_style"><a href="?action=createArticleId">Créer article</a></div>
+                                </li>
+                                <li class="deconnection">
+                                    <div class="list_style"><a
+                                            href="?action=deconnect">Déconnexion</a>
+                                    </div>
+                                </li>
+
+                                <?php if (isAdmin()) : ?>
+                                    <li>
+                                        <div class="list_style"><a href="?action=allMembers">Membres</a></div>
+                                    </li>
+
+                                <?php endif; ?>
+
+                            <?php else : ?>
+                                <li>
+                                    <div class="list_style"><a href="?action=connexion">Connection</a></div>
+                                </li>
+                                <li>
+                                    <div class="list_style"><a href="?action=inscription">Inscription</a></div>
+                                </li>
                             <?php endif; ?>
+                            <li>
+                                <div class="list_style"><a href="?action=allArticles">Articles</a></div>
+                            </li>
+                            <li class="has-children">
+                                <div class="list_style"><a
+                                        href="<?php if (isAdmin()) : ?>?action=allCategory<?php endif; ?>">Catégories</a>
+                                </div>
 
-                        <?php else : ?>
-                            <li><a href="?action=connexion">Connectez-vous</a></li>
-                            <li><a href="?action=inscription">Inscription</a></li>
-                        <?php endif; ?>
-                        <li><a href="?action=allArticles">Tous les articles</a>
-                        <li class="has-children"><a href="<?php if (isAdmin()) : ?>?action=allCategory<?php endif; ?>">Catégories</a>
-                        
-                        <ul class="sous-menu">
-                        <?php foreach ($allCategory as $cat => $values) : ?>
-                            <li><a href="?action=categoryId&amp;id=<?= $values->getId() ?>"><?= 'Catégorie ' . strtoupper($values->getTitle()); ?></a></li>
-                        <?php endforeach; ?>                                
+                                <ul class="sous-menu">
+                                    <?php foreach ($allCategory as $cat => $values) : ?>
+                                        <li>
+                                            <div class="list_style">
+                                                <a href="?action=categoryId&amp;id=<?= $values->getId() ?>"><?= strtoupper($values->getTitle()); ?></a>
+                                            </div>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
                         </ul>
-                    </li>
-                    </ul>
-                </div>
-            </nav>
+                    </div>
+                </nav>
+                <div class="memberInfo"><span><?= helloUser(); ?></span></div>
+
+            </object>
             <div class="menu-bg" id="menu-bg"></div>
             <div class="photo">
-                <div class="memberInfo"><span>Salut <?= helloUser(); ?></span></div>
 
-                <?php if (isConnected()) : ?>
-                    <?php if (empty($_SESSION['user_image'])) :?>
-                        <a href="assets/img/logo/pawn_logo.jpg"><img src="assets/img/logo/pawn_logo.jpg" alt="Photo de profil" title="Cliquez pour agrandir"   /></a>
-                        <?php else : ?>
-                <a href="assets/img/uploads/<?= $_SESSION['user_image'] ?>"><img src="assets/img/uploads/<?= $_SESSION['user_image'] ?>" alt="Photo de profil" title="Cliquez pour agrandir" height="100em"  /></a>     
-                <?php endif; ?>
-                            
+                <?php if (!isAdmin()) : ?>
+                    <?php if (empty($_SESSION['user_image'])) : ?>
+                        <a href="assets/img/logo/pawn_logo.jpg"><img src="assets/img/logo/pawn_logo.jpg"
+                                                                     alt="Photo de profil"
+                                                                     title="Cliquez pour agrandir"/></a>
+                    <?php else : ?>
+                        <a href="assets/img/uploads/<?= $_SESSION['user_image'] ?>"><img
+                                src="assets/img/uploads/<?= $_SESSION['user_image'] ?>" alt="Photo de profil"
+                                title="Cliquez pour agrandir" height="100em"/></a>
+                    <?php endif; ?>
+
                 <?php else : ?>
-                    <a href="assets/img/logo/pawn_logo.jpg"><img src="assets/img/logo/pawn_logo.jpg" alt="Photo de profil" title="Cliquez pour agrandir"   /></a>
+                    <a href="assets/img/logo/pawn_logo.jpg"><img src="assets/img/logo/pawn_logo.jpg"
+                                                                 alt="Photo de profil"
+                                                                 title="Cliquez pour agrandir"/></a>
 
                 <?php endif; ?>
-                
-                
-                
 
 
             </div>
+
         </div>
     </header>
 
 
     <main class="container">
-                        
+
         <?= $template; ?>
 
     </main>
     <footer>
-    
-
         <div class="pied-page">
             <div class="middle">
                 <div class="menu">
                     <li class="item" id="profile">
                         <a href="#profile" class="btn">Notre adresse</a>
+
                         <div class="smenu">
                             <h5>15 rue Général Faidherbe</h5>
                             <h5>94130 Nogent sur Marne</h5>
@@ -107,6 +146,7 @@
 
                     <li class="item" id="message">
                         <a href="#message" class="btn">Réseaux Sociaux</a>
+
                         <div class="smenu">
                             <a href="">Facebook</a>
                             <a href="">Twitter</a>
@@ -116,6 +156,7 @@
 
                     <li class="item" id="settings">
                         <a href="#settings" class="btn">FAQ</a>
+
                         <div class="smenu">
                             <a href="">Contactez-nous</a>
                             <a href="">Condition d'utilisation</a>

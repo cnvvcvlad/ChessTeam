@@ -112,6 +112,9 @@ try {
             'password' => $password,
             'user_image' => $user_image
         ]));
+
+
+
 //                var_dump(basename($_SERVER['HTTP_REFERER']));
 //                var_dump($_SERVER['HTTP_REFERER']);
         header("location:../index.php?action=home");

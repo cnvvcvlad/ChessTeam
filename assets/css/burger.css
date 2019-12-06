@@ -1,5 +1,10 @@
 @media all and (max-width: 1024px) {
 
+    .en-tete {
+        justify-content: space-around;
+    }
+
+
     /*style du burger*/
     #menu {
         display: flex;
@@ -19,6 +24,7 @@
         display: block;
         border-radius: 5px;
         transition: 0.5s ease;
+        /*margin-left: -87px;*/
     }
 
     #bar1 {
@@ -30,6 +36,11 @@
     }
 
     /*style du menu*/
+
+    .deconnection {
+        display: flex;
+    }
+
     .navigate li a {
         color: #fff;
         text-decoration: none;
@@ -37,23 +48,41 @@
 
     .navigate li a:hover {
         font-weight: bold;
+        border-radius: 5px;
+        color: #760001;
     }
 
     .navigate li {
-        list-style: none;
-        padding: 1px 0;
+        /*list-style: none;*/
+        padding-bottom: 2%;
     }
 
     .navigate {
-        padding: 0;
+        /*padding: 0;*/
         transition: 0.3s ease;
         display: none;
-        margin-left: -100px;
+        /*margin-left: -100px;*/
+        min-width: 160px;
+    }
+
+    .has-children > div:nth-child(1) {
+        padding: 0 0 10% 0;
+    }
+
+
+    .list_style {
+        min-height: 6vh;
+        min-width: 15vw;
+    }
+
+    .navigation a {
+        text-align: left;
     }
 
     #menu-bar {
         position: absolute;
         top: 0;
+        margin-left: -44%;
 
     }
 
@@ -61,7 +90,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 1;
+        z-index: 2;
         width: 0;
         height: 0;
         margin: 20px 0 10px 10px;
@@ -71,21 +100,30 @@
     }
 
     #menu-bar {
-        z-index: 2;
+        z-index: 3;
     }
 
     .change-bg {
-        width: 500px;
-        height: 500px;
+        width: 478px;
+        height: 635px;
         transform: translate(-40%, -40%);
         opacity: 0.7;
         top: 130px;
     }
 
     ul .sous-menu {
-        margin-left: -2px;
-        margin-top: 28px;
-        min-width: 35vw;
+        margin-top: 20%;
+        margin-left: -1px;
+        min-width: 30vw;
+        padding: 2%;
+    }
+
+    ul .sous-menu li .list_style {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        min-height: 5.5vh;
+        /*min-width: 25vw;*/
     }
 
     /*Instruction JS*/
@@ -93,6 +131,7 @@
         display: flex;
         flex-direction: column;
         margin-top: 0;
+        /*padding-bottom: 20%;*/
     }
 
     .change .bar {

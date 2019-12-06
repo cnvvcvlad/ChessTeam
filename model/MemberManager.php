@@ -71,7 +71,6 @@ class MemberManager extends DataBase
             $_SESSION['password'] = $user->getPassword();
             $_SESSION['user_image'] = $user->getUser_image();
             $_SESSION['statut'] = $user->getStatut();
-            // $request->closeCursor();
         } else {
             throw new Exception("Login et/ou mot de passe incorrect! Veuillez r�essayer !");
         }
@@ -91,7 +90,10 @@ class MemberManager extends DataBase
             "password" => $member->getPassword(),
             "user_image" => $member->getUser_image()
         ]);
-        $_SESSION['user_image'] = $member->getUser_image();
+
+        if(!isAdmin()) {
+            $_SESSION['user_image'] = $member->getUser_image();
+        }
         return $update;
     }
 

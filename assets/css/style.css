@@ -68,6 +68,13 @@
 
 }
 
+object {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 main {
     margin-left: 10%;
     max-width: 80%;
@@ -114,13 +121,21 @@ article {
     height: 700px;
     max-width: 700px;
     user-select: none;
-    /* position: relative; */
 }
 
 /*--------------------------------------------------------
            MIS EN PAGE
 --------------------------------------------------------*/
 /* Template En-téte*/
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 -17px 0;
+}
+
 
 .logo img {
     padding-left: 2px;
@@ -129,9 +144,14 @@ article {
     flex: 1;
     border-radius: 10px;
     margin-right: 3px;
+    margin-top: -14px;
 }
 
 /*Navigation*/
+
+.deconnection {
+    display: none;
+}
 
 nav {
     display: flex;
@@ -143,13 +163,18 @@ nav ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /*margin: auto;*/
-    /*padding: 10px 0;*/
     background: rgb(144, 192, 194);
     list-style: none;
     border-radius: 10px;
     border: solid 2px #006e8b;
-    box-shadow: inset 0px 0px 0px 1px #12a0bf, 0px 1px 4px 0px rgba(0, 0, 0, 0.9);
+    box-shadow: inset 0 0 0 1px #12a0bf, 0 1px 4px 0 rgba(0, 0, 0, 0.9);
+    /*border-radius: 5px;*/
+    /*border: solid 1px #006e8b;*/
+    padding: 0;
+}
+
+nav ul {
+
 }
 
 nav ul li {
@@ -178,24 +203,47 @@ nav a:hover {
     border-bottom: 1px solid #760001;
     text-decoration: none;
     border-radius: 10px;
+    font-weight: bold;
 }
 
 .navigation a {
-    padding: 0.3em;
     display: block;
     text-align: center;
     text-decoration: none;
     color: white;
 }
 
-.sous-menu > li:nth-child(n) > a:nth-child(1) {
+ul .sous-menu {
+    z-index: 1;
+    margin-left: -3%;
+    margin-top: 4.5%;
+}
+
+.list_style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 11vh;
+    min-width: 9vw;
+}
+
+.sous-menu > li:nth-child(n) > a:nth-child(0) {
     text-align: start;
 }
 
-.sous-menu {
-    margin-left: -2px;
-    margin-top: 28px;
-    min-width: 10vw;
+.sous-menu li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sous-menu .list_style {
+    min-height: 5vh;
+    min-width: 20vw;
+}
+
+.sous-menu .list_style a {
+    padding: 0;
 }
 
 #menu-bar {
@@ -206,14 +254,14 @@ nav a:hover {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 200px;
-    margin: 0 1px 0 5px;
+    width: 100px;
+    /*margin: 0 1px -14px -1px;*/
 }
 
 .photo img {
     box-shadow: 0px 0px 10px 0px tomato;
-    margin: 0 1px 0 20px;
-    width: 80%;
+    /*margin: 0 1px 0 2px;*/
+    width: 105%;
 }
 
 /* Main Vue */
@@ -303,6 +351,7 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 59vh;
 }
 
 .view {
@@ -620,18 +669,17 @@ section.content:nth-child(3) {
         width: 100px;
         max-height: 50px;
         border-radius: 5px;
+        margin-left: 56%;
+        /*margin-top: 1px;*/
 
     }
+
 
     nav {
         justify-content: flex-start;
     }
 
-    nav ul {
-        border-radius: 5px;
-        border: solid 1px #006e8b;
-        /* box-shadow: inset 0px 0px 0px 1px #12a0bf, 0px 1px 4px 0px rgba(0, 0, 0, 0.9); */
-    }
+
 
     li {
         width: 100%;
@@ -641,14 +689,13 @@ section.content:nth-child(3) {
         border-radius: 5px;
     }
 
-    nav a:hover {
-        border-radius: 5px;
-    }
 
     .memberInfo {
-        width: 80px;
-        margin-left: 1px;
+        /*width: 80px;*/
+        /*margin-left: 1px;*/
         font-size: 0.8em;
+        margin-left: 100%;
+        min-width: 20px;
     }
 
     #menu-bar {

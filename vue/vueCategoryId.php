@@ -50,7 +50,7 @@
             <div class="form-inscription">
                 <label for="">Description de la catégorie
                     <p><textarea required name="description" placeholder="Description de la catégorie" rows="5"
-                                 cols="33"></textarea></p>
+                                 cols="33"><?= $value->getDescription() ?></textarea></p>
                 </label>
             </div>
             <div class="form-inscription">

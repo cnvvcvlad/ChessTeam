@@ -31,7 +31,7 @@ function isAdmin() {
 function helloUser() {
     if(isConnected()) {
 
-        echo (strtoupper(htmlspecialchars($_SESSION['login'])));
+        echo 'Salut ' . strtoupper(htmlspecialchars($_SESSION['login']));
     }
 }
 

@@ -46,13 +46,13 @@
                     <div class="form-inscription">
                         <label for="">Description de l'article
                             <p><textarea name="art_description" placeholder="Description de l'article" rows="5"
-                                         cols="33"></textarea></p>
+                                         cols="33"><?= $values->getArt_description() ?></textarea></p>
                         </label>
                     </div>
                     <div class="form-inscription">
                         <label for="">Contenu de l'article
                             <p><textarea name="art_content" placeholder="Contenu de l'article" rows="5"
-                                         cols="33"></textarea></p>
+                                         cols="33"><?= $values->getArt_content() ?></textarea></p>
                         </label>
                     </div>
                     <div class="form-inscription">

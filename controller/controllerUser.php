@@ -25,10 +25,10 @@ function getAllMembers()
 
 function showNameAuthor($user_id)
 {
-    $member_manager = new UsersManager();
-    $member = $member_manager->nameUser($user_id);
-    $login_user = implode($member);
-    return $login_user;
+        $member_manager = new UsersManager();
+        $member = $member_manager->nameUser($user_id);
+        $login_user = implode($member);
+        return $login_user;
 }
 
 function deleteUser($user_id)
