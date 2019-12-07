@@ -22,7 +22,7 @@
                 <a href="?action=home"><img src="assets/img/logo/logo.png" alt="Le logo du Chess Team Nogent sur Marne"
                                             title="Logo"/></a>
             </div>
-            <object>
+            <div class="objet">
                 <nav class="navigation">
                     <div id="menu-bar">
                         <div id="menu" onclick="onClickMenu()">
@@ -33,6 +33,24 @@
                         <ul class="navigate" id="navigate">
                             <li>
                                 <div class="list_style"><a href="?action=home">Accueil</a></div>
+                            </li>
+                            <li class="has-children">
+                                <div class="list_style"><a
+                                        href="?action=allCategory">Catégories</a>
+                                </div>
+
+                                <ul class="sous-menu">
+                                    <?php foreach ($allCategory as $cat => $values) : ?>
+                                        <li>
+                                            <div class="list_style">
+                                                <a href="?action=categoryId&amp;id=<?= $values->getId() ?>"><?= strtoupper($values->getTitle()); ?></a>
+                                            </div>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="list_style"><a href="?action=allArticles">Articles</a></div>
                             </li>
 
 
@@ -51,16 +69,20 @@
                                 <li>
                                     <div class="list_style"><a href="?action=createArticleId">Créer article</a></div>
                                 </li>
-                                <li class="deconnection">
-                                    <div class="list_style"><a
-                                            href="?action=deconnect">Déconnexion</a>
-                                    </div>
-                                </li>
+<!--                                <li class="deconnection">-->
+<!--                                    <div class="list_style"><a-->
+<!--                                            href="?action=deconnect">Déconnexion</a>-->
+<!--                                    </div>-->
+<!--                                </li>-->
 
                                 <?php if (isAdmin()) : ?>
                                     <li>
                                         <div class="list_style"><a href="?action=allMembers">Membres</a></div>
                                     </li>
+                                    <li>
+                                        <div class="list_style"><a href="?action=deconnect">Déconnexion</a></div>
+                                    </li>
+
 
                                 <?php endif; ?>
 
@@ -72,30 +94,14 @@
                                     <div class="list_style"><a href="?action=inscription">Inscription</a></div>
                                 </li>
                             <?php endif; ?>
-                            <li>
-                                <div class="list_style"><a href="?action=allArticles">Articles</a></div>
-                            </li>
-                            <li class="has-children">
-                                <div class="list_style"><a
-                                        href="<?php if (isAdmin()) : ?>?action=allCategory<?php endif; ?>">Catégories</a>
-                                </div>
 
-                                <ul class="sous-menu">
-                                    <?php foreach ($allCategory as $cat => $values) : ?>
-                                        <li>
-                                            <div class="list_style">
-                                                <a href="?action=categoryId&amp;id=<?= $values->getId() ?>"><?= strtoupper($values->getTitle()); ?></a>
-                                            </div>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </li>
+
                         </ul>
                     </div>
                 </nav>
                 <div class="memberInfo"><span><?= helloUser(); ?></span></div>
 
-            </object>
+            </div>
             <div class="menu-bg" id="menu-bg"></div>
             <div class="photo">
 

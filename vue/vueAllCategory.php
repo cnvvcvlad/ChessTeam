@@ -3,7 +3,7 @@
 <?php $title = 'Catégories des articles du blog ChessTeam'; ?>
 <?php $description = 'Retrouvez tous les catégories des articles publiés sur le blog, consultez ses articles et ses commentaires'; ?>
 
-<?php if (isAdmin()) : ?>
+
 
         <h1>Toutes les catégories</h1>
     <div class="view">
@@ -17,6 +17,7 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
+<?php if (isAdmin()) : ?>
         <h2>Créer une nouvelle catégorie</h2>
 
         <form action="controller/controllerFrontEnd.php" method="post" class="form-inscription"

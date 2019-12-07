@@ -52,6 +52,10 @@
         color: #760001;
     }
 
+    nav ul li:hover ul {
+        display: none;
+    }
+
     .navigate li {
         /*list-style: none;*/
         padding-bottom: 2%;
@@ -65,9 +69,6 @@
         min-width: 160px;
     }
 
-    .has-children > div:nth-child(1) {
-        padding: 0 0 10% 0;
-    }
 
 
     .list_style {
@@ -112,7 +113,7 @@
     }
 
     ul .sous-menu {
-        margin-top: 20%;
+        margin-top: 4em;
         margin-left: -1px;
         min-width: 30vw;
         padding: 2%;

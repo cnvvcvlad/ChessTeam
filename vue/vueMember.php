@@ -111,6 +111,9 @@
                         <input type="file" name="user_image" required accept='.gif, .png , .jpg'>
                         <input type="hidden" name="id_user" value="<?= $value->getId_user() ?>">
                         <input type="submit" value="modifier" name="update">
+                        <div class="preview">
+                            <p>Aucun fichier sélectionné pour le moment</p>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -68,7 +68,8 @@
 
 }
 
-object {
+
+.objet {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -149,9 +150,9 @@ article {
 
 /*Navigation*/
 
-.deconnection {
-    display: none;
-}
+/*.deconnection {*/
+    /*display: none;*/
+/*}*/
 
 nav {
     display: flex;
@@ -171,6 +172,7 @@ nav ul {
     /*border-radius: 5px;*/
     /*border: solid 1px #006e8b;*/
     padding: 0;
+    flex-wrap: wrap;
 }
 
 nav ul {
@@ -214,17 +216,17 @@ nav a:hover {
 }
 
 ul .sous-menu {
-    z-index: 1;
-    margin-left: -3%;
-    margin-top: 4.5%;
+    z-index: 2;
+    /*margin-left: -3%;*/
+    margin-top: 2.4%;
 }
 
 .list_style {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 11vh;
-    min-width: 9vw;
+    min-height: 5vh;
+    min-width: 10vw;
 }
 
 .sous-menu > li:nth-child(n) > a:nth-child(0) {
