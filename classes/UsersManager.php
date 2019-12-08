@@ -46,4 +46,5 @@ class UsersManager extends DataBase
         $delete = $this->dbConnect()->prepare($request);
         $delete->execute(["id_user" => $user_id]);
     }
+
 }

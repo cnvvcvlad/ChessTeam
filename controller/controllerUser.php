@@ -25,10 +25,15 @@ function getAllMembers()
 
 function showNameAuthor($user_id)
 {
+    if(!empty($user_id)) {
         $member_manager = new UsersManager();
         $member = $member_manager->nameUser($user_id);
         $login_user = implode($member);
         return $login_user;
+    } else {
+        echo 'Admin';
+    }
+    return;
 }
 
 function deleteUser($user_id)

@@ -29,7 +29,7 @@ class DataBase {
                 return $this->pdo;
             }
             catch (\Exception $e) {
-                die('Erreur : ' . $e->getMessage());
+                die('Erreur : ' . $e->getMessage()) or die(print_r($this->pdo->errorInfo()));
             }
     }
 

@@ -38,4 +38,10 @@ class CategoryManager extends DataBase
         return $cat;
 
     }
+
+    public function deleteC($id_category) {
+        $request = 'DELETE FROM category WHERE id = :id';
+        $delete = $this->dbConnect()->prepare($request);
+        $delete->execute(["id" => $id_category]);
+    }
 }

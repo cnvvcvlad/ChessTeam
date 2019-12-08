@@ -13,8 +13,19 @@ function getCategory($id_category) {
 }
 
 function showNameCategory($id_category) {
+    if(!empty($id_category)) {
+        $cat_manager = new CategoryManager();
+        $category = $cat_manager->nameCategory($id_category);
+        $category = implode($category);
+        return $category;
+    } else {
+        echo 'Generique';
+    }
+    return;
+}
+
+function deleteCategory ($id_category)
+{
     $cat_manager = new CategoryManager();
-    $category = $cat_manager->nameCategory($id_category);
-    $category = implode($category);
-    return $category;
+    $category = $cat_manager->deleteC($id_category);
 }

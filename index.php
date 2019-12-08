@@ -15,33 +15,34 @@ require 'controller/controllerComments.php';
 /*****************************************/
 
 
-try {    
-    // var_dump($_SESSION);
+try {
     $allCategory = getAllCategory();
     $allArticles = getListe();
-    
+    $lastArticles = getLastArticles();
+    $lastArticle_one = getLastArticle_one();
+
     if (isset($_GET['action'])) {
-        $action = $_GET['action'];
+        $action = htmlspecialchars($_GET['action']);
 
         if ($action == 'inscription') {
             require 'vue/vueInscription.php';
         } elseif ($action == 'connexion') {
             require 'vue/vueConnexion.php';
         } elseif ($action == 'connected') {
-            require 'vue/vueConnexion.php';
-        } elseif ($action == 'myAccount') { 
+            require 'vue/vueAccueil.php';
+        } elseif ($action == 'myAccount') {
             if (isset($_SESSION['id_user'])) {
-                $myAccount = getInfoUser(htmlspecialchars($_SESSION['id_user']));          
+                $myAccount = getInfoUser(htmlspecialchars($_SESSION['id_user']));
                 require 'vue/vueMember.php';
             }
         } elseif ($action == 'myArticlesId') {
-                $myArticles = getMyArticles(htmlspecialchars($_SESSION['id_user']));
-                require 'vue/vueArticleId.php';
+            $myArticles = getMyArticles(htmlspecialchars($_SESSION['id_user']));
+            require 'vue/vueArticleId.php';
 
         } elseif ($action == 'createArticleId') {
             require 'vue/vueCreateArticleId.php';
 
-        } elseif ($action  == 'allArticles') {
+        } elseif ($action == 'allArticles') {
             if (isset($_GET['id'])) {
                 $commentsOfArticle = getAllCommentsOfArticle(htmlspecialchars($_GET['id']));
                 $articleId = getOneArticle(htmlspecialchars($_GET['id']));
@@ -66,11 +67,14 @@ try {
                 require 'vue/vueAllMembers.php';
             }
         } elseif ($action == 'allCategory') {
-            if (empty($_GET['id'])) {
+            if (isset($_GET['deleteC'])) {
+                $deleteCategory = deleteCategory(htmlspecialchars($_GET['deleteC']));
+                require 'vue/vueAllCategory.php';
+            } elseif (empty($_GET['id'])) {
                 $allCategory = getAllCategory();
                 require 'vue/vueAllCategory.php';
-            } 
-                           
+            }
+
         } elseif ($action == 'categoryId') {
             if (isset($_GET['id'])) {
                 $CategoryId = getCategory(htmlspecialchars($_GET['id']));
@@ -81,18 +85,21 @@ try {
                 $articlesOfCategory = getArticlesOfCategory(htmlspecialchars($_GET['id']));
                 require 'vue/vueArticlesCategory.php';
             }
-            
+
         } elseif ($action == 'home') {
-            header('location:./');
+            require 'vue/vueAccueil.php';
+//            header('location:./');
         } elseif ($action == 'deconnect') {
             session_destroy();
             header('location:./');
             exit();
+        } else {
+            require 'vue/vueAccueil.php';
+            exit();
         }
     } else {
-        $lastArticles = getLastArticles();
-        $lastArticle_one = getLastArticle_one();
-        require 'vue/VueAccueil.php';
+        require 'vue/vueAccueil.php';
+        exit();
     }
 } catch (Exception $e) {
     $ex = 'Erreur : ' . $e->getMessage();

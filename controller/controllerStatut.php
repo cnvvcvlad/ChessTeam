@@ -46,5 +46,8 @@ function backPageId() {
     return ;
 }
 
+function showImage($user_image) {
+    return $user_image;
+}
 
 

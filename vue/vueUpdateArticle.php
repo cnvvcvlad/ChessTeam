@@ -9,7 +9,8 @@
             <h1><?= $values->getArt_title() ?></h1>
             <div class="banniere_bouton">
 
-                <div class="bouton_commande"><a href="?action=allArticles&amp;deleteA=<?= $values->getId() ?>">Supprimer</a></div>
+                <div class="bouton_commande"><a
+                        href="?action=allArticles&amp;deleteA=<?= $values->getId() ?>">Supprimer</a></div>
                 <!--        <div class="bouton_commande"><a href="">Modifier</a></div>-->
 
             </div>

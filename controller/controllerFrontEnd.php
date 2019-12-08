@@ -23,12 +23,32 @@ $manager_comment = new CommentsManager();
 
 try {
 
+    if (isset($_GET['action'])) {
+        session_destroy();
+        header('location:./');
+        exit();
+    }
+
     /**************Connexion Inscription Update User *************/
 
+
     if (isset($_POST['connexion'])) {
-        $manager_user->log($_POST['login'], $_POST['password']);
-        header('location:../index.php?connected');
-        exit();
+        sleep(1);
+        $login = validate($_POST['login']);
+        $password = $manager_user->checkPassword($login, new MemberManager());
+
+        $passwordHash = $password['password'];
+        $passwordUser = validate($_POST['password']);
+
+        if (password_verify($passwordUser, $passwordHash)) {
+
+            $manager_user->log($login, $passwordHash);
+
+            header('location:../index.php?action=connected');
+            exit();
+        }
+        throw new Exception("Le mot de passe est invalide !");
+
     } elseif (isset($_POST['inscription']) and isset($_FILES['image_membre']) and $_FILES['image_membre']['error'] == 0) {
         extract($_POST);
 
@@ -37,6 +57,7 @@ try {
         $email = validate($email);
 
         $password = validate($password);
+        $password = password_hash($password, PASSWORD_DEFAULT);
 
         $user_image = validate($_FILES['image_membre']['name']);
 
@@ -114,9 +135,6 @@ try {
         ]));
 
 
-
-//                var_dump(basename($_SERVER['HTTP_REFERER']));
-//                var_dump($_SERVER['HTTP_REFERER']);
         header("location:../index.php?action=home");
         exit();
 
@@ -157,9 +175,7 @@ try {
         } else {
             throw new Exception("Votre fichier ne doit pas dépasser 1 Mo !");
         }
-    }
-
-    elseif (isset($_POST['updateCategory'])) {
+    } elseif (isset($_POST['updateCategory'])) {
         extract($_POST);
 
         $id = htmlspecialchars($id);
@@ -200,14 +216,10 @@ try {
             'category_image' => $category_image,
             'cat_author' => $cat_author
         ]));
-//                var_dump(basename($_SERVER['HTTP_REFERER']));
-//                var_dump($_SERVER['HTTP_REFERER']);
+
         header("location:../index.php?action=allCategory");
         exit();
-    }
-
-
-    /**************Add Update Article ****************/
+    } /**************Add Update Article ****************/
 
     elseif (isset($_POST['articleCreation']) and isset($_FILES['image_article']) and $_FILES['image_article']['error'] == 0) {
         extract($_POST);
@@ -287,23 +299,19 @@ try {
             }
 
 
-        $manager_article->updateArticle($id, new Article([
-            'art_title' => $art_title,
-            'art_description' => $art_description,
-            'art_image' => $art_image,
-            'art_author' => $art_author,
-            'art_content' => $art_content,
-            'category_id' => $category_id
-        ]));
-//                var_dump(basename($_SERVER['HTTP_REFERER']));
-//                var_dump($_SERVER['HTTP_REFERER']);
-        header("location:../index.php?action=allArticles");
-        exit();
+            $manager_article->updateArticle($id, new Article([
+                'art_title' => $art_title,
+                'art_description' => $art_description,
+                'art_image' => $art_image,
+                'art_author' => $art_author,
+                'art_content' => $art_content,
+                'category_id' => $category_id
+            ]));
+
+            header("location:../index.php?action=allArticles");
+            exit();
         }
-    }
-
-
-    /************Add Comments ****************/
+    } /************Add Comments ****************/
 
     elseif (isset($_POST['commentCreation'])) {
         $com_author = htmlspecialchars($_SESSION['id_user']);

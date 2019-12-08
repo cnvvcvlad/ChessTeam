@@ -69,22 +69,22 @@
                                 <li>
                                     <div class="list_style"><a href="?action=createArticleId">Créer article</a></div>
                                 </li>
-<!--                                <li class="deconnection">-->
-<!--                                    <div class="list_style"><a-->
-<!--                                            href="?action=deconnect">Déconnexion</a>-->
-<!--                                    </div>-->
-<!--                                </li>-->
+                                <!--                                <li class="deconnection">-->
+                                <!--                                    <div class="list_style"><a-->
+                                <!--                                            href="?action=deconnect">Déconnexion</a>-->
+                                <!--                                    </div>-->
+                                <!--                                </li>-->
+
 
                                 <?php if (isAdmin()) : ?>
                                     <li>
                                         <div class="list_style"><a href="?action=allMembers">Membres</a></div>
                                     </li>
-                                    <li>
-                                        <div class="list_style"><a href="?action=deconnect">Déconnexion</a></div>
-                                    </li>
-
 
                                 <?php endif; ?>
+                                <li>
+                                    <div class="list_style"><a href="?action=deconnect">Déconnexion</a></div>
+                                </li>
 
                             <?php else : ?>
                                 <li>
@@ -105,23 +105,22 @@
             <div class="menu-bg" id="menu-bg"></div>
             <div class="photo">
 
-                <?php if (!isAdmin()) : ?>
+
                     <?php if (empty($_SESSION['user_image'])) : ?>
                         <a href="assets/img/logo/pawn_logo.jpg"><img src="assets/img/logo/pawn_logo.jpg"
                                                                      alt="Photo de profil"
                                                                      title="Cliquez pour agrandir"/></a>
                     <?php else : ?>
-                        <a href="assets/img/uploads/<?= $_SESSION['user_image'] ?>"><img
-                                src="assets/img/uploads/<?= $_SESSION['user_image'] ?>" alt="Photo de profil"
+                        <a href="assets/img/uploads/<?= showImage($_SESSION['user_image']) ?>"><img
+                                src="assets/img/uploads/<?= showImage($_SESSION['user_image']) ?>" alt="Photo de profil"
                                 title="Cliquez pour agrandir" height="100em"/></a>
                     <?php endif; ?>
 
-                <?php else : ?>
-                    <a href="assets/img/logo/pawn_logo.jpg"><img src="assets/img/logo/pawn_logo.jpg"
-                                                                 alt="Photo de profil"
-                                                                 title="Cliquez pour agrandir"/></a>
+<!--                    <a href="assets/img/logo/pawn_logo.jpg"><img src="assets/img/logo/pawn_logo.jpg"-->
+<!--                                                                 alt="Photo de profil"-->
+<!--                                                                 title="Cliquez pour agrandir"/></a>-->
 
-                <?php endif; ?>
+
 
 
             </div>

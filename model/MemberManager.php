@@ -15,6 +15,24 @@ class MemberManager extends DataBase
     }
 
 
+    public function checkPassword($login, MemberManager $member)
+    {
+
+        $request = 'SELECT password FROM users WHERE login = :login';
+        $select = $this->dbConnect()->prepare($request);
+        $select->execute([
+            "login" => $login
+        ]);
+        if ($select->rowCount() != 0) {
+
+            $password = $select->fetch();
+            return $password;
+
+        }
+        throw new Exception("Le login est invalide !");
+
+    }
+
     public function insertMembre(Users $member)
     {
         if ($this->existLogin($member->getLogin())) {
@@ -24,11 +42,12 @@ class MemberManager extends DataBase
         $request = 'INSERT INTO users(login, email, password, user_image) VALUES(:login, :email, :password, :user_image)';
         $insert = $this->dbConnect()->prepare($request);
         $insert = $insert->execute([
-        "login" => $member->getLogin(),
-        "email" => $member->getEmail(),
-        "password" => $member->getPassword(),
-        "user_image" => $member->getUser_image()
-    ]);
+            "login" => $member->getLogin(),
+            "email" => $member->getEmail(),
+            "password" => $member->getPassword(),
+            "user_image" => $member->getUser_image()
+        ]);
+        return;
     }
 
     public function existLogin($login)
@@ -60,10 +79,9 @@ class MemberManager extends DataBase
         $request = 'SELECT * FROM users WHERE login = :login AND password = :password';
         $request = $this->dbConnect()->prepare($request);
         $request->execute(["login" => $login, "password" => $password]);
-    
         if ($request->rowCount() != 0) {
             $resultat = $request->fetch();
-        
+
             $user = new Users($resultat);
             $_SESSION['id_user'] = $user->getId_user();
             $_SESSION['email'] = $user->getEmail();
@@ -76,7 +94,8 @@ class MemberManager extends DataBase
         }
     }
 
-    public function updateMembre($id_user, Users $member) {
+    public function updateMembre($id_user, Users $member)
+    {
         if ($this->existId($member->getId_user())) {
             throw new Exception("Désolé cet utilisateur n'existe pas");
         }
@@ -91,11 +110,13 @@ class MemberManager extends DataBase
             "user_image" => $member->getUser_image()
         ]);
 
-        if(!isAdmin()) {
+        if (isConnected()) {
             $_SESSION['user_image'] = $member->getUser_image();
+            $_SESSION['login'] = $member->getLogin();
+            $_SESSION['email'] = $member->getEmail();
         }
         return $update;
     }
 
-    
+
 }

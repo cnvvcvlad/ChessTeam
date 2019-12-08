@@ -2,9 +2,11 @@
 
 require_once 'DataBase.php';
 
-class CategoriesManager extends DataBase {
+class CategoriesManager extends DataBase
+{
 
-    public function getDataBase() {
+    public function getDataBase()
+    {
         return $this->dataBase;
     }
 
@@ -14,7 +16,8 @@ class CategoriesManager extends DataBase {
     }
 
 
-    public function insertCategory(Category $category) {
+    public function insertCategory(Category $category)
+    {
         $request = 'INSERT INTO category(title, description, category_image, cat_author) VALUES(:cat_title, :cat_description, :cat_image, :cat_author)';
         $insert = $this->dbConnect()->prepare($request);
         $insert = $insert->execute([
@@ -25,7 +28,8 @@ class CategoriesManager extends DataBase {
         ]);
     }
 
-    public function updateCategory($id, Category $category) {
+    public function updateCategory($id, Category $category)
+    {
         $request = 'UPDATE category SET title = :title, description = :description, category_image = :category_image, cat_author = :cat_author WHERE id = :id ';
         $update = $this->dbConnect()->prepare($request);
         $update = $update->execute([

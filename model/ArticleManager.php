@@ -2,8 +2,10 @@
 
 require_once 'DataBase.php';
 
-class ArticleManager extends DataBase {
-    public function getDataBase() {
+class ArticleManager extends DataBase
+{
+    public function getDataBase()
+    {
         return $this->dataBase;
     }
 
@@ -12,7 +14,8 @@ class ArticleManager extends DataBase {
         $this->dataBase = $dataBase;
     }
 
-    public function insertArticle(Article $article) {
+    public function insertArticle(Article $article)
+    {
         $request = 'INSERT INTO articles(art_title, art_description, art_content, art_image, art_author, category_id) VALUES(:art_title, :art_description, :art_content, :art_image, :art_author, :category_id)';
         $insert = $this->dbConnect()->prepare($request);
         $insert = $insert->execute([
@@ -24,13 +27,11 @@ class ArticleManager extends DataBase {
             'category_id' => $article->getCategory_id()
         ]);
 
-//        var_dump($article->getArt_author());
-//        var_dump($article->getCategory_id());
 
-        
     }
 
-    public function updateArticle($id, Article $article) {
+    public function updateArticle($id, Article $article)
+    {
         $request = 'UPDATE articles SET art_title = :art_title, art_description = :art_description, art_content = :art_content, art_image = :art_image, art_author = :art_author, category_id = :category_id WHERE id =:id';
         $update = $this->dbConnect()->prepare($request);
         $update = $update->execute([
@@ -44,6 +45,6 @@ class ArticleManager extends DataBase {
         ]);
         return;
     }
-    
+
 
 }

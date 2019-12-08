@@ -7,7 +7,12 @@
         <?php if (!empty($CategoryId)): ?>
             <?php foreach ($CategoryId as $key => $value) : ?>
                 <h1>Categorie : <?= $value->getTitle() ?> </h1>
-
+                <?php if (isAdmin()) : ?>
+                    <div class="banniere_bouton">
+                        <div class="bouton_commande"><a href="?action=allCategory&amp;deleteC=<?= $value->getId() ?>">Supprimer</a>
+                        </div>
+                    </div>
+                <?php endif ?>
                 <p>Ecrit par
                     <mark><?= showNameAuthor($value->getCat_author()) ?></mark>
                     le <em><?= $value->getCat_date_creation() ?></em></p>
@@ -25,7 +30,7 @@
                             les articles de cette catégorie <img src="assets/img/by_default/flecheblanchedroite.png"
                                                                  alt="le bouton rouge"/></a>
                     </div>
-                    <div class="back-page"><a href="<?= $_SERVER['HTTP_REFERER']?>">Retour</a></div>
+                    <div class="back-page"><a href="<?= $_SERVER['HTTP_REFERER'] ?>">Retour</a></div>
                 </div>
 
             <?php endforeach; ?>
