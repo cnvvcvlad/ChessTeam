@@ -53,7 +53,6 @@
         <h1><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?></h1> 
         <div class="banniere_bouton">
                 <?php if (isAdmin()) : ?>
-<!--                    <div class="bouton_commande"><a href="">Supprimer</a></div>-->
                     <div class="bouton_commande"><a href="">Modifier</a></div>
                 <?php endif; ?>
                 <div class="bouton_commande">
@@ -67,7 +66,7 @@
 
                 <span><?= $value->getArt_content() ?></span>                    
             </p>
-            <p><a href="http://">Commentaires ()</a></p>
+            <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">Commentaires (<?= numberCommentsOfArticle(getAllCommentsOfArticle($value->getId())); ?>)</a></p>
         </div>
     <?php endforeach; ?>
     <?php endif; ?>
@@ -77,7 +76,7 @@
         <section class="content">
             <h2 class="myColor">Qui sommes-nous ?</h2>
             <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, explicabo neque odit repellat debitis eum mollitia dolor ducimus nulla saepe recusandae sint aspernatur omnis porro fuga officia quod quasi rem?</span><span>Error placeat molestias debitis pariatur molestiae atque dolores. Debitis, sint eaque. Cumque ipsa, ad blanditiis porro quas adipisci voluptatum? Quisquam expedita in minus id nulla, adipisci facere praesentium. Amet, deleniti?</span></p>
-            <button>Subscribe</button>
+<!--            <button>Subscribe</button>-->
         </section>
         <section class="content">
             <h2 class="myColor">Nos actualités</h2>

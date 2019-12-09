@@ -9,3 +9,4 @@ function getAllCommentsOfArticle($article_id) {
 function numberCommentsOfArticle($commentsOfArticle) {
     echo count($commentsOfArticle);
 }
+

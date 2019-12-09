@@ -34,13 +34,7 @@
 <?php $template = ob_get_clean(); ?>
 
 <?php
-//require 'templates/program.php';
 
 require 'templates/tempAccueil.php';
 
-//require 'templates/header.php';
-
-//require 'templates/main.php';
-
-//require 'templates/footer.php';
 ?>

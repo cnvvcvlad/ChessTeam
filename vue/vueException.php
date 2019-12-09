@@ -6,13 +6,13 @@
     <meta name="description" content=" "/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/normalize.css" type="text/css">
 
 </head>
 
 <body>
 <div class="en-tete">
-    <main class="container">
+    <main class="container-exception">
 
         <h1>Erreur !!!</h1>
 
@@ -21,12 +21,13 @@
 </div>
 <footer>
     <div class="pied-page">
-        <div class="condition">
-            <div class="copyright">
-                <p>Copyright</p>
-            </div>
-            <div class="top-button">
+        <div class="exception">
+
+            <div class="top-button-exception">
                 <a href="<?= $_SERVER['HTTP_REFERER']?>">Retour</a>
+            </div>
+            <div class="copyright-exception">
+                <p>Copyright</p>
             </div>
         </div>
     </div>

@@ -76,11 +76,11 @@
     align-items: center;
 }
 
-main {
-    margin-left: 10%;
-    max-width: 80%;
-    position: inherit;
-}
+/*main {*/
+    /*margin-left: 10%;*/
+    /*max-width: 80%;*/
+    /*position: inherit;*/
+/*}*/
 
 h1 {
     color: black;
@@ -124,6 +124,9 @@ article {
     user-select: none;
 }
 
+a {
+    text-decoration: none;
+}
 /*--------------------------------------------------------
            MIS EN PAGE
 --------------------------------------------------------*/
@@ -277,7 +280,7 @@ ul .sous-menu {
     background: url("../img/by_default/banner.jpg") repeat;
     box-shadow: 0px 4px 4px #465c63;
     height: 500px;
-    border-radius: 10px 10px;
+    border-radius: 10px 10px 10px 10px;
 
 }
 
@@ -323,6 +326,7 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
 
 .justify_article {
     padding: 1vh 1vw;
+    text-decoration: none;
 
 }
 
@@ -334,10 +338,10 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
 }
 
 .program {
-    border: 1px solid blue;
     display: flex;
     justify-content: space-around;
     background-color: ghostwhite;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .content {
@@ -353,7 +357,11 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 59vh;
+    min-height: 75vh;
+    min-width: 70vw;
+    max-width: 80vw;
+    align-self: center;
+
 }
 
 .view {
@@ -553,15 +561,26 @@ section.content:nth-child(3) {
 
 }
 
+
 .copyright {
-    flex: 5;
     display: flex;
     justify-content: center;
+    align-items: flex-end;
+    z-index: 1;
+    position: relative;
+    margin-top: 156px;
+    background-color: #333;
+    min-height: 63px;
+    color: cornsilk;
+    margin-bottom: 0;
+    padding: 0;
+
 }
 
-.top-button {
-    flex: 1;
-}
+
+/*.top-button {*/
+    /*flex: 1;*/
+/*}*/
 
 .top-button a {
     color: whitesmoke;
@@ -587,16 +606,26 @@ section.content:nth-child(3) {
     color: whitesmoke;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
 }
+
+
 
 /* Style accordeon */
 
-/*.middle {
-    transform: translateX(-50%, -50%);
-}*/
+
+
+footer {
+
+    display: flex;
+    flex-direction: column;
+    /*height: 240px;*/
+}
 
 .menu {
-    border-radius: 8px;
+    border-radius: 8px 8px 0 0;
     overflow: hidden;
 }
 
@@ -605,13 +634,28 @@ section.content:nth-child(3) {
     overflow: hidden;
 
 }
+li.item:nth-child(4) {
+    display: flex;
+    justify-content: stretch;
+}
+
+
+li.item:nth-child(4) > a:nth-child(1) {
+    width: 90%;
+}
+
+a.btn:nth-child(2) {
+    width: 10%;
+}
+
 
 .btn {
     display: block;
-    padding: 16px 20px;
+    padding: 10px 20px;
     background: #34495e;
     color: cornsilk;
     position: relative;
+    text-decoration: none;
 }
 
 .btn:before {
@@ -639,6 +683,7 @@ section.content:nth-child(3) {
     font-size: 14px;
     margin: 4px 0;
     position: relative;
+    text-decoration: none;
 }
 
 .smenu a:before {
@@ -660,6 +705,19 @@ section.content:nth-child(3) {
 .item:target .smenu {
     max-height: 10em;
 }
+
+.exception {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 25vh;
+}
+
+.container-exception {
+    min-height: 75vh;
+}
+
 
 @media all and (max-width: 1024px) {
 
@@ -742,6 +800,42 @@ section.content:nth-child(3) {
         justify-content: center;
         align-items: center;
     }
+
+    .btn {
+        padding: 8px 15px;
+    }
+
+
+    h5 {
+        margin: 0;
+        padding: 3px 4px 0 0;
+        font-size: 12px;
+    }
+
+    .smenu a {
+        padding: 2px 0 1px 6px;
+        margin: 0;
+    }
+
+    #settings > div:nth-child(2) {
+        justify-content: space-between;
+        flex-wrap: nowrap;
+
+    }
+
+    .copyright {
+        margin-top: 122px;
+        min-height: 50px;
+        margin-bottom: 10px;
+    }
+
+    #message > div:nth-child(2) {
+        flex-wrap: nowrap;
+
+    }
+
+
+
 
     /******Tableau***********/
     .table-update {

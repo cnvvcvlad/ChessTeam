@@ -61,7 +61,7 @@ try {
 
         $user_image = validate($_FILES['image_membre']['name']);
 
-        if ($_FILES['image_membre']['size'] <= 1000000) {
+        if ($_FILES['image_membre']['size'] <= 2000000) {
             $extension_autorisee = ["jpg", "jpeg", "png", "gif"];
 
             $info = pathinfo($_FILES['image_membre']['name']);
@@ -105,7 +105,7 @@ try {
 
             $user_image = validate($_FILES['user_image']['name']);
 
-            if ($_FILES['user_image']['size'] <= 1000000) {
+            if ($_FILES['user_image']['size'] <= 2000000) {
                 $extension_autorisee = ["jpg", "jpeg", "png", "gif"];
 
                 $info = pathinfo($_FILES['user_image']['name']);
@@ -148,7 +148,7 @@ try {
         $category_image = validate($_FILES['image_category']['name']);
         $cat_author = htmlspecialchars($_SESSION['id_user']);
 
-        if ($_FILES['image_category']['size'] <= 1000000) {
+        if ($_FILES['image_category']['size'] <= 2000000) {
             $extention_autorisee = ["jpg", "jpeg", "png", "gif"];
 
             $info = pathinfo($_FILES['image_category']['name']);
@@ -188,7 +188,7 @@ try {
 
             $category_image = validate($_FILES['category_image']['name']);
 
-            if ($_FILES['category_image']['size'] <= 1000000) {
+            if ($_FILES['category_image']['size'] <= 2000000) {
                 $extension_autorisee = ["jpg", "jpeg", "png", "gif"];
 
                 $info = pathinfo($_FILES['category_image']['name']);
@@ -231,7 +231,7 @@ try {
         $category_id = htmlspecialchars($_POST['category']);
         $art_author = htmlspecialchars($_SESSION['id_user']);
 
-        if ($_FILES['image_article']['size'] <= 1000000) {
+        if ($_FILES['image_article']['size'] <= 2000000) {
             $extension_autorisee = ["jpg", "jpeg", "png", "gif"];
 
             $info = pathinfo($_FILES['image_article']['name']);
@@ -261,8 +261,8 @@ try {
             throw new Exception("La taille de votre fichier doit etre inférieure à 1Mo !");
         }
     } elseif (isset($_POST['updateArticle'])) {
-        var_dump($_POST);
-        var_dump($_FILES);
+//        var_dump($_POST);
+//        var_dump($_FILES);
         extract($_POST);
 
         $id = htmlspecialchars($id);
@@ -277,7 +277,7 @@ try {
 
             $art_image = validate($_FILES['art_image']['name']);
 
-            if ($_FILES['art_image']['size'] <= 1000000) {
+            if ($_FILES['art_image']['size'] <= 2000000) {
                 $extension_autorisee = ["jpg", "jpeg", "png", "gif"];
 
                 $info = pathinfo($_FILES['art_image']['name']);

@@ -39,4 +39,4 @@
 
 <?php $template = ob_get_clean(); ?>
 
-<?php require 'templates/tempAccueil.php'; ?>
+<?php require 'templates/tempForm.php'; ?>

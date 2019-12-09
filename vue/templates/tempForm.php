@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="assets/css/burger.css" type="text/css">
     <link rel="stylesheet" href="assets/css/normalize.css" type="text/css">
     <link rel="stylesheet" href="assets/css/icomoon.css" type="text/css">
-
 </head>
+
 <body>
 <div id="main_wrapper">
     <header>
@@ -37,7 +37,7 @@
                             </li>
                             <li class="has-children">
                                 <div class="list_style"><a
-                                        href="?action=allCategory">CatÃ©gories</a>
+                                        href="?action=allCategory">Catégories</a>
                                 </div>
 
                                 <ul class="sous-menu">
@@ -68,7 +68,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="list_style"><a href="?action=createArticleId">CrÃ©er article</a></div>
+                                    <div class="list_style"><a href="?action=createArticleId">Créer article</a></div>
                                 </li>
 
 
@@ -79,7 +79,7 @@
 
                                 <?php endif; ?>
                                 <li>
-                                    <div class="list_style"><a href="?action=deconnect">DÃ©connexion</a></div>
+                                    <div class="list_style"><a href="?action=deconnect">Déconnexion</a></div>
                                 </li>
 
                             <?php else : ?>
@@ -128,7 +128,7 @@
                         <a href="#profile" class="btn">Notre adresse</a>
 
                         <div class="smenu">
-                            <h5>15 rue GÃ©nÃ©ral Faidherbe</h5>
+                            <h5>15 rue Général Faidherbe</h5>
                             <h5>94130 Nogent sur Marne</h5>
                             <h5>0783554818</h5>
                             <h5>cnvvc_vlad@yahoo.fr</h5>
@@ -136,7 +136,7 @@
                     </li>
 
                     <li class="item" id="message">
-                        <a href="#message" class="btn">RÃ©seaux Sociaux</a>
+                        <a href="#message" class="btn">Réseaux Sociaux</a>
 
                         <div class="smenu">
                             <a href="">Facebook<span class="icon-facebook"></span></a>
@@ -151,11 +151,11 @@
                         <div class="smenu">
                             <a href="">Contactez-nous</a>
                             <a href="">Condition d'utilisation</a>
-                            <a href="">Politique de confidentialitÃ©</a>
+                            <a href="">Politique de confidentialité</a>
                         </div>
                     </li>
                     <?php if (isConnected()) : ?>
-                        <li class="item"><a href="?action=deconnect" class="btn">DÃ©connexion</a></li>
+                        <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a></li>
                     <?php else : ?>
                         <li class="item"><a href="https://www.chess.com/" target="_blank" class="btn">Chess.com</a><a
                                 class="btn" href="">#top</a></li>
