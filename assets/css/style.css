@@ -93,6 +93,7 @@ h2 {
     color: rgb(128, 125, 99);
     text-align: center;
     font-family: "AlexBrush", Verdana, Geneva, Tahoma, sans-serif;
+    /*padding: 1px 1px;*/
 }
 
 h3 {
@@ -306,7 +307,7 @@ ul .sous-menu {
     flex-direction: row;
     justify-content: flex-end;
     align-items: flex-end;
-    flex: 1;
+    /*flex: 1;*/
 }
 
 .bouton_commande {
@@ -322,6 +323,19 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     flex-direction: column;
     background-color: ghostwhite;
     border-radius: 10px 10px;
+    min-height: 75vh;
+    justify-content: flex-start;
+    min-width: 75vw;
+}
+
+.top_article_form {
+    display: flex;
+    flex-direction: column;
+    background-color: ghostwhite;
+    border-radius: 10px 10px;
+    /*min-height: 75vh;*/
+    justify-content: flex-start;
+    margin: 1vh 1vw;
 }
 
 .justify_article {
@@ -333,11 +347,20 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
 .justify_article img {
     float: left;
     margin-right: 1em;
-    height: 30vh;
+    /*height: 30vh;*/
     width: 30vw;
+    max-width: 100%;
+    height: auto;
 }
 
 .program {
+     display: flex;
+     justify-content: space-around;
+     background-color: ghostwhite;
+     border-radius: 10px 10px 10px 10px;
+ }
+
+.program_view {
     display: flex;
     justify-content: space-around;
     background-color: ghostwhite;
@@ -350,24 +373,170 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     padding: 0.5em 0.5em;
 }
 
-/**********Forms****************/
+/**********Forms inscription connexion****************/
+
+div.form_view {
+    display: flex;
+    /*justify-content: center;*/
+    /*align-items: flex-start;*/
+}
+
+.section_view {
+    /*min-height: 75vh;*/
+    margin: 1vh 1vw;
+}
+
+
+aside.form_view {
+    flex: 3;
+    background-color: ghostwhite;
+    /*align-self: flex-start;*/
+    margin: 0 2vw 0 2vw;
+    border-radius: 10px;
+
+}
+/*aside.form_view:nth-child(3) {*/
+    /*align-self: flex-start;*/
+/*}*/
+
+aside.form_view:nth-child(3) {
+    display: flex;
+    background-color: ghostwhite;
+    border-radius: 10px;
+}
+
+
+
+
+
+form.form-inscription {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /*width: 100%;*/
+    background-color: #FAFAFA;
+    padding: 0 10px 0 0;
+    width: 325px;
+    border-radius: 10px;
+}
+
+fieldset {
+    margin-bottom:10px;
+    border:1px solid #C4C2E3;
+    border-radius: 5px;
+}
+
+legend {
+    font-weight:bold
+}
+
+input, textarea, select, option {
+    background-color:#A0D3FF;
+    cursor: pointer;
+}
+
+input.image {
+    background-color:#A0D3FF;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+input[type=submit]:hover, input[type=reset]:hover {
+    background-color:#219FDC;
+}
+
+input[type=submit]:active, input[type=reset]:active {
+    background-color:#FCDEDE;
+    box-shadow:1px 1px 1px #D83F3D inset;
+}
+
+div.form-inscription:nth-child(5) > label:nth-child(1) {
+    background-color: #A0D3FF;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #1C0A77;
+    cursor: pointer;
+}
+
+
+input, textarea, select {
+    padding:3px;
+    border:1px solid #1C0A77;
+    border-radius:5px;
+    width:200px;
+    box-shadow:1px 1px 2px #C0C0C0 inset;
+}
+
+input[type=submit], input[type=reset] {
+    width:100px;
+    margin-left:5px;
+    box-shadow:1px 1px 1px #D83F3D;
+    cursor:pointer;
+}
+
+form.form-connexion > div:nth-child(1) {
+    width: 100%;
+}
+
+form.form-inscription > div:nth-child(3) {
+    display: flex;
+}
+
+
+
+
+.container_form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 75vh;
+    min-width: 33vw;
+    max-width: 80vw;
+    align-self: flex-start;
+    flex: 1;
+    margin: 0 auto;
+}
+
+
+.container_form > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+
+
 
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     min-height: 75vh;
-    min-width: 70vw;
+    min-width: 40vw;
     max-width: 80vw;
-    align-self: center;
-
+    align-self: flex-start;
+    flex: 1;
+    margin: auto;
 }
 
 .view {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.view ul li {
+    list-style: none;
 }
 
 /**********Tableau********************/
@@ -427,7 +596,6 @@ table {
     align-items: center;
 }
 
-/* Element | http://localhost/MVC_Chess_Team22.11.2019/?action=myAccount&id=49 */
 
 .table-update > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > th:nth-child(1) {
     display: flex;
@@ -435,13 +603,11 @@ table {
     align-items: center;
 }
 
-/* Element | http://localhost/MVC_Chess_Team22.11.2019/?action=myAccount&id=49 */
 
 .table-update > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > th:nth-child(2) {
     flex-direction: column;
 }
 
-/* Element | http://localhost/MVC_Chess_Team22.11.2019/?action=myAccount&id=49 */
 
 .table-update > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(5) > td:nth-child(2) {
     display: flex;
@@ -457,20 +623,37 @@ textarea {
     letter-spacing: 1px;
 }
 
-textarea {
-    /* padding: 10px; */
-    line-height: 1.5;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 1px #999;
-}
+/*textarea {*/
+    /*/!* padding: 10px; *!/*/
+    /*line-height: 1.5;*/
+    /*border-radius: 5px;*/
+    /*border: 1px solid #ccc;*/
+    /*box-shadow: 1px 1px 1px #999;*/
+/*}*/
 
-label {
-    display: block;
-}
+/*label {*/
+    /*display: block;*/
+/*}*/
 
 div.top_article:nth-child(n) {
     width: 100%;
+
+}
+
+form.form-create {
+    min-width: 75vw;
+}
+
+
+
+div.form-create:nth-child(6) > label:nth-child(1) {
+    background-color:
+    #A0D3FF;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid
+    #1C0A77;
+    cursor: pointer;
 }
 
 /***********Comments***********/
@@ -570,7 +753,7 @@ section.content:nth-child(3) {
     position: relative;
     margin-top: 156px;
     background-color: #333;
-    min-height: 63px;
+    min-height: 62px;
     color: cornsilk;
     margin-bottom: 0;
     padding: 0;
@@ -791,8 +974,10 @@ a.btn:nth-child(2) {
     }
 
     .justify_article img {
-        height: 10vh;
+        /*height: 10vh;*/
         width: 15vw;
+        max-width: 100%;
+        height: auto;
     }
 
     .program {
@@ -826,8 +1011,12 @@ a.btn:nth-child(2) {
     .copyright {
         margin-top: 122px;
         min-height: 50px;
-        margin-bottom: 10px;
+        padding-bottom: 10px;
     }
+    .copyright > p:nth-child(1) {
+        margin-bottom: -7px;
+    }
+
 
     #message > div:nth-child(2) {
         flex-wrap: nowrap;
@@ -926,6 +1115,12 @@ a.btn:nth-child(2) {
     }
 
     /*******Formulaire CreateArticle***********/
+
+    aside.form_view, aside.form_view:nth-child(3) {
+        display: none;
+    }
+
+
     textarea {
         width: 100%;
         height: 150px;
@@ -933,9 +1128,12 @@ a.btn:nth-child(2) {
         box-sizing: border-box;
         border: 2px solid #ccc;
         border-radius: 4px;
-        background-color: #f8f8f8;
+        /*background-color: #f8f8f8;*/
         resize: none;
     }
+
+
+
 
     /*********** Comments **********/
     .comment-added {

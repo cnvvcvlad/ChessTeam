@@ -28,7 +28,7 @@
             <p>
             <img src="assets/img/uploads/<?= $value->getArt_image()?>" alt="Image de l'article">
 
-                <span><?= $value->getArt_content() ?></span>                    
+                <span><?= $value->getArt_description() ?></span>
             </p>
             <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(getAllCommentsOfArticle($value->getId())) ?>) Commentaires </a></p>
         </div>

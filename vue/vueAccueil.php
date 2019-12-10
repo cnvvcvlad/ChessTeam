@@ -66,7 +66,7 @@
 
                 <span><?= $value->getArt_content() ?></span>                    
             </p>
-            <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">Commentaires (<?= numberCommentsOfArticle(getAllCommentsOfArticle($value->getId())); ?>)</a></p>
+            <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">Commentaires(<?= numberCommentsOfArticle(getAllCommentsOfArticle($value->getId())); ?>)</a></p>
         </div>
     <?php endforeach; ?>
     <?php endif; ?>

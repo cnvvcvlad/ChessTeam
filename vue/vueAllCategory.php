@@ -20,35 +20,37 @@
 <?php if (isAdmin()) : ?>
         <h2>Créer une nouvelle catégorie</h2>
 
-        <form action="controller/controllerFrontEnd.php" method="post" class="form-inscription"
+        <form action="controller/controllerFrontEnd.php" method="post" class="form-create"
               enctype="multipart/form-data">
             <fieldset>
                 <legend>Introduisez vos informations</legend>
-                <div class="form-inscription">
+                <div class="form-create">
                     <label for="">Titre de la catégorie
                         <p><input type="text" name="cat_title" value="" placeholder="Titre de la catégorie"></p>
                     </label>
                 </div>
-                <div class="form-inscription">
+                <div class="form-create">
                     <label for="">Description de la catégorie
                         <p><textarea name="cat_description" placeholder="Description de la catégorie" rows="5"
                                      cols="33"></textarea></p>
                     </label>
                 </div>
-                <div class="form-inscription">
+                <div class="form-create">
                     <label for="">Image de la catégorie
                         <p><input type="file" name="image_category" accept='.gif, .png , .jpg' required></p>
                     </label>
                 </div>
                 <p><input type="hidden" name="id_user" value="<?= htmlspecialchars($_SESSION['id_user']) ?>"></p>
 
-                <div class="form-inscription">
+                <div class="form-create">
                     <input type="submit" value="Envoyer" name="categoryCreation">
+                    <p><input type="reset" value="Annuler" /></p>
+
                 </div>
             </fieldset>
         </form>
 
 <?php endif; ?>
-<?php $template = ob_get_clean(); ?>
+<?php $template_form = ob_get_clean(); ?>
 
-<?php require 'templates/tempAccueil.php'; ?>
+<?php require 'templates/tempForm.php'; ?>

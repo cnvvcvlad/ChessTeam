@@ -57,8 +57,8 @@
                         </label>
                     </div>
                     <div class="form-inscription">
-                        <label for="">Image de l'article
-                            <p><input type="file" name="art_image" accept='.gif, .png , .jpg' required></p>
+                        <label for="art_image">Image de l'article
+                            <input type="file" id="art_image" name="art_image" accept='.gif, .png , .jpg' required>
                         </label>
                     </div>
                     <p><input type="hidden" name="art_author" value="<?= $values->getArt_author() ?>"></p>
@@ -66,6 +66,7 @@
 
                     <div class="form-inscription">
                         <input type="submit" value="Envoyer" name="updateArticle">
+                        <p><input type="reset" value="Annuler" /></p>
                     </div>
                 </fieldset>
             </form>

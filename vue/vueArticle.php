@@ -5,7 +5,7 @@
 
 
 <?php if (!empty($allArticles)): ?>
-    <h1>Tous les articles</h1>
+
     <div class="bienvenue">
         <div class="search_bouton">
             <label for="article-search">Recherchez un article :</label>
@@ -18,7 +18,7 @@
                                                                 alt="le bouton rouge"/></a>
         </div>
     </div>
-
+<!--    <h1>Tous les articles</h1>-->
     <?php foreach ($allArticles as $key => $values): ?>
 
         <div class="top_article">
@@ -46,7 +46,7 @@
                 <p>
                     <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image de l'article">
 
-                    <?= $values->getArt_content() ?></p>
+                    <?= $values->getArt_description() ?></p>
             </div>
             <p>
                 <a href="?action=allArticles&amp;id=<?= $values->getId() ?>">(<?= count(getAllCommentsOfArticle($values->getId())); ?>

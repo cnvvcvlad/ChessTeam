@@ -139,9 +139,9 @@
                         <a href="#message" class="btn">Réseaux Sociaux</a>
 
                         <div class="smenu">
-                            <a href="">Facebook<span class="icon-facebook"></span></a>
-                            <a href="">Twitter<span class="icon-twitter"></span></a>
-                            <a href="">Whatsapp<span class="icon-whatsapp"></span></a>
+                            <a href="https://www.facebook.com/">Facebook<span class="icon-facebook"></span></a>
+                            <a href="https://www.twitter.com/">Twitter<span class="icon-twitter"></span></a>
+                            <a href="https://www.whatsapp.com/">Whatsapp<span class="icon-whatsapp"></span></a>
                         </div>
                     </li>
 
@@ -155,7 +155,8 @@
                         </div>
                     </li>
                     <?php if (isConnected()) : ?>
-                        <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a></li>
+                        <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a><a
+                                class="btn" href="">#top</a></li>
                     <?php else : ?>
                         <li class="item"><a href="https://www.chess.com/" target="_blank" class="btn">Chess.com</a><a
                                 class="btn" href="">#top</a></li>

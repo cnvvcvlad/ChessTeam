@@ -30,7 +30,7 @@
 
         <div class="comment-block">
 
-            <h3 class="comment-libelle">(<?php numberCommentsOfArticle($commentsOfArticle); ?>) Commentaires : </h3>
+            <h3 class="comment-libelle">(<?php numberCommentsOfArticle($commentsOfArticle); ?>) Commentaires </h3>
             <?php foreach ($commentsOfArticle as $keys => $values) : ?>
                 <div class="comment-added">
 

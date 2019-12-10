@@ -104,13 +104,37 @@
                             </tr>
                         <?php endif ?>
                     </table>
-                    <form action="controller/controllerFrontEnd.php" method="POST" enctype="multipart/form-data">
-                        Login :<input type="text" required name="login" minlength="6" maxlength="10" value="<?= $value->getLogin() ?>">
-                        Email :<input type="text" required name="email" maxlength="25" value="<?= $value->getEmail() ?>">
-                        Mot de passe :<input type="text"  required name="password" minlength="6" maxlength="10" value="<?= $value->getPassword() ?>">
-                        <input type="file" name="user_image" required accept='.gif, .png , .jpg'>
-                        <input type="hidden" name="id_user" value="<?= $value->getId_user() ?>">
-                        <input type="submit" value="modifier" name="update">
+                    <form action="controller/controllerFrontEnd.php" method="POST" enctype="multipart/form-data"
+                          class="form-create">
+                        <fieldset>
+                            <legend>Introduisez vos informations</legend>
+                            <div class="form-create">
+                                <p><label>Login :</label><input type="text" required name="login" minlength="6"
+                                                                maxlength="10"
+                                                                value="<?= $value->getLogin() ?>"></p>
+                            </div>
+                            <div class="form-create">
+                                <p><label>Email :</label><input type="text" required name="email" maxlength="25"
+                                                                value="<?= $value->getEmail() ?>"></p>
+                            </div>
+                            <div class="form-create">
+                                <p><label>Mot de passe :</label><input type="text" required name="password"
+                                                                       minlength="6"
+                                                                       maxlength="10"
+                                                                       value="<?= $value->getPassword() ?>"></p>
+                            </div>
+                            <div class="form-create">
+                                <p><label for="user_image">Choisir une image</label>
+                                    <input type="file" id="user_image" name="user_image" required
+                                           accept='.gif, .png , .jpg'></p>
+                            </div>
+                            <input type="hidden" name="id_user" value="<?= $value->getId_user() ?>">
+                        </fieldset>
+                        <div class="form-create">
+                            <input type="submit" value="modifier" name="update">
+
+                            <p><input type="reset" value="Annuler"/></p>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -52,14 +52,16 @@ try {
     } elseif (isset($_POST['inscription']) and isset($_FILES['image_membre']) and $_FILES['image_membre']['error'] == 0) {
         extract($_POST);
 
+
         $login = validate($login);
 
-        $email = validate($email);
+        $email = emailValidator($email);
+
 
         $password = validate($password);
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $user_image = validate($_FILES['image_membre']['name']);
+        $user_image = photoValidator($_FILES['image_membre']['name']);
 
         if ($_FILES['image_membre']['size'] <= 2000000) {
             $extension_autorisee = ["jpg", "jpeg", "png", "gif"];
@@ -81,15 +83,23 @@ try {
                     'user_image' => $user_image
                 ]));
 
+                if (isAdmin()) {
+                    header('location:../index.php?action=allMembers&alert=aded');
+                    exit();
+                }
                 header("location:../index.php?action=connexion&alert=inscrit");
                 exit();
 
             } else {
-                throw new Exception("Veuillez rééssayer avec un autre format !");
+                throw new Exception("Veuillez rééssayer avec un autre format d'image !");
             }
         } else {
-            throw new Exception("Votre fichier ne doit pas dépasser 1 Mo !");
+            throw new Exception("Votre fichier ne doit pas dépasser 2 Mo !");
         }
+
+
+    } elseif ($_FILES['image_membre']['error'] != 0) {
+        throw new Exception ('Veuillez télécharger une image ');
     } elseif (isset($_POST['update'])) {
 
         extract($_POST);
@@ -227,7 +237,7 @@ try {
         $art_title = validate($art_title);
         $art_description = validate($art_description);
         $art_content = validate($art_content);
-        $art_image = validate($_FILES['image_article']['name']);
+        $art_image = photoValidator($_FILES['image_article']['name']);
         $category_id = htmlspecialchars($_POST['category']);
         $art_author = htmlspecialchars($_SESSION['id_user']);
 
@@ -267,7 +277,7 @@ try {
 
         $id = htmlspecialchars($id);
         $art_author = htmlspecialchars($art_author);
-        $art_title = validate($art_title);
+        $art_title = htmlspecialchars($art_title);
         $art_description = htmlspecialchars($art_description);
         $art_content = htmlspecialchars($art_content);
         $category_id = htmlspecialchars($category_id);
@@ -275,7 +285,7 @@ try {
 
         if (isset($_FILES['art_image']) AND $_FILES['art_image']['error'] == 0) {
 
-            $art_image = validate($_FILES['art_image']['name']);
+            $art_image = photoValidator($_FILES['art_image']['name']);
 
             if ($_FILES['art_image']['size'] <= 2000000) {
                 $extension_autorisee = ["jpg", "jpeg", "png", "gif"];

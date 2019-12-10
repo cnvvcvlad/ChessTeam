@@ -4,10 +4,10 @@
 
 <?php if(isConnected()) : ?>
 <h1>Créez un article</h1>
-<form action="controller/controllerFrontEnd.php" method="post" class="form-inscription" enctype="multipart/form-data">
+<form action="controller/controllerFrontEnd.php" method="post" class="form-create" enctype="multipart/form-data">
 <fieldset>
     <legend>Introduisez vos informations</legend>
-    <div class="form-inscription">
+    <div class="form-create">
         <?php if (isset($allCategory)) : ?>            
         <label for="category">Catégorie de l'article
             <p><select required class="form-inscription" name="category">
@@ -19,30 +19,32 @@
             </p>   
                 <?php endif; ?>     
     </div>
-    <div class="form-inscription">
+    <div class="form-create">
         <label for="art_title">Titre de l'article
             <p><input type="text" required name="art_title" value="" placeholder="Titre de l'article"></p>
         </label>
     </div>
-    <div class="form-inscription">
+    <div class="form-create">
         <label for="art_description">Description de l'article
             <p><textarea name="art_description" required placeholder="Description de l'article" rows="5" cols="33"></textarea></p>
         </label>
     </div>
-    <div class="form-inscription">
+    <div class="form-create">
         <label for="art_content">Contenu de l'article
             <p><textarea name="art_content" required placeholder="Contenu de l'article" rows="10" cols="60"></textarea></p>
         </label>
     </div>
-    <div class="form-inscription">
-        <label for="image_article">Image de l'article
-            <p><input type="file" name="image_article" accept='.gif, .png , .jpg' required></p>
+    <div class="form-create">
+        <label for="image_article">Choisir une image
+            <input type="file" class="image" id="image_article" name="image_article" accept='.gif, .png , .jpg' required>
         </label>
     </div>
     <p><input type="hidden" name="id_user" value="<?= $_SESSION['id_user'] ?>"></p>
-    <div class="form-inscription">
+    <div class="form-create">
     <input type="submit" value="Envoyer" name="articleCreation">
-  </div>
+        <p><input type="reset" value="Annuler" /></p>
+
+    </div>
 </fieldset>
 </form>
 

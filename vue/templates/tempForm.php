@@ -114,12 +114,84 @@
         </div>
     </header>
 
+    <div class="form_view">
+        <?php if (!isConnected()) : ?>
+            <aside class="form_view">
+                <div class="top_article_form">
+                    <?php if (!empty($lastArticle_one)) : ?>
+                        <?php foreach ($lastArticle_one as $key => $value) : ?>
+                            <h2><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie"
+                                     class="ico_categorie"/><?= $value->getArt_title() ?></h2>
+                            <!--                        <div class="banniere_bouton">-->
+                            <?php if (isAdmin()) : ?>
+                                <div class="bouton_commande"><a href="">Modifier</a></div>
+                            <?php endif; ?>
+                            <div class="bouton_commande">
+                                <a href="?action=allArticles&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Voir
+                                    l'article <img src="assets/img/by_default/flecheblanchedroite.png"
+                                                   alt="le bouton rouge"/></a>
+                            </div>
+                            <!--                        </div>-->
+                            <p>Ecrit par
+                                <mark><?= showNameAuthor($value->getArt_author()) ?></mark>
+                                le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
+                                <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
+                            <div class="justify_article">
+                                <p>
+                                    <img src="assets/img/uploads/<?= $value->getArt_image() ?>"
+                                         alt="Image de l'article">
 
-    <main class="container">
+                                    <?= $value->getArt_description() ?>
+                                </p>
 
-        <?= $template; ?>
+                                <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">Commentaires
+                                        (<?= numberCommentsOfArticle(getAllCommentsOfArticle($value->getId())); ?>)</a>
+                                </p>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
 
-    </main>
+            </aside>
+            <main class="container_form">
+
+                <?= $template_form; ?>
+
+            </main>
+
+            <aside class="form_view">
+                <div class="program_view">
+                    <div class="section_view">
+                        <h3 class="myColor">Qui sommes-nous ?</h3>
+                        <section class="section_form">
+
+                            <p><span>Error placeat molestias debitis pariatur molestiae atque dolores. Debitis, sint eaque. Cumque ipsa, ad blanditiis porro quas adipisci voluptatum? Quisquam expedita in minus id nulla, adipisci facere praesentium. Amet, deleniti?</span>
+                            </p>
+                            <!--            <button>Subscribe</button>-->
+                        </section>
+                        <h3 class="myColor">Nos actualités</h3>
+                        <section class="section_form">
+
+                            <p><span>Reprehenderit enim eaque sapiente excepturi maxime error recusandae illum? Amet sint sapiente omnis cupiditate iure quod optio, suscipit consectetur cumque deserunt illo molestias repellendus voluptatem error nesciunt assumenda provident! Molestias!</span>
+                            </p>
+                        </section>
+                        <h3 class="myColor">Les sites partenaires</h3>
+                        <section class="section_form">
+                            <p><span>Autem iste hic est ipsa, aliquam at sit earum sapiente dignissimos beatae deleniti quis laudantium, quisquam, voluptate possimus aut repellendus doloremque reprehenderit error id asperiores! Aspernatur quibusdam mollitia commodi perferendis!</span>
+                            </p>
+                        </section>
+                    </div>
+                </div>
+            </aside>
+        <?php else : ?>
+            <main class="container_form">
+
+                <?= $template_form; ?>
+
+            </main>
+        <?php endif; ?>
+    </div>
+
     <footer>
         <div class="pied-page">
             <div class="middle">
@@ -155,7 +227,8 @@
                         </div>
                     </li>
                     <?php if (isConnected()) : ?>
-                        <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a></li>
+                        <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a><a
+                                class="btn" href="">#top</a></li>
                     <?php else : ?>
                         <li class="item"><a href="https://www.chess.com/" target="_blank" class="btn">Chess.com</a><a
                                 class="btn" href="">#top</a></li>
