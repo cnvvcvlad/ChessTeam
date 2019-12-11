@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title><?= $title; ?></title>
     <meta name="description" content="<?= $description; ?>"/>
-    <!-- css perso -->
+    <!-- ===css perso== -->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/caroussel.css" type="text/css">
     <link rel="stylesheet" href="assets/css/burger.css" type="text/css">
@@ -44,7 +44,7 @@
                                     <?php foreach ($allCategory as $cat => $values) : ?>
                                         <li>
                                             <div class="list_style">
-                                                <a href="?action=categoryId&amp;id=<?= $values->getId() ?>"><?= strtoupper($values->getTitle()); ?></a>
+                                                <a href="?action=categoryId&amp;id=<?= $values->getId() ?>"><?=$values->getTitle(); ?></a>
                                             </div>
                                         </li>
                                     <?php endforeach; ?>
@@ -74,8 +74,12 @@
 
                                 <?php if (isAdmin()) : ?>
                                     <li>
+                                        <div class="list_style"><a href="?action=allComments">Commentaires</a></div>
+                                    </li>
+                                    <li>
                                         <div class="list_style"><a href="?action=allMembers">Membres</a></div>
                                     </li>
+
 
                                 <?php endif; ?>
                                 <li>
@@ -175,7 +179,7 @@
 </div>
 
 
-<!-- javaScript perso -->
+<!-- ==javaScript perso== -->
 <script src="assets/js/caroussel.js" type="text/javascript"></script>
 <script src="assets/js/burger.js" type="text/javascript"></script>
 

@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <?php $title = 'Catégories des articles du blog ChessTeam'; ?>
-<?php $description = 'Retrouvez tous les catégories des articles publiés sur le blog, consultez ses articles et ses commentaires'; ?>
+<?php $description = 'Retrouvez toutes les catégories des articles publiés sur le site, regardez ses articles et ses commentaires'; ?>
 
 
 

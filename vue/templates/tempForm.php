@@ -6,7 +6,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title><?= $title; ?></title>
     <meta name="description" content="<?= $description; ?>"/>
-    <!-- css perso -->
+    <!-- ==css perso== -->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/caroussel.css" type="text/css">
     <link rel="stylesheet" href="assets/css/burger.css" type="text/css">
@@ -37,14 +37,14 @@
                             </li>
                             <li class="has-children">
                                 <div class="list_style"><a
-                                        href="?action=allCategory">Catégories</a>
+                                        href="?action=allCategory">CatÃ©gories</a>
                                 </div>
 
                                 <ul class="sous-menu">
                                     <?php foreach ($allCategory as $cat => $values) : ?>
                                         <li>
                                             <div class="list_style">
-                                                <a href="?action=categoryId&amp;id=<?= $values->getId() ?>"><?= strtoupper($values->getTitle()); ?></a>
+                                                <a href="?action=categoryId&amp;id=<?= $values->getId() ?>"><?= $values->getTitle(); ?></a>
                                             </div>
                                         </li>
                                     <?php endforeach; ?>
@@ -68,7 +68,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="list_style"><a href="?action=createArticleId">Créer article</a></div>
+                                    <div class="list_style"><a href="?action=createArticleId">CrÃ©er article</a></div>
                                 </li>
 
 
@@ -76,10 +76,13 @@
                                     <li>
                                         <div class="list_style"><a href="?action=allMembers">Membres</a></div>
                                     </li>
+                                    <li>
+                                        <div class="list_style"><a href="?action=allComments">Commentaires</a></div>
+                                    </li>
 
                                 <?php endif; ?>
                                 <li>
-                                    <div class="list_style"><a href="?action=deconnect">Déconnexion</a></div>
+                                    <div class="list_style"><a href="?action=deconnect">DÃ©connexion</a></div>
                                 </li>
 
                             <?php else : ?>
@@ -120,9 +123,8 @@
                 <div class="top_article_form">
                     <?php if (!empty($lastArticle_one)) : ?>
                         <?php foreach ($lastArticle_one as $key => $value) : ?>
-                            <h2><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie"
+                            <h2><img src="assets/img/by_default/ico_epingle.png" alt="CatÃ©gorie"
                                      class="ico_categorie"/><?= $value->getArt_title() ?></h2>
-                            <!--                        <div class="banniere_bouton">-->
                             <?php if (isAdmin()) : ?>
                                 <div class="bouton_commande"><a href="">Modifier</a></div>
                             <?php endif; ?>
@@ -131,10 +133,9 @@
                                     l'article <img src="assets/img/by_default/flecheblanchedroite.png"
                                                    alt="le bouton rouge"/></a>
                             </div>
-                            <!--                        </div>-->
                             <p>Ecrit par
                                 <mark><?= showNameAuthor($value->getArt_author()) ?></mark>
-                                le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
+                                le <em><?= $value->getArt_date_creation() ?></em> dans la catÃ©gorie
                                 <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
                             <div class="justify_article">
                                 <p>
@@ -167,9 +168,8 @@
 
                             <p><span>Error placeat molestias debitis pariatur molestiae atque dolores. Debitis, sint eaque. Cumque ipsa, ad blanditiis porro quas adipisci voluptatum? Quisquam expedita in minus id nulla, adipisci facere praesentium. Amet, deleniti?</span>
                             </p>
-                            <!--            <button>Subscribe</button>-->
                         </section>
-                        <h3 class="myColor">Nos actualités</h3>
+                        <h3 class="myColor">Nos actualitÃ©s</h3>
                         <section class="section_form">
 
                             <p><span>Reprehenderit enim eaque sapiente excepturi maxime error recusandae illum? Amet sint sapiente omnis cupiditate iure quod optio, suscipit consectetur cumque deserunt illo molestias repellendus voluptatem error nesciunt assumenda provident! Molestias!</span>
@@ -200,7 +200,7 @@
                         <a href="#profile" class="btn">Notre adresse</a>
 
                         <div class="smenu">
-                            <h5>15 rue Général Faidherbe</h5>
+                            <h5>15 rue GÃ©nÃ©ral Faidherbe</h5>
                             <h5>94130 Nogent sur Marne</h5>
                             <h5>0783554818</h5>
                             <h5>cnvvc_vlad@yahoo.fr</h5>
@@ -208,7 +208,7 @@
                     </li>
 
                     <li class="item" id="message">
-                        <a href="#message" class="btn">Réseaux Sociaux</a>
+                        <a href="#message" class="btn">RÃ©seaux Sociaux</a>
 
                         <div class="smenu">
                             <a href="">Facebook<span class="icon-facebook"></span></a>
@@ -223,11 +223,11 @@
                         <div class="smenu">
                             <a href="">Contactez-nous</a>
                             <a href="">Condition d'utilisation</a>
-                            <a href="">Politique de confidentialité</a>
+                            <a href="">Politique de confidentialitï¿½</a>
                         </div>
                     </li>
                     <?php if (isConnected()) : ?>
-                        <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a><a
+                        <li class="item"><a href="?action=deconnect" class="btn">DÃ©</a><a
                                 class="btn" href="">#top</a></li>
                     <?php else : ?>
                         <li class="item"><a href="https://www.chess.com/" target="_blank" class="btn">Chess.com</a><a
@@ -247,7 +247,7 @@
 </div>
 
 
-<!-- javaScript perso -->
+<!-- ==javaScript perso== -->
 <script src="assets/js/caroussel.js" type="text/javascript"></script>
 <script src="assets/js/burger.js" type="text/javascript"></script>
 

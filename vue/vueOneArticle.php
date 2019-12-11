@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
-<?php $title = 'Consulter un article de ChessTeam'; ?>
-<?php $description = ''; ?>
+<?php $title = 'Consulter un billet de ChessTeam'; ?>
+<?php $description = 'Trouvez votre article de blog préféré'; ?>
 
 
     <div class="top_article">
@@ -41,12 +41,16 @@
                         </p>
                     </div>
                     <div class="comment-description"><p><?= $values->getCom_content() ?></p></div>
+                    <?php if (isAdmin()) : ?>
+                    <div class="comment-modify">
+                        <a href="?action=allComments&amp;modifyC=<?= $values->getId() ?>" class="comment-modify">Modifier</a>
+                    </div>
+                    <?php endif; ?>
 
                 </div>
             <?php endforeach; ?>
 
             <?php if (isConnected()) : ?>
-                <p class="comment-foruser">Vous pouvez ajouter un commentaire !</p>
                 <div class="comment-block">
                     <div class="comment-add">
                         <fieldset>
@@ -59,7 +63,7 @@
                                 <textarea class="comment-text" name="com_content" id="" cols="40" rows="5"
                                           placeholder="Commenter" wrap="off"></textarea>
 
-                                <p><input type="submit" name="commentCreation" value="Envoyer le commentaire"></p>
+                                <p><input type="submit" name="commentCreation" value="Envoyer"></p>
                             </form>
                         </fieldset>
                     </div>

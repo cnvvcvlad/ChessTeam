@@ -34,11 +34,11 @@ try {
 
     if (isset($_POST['connexion'])) {
         sleep(1);
-        $login = validate($_POST['login']);
+        $login = validator($_POST['login']);
         $password = $manager_user->checkPassword($login, new MemberManager());
 
         $passwordHash = $password['password'];
-        $passwordUser = validate($_POST['password']);
+        $passwordUser = validator($_POST['password']);
 
         if (password_verify($passwordUser, $passwordHash)) {
 
@@ -98,8 +98,6 @@ try {
         }
 
 
-    } elseif ($_FILES['image_membre']['error'] != 0) {
-        throw new Exception ('Veuillez télécharger une image ');
     } elseif (isset($_POST['update'])) {
 
         extract($_POST);
@@ -110,6 +108,7 @@ try {
         $email = validate($email);
 
         $password = validate($password);
+        $password = password_hash($password, PASSWORD_DEFAULT);
 
         if (isset($_FILES['user_image']) AND $_FILES['user_image']['error'] == 0) {
 
@@ -144,8 +143,11 @@ try {
             'user_image' => $user_image
         ]));
 
-
-        header("location:../index.php?action=home");
+        if (isAdmin()) {
+            header('location:../index.php?action=home');
+            exit();
+        }
+        header("location:../index.php?action=myAccount");
         exit();
 
     } /************Add Update Category *************/
@@ -321,11 +323,11 @@ try {
             header("location:../index.php?action=allArticles");
             exit();
         }
-    } /************Add Comments ****************/
+    } /************Add Update Comments ****************/
 
     elseif (isset($_POST['commentCreation'])) {
         $com_author = htmlspecialchars($_SESSION['id_user']);
-        $com_content = validate($_POST['com_content']);
+        $com_content = htmlspecialchars($_POST['com_content']);
         $article_id = htmlspecialchars($_POST['article_id']);
 
         $manager_comment->insertComment(new Comment([
@@ -336,10 +338,23 @@ try {
 
         $url = $_SERVER['HTTP_REFERER'];
         $url_referer = basename($url);
-        var_dump($url);
-        var_dump($url_referer);
         header("location: ../" . basename($_SERVER['HTTP_REFERER']));
         exit();
+    } elseif (isset($_POST['updateComment'])) {
+
+        extract($_POST);
+        $id = htmlspecialchars($id);
+        $com_content = htmlspecialchars($com_content);
+
+        $manager_comment->updateComment($id, new Comment([
+            'com_content' => $com_content,
+        ]));
+
+        header("location:../index.php?action=allComments");
+        exit();
+
+    } else {
+        throw new Exception ('Veuillez télécharger une image ');
     }
 
 } catch (Exception $e) {

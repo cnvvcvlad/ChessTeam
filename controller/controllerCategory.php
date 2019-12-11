@@ -13,7 +13,7 @@ function getCategory($id_category) {
 }
 
 function showNameCategory($id_category) {
-    if(!empty($id_category)) {
+    if(!isset($id_category)) {
         $cat_manager = new CategoryManager();
         $category = $cat_manager->nameCategory($id_category);
         $category = implode($category);

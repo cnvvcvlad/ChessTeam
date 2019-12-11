@@ -6,7 +6,6 @@ class PostsManager extends DataBase
 {
     public function Affichage()
     {
-        //  $d = new DataBase();
         $query = 'SELECT * FROM articles ORDER BY id DESC';
         $select = $this->dbConnect()->prepare($query);
         $select->execute();
@@ -16,7 +15,6 @@ class PostsManager extends DataBase
         while ($donnees = $select->fetch()) {
             $art[] = new Article($donnees);
         }
-        // var_dump($art);
         return $art;
     }
 

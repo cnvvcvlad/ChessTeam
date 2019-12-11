@@ -16,6 +16,7 @@ require 'controller/controllerComments.php';
 
 
 try {
+
     $allCategory = getAllCategory();
     $allArticles = getListe();
     $lastArticles = getLastArticles();
@@ -86,6 +87,17 @@ try {
                 require 'vue/vueArticlesCategory.php';
             }
 
+        } elseif ($action == 'allComments') {
+            if (isset($_GET['modifyC'])) {
+                $modifyComment = getComment(htmlspecialchars($_GET['modifyC']));
+                require 'vue/vueCommentId.php';
+            } elseif (isset($_GET['deleteCom'])) {
+                $deleteComment = deleteComment(htmlspecialchars($_GET['deleteCom']));
+                require 'vue/vueAllComments.php';
+            } else {
+                $allComments = getAllComments();
+                require 'vue/vueAllComments.php';
+            }
         } elseif ($action == 'home') {
             require 'vue/vueAccueil.php';
 //            header('location:./');

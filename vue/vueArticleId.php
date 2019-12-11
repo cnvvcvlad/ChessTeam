@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
-<?php $title ='Articles  membres'; ?>
-<?php $description = '' ;?>
+<?php $title ='Articles ajoutés par des membres'; ?>
+<?php $description = 'Retrouvez la listes des billets proposées par les internautes' ;?>
 
 <?php if(isConnected()) : ?>
 

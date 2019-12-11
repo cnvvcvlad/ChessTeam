@@ -109,12 +109,15 @@ class MemberManager extends DataBase
             "password" => $member->getPassword(),
             "user_image" => $member->getUser_image()
         ]);
+        if (isAdmin()) {
+            if (isConnected()) {
+                $_SESSION['user_image'] = $member->getUser_image();
+                $_SESSION['login'] = $member->getLogin();
+                $_SESSION['email'] = $member->getEmail();
+            }
 
-        if (isConnected()) {
-            $_SESSION['user_image'] = $member->getUser_image();
-            $_SESSION['login'] = $member->getLogin();
-            $_SESSION['email'] = $member->getEmail();
         }
+
         return $update;
     }
 

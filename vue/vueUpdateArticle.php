@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
-<?php $title = 'Consulter un article de ChessTeam'; ?>
-<?php $description = ''; ?>
+<?php $title = 'Mis à jour d\'un article de ChessTeam'; ?>
+<?php $description = 'Enregistrez les modifications apportées aux informations publiées sur le site web'; ?>
 
 
     <div class="top_article">
@@ -11,12 +11,11 @@
 
                 <div class="bouton_commande"><a
                         href="?action=allArticles&amp;deleteA=<?= $values->getId() ?>">Supprimer</a></div>
-                <!--        <div class="bouton_commande"><a href="">Modifier</a></div>-->
 
             </div>
             <p>Ecrit par
                 <mark><?= showNameAuthor($values->getArt_author()) ?></mark>
-                le <em><?= $values->getArt_date_creation() ?></em> dans la cat�gorie
+                le <em><?= $values->getArt_date_creation() ?></em> dans la catégorie
                 <strong><?= showNameCategory($values->getCategory_id()) ?></strong></p>
             <div class="justify_article">
                 <h3><?= $values->getArt_description() ?></h3>

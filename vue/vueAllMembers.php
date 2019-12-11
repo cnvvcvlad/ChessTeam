@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 <?php $title = 'Membres ChessTeam Nogent sur Marne'; ?>
-<?php $description = 'Consultez et modifiez les informations de tous les membres du blog'; ?>
+<?php $description = 'Modifiez les informations des membres du blog'; ?>
 
 <?php if (isset($_GET['alert']) AND ($_GET['alert'] == 'aded')) {
     echo '<h4>Nouveau membre vient d\'être ajouté !</h4>';
@@ -17,7 +17,7 @@
             <caption>Informations internaute</caption>
             <tr>
                 <th scope="col">Libellé</th>
-                <th scope="col">Valeur</th>
+                <th scope="col"></th>
                 <th scope="col">Actions</th>
             </tr>
             <?php foreach ($allMembers as $key => $value) : ?>
@@ -34,12 +34,14 @@
                         <button class="hidden-btn">Modifier</button>
                     </th>
                     <td><?= $value->getEmail() ?></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th scope="row">Password
                         <button class="hidden-btn">Modifier</button>
                     </th>
                     <td><?= $value->getPassword() ?></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th scope="row">Image
@@ -48,10 +50,8 @@
                     <td><a href="assets/img/uploads/<?= $value->getUser_image() ?>"><img
                                 src="assets/img/uploads/<?= $value->getUser_image() ?>" alt="Photo de profil"
                                 title="Cliquez pour agrandir" height="80em"/></a></td>
-                </tr>
-                <tr>
-                    <th><a href="?action=allMembers&amp;deleteM=<?= $value->getId_user() ?>">Supprimer le compte</a></th>
-
+                    <td><a href="?action=allMembers&amp;deleteM=<?= $value->getId_user() ?>">Supprimer le compte</a>
+                    </td>
                 </tr>
 
 
@@ -67,7 +67,8 @@
                 <div class="form-inscription">
                     <label for="login">Login : </label>
 
-                    <p><input type="text" name="login" id="login" required placeholder="Login" minlength="6" maxlength="10"></p>
+                    <p><input type="text" name="login" id="login" required placeholder="Login" minlength="6"
+                              maxlength="10"></p>
                 </div>
                 <div class="form-inscription">
                     <label for="email">Email : </label>
@@ -77,7 +78,8 @@
                 <div class="form-inscription">
                     <label for="password">Mot de passe : </label>
 
-                    <p><input type="password" name="password" id="password" required placeholder="Mot de passe" minlength="6"
+                    <p><input type="password" name="password" id="password" required placeholder="Mot de passe"
+                              minlength="6"
                               maxlength="10"></p>
                 </div>
                 <div class="form-inscription">
@@ -87,12 +89,12 @@
                 </div>
                 <div class="form-inscription">
                     <p><input type="submit" value="Ajouter !" name="inscription"></p>
-                    <p><input type="reset" value="Annuler" /></p>
+
+                    <p><input type="reset" value="Annuler"/></p>
 
                 </div>
             </form>
         </div>
-
 
 
     <?php endif; ?>

@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <?php $title = 'Accueil Membre'; ?>
-<?php $description = ""; ?>
+<?php $description = 'Administrez les informations personnelles et actualisez-les'; ?>
 
 
 <div class="top_article">

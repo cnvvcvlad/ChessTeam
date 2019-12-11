@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 <?php $title = 'Inscription blog Chess Team Nogent sur Marne'; ?>
-<?php $description = ''; ?>
+<?php $description = 'Inscrivez-vous pour publier des actualités liés aux échecs'; ?>
 
 
 <div class="form-connexion">
@@ -10,7 +10,7 @@
           enctype="multipart/form-data">
         <h1>Inscrivez-vous !</h1>
         <fieldset>
-            <legend>Vos coordonn�es : </legend>
+            <legend>Vos coordonnées : </legend>
             <div class="form-inscription">
                 <label for="login">Login : </label>
 
@@ -45,4 +45,4 @@
 
 <?php $template_form = ob_get_clean(); ?>
 
-<?php require 'templates/tempForm.php'; ?>
+<?php require 'templates/tempForm.php';

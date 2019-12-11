@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
-<?php $title = 'Conexion blog Chess Team Nogent sur Marne'; ?>
-<?php $description = ''; ?>
+<?php $title = 'Connexion sur le blog du ChessTeam Nogent sur Marne'; ?>
+<?php $description = 'Connéctez-vous en tant que membre pour interagir avec les autres'; ?>
 
 <?php if (isset($_GET['alert']) AND ($_GET['alert'] == 'inscrit')) {
     echo '<h4>Vous êtes bien inscrit !</h4>';

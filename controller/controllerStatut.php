@@ -1,12 +1,22 @@
 <?php
 
-function validate($data)
-{
+
+function validate($data) {
     $data = trim($data);
-    $data = stripcslashes($data);
+    $data = stripslashes($data);
     $data = htmlspecialchars($data);
 
-    if (strlen($data) < 6) {
+    if (strlen($data) < 2) {
+        throw new Exception("Caractères insuffisants !!");
+    }
+    return $data;
+}
+
+
+function validator($data)
+{
+
+    if (strlen(validate($data)) < 6) {
         throw new Exception("Caractères insuffisants !");
     } elseif (strlen($data) > 10) {
         throw new Exception ('Votre identifiant ou mot de pase ne doit pas déppasser 10 caractères !');
@@ -15,15 +25,12 @@ function validate($data)
 }
 
 function emailValidator($data) {
-    $data = trim($data);
-    $data = stripcslashes($data);
-    $data = htmlspecialchars($data);
-    $valid = filter_var($data, FILTER_VALIDATE_EMAIL);
+    $valid = filter_var(validate($data), FILTER_VALIDATE_EMAIL);
     if(empty($valid)) {
         throw new Exception ('Veuillez insérer une adresse mail valide !');
     } else {
 
-        if (strlen($data) < 3) {
+        if (strlen(validate($data)) < 4) {
             throw new Exception("Caractères insuffisants !");
         } elseif (strlen($data) > 30) {
             throw new Exception ('Veuillez ne pas déppasser 30 caractères !');
@@ -33,10 +40,7 @@ function emailValidator($data) {
 }
 
 function photoValidator ($data) {
-    $data = trim($data);
-    $data = stripcslashes($data);
-    $data = htmlspecialchars($data);
-    if (strlen($data) < 3) {
+    if (strlen(validate($data)) < 4) {
         throw new Exception("Caractères insuffisants !");
     } elseif (strlen($data) > 30) {
         throw new Exception ('Le nom de la photo ne doit pas déppasser 30 caractères !');
@@ -63,7 +67,7 @@ function isAdmin() {
 function helloUser() {
     if(isConnected()) {
 
-        echo 'Salut ' . strtoupper(htmlspecialchars($_SESSION['login']));
+        echo 'Salut ' . strtoupper(showNameAuthor(htmlspecialchars($_SESSION['id_user'])));
     }
 }
 

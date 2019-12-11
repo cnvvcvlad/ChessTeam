@@ -1,7 +1,7 @@
 <?php ob_start() ?>
 
 <?php $title = 'Articles d\'une seule catégorie'; ?>
-<?php $description = ''; ?>
+<?php $description = 'Les textes sont triés par différents sous-domaine du monde des échecs'; ?>
 
 
     <div class="top_article">

@@ -43,7 +43,6 @@ class ArticleManager extends DataBase
             'art_author' => $article->getArt_author(),
             'category_id' => $article->getCategory_id()
         ]);
-        return;
     }
 
 

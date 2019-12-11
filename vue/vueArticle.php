@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 
 <?php $title = 'Article du blog'; ?>
-<?php $description = ''; ?>
+<?php $description = 'Cette page affiche tous les articles du site web'; ?>
 
 
 <?php if (!empty($allArticles)): ?>
@@ -18,7 +18,6 @@
                                                                 alt="le bouton rouge"/></a>
         </div>
     </div>
-<!--    <h1>Tous les articles</h1>-->
     <?php foreach ($allArticles as $key => $values): ?>
 
         <div class="top_article">
@@ -28,7 +27,6 @@
 
             <div class="banniere_bouton">
                 <?php if (isAdmin()) : ?>
-                    <!--                    <div class="bouton_commande"><a href="">Supprimer</a></div>-->
                     <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $values->getId() ?>">Modifier</a>
                     </div>
                 <?php endif; ?>

@@ -39,6 +39,5 @@ class CategoriesManager extends DataBase
             'category_image' => $category->getCategory_image(),
             'cat_author' => $category->getCat_author()
         ]);
-        return;
     }
 }

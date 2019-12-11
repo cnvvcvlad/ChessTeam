@@ -1,12 +1,12 @@
 <?php ob_start(); ?>
-<?php $title = 'Categorie des articles'; ?>
-<?php $description = ''; ?>
+<?php $title = 'Catégorie des articles'; ?>
+<?php $description = 'Découvrez les catégories disponible pour trouver les informations utiles'; ?>
 
 
     <div class="top_article">
         <?php if (!empty($CategoryId)): ?>
             <?php foreach ($CategoryId as $key => $value) : ?>
-                <h1>Categorie : <?= $value->getTitle() ?> </h1>
+                <h1>Catégorie : <?= $value->getTitle() ?> </h1>
                 <?php if (isAdmin()) : ?>
                     <div class="banniere_bouton">
                         <div class="bouton_commande"><a href="?action=allCategory&amp;deleteC=<?= $value->getId() ?>">Supprimer</a>

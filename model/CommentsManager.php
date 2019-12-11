@@ -26,4 +26,15 @@ class CommentsManager extends DataBase
             'article_id' => $comment->getArticle_id()
         ]);
     }
+
+    public function updateComment($id, Comment $comment) {
+        $request = 'UPDATE comments SET com_content = :com_content WHERE id =:id';
+        $update = $this->dbConnect()->prepare($request);
+        $update = $update->execute([
+            'id' => $id,
+            'com_content' => $comment->getCom_content()
+        ]);
+    }
+
+
 }
