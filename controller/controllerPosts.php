@@ -3,7 +3,7 @@
 
 function getListe()
 {
-    $art_manager = new PostsManager();
+    $art_manager = new ArticleManager();
     $posts = $art_manager->Affichage();
     return $posts;
 
@@ -11,28 +11,28 @@ function getListe()
 
 function getLastArticles()
 {
-    $art_manager = new PostsManager();
+    $art_manager = new ArticleManager();
     $posts = $art_manager->Affichage_recentes();
     return $posts;
 }
 
 function getLastArticle_one()
 {
-    $art_manager = new PostsManager();
+    $art_manager = new ArticleManager();
     $post = $art_manager->Affichage_last_one();
     return $post;
 }
 
 function getArticlesOfCategory($category_id)
 {
-    $art_manager = new PostsManager();
+    $art_manager = new ArticleManager();
     $posts = $art_manager->AffichageParCategorie($category_id);
     return $posts;
 }
 
 function getOneArticle($art_id)
 {
-    $art_manager = new PostsManager();
+    $art_manager = new ArticleManager();
     $post = $art_manager->Affichage_one($art_id);
     return $post;
 }
@@ -40,7 +40,7 @@ function getOneArticle($art_id)
 function isAuthor($art_author)
 {
     if (isset($_SESSION['id_user'])) {
-        $art_manager = new PostsManager();
+        $art_manager = new ArticleManager();
         $art_manager = $art_manager->AffichageMyArticles($art_author);
         foreach ($art_manager as $key => $value) {
             $value->getArt_author();
@@ -55,21 +55,22 @@ function isAuthor($art_author)
 
 function getMyArticles($id_user)
 {
-    $art_manager = new PostsManager();
+    $art_manager = new ArticleManager();
     $posts = $art_manager->AffichageMyArticles($id_user);
     return $posts;
 }
 
 function deleteMyArticle($id_article)
 {
-    $art_manager = new PostsManager();
+    $art_manager = new ArticleManager();
     $art_manager->deleteArticle($id_article);
     header('location:index.php?action=allArticles');
     return;
 }
 
-function updateMyArticle($id_article) {
-    $art_manager = new PostsManager();
-    $art_manager->updateArticle($id_article);
-    return;
-}
+//function updateMyArticle($id_article)
+//{
+//    $art_manager = new ArticleManager();
+//    $art_manager->updateArticle($id_article);
+//    return;
+//}

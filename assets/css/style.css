@@ -554,7 +554,7 @@ input, textarea, select {
 }
 
 input[type=submit], input[type=reset] {
-    width:100px;
+    width:105px;
     margin-left:5px;
     box-shadow:1px 1px 1px #D83F3D;
     cursor:pointer;
@@ -566,6 +566,17 @@ form.form-connexion > div:nth-child(1) {
 
 form.form-inscription > div:nth-child(3) {
     display: flex;
+}
+
+
+div.form-inscription:nth-child(5) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label.form-image {
+    padding: 1vh 1vw;
 }
 
 

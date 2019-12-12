@@ -12,6 +12,11 @@ require 'controller/controllerCategory.php';
 require 'controller/controllerUser.php';
 require 'controller/controllerComments.php';
 
+require 'model/ArticleManager.php';
+require 'model/CategoriesManager.php';
+require 'model/CommentsManager.php';
+require 'model/MemberManager.php';
+
 /*****************************************/
 
 
