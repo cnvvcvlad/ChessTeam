@@ -77,16 +77,13 @@
     margin: 0 2%;
 }
 
-/*main {*/
-    /*margin-left: 10%;*/
-    /*max-width: 80%;*/
-    /*position: inherit;*/
-/*}*/
 
 h1 {
     color: black;
     text-align: center;
     font-family: "ClearSans", Arial, Helvetica, sans-serif;
+    letter-spacing: .1rem;
+
 
 }
 
@@ -113,6 +110,35 @@ h5 {
     color: darkgrey;
 }
 
+p {
+    text-align: start;
+    font-family: "ClearSans", sans-serif;
+    padding: 1vw 1vh;
+    letter-spacing: 1px;
+    line-height : 120%;
+}
+
+a, li {
+    text-decoration: none;
+    font-family: "rubik", sans-serif;
+    color: #2050a6;
+}
+
+mark {
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+
+label,
+textarea, legend {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+
 article {
     display: flex;
     flex-direction: column;
@@ -126,9 +152,15 @@ article {
     user-select: none;
 }
 
-a {
-    text-decoration: none;
+#cache {
+    display: none;
 }
+#cache:target {
+    display: block;
+}
+
+
+
 /*--------------------------------------------------------
            MIS EN PAGE
 --------------------------------------------------------*/
@@ -285,6 +317,7 @@ ul .sous-menu {
     /*width: 105%;*/
     max-height: 65px;
     width: auto;
+    border-radius: 10px;
 }
 
 /* Main Vue */
@@ -368,6 +401,7 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     width: 30vw;
     max-width: 100%;
     height: auto;
+    border-radius: 10px;
 }
 
 .program {
@@ -388,6 +422,7 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     border: 1px solid red;
     margin: 1% 1%;
     padding: 0.5em 0.5em;
+    border-radius: 10px;
 }
 
 /**********Forms inscription connexion****************/
@@ -663,23 +698,7 @@ table {
 
 /***********Formulaire CreateArticle***********/
 
-label,
-textarea {
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-}
 
-/*textarea {*/
-    /*/!* padding: 10px; *!/*/
-    /*line-height: 1.5;*/
-    /*border-radius: 5px;*/
-    /*border: 1px solid #ccc;*/
-    /*box-shadow: 1px 1px 1px #999;*/
-/*}*/
-
-/*label {*/
-    /*display: block;*/
-/*}*/
 
 div.top_article:nth-child(n) {
     width: 100%;
@@ -855,6 +874,8 @@ footer {
 .menu {
     border-radius: 8px 8px 0 0;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .item {
@@ -1054,12 +1075,12 @@ a.btn:nth-child(2) {
     }
 
     .copyright {
-        margin-top: 122px;
+        margin-top: 127px;
         min-height: 50px;
-        padding-bottom: 10px;
+        padding-bottom: 8px;
     }
     .copyright > p:nth-child(1) {
-        margin-bottom: -7px;
+        margin-bottom: -11px;
     }
 
 

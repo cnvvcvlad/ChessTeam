@@ -20,11 +20,14 @@
             <mark><?= showNameAuthor($value->getArt_author()) ?></mark>
             le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
             <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
-        <div class="justify_article">
-            <p>
+        <div id="detail_art" class="justify_article">
+
                 <img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article">
-                <span><?= $value->getArt_content() ?></span>
-            </p>
+            <span><?= $value->getArt_description() ?><a href="#cache"> [Lire la suite...] </a></span>
+
+            <div id="cache"><span><?= $value->getArt_content() ?></span><a href="#detail_art"> [Voir moins]</a>
+            </div>
+
         </div>
 
 

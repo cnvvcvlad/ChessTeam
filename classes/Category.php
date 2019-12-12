@@ -11,8 +11,11 @@ class Category extends Generique
 
     public function __construct(array $data)
     {
-        if ($data) {
+//        var_dump($data);
+        if (is_array($data)) {
             parent::__construct($data);
+        } else {
+            throw new Exception ('Désolé !');
         }
     }
 

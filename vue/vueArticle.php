@@ -6,6 +6,7 @@
 
 <?php if (!empty($allArticles)): ?>
 
+
     <div class="bienvenue">
         <div class="search_bouton">
             <label for="article-search">Recherchez un article :</label>
@@ -40,11 +41,15 @@
                 le <em><?= $values->getArt_date_creation() ?></em> dans la catégorie
                 <strong><?= showNameCategory($values->getCategory_id()) ?></strong></p>
 
-            <div class="justify_article">
-                <p>
-                    <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image de l'article">
+            <div id="detail_art" class="justify_article">
 
-                    <?= $values->getArt_description() ?></p>
+                <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image de l'article">
+
+                <span><?= $values->getArt_description() ?><a href="#cache"> [Lire la suite...] </a></span>
+
+                <div id="cache"><span><?= $values->getArt_content() ?></span><a href="#detail_art"> [Voir moins]</a>
+                </div>
+
             </div>
             <p>
                 <a href="?action=allArticles&amp;id=<?= $values->getId() ?>">(<?= count(getAllCommentsOfArticle($values->getId())); ?>

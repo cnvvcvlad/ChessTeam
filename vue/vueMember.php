@@ -118,10 +118,10 @@
                                                                 value="<?= $value->getEmail() ?>"></p>
                             </div>
                             <div class="form-create">
-                                <p><label>Mot de passe :</label><input type="text" required name="password"
+                                <p><label>Nouveau mot de passe :</label><input type="text" required name="password"
                                                                        minlength="6"
                                                                        maxlength="10"
-                                                                       value="<?= $value->getPassword() ?>"></p>
+                                                                       value=""></p>
                             </div>
                             <div class="form-create">
                                 <p><label for="user_image">Choisir une image</label>

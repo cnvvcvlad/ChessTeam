@@ -2,6 +2,7 @@
 require_once 'model/DataBase.php';
 
 class CategoryManager extends DataBase
+
 {
     public function ShowAllCategory()
     {
@@ -23,9 +24,12 @@ class CategoryManager extends DataBase
         $select = $this->dbConnect()->prepare($request);
         $select->execute(["id" => $id_category]);
 
-        $cat[] = new Category($select->fetch());
-        return $cat;
+        $cat = [];
 
+        while ($data = $select->fetch()) {
+            $cat[] = new Category($data);
+        }
+        return $cat;
     }
 
     public function nameCategory($id_category)
@@ -34,7 +38,7 @@ class CategoryManager extends DataBase
         $select = $this->dbConnect()->prepare($request);
         $select->execute(["id" => $id_category]);
 
-        $cat = $select->fetch();
+        $cat =$select->fetch();
         return $cat;
 
     }

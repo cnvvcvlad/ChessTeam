@@ -30,6 +30,7 @@
                             les articles de cette catégorie <img src="assets/img/by_default/flecheblanchedroite.png"
                                                                  alt="le bouton rouge"/></a>
                     </div>
+
                     <div class="back-page"><a href="<?= $_SERVER['HTTP_REFERER'] ?>">Retour</a></div>
                 </div>
 

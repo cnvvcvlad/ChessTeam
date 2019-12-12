@@ -3,6 +3,7 @@
 <?php $title = 'Liste des commentaires'; ?>
 <?php $description = 'Voir les commentaires des internautes sur différents sujets des échecs'; ?>
 
+<?php if(isAdmin()): ?>
 <?php if (isset($allComments)) : ?>
     <h3>Tous les commentaires</h3>
 
@@ -25,6 +26,7 @@
         </div>
         <?php endforeach; ?>
 
+<?php endif ?>
 <?php endif ?>
 <?php $template = ob_get_clean(); ?>
 

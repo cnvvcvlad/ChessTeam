@@ -3,8 +3,6 @@
 abstract class Generique
 {
 
-    const MAX_LENGTH_TITLE = 100;
-
     public function __construct(array $data = null)
     {
         if ($data) {
@@ -24,11 +22,4 @@ abstract class Generique
         }
     }
 
-//    public function validateTitle($title)
-//    {
-//        if (strlen($title) > self::MAX_LENGTH_TITLE) {
-//            throw new \Exception("Le titre est trop long");
-//        }
-//        return true;
-//    }
 }

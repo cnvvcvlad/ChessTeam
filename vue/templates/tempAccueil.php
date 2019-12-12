@@ -73,11 +73,12 @@
 
 
                                 <?php if (isAdmin()) : ?>
-                                    <li>
-                                        <div class="list_style"><a href="?action=allComments">Commentaires</a></div>
-                                    </li>
+
                                     <li>
                                         <div class="list_style"><a href="?action=allMembers">Membres</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="list_style"><a href="?action=allComments">Commentaires</a></div>
                                     </li>
 
 
@@ -127,7 +128,7 @@
     <footer>
         <div class="pied-page">
             <div class="middle">
-                <div class="menu">
+                <ul class="menu">
                     <li class="item" id="profile">
                         <a href="#profile" class="btn">Notre adresse</a>
 
@@ -166,7 +167,7 @@
                                 class="btn" href="">#top</a></li>
                     <?php endif; ?>
 
-                </div>
+                </ul>
             </div>
         </div>
         <div class="copyright">

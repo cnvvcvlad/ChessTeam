@@ -73,11 +73,12 @@
 
 
                                 <?php if (isAdmin()) : ?>
-                                    <li>
-                                        <div class="list_style"><a href="?action=allMembers">Membres</a></div>
-                                    </li>
+
                                     <li>
                                         <div class="list_style"><a href="?action=allComments">Commentaires</a></div>
+                                    </li>
+                                    <li>
+                                        <div class="list_style"><a href="?action=allMembers">Membres</a></div>
                                     </li>
 
                                 <?php endif; ?>
@@ -137,12 +138,17 @@
                                 <mark><?= showNameAuthor($value->getArt_author()) ?></mark>
                                 le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
                                 <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
-                            <div class="justify_article">
+                            <div id="detail_art" class="justify_article">
                                 <p>
                                     <img src="assets/img/uploads/<?= $value->getArt_image() ?>"
                                          alt="Image de l'article">
 
-                                    <?= $value->getArt_description() ?>
+
+                                    <span><a href="#cache"> [Lire la suite...] </a></span>
+
+                                <div id="cache"><?= $value->getArt_description() ?></span><a href="#detail_art"> [Voir
+                                        moins]</a>
+                                </div>
                                 </p>
 
                                 <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">Commentaires
@@ -195,7 +201,7 @@
     <footer>
         <div class="pied-page">
             <div class="middle">
-                <div class="menu">
+                <ul class="menu">
                     <li class="item" id="profile">
                         <a href="#profile" class="btn">Notre adresse</a>
 
@@ -234,7 +240,7 @@
                                 class="btn" href="">#top</a></li>
                     <?php endif; ?>
 
-                </div>
+                </ul>
             </div>
         </div>
         <div class="copyright">
