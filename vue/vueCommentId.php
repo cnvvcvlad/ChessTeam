@@ -26,7 +26,7 @@
         <div class="form-inscription">
             <input type="submit" value="Envoyer" name="updateComment">
             <p><input type="reset" value="Annuler" /></p>
-            <p class="deleteCom"><a href="?action=allComments&amp;deleteCom=<?= $value->getId()?>" class="deleteCom"/>Supprimer</a></p>
+            <p class="deleteCom"><a href="?action=allComments&amp;deleteCom=<?= $value->getId()?>" onclick="return(confirm('Supprimer le commentaire?'))" class="deleteCom">Supprimer</a></p>
         </div>
     </form>
     <?php endforeach ; ?>

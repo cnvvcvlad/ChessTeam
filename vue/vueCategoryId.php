@@ -9,7 +9,7 @@
                 <h1>Catégorie : <?= $value->getTitle() ?> </h1>
                 <?php if (isAdmin()) : ?>
                     <div class="banniere_bouton">
-                        <div class="bouton_commande"><a href="?action=allCategory&amp;deleteC=<?= $value->getId() ?>">Supprimer</a>
+                        <div class="bouton_commande" ><a href="?action=allCategory&amp;deleteC=<?= $value->getId() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer cette catégorie</a>
                         </div>
                     </div>
                 <?php endif ?>
@@ -24,15 +24,7 @@
                     </p>
 
                 </div>
-                <div class="back-page">
-                    <div class="back-page">
-                        <a href="?action=articlesOfCategory&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Consulter
-                            les articles de cette catégorie <img src="assets/img/by_default/flecheblanchedroite.png"
-                                                                 alt="le bouton rouge"/></a>
-                    </div>
 
-                    <div class="back-page"><a href="<?= $_SERVER['HTTP_REFERER'] ?>">Retour</a></div>
-                </div>
 
             <?php endforeach; ?>
 
@@ -60,11 +52,11 @@
                 </label>
             </div>
             <div class="form-create">
-                <label for="">Image de la catégorie
-                    <p><input type="file" name="category_image" accept='.gif, .png , .jpg' required></p>
-                </label>
+                <label for="image">Choisir une image</label>
+                    <p><input type="file" name="category_image" class="image" id="image" accept='.gif, .png , .jpg' required></p>
+
             </div>
-            <p><input type="hidden" name="cat_author" value="<?= htmlspecialchars($_SESSION['id_user']) ?>"></p>
+            <p><input type="hidden" name="cat_author"  value="<?= htmlspecialchars($_SESSION['id_user']) ?>"></p>
 
             <div class="form-create">
                 <input type="submit" value="Envoyer" name="updateCategory">
@@ -74,5 +66,16 @@
         </fieldset>
     </form>
 <?php endif; ?>
+    <div class="back-page">
+        <div class="back-page">
+            <a href="?action=allCategory">Retour</a>
+            <a href="?action=articlesOfCategory&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Consulter
+                les articles de cette catégorie <img src="assets/img/by_default/flecheblanchedroite.png"
+                                                     alt="le bouton rouge"/></a>
+
+        </div>
+
+
+    </div>
 <?php $template = ob_get_clean(); ?>
 <?php require 'templates/tempAccueil.php'; ?>

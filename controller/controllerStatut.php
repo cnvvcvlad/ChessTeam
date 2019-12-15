@@ -1,10 +1,12 @@
 <?php
 
 
-function validate($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
+function validate($data)
+{
+    $data = trim($data); //supprimer les espaces dans la requête de l'internaute
+    $data = stripslashes($data);// Supprime les antislashs d'une chaîne
+    $data = htmlspecialchars($data); //sécuriser le formulaire contre les failles html
+    $data = strip_tags($data); // supprimer les balises html et php dans la requête
 
     if (strlen($data) < 2) {
         throw new Exception("Caractères insuffisants !!");
@@ -24,32 +26,35 @@ function validator($data)
     return $data;
 }
 
-function emailValidator($data) {
+function emailValidator($data)
+{
     $valid = filter_var(validate($data), FILTER_VALIDATE_EMAIL);
-    if(empty($valid)) {
+    if (empty($valid)) {
         throw new Exception ('Veuillez insérer une adresse mail valide !');
     } else {
 
         if (strlen(validate($data)) < 4) {
             throw new Exception("Caractères insuffisants !");
-        } elseif (strlen($data) > 30) {
+        } elseif (strlen(validate($data)) > 30) {
             throw new Exception ('Veuillez ne pas déppasser 30 caractères !');
         }
     }
     return $data;
 }
 
-function photoValidator ($data) {
+function photoValidator($data)
+{
     if (strlen(validate($data)) < 4) {
         throw new Exception("Caractères insuffisants !");
-    } elseif (strlen($data) > 30) {
-        throw new Exception ('Le nom de la photo ne doit pas déppasser 30 caractères !');
+    } if (strlen(validate($data)) > 20) {
+        throw new Exception ('Le nom de la photo ne doit pas déppasser 20 caractères !');
     }
     return $data;
 }
 
 
-function isConnected() {
+function isConnected()
+{
     if (isset($_SESSION['id_user'])) {
         return true;
     }
@@ -57,32 +62,38 @@ function isConnected() {
 }
 
 
-function isAdmin() {
-    if(isConnected() && $_SESSION['statut'] == 1) {
+function isAdmin()
+{
+    if (isConnected() && $_SESSION['statut'] == 1) {
         return true;
     }
     return false;
 }
 
-function helloUser() {
-    if(isConnected()) {
+function helloUser()
+{
+    if (isConnected()) {
 
         echo 'Salut ' . strtoupper(showNameAuthor(htmlspecialchars($_SESSION['id_user'])));
     }
 }
 
-function backPageId() {
-    if (isset($_SERVER['HTTP_REFERER']) AND isset($_SESSION['id_user'])) {
-        $url = basename($_SERVER['HTTP_REFERER']);
-        if ($url=='index.php?action=myArticlesId&id=' . $_SESSION['id_user']) {
-            return true;
-        }
+function backPageId()
+{
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        return true;
+    } else {
         return false;
     }
-    return ;
 }
 
-function showImage($user_image) {
+
+function showImage($user_image)
+{
+    if (empty($_SESSION['user_image']) or (!isset($_SESSION['user_image']))) {
+        $user_image = 'pawn_logo.jpg';
+        return $user_image;
+    }
     return $user_image;
 }
 

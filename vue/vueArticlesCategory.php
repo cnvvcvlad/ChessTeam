@@ -6,29 +6,48 @@
 
     <div class="top_article">
         <?php if (!empty($articlesOfCategory)): ?>
-        <?php foreach ($articlesOfCategory as $key => $value) : ?>
+            <?php foreach ($articlesOfCategory as $key => $value) : ?>
 
-        <h1><?= $value->getArt_title() ?></h1>
-        <p>Ecrit par <mark><?= showNameAuthor($value->getArt_author())?></mark> le <em><?= $value->getArt_date_creation() ?></em> dans le catégorie <strong><?= showNameCategory($value->getCategory_id())?></strong></p>
-        <h3>Description</h3>
-        <div class="justify_article">
-        <p><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de la catégorie">
+                <h1><?= $value->getArt_title() ?></h1>
+                <p>Ecrit par
+                    <mark><?= showNameAuthor($value->getArt_author()) ?></mark>
+                    le <em><?= $value->getArt_date_creation() ?></em> dans le catégorie
+                    <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
+
+                <h3>Description</h3>
+
+                <div class="banniere_bouton">
+                    <div class="bouton_commande">
+                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Voir l'article
+                            <img src="assets/img/by_default/flecheblanchedroite.png"
+                                 alt="le bouton rouge"/></a>
+                    </div>
+                    <?php if (isAdmin()) : ?>
+                        <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a></div>
+                    <?php endif; ?>
+                </div>
+
+                <div class="justify_article">
+                    <p><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de la catégorie">
             <span>
                 <?= $value->getArt_description() ?></span>
-            </p>
-                        <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(getAllCommentsOfArticle($value->getId())) ?>) Commentaires </a></p>
+                    </p>
 
-    </div>
+                    <p>
+                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(getAllCommentsOfArticle($value->getId())) ?>
+                            ) Commentaires </a></p>
 
-        <div class="bouton_commande">
-                    <a href="?action=allArticles&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Consulter l'article <img src="assets/img/by_default/flecheblanchedroite.png" alt="le bouton rouge" /></a>
                 </div>
-    <?php endforeach; ?>
-    <?php else : ?>
-        <h3>Il n'y a pas d'articles dans cette catégorie</h3>
 
-    <?php endif; ?>
+
+            <?php endforeach; ?>
+        <?php else : ?>
+            <h3>Il n'y a pas d'articles dans cette catégorie</h3>
+
+        <?php endif; ?>
     </div>
+    <div class="back-page"><a href="?action=allCategory">Retour</a></div>
+
 
 <?php $template = ob_get_clean(); ?>
 <?php require 'templates/tempAccueil.php'; ?>

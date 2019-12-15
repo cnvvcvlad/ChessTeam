@@ -119,7 +119,7 @@
     </header>
 
     <div class="form_view">
-        <?php if (!isConnected()) : ?>
+        <?php if (!isAdmin()) : ?>
             <aside class="form_view">
                 <div class="top_article_form">
                     <?php if (!empty($lastArticle_one)) : ?>
@@ -146,8 +146,9 @@
 
                                     <span><a href="#cache"> [Lire la suite...] </a></span>
 
-                                <div id="cache"><?= $value->getArt_description() ?></span><a href="#detail_art"> [Voir
-                                        moins]</a>
+                                <div id="cache"><span><?= $value->getArt_description() ?><br><a href="#detail_art">
+                                            [Voir
+                                            moins]</a></span>
                                 </div>
                                 </p>
 
@@ -163,6 +164,7 @@
             <main class="container_form">
 
                 <?= $template_form; ?>
+
 
             </main>
 
@@ -189,6 +191,7 @@
                     </div>
                 </div>
             </aside>
+
         <?php else : ?>
             <main class="container_form">
 
@@ -196,7 +199,9 @@
 
             </main>
         <?php endif; ?>
+
     </div>
+
 
     <footer>
         <div class="pied-page">
@@ -227,16 +232,22 @@
                         <a href="#settings" class="btn">FAQ</a>
 
                         <div class="smenu">
-                            <a href="">Contactez-nous</a>
+                            <a href="">Questions fréquentes</a>
                             <a href="">Condition d'utilisation</a>
-                            <a href="">Politique de confidentialit�</a>
+                            <a href="">Politique de confidentialité</a>
                         </div>
                     </li>
                     <?php if (isConnected()) : ?>
-                        <li class="item"><a href="?action=deconnect" class="btn">Dé</a><a
+                        <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a>
+
+                            <div class="separate"></div>
+                            <a
                                 class="btn" href="">#top</a></li>
                     <?php else : ?>
-                        <li class="item"><a href="https://www.chess.com/" target="_blank" class="btn">Chess.com</a><a
+                        <li class="item"><a href="https://www.chess.com/" target="_blank" class="btn">Chess.com</a>
+
+                            <div class="separate"></div>
+                            <a
                                 class="btn" href="">#top</a></li>
                     <?php endif; ?>
 

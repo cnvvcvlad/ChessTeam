@@ -6,7 +6,7 @@
 <?php if(isAdmin()): ?>
 <?php if (isset($allComments)) : ?>
     <h3>Tous les commentaires</h3>
-
+    <div class="top_article">
     <?php foreach ($allComments as $key => $value) : ?>
 
         <div class="comment-added">
@@ -28,6 +28,10 @@
 
 <?php endif ?>
 <?php endif ?>
+    </div>
+<div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
+
+
 <?php $template = ob_get_clean(); ?>
 
 <?php require 'templates/tempAccueil.php'; ?>

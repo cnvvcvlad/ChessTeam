@@ -76,7 +76,7 @@ class ArticleManager extends DataBase
 
     public function Affichage_last_one()
     {
-        $query = 'SELECT * FROM articles WHERE id = 40';
+        $query = 'SELECT * FROM articles WHERE id = 68';
         $select = $this->dbConnect()->prepare($query);
         $select->execute();
         $art[] = new Article($select->fetch());

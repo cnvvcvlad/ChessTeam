@@ -154,17 +154,17 @@
                         <a href="#settings" class="btn">FAQ</a>
 
                         <div class="smenu">
-                            <a href="">Contactez-nous</a>
+                            <a href="vue/contact.php">Questions fréquentes</a>
                             <a href="">Condition d'utilisation</a>
                             <a href="">Politique de confidentialité</a>
                         </div>
                     </li>
                     <?php if (isConnected()) : ?>
-                        <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a><a
+                        <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a><div class="separate"></div><a
                                 class="btn" href="">#top</a></li>
                     <?php else : ?>
-                        <li class="item"><a href="https://www.chess.com/" target="_blank" class="btn">Chess.com</a><a
-                                class="btn" href="">#top</a></li>
+                        <li class="item"><a href="https://www.chess.com/" target="_blank" class="btn">Chess.com</a><div class="separate"></div><a
+                                class="btn" href=""><i class="fas fa-arrow-up"></i>#top</a></li>
                     <?php endif; ?>
 
                 </ul>

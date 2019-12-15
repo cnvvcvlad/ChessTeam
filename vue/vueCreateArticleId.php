@@ -35,7 +35,7 @@
         </label>
     </div>
     <div class="form-create">
-        <label for="image_article">Choisir une image
+        <label class="form-inscription" for="image_article">Choisir une image
             <input type="file" class="image" id="image_article" name="image_article" accept='.gif, .png , .jpg' required>
         </label>
     </div>
@@ -47,6 +47,7 @@
     </div>
 </fieldset>
 </form>
+    <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
 
 <?php endif ; ?>
 <?php $template = ob_get_clean(); ?>

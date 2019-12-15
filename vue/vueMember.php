@@ -24,7 +24,7 @@
                 <li>consulter tous les articles</li>
             </ul>
             <ul>
-                <li>consulter tous les catégories des articles</li>
+                <li>consulter toutes les catégories des articles</li>
             </ul>
             <ul>
                 <li>ajouter des nouveaux articles</li>
@@ -58,7 +58,7 @@
         <?php foreach ($myAccount as $key => $value) : ?>
             <div class="table-update">
                 <div>
-                    <table>
+                    <table class="table-update">
                         <caption>Informations internaute</caption>
                         <tr>
                             <th scope="col">Libellé</th>
@@ -66,29 +66,25 @@
                         </tr>
                         <tr>
                             <th scope="row"><p>Login</p>
-                                <button class="hidden-btn">Modifier</button>
                             </th>
                             <td><input type="text" readonly name="login" value="<?= $value->getLogin() ?>"></td>
 
                         </tr>
                         <tr>
-                            <th scope="row">Email
-                                <button class="hidden-btn">Modifier</button>
+                            <th scope="row"><p>Email</p>
                             </th>
                             <td><input type="text" readonly name="email" value="<?= $value->getEmail() ?>"></td>
 
                         </tr>
                         <tr>
-                            <th scope="row">Password
-                                <button class="hidden-btn">Modifier</button>
+                            <th scope="row"><p>Password</p>
                             </th>
                             <td><input type="password" readonly name="password"
                                        value="<?= $value->getPassword() ?>"></td>
 
                         </tr>
                         <tr>
-                            <th scope="row">Image
-                                <button class="hidden-btn">Modifier</button>
+                            <th scope="row"><p>Image</p>
                             </th>
                             <td>
                                 <a href="assets/img/uploads/<?= $value->getUser_image() ?>"><img
@@ -99,7 +95,7 @@
                         </tr>
                         <?php if (!isAdmin()) : ?>
                             <tr>
-                                <th><a href="?action=allMembers&amp;deleteM=<?= $_SESSION['id_user'] ?>">Supprimer
+                                <th><a href="?action=allMembers&amp;deleteM=<?= $_SESSION['id_user'] ?>" class="comment-modify" onclick="return(confirm('Supprimer vraiment?'))">Supprimer
                                         mon compte</a></th>
                             </tr>
                         <?php endif ?>
@@ -108,30 +104,30 @@
                           class="form-create">
                         <fieldset>
                             <legend>Introduisez vos informations</legend>
-                            <div class="form-create">
-                                <p><label>Login :</label><input type="text" required name="login" minlength="6"
-                                                                maxlength="10"
-                                                                value="<?= $value->getLogin() ?>"></p>
+                            <div class="form-create"><p>
+                                <label>Login :<input type="text" required name="login" minlength="6"
+                                                             maxlength="10"
+                                                             value="<?= $value->getLogin() ?>"></label></p>
                             </div>
                             <div class="form-create">
-                                <p><label>Email :</label><input type="text" required name="email" maxlength="25"
-                                                                value="<?= $value->getEmail() ?>"></p>
+                                <p><label>Email :<input type="text" required name="email" maxlength="25"
+                                                                value="<?= $value->getEmail() ?>"></label></p>
+                            </div>
+                            <div class="form-create"><p>
+                                    <label>Nouveau mot de passe :<input type="text" required name="password"
+                                                                                minlength="6"
+                                                                                maxlength="10"
+                                                                                value=""></label></p>
                             </div>
                             <div class="form-create">
-                                <p><label>Nouveau mot de passe :</label><input type="text" required name="password"
-                                                                       minlength="6"
-                                                                       maxlength="10"
-                                                                       value=""></p>
-                            </div>
-                            <div class="form-create">
-                                <p><label for="user_image">Choisir une image</label>
-                                    <input type="file" id="user_image" name="user_image" required
+                                <p><label class="form-create" for="user_image">Choisir une image</label>
+                                    <input class="image" type="file" id="user_image" name="user_image" required
                                            accept='.gif, .png , .jpg'></p>
                             </div>
                             <input type="hidden" name="id_user" value="<?= $value->getId_user() ?>">
                         </fieldset>
                         <div class="form-create">
-                            <input type="submit" value="modifier" name="update">
+                            <input type="submit" value="Modifier" name="update">
 
                             <p><input type="reset" value="Annuler"/></p>
                         </div>
@@ -141,7 +137,10 @@
 
         <?php endforeach; ?>
     <?php endif; ?>
+
 </div>
+<div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
+
 
 <?php $template = ob_get_clean(); ?>
 

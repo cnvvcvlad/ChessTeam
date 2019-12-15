@@ -4,8 +4,16 @@
 <?php $description = 'Le blog du ChessTeam Nogent sur Marne propose aux internautes passionés des échecs  de consulter ses articles publiés, s\'inscrire en tant que membre pour publier ses propres articles et commentaires'; ?>
     <div class="main-vue">
     <div class="banniere">
+    <div class="bienvenue">
+        <div class="search_bouton">
+            <p class="bienvenue">Bienvenue sur la page d'accueil de notre blog ! <br>
+            On vous souhaite une agréable lecture ! </p>
+        </div>
+    </div>
+
 <?php if (!empty($lastArticles)): ?>
     <article>
+
         <!-- La structure du slide -->
         <div class="galleryContainer">
             <div class="slideShowContainer">
@@ -32,24 +40,7 @@
         </div>
     </article>
 
-    <div class="bienvenue">
-        <div class="search_bouton">
-            <label for="article-search">Recherchez un article :</label>
-            <input type="search" id="article-search"
-                   aria-label="Recherchez un article">
-            <button>Search</button>
-        </div>
-        <div class="banniere_bouton">
-            <?php if (isAdmin()) : ?>
-                <div class="bouton_commande"><a href="">Supprimer</a></div>
-                <div class="bouton_commande"><a href="">Modifier</a></div>
-            <?php endif; ?>
-            <div class="bouton_commande">
-                <a href="#" class="bouton_rouge">Voir l'article <img src="assets/img/by_default/flecheblanchedroite.png"
-                                                                     alt="le bouton rouge"/></a>
-            </div>
-        </div>
-    </div>
+
     </div>
     <div class="top_article">
         <?php if (!empty($lastArticle_one)) : ?>
@@ -58,7 +49,8 @@
                          class="ico_categorie"/><?= $value->getArt_title() ?></h1>
                 <div class="banniere_bouton">
                     <?php if (isAdmin()) : ?>
-                        <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a></div>
+                        <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
+                        </div>
                     <?php endif; ?>
                     <div class="bouton_commande">
                         <a href="?action=allArticles&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Voir l'article
@@ -71,16 +63,18 @@
                     <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
                 <div id="detail_art" class="justify_article">
 
-                        <img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article">
+                    <img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article">
 
-                        <span><?= $value->getArt_description() ?><a href="#cache"> [Lire la suite...] </a></span>
+                    <span><h5><?= $value->getArt_description() ?></h5><br><a href="#cache">[Lire la
+                            suite...] </a></span>
 
-                    <div id="cache"><span><?= $value->getArt_content() ?></span><a href="#detail_art"> [Voir moins]</a>
+                    <div id="cache"><span><?= $value->getArt_content() ?><br><a href="#detail_art"> [Voir
+                                moins]</a></span>
                     </div>
-                    </p>
                     <p>
-                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">Commentaires(<?= numberCommentsOfArticle(getAllCommentsOfArticle($value->getId())); ?>
-                            )</a></p>
+                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">
+                            Commentaires(<?= numberCommentsOfArticle(getAllCommentsOfArticle($value->getId())); ?>)</a>
+                    </p>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
@@ -104,6 +98,7 @@
 
             <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laborum reiciendis adipisci quasi sit in ut esse tenetur repudiandae ea minus totam enim eligendi explicabo, rerum mollitia omnis vel aspernatur.</span><span>Autem iste hic est ipsa, aliquam at sit earum sapiente dignissimos beatae deleniti quis laudantium, quisquam, voluptate possimus aut repellendus doloremque reprehenderit error id asperiores! Aspernatur quibusdam mollitia commodi perferendis!</span>
             </p>
+
         </section>
     </div>
     </div>

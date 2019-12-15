@@ -30,7 +30,7 @@
                           maxlength="10"></p>
             </div>
             <div class="form-inscription">
-                <label class="form-image" for="image">Choisir une image</label>
+                <label class="form-inscription" for="image">Choisir une image</label>
                 <p><input type="file" name="image_membre" class="image" id="image" required accept='.gif, .png , .jpg'></p>
             </div>
         </fieldset>

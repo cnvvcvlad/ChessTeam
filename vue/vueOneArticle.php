@@ -23,9 +23,9 @@
         <div id="detail_art" class="justify_article">
 
                 <img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article">
-            <span><?= $value->getArt_description() ?><a href="#cache"> [Lire la suite...] </a></span>
+            <span><?= $value->getArt_description() ?><br><a href="#cache"> [Lire la suite...] </a></span>
 
-            <div id="cache"><span><?= $value->getArt_content() ?></span><a href="#detail_art"> [Voir moins]</a>
+            <div id="cache"><span><?= $value->getArt_content() ?><br><a href="#detail_art"> [Voir moins]</a></span>
             </div>
 
         </div>
@@ -77,11 +77,11 @@
             <?php endif; ?>
             <div class="back-page">
                 <?php if (backPageId()) : ?>
-                    <div class="back-page"><a href="?action=myArticlesId">Retour</a></div>
+                    <a href="<?= basename($_SERVER['HTTP_REFERER']) ?>">Retour</a>
                 <?php else : ?>
-                    <div class="back-page"><a href="?action=allArticles">Retour</a></div>
+                    <a href="?action=allArticles">Retour</a>
                 <?php endif; ?>
-                <div class="back-page"><a href="?action=allArticles">Consulter autres articles</a></div>
+                <a href="?action=allArticles">Consulter les articles du blog</a>
 
             </div>
         </div>

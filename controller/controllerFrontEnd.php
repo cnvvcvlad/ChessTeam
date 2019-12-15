@@ -74,7 +74,12 @@ try {
             if (in_array($extension_uploadee, $extension_autorisee)) {
                 $user_image = $_FILES['image_membre']['name'];
 
-                move_uploaded_file($_FILES['image_membre']['tmp_name'], '../assets/img/uploads/' . $user_image);
+
+
+//                $user_image = uniqid() . $user_image;
+                $path = '../assets/img/uploads/' . $user_image;
+
+                move_uploaded_file($_FILES['image_membre']['tmp_name'], $path);
 
                 $manager_user->insertMembre(new Users([
                     'login' => $login,
@@ -112,7 +117,7 @@ try {
 
         if (isset($_FILES['user_image']) AND $_FILES['user_image']['error'] == 0) {
 
-            $user_image = validate($_FILES['user_image']['name']);
+            $user_image = photoValidator($_FILES['user_image']['name']);
 
             if ($_FILES['user_image']['size'] <= 2000000) {
                 $extension_autorisee = ["jpg", "jpeg", "png", "gif"];

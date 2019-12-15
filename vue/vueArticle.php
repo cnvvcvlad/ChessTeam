@@ -9,14 +9,8 @@
 
     <div class="bienvenue">
         <div class="search_bouton">
-            <label for="article-search">Recherchez un article :</label>
-            <input type="search" id="article-search"
-                   aria-label="Recherchez un article">
-            <button>Search</button>
-        </div>
-        <div class="bouton_commande">
-            <a href="" class="bouton_rouge">Voir l'article <img src="assets/img/by_default/flecheblanchedroite.png"
-                                                                alt="le bouton rouge"/></a>
+            <p class="bienvenue">Voici la page principale de nos articles !<br>
+            N'hésitez pas à nous donner votre avis dans les commentaires ! </p>
         </div>
     </div>
     <?php foreach ($allArticles as $key => $values): ?>
@@ -45,27 +39,29 @@
 
                 <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image de l'article">
 
-                <span><?= $values->getArt_description() ?><a href="#cache"> [Lire la suite...] </a></span>
+                <span><?= $values->getArt_description() ?><br><a href="#cache"> [Lire la suite...] </a></span>
 
-                <div id="cache"><span><?= $values->getArt_content() ?></span><a href="#detail_art"> [Voir moins]</a>
+                <div id="cache"><span><?= $values->getArt_content() ?><br><a href="#detail_art"> [Voir moins]</a></span>
                 </div>
+                <p>
+                    <a href="?action=allArticles&amp;id=<?= $values->getId() ?>">
+                        (<?= count(getAllCommentsOfArticle($values->getId())); ?>) Commentaires
+                    </a>
+                </p>
 
             </div>
-            <p>
-                <a href="?action=allArticles&amp;id=<?= $values->getId() ?>">(<?= count(getAllCommentsOfArticle($values->getId())); ?>
-                    ) Commentaires </a></p>
+
         </div>
 
     <?php endforeach; ?>
 <?php endif; ?>
     <div class="back-page">
         <?php if (backPageId()) : ?>
-            <div class="back-page"><a href="?action=home">Retour</a></div>
+            <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
+
         <?php else : ?>
-            <div class="back-page"><a href="?action=home">Retour</a></div>
-        <?php endif; ?>
-        <?php if (isAdmin()) : ?>
-            <div class="back-page"><a href="?action=allCategory">Consulter autres catégories</a></div>
+            <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
+
         <?php endif; ?>
 
     </div>
