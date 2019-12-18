@@ -29,7 +29,7 @@
         </li>
 
         <?php if(isset($_SERVER['HTTP_REFERER'])) : ?>
-        <div class="d-flex justify-content-end"><a class="btn btn-primary" href="../../<?= basename($_SERVER['HTTP_REFERER']); ?>">Retour à l'accueil</a>
+        <div class="d-flex justify-content-end"><a class="btn btn-primary" href="/ChessTeam/<?= basename($_SERVER['HTTP_REFERER']); ?>">Retour à l'accueil</a>
         <?php endif; ?>
         </div>
     </ol>
