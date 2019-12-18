@@ -11,9 +11,10 @@
         <h1><?= $value->getArt_title() ?></h1>
         <div class="banniere_bouton">
             <?php if (isAdmin()) : ?>
+                <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>" >Modifier</a></div>
                 <div class="bouton_commande"><a
-                        href="?action=allArticles&amp;deleteA=<?= $value->getId() ?>">Supprimer</a></div>
-                <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a></div>
+                        href="?action=allArticles&amp;deleteA=<?= $value->getId() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer</a></div>
+
             <?php endif; ?>
         </div>
         <p>Ecrit par
