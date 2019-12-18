@@ -108,19 +108,17 @@ class MemberManager extends DataBase
             "password" => $member->getPassword(),
             "user_image" => $member->getUser_image()
         ]);
-        if (isAdmin()) {
-            if (isConnected()) {
+        if (isAdmin() and $_SESSION['id_user'] != $id_user)  {
+           return $_SESSION['user_image'];
+        }
+            elseif (isConnected()) {
                 $_SESSION['user_image'] = $member->getUser_image();
-                $_SESSION['login'] = $member->getLogin();
-                $_SESSION['email'] = $member->getEmail();
-            }
-
         }
 
     }
 
 
-    public function ShowOneUser($user_id)
+    public function showOneUser($user_id)
     {
         $request = 'SELECT * FROM users WHERE id_user = :id_user';
         $select = $this->dbConnect()->prepare($request);
@@ -131,7 +129,7 @@ class MemberManager extends DataBase
         return $member;
     }
 
-    public function ShowAllUsers()
+    public function showAllUsers()
     {
         $request = 'SELECT * FROM users WHERE statut = 0  ORDER BY id_user DESC';
         $select = $this->dbConnect()->prepare($request);

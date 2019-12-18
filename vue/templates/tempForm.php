@@ -109,8 +109,8 @@
                                                                  alt="Photo de profil"
                                                                  title="Cliquez pour agrandir"/></a>
                 <?php else : ?>
-                    <a href="assets/img/uploads/<?= showImage($_SESSION['user_image']) ?>"><img
-                            src="assets/img/uploads/<?= showImage($_SESSION['user_image']) ?>" alt="Photo de profil"
+                    <a href="assets/img/uploads/<?= $_SESSION['user_image'] ?>"><img
+                            src="assets/img/uploads/<?= $_SESSION['user_image'] ?>" alt="Photo de profil"
                             title="Cliquez pour agrandir" height="100em"/></a>
                 <?php endif; ?>
             </div>
@@ -183,7 +183,7 @@
                             <p><span>Reprehenderit enim eaque sapiente excepturi maxime error recusandae illum? Amet sint sapiente omnis cupiditate iure quod optio, suscipit consectetur cumque deserunt illo molestias repellendus voluptatem error nesciunt assumenda provident! Molestias!</span>
                             </p>
                         </section>
-                        <h3 class="myColor">Les sites partenaires</h3>
+                        <h3 class="myColor">Derniers articles</h3>
                         <section class="section_form">
                             <p><span>Autem iste hic est ipsa, aliquam at sit earum sapiente dignissimos beatae deleniti quis laudantium, quisquam, voluptate possimus aut repellendus doloremque reprehenderit error id asperiores! Aspernatur quibusdam mollitia commodi perferendis!</span>
                             </p>
@@ -229,12 +229,12 @@
                     </li>
 
                     <li class="item" id="settings">
-                        <a href="#settings" class="btn">FAQ</a>
+                        <a href="#settings" class="btn">FAQ / CGU</a>
 
                         <div class="smenu">
-                            <a href="">Questions fréquentes</a>
-                            <a href="">Condition d'utilisation</a>
-                            <a href="">Politique de confidentialité</a>
+                            <a href="vue/questions.php">Questions fréquentes</a>
+                            <a href="vue/conditions.php">Condition d'utilisation</a>
+                            <a href="vue/mentions.php">Mentions légales</a>
                         </div>
                     </li>
                     <?php if (isConnected()) : ?>

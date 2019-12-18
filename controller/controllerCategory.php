@@ -2,20 +2,17 @@
 
 function getAllCategory() {
     $cat_manager = new CategoriesManager();
-    $category = $cat_manager->ShowAllCategory();
+    $category = $cat_manager->showAllCategory();
     return $category;
 }
 
 function getCategory($id_category) {
     $cat_manager = new CategoriesManager();
-    $category = $cat_manager->ShowCategory($id_category);
-    if($category != 0) {
+    $category = $cat_manager->showCategory($id_category);
         return $category;
-    } else {
-        throw new Exception ('Désole !');
-    }
 
 }
+
 
 function showNameCategory($id_category) {
     if(!empty($id_category)) {
@@ -28,10 +25,8 @@ function showNameCategory($id_category) {
     }
 }
 
-
-
 function deleteCategory ($id_category)
 {
     $cat_manager = new CategoriesManager();
-    $category = $cat_manager->deleteC($id_category);
+    $category = $cat_manager->deleteCat($id_category);
 }

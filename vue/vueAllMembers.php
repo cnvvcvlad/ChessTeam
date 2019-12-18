@@ -8,7 +8,7 @@
 ?>
 
 <?php if (isAdmin()) : ?>
-    <h1>Tous les membres</h1>
+    <h1>Voici tous les membres de ChessTeam</h1>
 
     <?php if (isset($allMembers)) : ?>
 
@@ -41,14 +41,16 @@
                             le compte</a>
                     </th>
                     <td><?= $value->getEmail() ?></td>
-                    <td><a href="?action=allMembers&amp;deleteM=<?= $value->getId_user() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer le compte</a>
+                    <td><a href="?action=allMembers&amp;deleteM=<?= $value->getId_user() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer le compte</a></td>
 
                 </tr>
                 <tr>
                     <th scope="row">Password
+                        <a href="?action=myArticlesId&amp;idAuthor=<?= $value->getId_user() ?>" class="hidden-btn">Articles</a>
                     </th>
                     <td><input type="password" value="<?= $value->getPassword() ?>"</td>
-                    <td></td>
+                    <td>                        <a href="?action=myArticlesId&amp;idAuthor=<?= $value->getId_user() ?>">Articles
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">Image
@@ -72,27 +74,27 @@
             <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription"
                   enctype="multipart/form-data">
                 <div class="form-inscription">
-                    <label for="login">Login : </label>
+                    <label for="login">Login :
 
                     <p><input type="text" name="login" id="login" required placeholder="Login" minlength="6"
-                              maxlength="10"></p>
+                              maxlength="10"></p></label>
                 </div>
                 <div class="form-inscription">
-                    <label for="email">Email : </label>
+                    <label for="email">Email :
 
-                    <p><input type="email" name="email" id="email" required placeholder="Email" maxlength="25"></p>
+                    <p><input type="email" name="email" id="email" required placeholder="Email" maxlength="25"></p></label>
                 </div>
                 <div class="form-inscription">
-                    <label for="password">Mot de passe : </label>
+                    <label for="password_members">Mot de passe :
 
-                    <p><input type="password" name="password" id="password" required placeholder="Mot de passe"
+                    <p><input type="password" name="password" id="password_members" required placeholder="Mot de passe"
                               minlength="6"
-                              maxlength="10"></p>
+                              maxlength="10"></p></label>
                 </div>
                 <div class="form-inscription">
-                    <label for="image">Image : </label>
+                    <label class="form-inscription" for="image_members">Choisir un image</label>
 
-                    <p><input type="file" name="image_membre" id="image" required accept='.gif, .png , .jpg'></p>
+                    <p><input type="file" name="image_membre" class="image" id="image_members" required accept='.gif, .png , .jpg'></p>
                 </div>
                 <div class="form-inscription">
                     <p><input type="submit" value="Ajouter !" name="inscription"></p>

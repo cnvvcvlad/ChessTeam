@@ -5,7 +5,7 @@
 
 <?php if(isAdmin()): ?>
 <?php if (isset($allComments)) : ?>
-    <h3>Tous les commentaires</h3>
+    <h1>Voici tous les commentaires postés</h1>
     <div class="top_article">
     <?php foreach ($allComments as $key => $value) : ?>
 

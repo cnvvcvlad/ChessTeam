@@ -141,18 +141,17 @@ try {
             }
 
         }
-        $manager_user->updateMembre($id_user, new Users([
+        $update_m = $manager_user->updateMembre($id_user, new Users([
             'login' => $login,
             'email' => $email,
             'password' => $password,
             'user_image' => $user_image
         ]));
-
         if (isAdmin()) {
             header('location:../index.php?action=home');
             exit();
-        }
-        header("location:../index.php?action=myAccount");
+        } else
+        header("location:../index.php?action=home");
         exit();
 
     } /************Add Update Category *************/

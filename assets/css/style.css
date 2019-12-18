@@ -127,8 +127,12 @@ span {
     font-family: "ClearSans", sans-serif;
 }
 
-mark {
+mark, .sous-menu .list_style a  {
     text-transform: uppercase;
+    
+}
+
+mark {
     font-weight: bolder;
 }
 
@@ -278,8 +282,7 @@ ul .sous-menu {
 }
 
 .sous-menu .list_style a {
-    padding: 0;
-    text-transform: uppercase;
+    padding: 0;    
 }
 
 #menu-bar {
@@ -312,7 +315,7 @@ ul .sous-menu {
     position: unset;
     background: url("../img/by_default/banner.jpg") repeat;
     box-shadow: 0px 4px 4px #465c63;
-    height: 500px;
+    height: 35em;
     border-radius: 10px 10px 10px 10px;
 
 }
@@ -379,7 +382,7 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     background-color: ghostwhite;
     border-radius: 10px 10px;
     justify-content: flex-start;
-    min-width: 75vw;
+    /*min-width: 75vw;*/
     padding: 1px 1px 5px 1px;
 }
 
@@ -455,7 +458,7 @@ aside.form_view:nth-child(3) {
     border-radius: 10px;
 }
 
-form.form-inscription, form.form-create, .form-create p label.form-inscription {
+form.form-inscription, form.form-create, .form-create p label.form-inscription  {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -526,7 +529,8 @@ input[type=submit]:active, input[type=reset]:active {
 
 div.form-inscription:nth-child(5) > label:nth-child(1),
 .form-create label.form-create,
-fieldset div.form-create label.form-inscription {
+fieldset div.form-create label.form-inscription,
+form.form-inscription div.form-inscription label.form-inscription{
     background-color: #A0D3FF;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -563,29 +567,16 @@ div.form-inscription:nth-child(5), div.form-create:nth-child(n) {
     align-items: center;
 }
 
-.container_form {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    min-height: 75vh;
-    min-width: 33vw;
-    max-width: 80vw;
-    align-self: flex-start;
-    flex: 1;
-    margin: 0 auto;
-    background-color: ghostwhite;
-    border-radius: 10px;
-}
-
 main.container_form div.bouton_commande {
     align-self: flex-end;
     margin-top: 2em;
 }
 
-.container {
+
+
+
+
+.container, .container_form {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -596,6 +587,18 @@ main.container_form div.bouton_commande {
     align-self: flex-start;
     flex: 1;
     margin: auto;
+}
+
+.container_form {
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+    min-width: 33vw;
+    max-width: 80vw;
+    flex: 1;
+    margin: 0 auto;
+    /*background-color: ghostwhite;*/
+    border-radius: 10px;
 }
 
 .view {
@@ -780,10 +783,10 @@ main div.back-page {
     margin-right: 2em;
 }
 
-div.back-page:nth-child(2) {
-    justify-content: flex-end;
-    align-items: flex-end;
-}
+/*div.back-page:nth-child(2) {*/
+    /*justify-content: flex-end;*/
+    /*align-items: flex-end;*/
+/*}*/
 
 /*************Sections***********/
 
@@ -981,31 +984,27 @@ a.btn:nth-child(2) {
 }
 
 @media all and (max-width: 1024px) {
-
+    h1, span, p, a {
+        font-size: 0.8em;
+    }
     article {
         display: none;
     }
-
     .logo img {
         max-width: 100%;
         max-height: 50px;
         border-radius: 5px;
         margin-left: 65%;
-
     }
-
     nav {
         justify-content: flex-start;
     }
-
     li {
         width: 100%;
     }
-
     nav ul li:hover {
         border-radius: 5px;
     }
-
     .memberInfo {
         font-size: 0.8em;
         margin-left: 65%;
@@ -1029,7 +1028,7 @@ a.btn:nth-child(2) {
 
     /* Main Vue */
     .banniere {
-        height: 80px;
+        height: 5em;
     }
 
     .article {

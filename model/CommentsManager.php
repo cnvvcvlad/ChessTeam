@@ -36,21 +36,8 @@ class CommentsManager extends DataBase
         ]);
     }
 
-    public function Affichage()
-    {
-        $query = 'SELECT * FROM articles ORDER BY id DESC';
-        $select = $this->dbConnect()->prepare($query);
-        $select->execute();
 
-        $art = [];
-
-        while ($donnees = $select->fetch()) {
-            $art[] = new Article($donnees);
-        }
-        return $art;
-    }
-
-    public function ShowCommentsOfArticle($article_id)
+    public function showCommentsOfArticle($article_id)
     {
         $request = 'SELECT * FROM comments WHERE article_id = :article_id';
         $select = $this->dbConnect()->prepare($request);

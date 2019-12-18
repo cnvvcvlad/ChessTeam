@@ -14,7 +14,7 @@
         <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription">
             <h1>Connectez - vous!</h1>
             <fieldset>
-                <legend>Vos coordonnées : </legend>
+                <legend>Vos identifiants : </legend>
             <div class="form-inscription">
                 <label for="login">Login : </label>
 

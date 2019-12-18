@@ -6,16 +6,13 @@
 
 <?php if (!empty($allArticles)): ?>
 
+<h1>Voici tous nos articles!<br>
+    N'hésitez pas à nous donner votre avis dans les commentaires!</h1>
 
-    <div class="bienvenue">
-        <div class="search_bouton">
-            <p class="bienvenue">Voici la page principale de nos articles !<br>
-            N'hésitez pas à nous donner votre avis dans les commentaires ! </p>
-        </div>
-    </div>
+    <div class="top_article">
     <?php foreach ($allArticles as $key => $values): ?>
 
-        <div class="top_article">
+
 
             <h1><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie"
                      class="ico_categorie"/><?= $values->getArt_title() ?></h1>
@@ -51,9 +48,10 @@
 
             </div>
 
-        </div>
 
     <?php endforeach; ?>
+    </div>
+
 <?php endif; ?>
     <div class="back-page">
         <?php if (backPageId()) : ?>

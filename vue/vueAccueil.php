@@ -4,13 +4,8 @@
 <?php $description = 'Le blog du ChessTeam Nogent sur Marne propose aux internautes passionés des échecs  de consulter ses articles publiés, s\'inscrire en tant que membre pour publier ses propres articles et commentaires'; ?>
     <div class="main-vue">
     <div class="banniere">
-    <div class="bienvenue">
-        <div class="search_bouton">
-            <p class="bienvenue">Bienvenue sur la page d'accueil de notre blog ! <br>
-            On vous souhaite une agréable lecture ! </p>
-        </div>
-    </div>
-
+    <h1>Bienvenue sur la page d'accueil de notre blog! <br>
+        On vous souhaite une agréable lecture!</h1>
 <?php if (!empty($lastArticles)): ?>
     <article>
 
@@ -94,7 +89,7 @@
             </p>
         </section>
         <section class="content">
-            <h2 class="myColor">Les sites partenaires</h2>
+            <h2 class="myColor">Derniers articles</h2>
 
             <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laborum reiciendis adipisci quasi sit in ut esse tenetur repudiandae ea minus totam enim eligendi explicabo, rerum mollitia omnis vel aspernatur.</span><span>Autem iste hic est ipsa, aliquam at sit earum sapiente dignissimos beatae deleniti quis laudantium, quisquam, voluptate possimus aut repellendus doloremque reprehenderit error id asperiores! Aspernatur quibusdam mollitia commodi perferendis!</span>
             </p>

@@ -6,7 +6,7 @@
 function getInfoUser($user_id)
 {
     $member_manager = new MemberManager();
-    $member = $member_manager->ShowOneUser($user_id);
+    $member = $member_manager->showOneUser($user_id);
     return $member;
 }
 
@@ -15,7 +15,7 @@ function getInfoUser($user_id)
 function getAllMembers()
 {
     $member_manager = new MemberManager();
-    $members = $member_manager->ShowAllUsers();
+    $members = $member_manager->showAllUsers();
     return $members;
 }
 

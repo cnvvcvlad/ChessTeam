@@ -3,10 +3,8 @@
 <?php $description = 'Retrouvez la listes des billets proposées par les internautes'; ?>
 
 <?php if (isConnected()) : ?>
-    <div class="bienvenue">
-        <p class="bienvenue">Voici vos créations ! </p>
-    </div>
 
+<h1>Voici vos créations ! </h1>
 
     <div class="top_article">
 
@@ -51,7 +49,11 @@
             <h1>Vous n'avez pas des articles</h1>
         <?php endif; ?>
     </div>
+    <div class="back-page">
     <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
+    <div class="back-page"><a href="<?= $_SERVER['HTTP_REFERER']; ?>">Retour</a></div>
+    </div>
+
 
 <?php endif; ?>
 

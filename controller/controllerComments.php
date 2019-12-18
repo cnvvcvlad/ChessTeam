@@ -2,7 +2,7 @@
 
 function getAllCommentsOfArticle($article_id) {
     $comment_manager = new CommentsManager();
-    $comments = $comment_manager->ShowCommentsOfArticle($article_id);
+    $comments = $comment_manager->showCommentsOfArticle($article_id);
     return $comments;
 }
 

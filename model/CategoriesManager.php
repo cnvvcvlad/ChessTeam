@@ -42,7 +42,7 @@ class CategoriesManager extends DataBase
     }
 
 
-    public function ShowAllCategory()
+    public function showAllCategory()
     {
         $request = 'SELECT * FROM category';
         $select = $this->dbConnect()->prepare($request);
@@ -56,7 +56,7 @@ class CategoriesManager extends DataBase
         return $cat;
     }
 
-    public function ShowCategory($id_category)
+    public function showCategory($id_category)
     {
         $request = 'SELECT * FROM category WHERE id = :id';
         $select = $this->dbConnect()->prepare($request);
@@ -81,7 +81,7 @@ class CategoriesManager extends DataBase
 
     }
 
-    public function deleteC($id_category) {
+    public function deleteCat($id_category) {
         $request = 'DELETE FROM category WHERE id = :id';
         $delete = $this->dbConnect()->prepare($request);
         $delete->execute(["id" => $id_category]);

@@ -2,12 +2,9 @@
 
 <?php $title = 'Accueil Membre'; ?>
 <?php $description = 'Administrez les informations personnelles et actualisez-les'; ?>
-
+<h1> Bienvenue dans l'espace <?php if (isAdmin()) : ?> administrateur <?php else : ?> membre<?php endif; ?></h1>
 
 <div class="top_article">
-
-    <h1>Bonjour ! Bienvenue dans
-        l'espace <?php if (isAdmin()) : ?> administrateur <?php else : ?> membre<?php endif; ?></h1>
 
     <h3>Vous trouverez ci-dessus une barre de navigation qui vous permettra de:</h3>
 
@@ -90,6 +87,8 @@
                                 <a href="assets/img/uploads/<?= $value->getUser_image() ?>"><img
                                         src="assets/img/uploads/<?= $value->getUser_image() ?>"
                                         alt="Photo de profil" title="Cliquez pour agrandir" height="80em"/></a>
+                                <input type="text" readonly name="image"
+                                       value="<?= $value->getUser_image() ?>">
                             </td>
 
                         </tr>

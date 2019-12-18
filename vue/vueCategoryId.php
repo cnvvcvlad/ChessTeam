@@ -52,8 +52,8 @@
                 </label>
             </div>
             <div class="form-create">
-                <label for="image">Choisir une image</label>
-                    <p><input type="file" name="category_image" class="image" id="image" accept='.gif, .png , .jpg' required></p>
+                <label class="form-create" for="image_cat">Choisir une image</label>
+                    <p><input type="file" name="category_image" class="image" id="image_cat" accept='.gif, .png , .jpg' required></p>
 
             </div>
             <p><input type="hidden" name="cat_author"  value="<?= htmlspecialchars($_SESSION['id_user']) ?>"></p>

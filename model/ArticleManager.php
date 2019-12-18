@@ -45,7 +45,7 @@ class ArticleManager extends DataBase
         ]);
     }
 
-    public function Affichage()
+    public function affichageArt()
     {
         $query = 'SELECT * FROM articles ORDER BY id DESC';
         $select = $this->dbConnect()->prepare($query);
@@ -60,7 +60,7 @@ class ArticleManager extends DataBase
     }
 
 
-        public function Affichage_recentes()
+        public function affichageRecentes()
     {
         $query = 'SELECT * FROM articles WHERE id > 40 ORDER BY id DESC LIMIT 5 ';
         $select = $this->dbConnect()->prepare($query);
@@ -74,17 +74,17 @@ class ArticleManager extends DataBase
         return $art;
     }
 
-    public function Affichage_last_one()
+    public function affichageLastOne()
     {
-        $query = 'SELECT * FROM articles WHERE id = 68';
+        $query = 'SELECT * FROM articles WHERE id = 77';
         $select = $this->dbConnect()->prepare($query);
         $select->execute();
         $art[] = new Article($select->fetch());
         return $art;
-    }
+        }
 
 
-    public function AffichageParCategorie($category_id)
+    public function affichageParCategorie($category_id)
     {
         $query = 'SELECT * FROM articles WHERE category_id = :category_id';
         $select = $this->dbConnect()->prepare($query);
@@ -99,7 +99,7 @@ class ArticleManager extends DataBase
         return $art;
     }
 
-    public function Affichage_one($art_id)
+    public function affichageOne($art_id)
     {
         $query = 'SELECT * FROM articles WHERE id = :art_id';
         $select = $this->dbConnect()->prepare($query);
@@ -109,7 +109,7 @@ class ArticleManager extends DataBase
         return $art;
     }
 
-    public function AffichageMyArticles($id_user)
+    public function affichageMyArticles($id_user)
     {
         $query = 'SELECT * FROM articles WHERE art_author = :id_user';
         $select = $this->dbConnect()->prepare($query);

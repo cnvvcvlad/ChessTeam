@@ -110,8 +110,8 @@
                                                                  alt="Photo de profil"
                                                                  title="Cliquez pour agrandir"/></a>
                 <?php else : ?>
-                    <a href="assets/img/uploads/<?= showImage($_SESSION['user_image']) ?>"><img
-                            src="assets/img/uploads/<?= showImage($_SESSION['user_image']) ?>" alt="Photo de profil"
+                    <a href="assets/img/uploads/<?= $_SESSION['user_image'] ?>"><img
+                            src="assets/img/uploads/<?= $_SESSION['user_image'] ?>" alt="Photo de profil"
                             title="Cliquez pour agrandir" height="100em"/></a>
                 <?php endif; ?>
             </div>
@@ -151,12 +151,12 @@
                     </li>
 
                     <li class="item" id="settings">
-                        <a href="#settings" class="btn">FAQ</a>
+                        <a href="#settings" class="btn">FAQ / CGU</a>
 
                         <div class="smenu">
-                            <a href="vue/contact.php">Questions fréquentes</a>
-                            <a href="">Condition d'utilisation</a>
-                            <a href="">Politique de confidentialité</a>
+                            <a href="vue/questions.php">Questions fréquentes</a>
+                            <a href="vue/conditions.php">Condition d'utilisation</a>
+                            <a href="vue/mentions.php">Mentions légales</a>
                         </div>
                     </li>
                     <?php if (isConnected()) : ?>

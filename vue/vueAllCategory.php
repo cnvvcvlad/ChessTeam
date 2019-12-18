@@ -5,6 +5,7 @@
 
 
     <h1>Voici toutes nos catégories dédiées aux jeux d'échecs</h1>
+<div class="top_article">
     <div class="view">
         <?php if (isset($allCategory)) : ?>
             <?php foreach ($allCategory as $key => $value) : ?>
@@ -15,6 +16,7 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
+</div>
 
 
 <?php if (isAdmin()) : ?>

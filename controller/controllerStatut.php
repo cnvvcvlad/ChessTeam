@@ -88,13 +88,5 @@ function backPageId()
 }
 
 
-function showImage($user_image)
-{
-    if (empty($_SESSION['user_image']) or (!isset($_SESSION['user_image']))) {
-        $user_image = 'pawn_logo.jpg';
-        return $user_image;
-    }
-    return $user_image;
-}
 
 

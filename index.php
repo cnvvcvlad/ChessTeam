@@ -42,7 +42,11 @@ try {
                 require 'vue/vueMember.php';
             }
         } elseif ($action == 'myArticlesId') {
-            $myArticles = getMyArticles(htmlspecialchars($_SESSION['id_user']));
+            if (isset($_GET['idAuthor'])) {
+                $myArticles = getMyArticles(htmlspecialchars($_GET['idAuthor']));
+            } else {
+                $myArticles = getMyArticles(htmlspecialchars($_SESSION['id_user']));
+            }
             require 'vue/vueArticleId.php';
 
         } elseif ($action == 'createArticleId') {

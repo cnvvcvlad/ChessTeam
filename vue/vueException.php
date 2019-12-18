@@ -16,7 +16,9 @@
 
         <h1>Erreur !!!</h1>
 
-        <?php echo $ex; ?>
+        <?php if(isset($ex)) {
+            echo $ex;
+        }; ?>
     </main>
 </div>
 <footer>
@@ -24,7 +26,9 @@
         <div class="exception">
 
             <div class="top-button-exception">
-                <a href="<?= $_SERVER['HTTP_REFERER']?>">Retour</a>
+
+                <a href="../">Retour</a>
+
             </div>
             <div class="copyright-exception">
                 <p>Copyright</p>

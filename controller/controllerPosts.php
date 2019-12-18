@@ -4,7 +4,7 @@
 function getListe()
 {
     $art_manager = new ArticleManager();
-    $posts = $art_manager->Affichage();
+    $posts = $art_manager->affichageArt();
     return $posts;
 
 }
@@ -12,28 +12,28 @@ function getListe()
 function getLastArticles()
 {
     $art_manager = new ArticleManager();
-    $posts = $art_manager->Affichage_recentes();
+    $posts = $art_manager->affichageRecentes();
     return $posts;
 }
 
 function getLastArticle_one()
 {
     $art_manager = new ArticleManager();
-    $post = $art_manager->Affichage_last_one();
+    $post = $art_manager->affichageLastOne();
     return $post;
 }
 
 function getArticlesOfCategory($category_id)
 {
     $art_manager = new ArticleManager();
-    $posts = $art_manager->AffichageParCategorie($category_id);
+    $posts = $art_manager->affichageParCategorie($category_id);
     return $posts;
 }
 
 function getOneArticle($art_id)
 {
     $art_manager = new ArticleManager();
-    $post = $art_manager->Affichage_one($art_id);
+    $post = $art_manager->affichageOne($art_id);
     return $post;
 }
 
@@ -68,9 +68,3 @@ function deleteMyArticle($id_article)
     return;
 }
 
-//function updateMyArticle($id_article)
-//{
-//    $art_manager = new ArticleManager();
-//    $art_manager->updateArticle($id_article);
-//    return;
-//}
