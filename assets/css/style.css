@@ -382,7 +382,6 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     background-color: ghostwhite;
     border-radius: 10px 10px;
     justify-content: flex-start;
-    /*min-width: 75vw;*/
     padding: 1px 1px 5px 1px;
 }
 
