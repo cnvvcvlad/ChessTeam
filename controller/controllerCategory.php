@@ -28,5 +28,6 @@ function showNameCategory($id_category) {
 function deleteCategory ($id_category)
 {
     $cat_manager = new CategoriesManager();
-    $category = $cat_manager->deleteCat($id_category);
+    $cat_manager->deleteCat($id_category);
+    header('location:index.php?action=allCategory');
 }

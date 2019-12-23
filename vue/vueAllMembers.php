@@ -45,10 +45,10 @@
 
                 </tr>
                 <tr>
-                    <th scope="row">Password
+                    <th scope="row">
                         <a href="?action=myArticlesId&amp;idAuthor=<?= $value->getId_user() ?>" class="hidden-btn">Articles</a>
                     </th>
-                    <td><input type="password" value="<?= $value->getPassword() ?>"</td>
+                    <td></td>
                     <td>                        <a href="?action=myArticlesId&amp;idAuthor=<?= $value->getId_user() ?>">Articles
                     </td>
                 </tr>

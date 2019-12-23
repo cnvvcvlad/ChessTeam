@@ -65,6 +65,5 @@ function deleteMyArticle($id_article)
     $art_manager = new ArticleManager();
     $art_manager->deleteArticle($id_article);
     header('location:index.php?action=allArticles');
-    return;
 }
 

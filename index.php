@@ -58,7 +58,7 @@ try {
                 $articleId = getOneArticle(htmlspecialchars($_GET['id']));
                 require 'vue/vueOneArticle.php';
             } elseif (isset($_GET['deleteA'])) {
-                $deleteArticle = deleteMyArticle(htmlspecialchars($_GET['deleteA']));
+                deleteMyArticle(htmlspecialchars($_GET['deleteA']));
             } elseif (isset($_GET['updateA'])) {
                 $articleId = getOneArticle(htmlspecialchars($_GET['updateA']));
 
@@ -71,15 +71,14 @@ try {
                 $myAccount = getInfoUser(htmlspecialchars($_GET['memberId']));
                 require 'vue/vueMember.php';
             } elseif (isset($_GET['deleteM'])) {
-                $deleteAccount = deleteUser(htmlspecialchars($_GET['deleteM']));
+                deleteUser(htmlspecialchars($_GET['deleteM']));
             } else {
                 $allMembers = getAllMembers();
                 require 'vue/vueAllMembers.php';
             }
         } elseif ($action == 'allCategory') {
             if (isset($_GET['deleteC'])) {
-                $deleteCategory = deleteCategory(htmlspecialchars($_GET['deleteC']));
-                require 'vue/vueAllCategory.php';
+                deleteCategory(htmlspecialchars($_GET['deleteC']));
             } elseif (empty($_GET['id'])) {
                 $allCategory = getAllCategory();
                 require 'vue/vueAllCategory.php';
@@ -101,8 +100,7 @@ try {
                 $modifyComment = getComment(htmlspecialchars($_GET['modifyC']));
                 require 'vue/vueCommentId.php';
             } elseif (isset($_GET['deleteCom'])) {
-                $deleteComment = deleteComment(htmlspecialchars($_GET['deleteCom']));
-                require 'vue/vueAllComments.php';
+                deleteComment(htmlspecialchars($_GET['deleteCom']));
             } else {
                 $allComments = getAllComments();
                 require 'vue/vueAllComments.php';

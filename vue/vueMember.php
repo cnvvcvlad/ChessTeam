@@ -73,13 +73,7 @@
                             <td><input type="text" readonly name="email" value="<?= $value->getEmail() ?>"></td>
 
                         </tr>
-                        <tr>
-                            <th scope="row"><p>Password</p>
-                            </th>
-                            <td><input type="password" readonly name="password"
-                                       value="<?= $value->getPassword() ?>"></td>
 
-                        </tr>
                         <tr>
                             <th scope="row"><p>Image</p>
                             </th>
