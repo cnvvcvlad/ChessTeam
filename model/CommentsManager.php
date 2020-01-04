@@ -76,7 +76,6 @@ class CommentsManager extends DataBase
         $request = 'DELETE FROM comments WHERE id = :id';
         $delete = $this->dbConnect()->prepare($request);
         $delete->execute(["id" => $id]);
-//        return;
     }
 
 }

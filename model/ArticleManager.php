@@ -128,7 +128,6 @@ class ArticleManager extends DataBase
         $query = 'DELETE FROM articles WHERE id = :id_article';
         $delete = $this->dbConnect()->prepare($query);
         $delete->execute(["id_article" => $id_article]);
-        return;
     }
 
 }

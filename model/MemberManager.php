@@ -154,7 +154,7 @@ class MemberManager extends DataBase
         return $member;
     }
 
-    public function deleteU($user_id) :void
+    public function deleteU($user_id)
     {
         $request = 'DELETE FROM users WHERE id_user = :id_user';
         $delete = $this->dbConnect()->prepare($request);
