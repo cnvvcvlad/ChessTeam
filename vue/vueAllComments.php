@@ -13,7 +13,7 @@
 
             <div class="comment-author">
                 <p>
-                    <mark><?= showNameAuthor($value->getCom_author()) ?></mark>
+                    <span class="mark"><?= showNameAuthor($value->getCom_author()) ?></span>
                     le ( <?= $value->getCom_date_creation() ?> )
                 </p>
             </div>

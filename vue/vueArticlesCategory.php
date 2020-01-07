@@ -10,7 +10,7 @@
 
                 <h1><?= $value->getArt_title() ?></h1>
                 <p>Ecrit par
-                    <mark><?= showNameAuthor($value->getArt_author()) ?></mark>
+                    <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> dans le catégorie
                     <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
 
@@ -28,7 +28,8 @@
                 </div>
 
                 <div class="justify_article">
-                    <p><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de la catégorie">
+                    <p><a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de la catégorie" title="Cliquez pour agrandir"></a>
+
             <span>
                 <?= $value->getArt_description() ?></span>
                     </p>

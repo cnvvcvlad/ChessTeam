@@ -15,7 +15,7 @@
 
             </div>
             <p>Ecrit par
-                <mark><?= showNameAuthor($values->getArt_author()) ?></mark>
+                <span class="mark"><?= showNameAuthor($values->getArt_author()) ?></span>
                 le <em><?= $values->getArt_date_creation() ?></em> dans la catégorie
                 <strong><?= showNameCategory($values->getCategory_id()) ?></strong></p>
             <div class="justify_article">

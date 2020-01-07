@@ -47,7 +47,7 @@ class ArticleManager extends DataBase
 
     public function affichageArt()
     {
-        $query = 'SELECT * FROM articles ORDER BY id DESC';
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles ORDER BY id DESC';
         $select = $this->dbConnect()->prepare($query);
         $select->execute();
 
@@ -62,7 +62,7 @@ class ArticleManager extends DataBase
 
         public function affichageRecentes()
     {
-        $query = 'SELECT * FROM articles WHERE id > 40 ORDER BY id DESC LIMIT 5 ';
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE id > 40 ORDER BY id DESC LIMIT 5 ';
         $select = $this->dbConnect()->prepare($query);
         $select->execute();
 
@@ -76,7 +76,7 @@ class ArticleManager extends DataBase
 
     public function affichageLastOne()
     {
-        $query = 'SELECT * FROM articles WHERE id = 77';
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE id = 77';
         $select = $this->dbConnect()->prepare($query);
         $select->execute();
         $art[] = new Article($select->fetch());
@@ -86,7 +86,7 @@ class ArticleManager extends DataBase
 
     public function affichageParCategorie($category_id)
     {
-        $query = 'SELECT * FROM articles WHERE category_id = :category_id';
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE category_id = :category_id';
         $select = $this->dbConnect()->prepare($query);
         $select->execute(["category_id" => $category_id]);
 
@@ -101,7 +101,7 @@ class ArticleManager extends DataBase
 
     public function affichageOne($art_id)
     {
-        $query = 'SELECT * FROM articles WHERE id = :art_id';
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE id = :art_id';
         $select = $this->dbConnect()->prepare($query);
         $select->execute(["art_id" => $art_id]);
 
@@ -111,7 +111,7 @@ class ArticleManager extends DataBase
 
     public function affichageMyArticles($id_user)
     {
-        $query = 'SELECT * FROM articles WHERE art_author = :id_user';
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE art_author = :id_user';
         $select = $this->dbConnect()->prepare($query);
         $select->execute(["id_user" => $id_user]);
 

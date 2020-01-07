@@ -14,12 +14,11 @@
                     </div>
                 <?php endif ?>
                 <p>Ecrit par
-                    <mark><?= showNameAuthor($value->getCat_author()) ?></mark>
+                    <span class="mark"><?= showNameAuthor($value->getCat_author()) ?></span>
                     le <em><?= $value->getCat_date_creation() ?></em></p>
                 <div class="justify_article">
                     <p>
-                        <img src="assets/img/uploads/<?= $value->getCategory_image() ?>" alt="Image de la catégorie">
-
+                        <a class="grand_image" href="assets/img/uploads/<?= $value->getCategory_image() ?>"><img src="assets/img/uploads/<?= $value->getCategory_image() ?>" alt="Image de la catégorie" title="Cliquez pour agrandir"></a>
                         <span><?= $value->getDescription() ?></span>
                     </p>
 
@@ -59,7 +58,7 @@
             <p><input type="hidden" name="cat_author"  value="<?= htmlspecialchars($_SESSION['id_user']) ?>"></p>
 
             <div class="form-create">
-                <input type="submit" value="Envoyer" name="updateCategory">
+                <p><input type="submit" value="Envoyer" name="updateCategory"></p>
                 <p><input type="reset" value="Annuler" /></p>
 
             </div>

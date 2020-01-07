@@ -26,22 +26,25 @@
                     </div>
                 </div>
                 <p>Ecrit par
-                    <mark><?= showNameAuthor($value->getArt_author()) ?></mark>
+                    <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
                     <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
                 <div class="justify_article">
                     <p>
-                        <img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article">
+                        <a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article" title="Cliquez pour agrandir"></a>
 
-                    <h2><?= $value->getArt_description() ?></h2>
+                    <span><?= $value->getArt_description() ?><br><a class="lire_suite" href="#cache"> [Lire la suite...] </a></span>
+                    <div id="cache"><span><?= $value->getArt_content() ?><br><a href="#detail_art"> [Voir moins]</a></span>
+                    </div>
                     </p>
                     <p>
                         <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(getAllCommentsOfArticle($value->getId())) ?>
                             ) Commentaires </a></p>
                 </div>
 
-                <h3 class="button_creation"><a href="?action=createArticleId">Créer un article</a></h3>
-                <!--                <a href="?action=home">Retour à l'accueil</a></div>-->
+
+<!--                <h3 class="button_creation"><a href="?action=createArticleId">Créer un article</a></h3>-->
+                <div class="separateur"></div>
 
 
             <?php endforeach; ?>

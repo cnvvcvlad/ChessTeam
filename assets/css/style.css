@@ -62,7 +62,7 @@
     padding-top: 1%;
     padding-bottom: 1%;
     flex-wrap: nowrap;
-    background-color: rgba(0, 123, 157, 0.9);
+    background-color: rgba(1, 82, 60, 0.98);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 
@@ -127,13 +127,18 @@ span {
     font-family: "ClearSans", sans-serif;
 }
 
-mark, .sous-menu .list_style a  {
+.mark, .sous-menu .list_style a  {
     text-transform: uppercase;
     
 }
 
-mark {
+.mark {
     font-weight: bolder;
+}
+
+
+.grand_image {
+    display: contents;
 }
 
 label,
@@ -408,6 +413,12 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     height: auto;
     border-radius: 10px;
     margin-bottom: 0.5em;
+}
+
+.separateur {
+    background: url("../img/by_default/separateur.png") repeat;
+    padding-top: 0.5em;
+
 }
 
 .program {
@@ -983,10 +994,15 @@ a.btn:nth-child(2) {
 }
 
 @media all and (max-width: 1024px) {
-    h1, span, p, a {
+    span, p, a, .bouton_commande {
         font-size: 0.8em;
     }
-    article {
+
+    span.mark, strong, h1 {
+        font-size: 1.2em;
+    }
+
+    article, a.lire_suite {
         display: none;
     }
     .logo img {

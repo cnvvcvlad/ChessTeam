@@ -6,12 +6,11 @@
 
 <?php if (!empty($allArticles)): ?>
 
-<h1>Voici tous nos articles!<br>
-    N'hésitez pas à nous donner votre avis dans les commentaires!</h1>
+    <h1>Voici tous nos articles!<br>
+        N'hésitez pas à nous donner votre avis dans les commentaires!</h1>
 
     <div class="top_article">
-    <?php foreach ($allArticles as $key => $values): ?>
-
+        <?php foreach ($allArticles as $key => $values): ?>
 
 
             <h1><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie"
@@ -28,15 +27,18 @@
                 </div>
             </div>
             <p>Ecrit par
-                <mark><?= showNameAuthor($values->getArt_author()) ?></mark>
+                <span class="mark"><?= showNameAuthor($values->getArt_author()) ?></span>
                 le <em><?= $values->getArt_date_creation() ?></em> dans la catégorie
                 <strong><?= showNameCategory($values->getCategory_id()) ?></strong></p>
 
             <div id="detail_art" class="justify_article">
 
-                <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image de l'article">
+                <a class="grand_image" href="assets/img/uploads/<?= $values->getArt_image() ?>"><img
+                        src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image de l'article"
+                        title="Cliquez pour agrandir"></a>
 
-                <span><?= $values->getArt_description() ?><br><a href="#cache"> [Lire la suite...] </a></span>
+                <span><?= $values->getArt_description() ?><br><a class="lire_suite" href="#cache"> [Lire la
+                        suite...] </a></span>
 
                 <div id="cache"><span><?= $values->getArt_content() ?><br><a href="#detail_art"> [Voir moins]</a></span>
                 </div>
@@ -47,9 +49,10 @@
                 </p>
 
             </div>
+            <div class="separateur"></div>
 
 
-    <?php endforeach; ?>
+        <?php endforeach; ?>
     </div>
 
 <?php endif; ?>

@@ -39,7 +39,7 @@ class CommentsManager extends DataBase
 
     public function showCommentsOfArticle($article_id)
     {
-        $request = 'SELECT * FROM comments WHERE article_id = :article_id';
+        $request = 'SELECT *, DATE_FORMAT(com_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS com_date_creation FROM comments WHERE article_id = :article_id';
         $select = $this->dbConnect()->prepare($request);
         $select->execute(["article_id" => $article_id]);
         $comments = [];
@@ -51,7 +51,7 @@ class CommentsManager extends DataBase
     }
 
     public  function  allComments() {
-        $request = 'SELECT * FROM comments ORDER BY id DESC';
+        $request = 'SELECT *, DATE_FORMAT(com_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS com_date_creation FROM comments ORDER BY id DESC';
         $select = $this->dbConnect()->prepare($request);
         $select->execute();
 
@@ -64,7 +64,7 @@ class CommentsManager extends DataBase
     }
 
     public function commentId($id) {
-        $request = 'SELECT * FROM comments WHERE id = :id';
+        $request = 'SELECT *, DATE_FORMAT(com_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS com_date_creation FROM comments WHERE id = :id';
         $select = $this->dbConnect()->prepare($request);
         $select->execute(["id" => $id]);
 

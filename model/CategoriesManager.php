@@ -44,7 +44,7 @@ class CategoriesManager extends DataBase
 
     public function showAllCategory()
     {
-        $request = 'SELECT * FROM category';
+        $request = 'SELECT *, DATE_FORMAT(cat_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS cat_date_creation FROM category';
         $select = $this->dbConnect()->prepare($request);
         $select->execute();
 
@@ -58,7 +58,7 @@ class CategoriesManager extends DataBase
 
     public function showCategory($id_category)
     {
-        $request = 'SELECT * FROM category WHERE id = :id';
+        $request = 'SELECT *, DATE_FORMAT(cat_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS cat_date_creation FROM category WHERE id = :id';
         $select = $this->dbConnect()->prepare($request);
         $select->execute(["id" => $id_category]);
 
