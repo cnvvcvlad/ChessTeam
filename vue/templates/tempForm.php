@@ -135,7 +135,7 @@
                                                    alt="le bouton rouge"/></a>
                             </div>
                             <p>Ecrit par
-                                <mark><?= showNameAuthor($value->getArt_author()) ?></mark>
+                                <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
                                 le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
                                 <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
                             <div id="detail_art" class="justify_article">

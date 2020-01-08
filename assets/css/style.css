@@ -92,7 +92,7 @@ h2 {
 }
 
 h3 {
-    text-align: center;
+    text-align: justify;
     font-family: "rubik", sans-serif;
 }
 
@@ -132,9 +132,9 @@ span {
     
 }
 
-.mark {
-    font-weight: bolder;
-}
+/*.mark {*/
+    /*font-weight: bolder;*/
+/*}*/
 
 
 .grand_image {
@@ -994,7 +994,7 @@ a.btn:nth-child(2) {
 }
 
 @media all and (max-width: 1024px) {
-    span, p, a, .bouton_commande {
+    span, p, a, .bouton_commande, .information, h1.welcome_message {
         font-size: 0.8em;
     }
 

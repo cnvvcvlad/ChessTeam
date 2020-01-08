@@ -13,13 +13,14 @@
                         </div>
                     </div>
                 <?php endif ?>
-                <p>Ecrit par
+                <p><span class="information">Ecrit par</span>
                     <span class="mark"><?= showNameAuthor($value->getCat_author()) ?></span>
                     le <em><?= $value->getCat_date_creation() ?></em></p>
+
                 <div class="justify_article">
                     <p>
                         <a class="grand_image" href="assets/img/uploads/<?= $value->getCategory_image() ?>"><img src="assets/img/uploads/<?= $value->getCategory_image() ?>" alt="Image de la catégorie" title="Cliquez pour agrandir"></a>
-                        <span><?= $value->getDescription() ?></span>
+                        <span><h3><?= $value->getDescription() ?></h3></span>
                     </p>
 
                 </div>

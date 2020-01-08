@@ -26,9 +26,9 @@
                         <img src="assets/img/by_default/flecheblanchedroite.png" alt="le bouton rouge"/></a>
                 </div>
             </div>
-            <p>Ecrit par
+            <p><span class="information"> Ecrit par</span>
                 <span class="mark"><?= showNameAuthor($values->getArt_author()) ?></span>
-                le <em><?= $values->getArt_date_creation() ?></em> dans la catégorie
+                le <em><?= $values->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
                 <strong><?= showNameCategory($values->getCategory_id()) ?></strong></p>
 
             <div id="detail_art" class="justify_article">
@@ -37,7 +37,7 @@
                         src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image de l'article"
                         title="Cliquez pour agrandir"></a>
 
-                <span><?= $values->getArt_description() ?><br><a class="lire_suite" href="#cache"> [Lire la
+                <span><h3><?= $values->getArt_description() ?></h3><br><a class="lire_suite" href="#cache"> [Lire la
                         suite...] </a></span>
 
                 <div id="cache"><span><?= $values->getArt_content() ?><br><a href="#detail_art"> [Voir moins]</a></span>

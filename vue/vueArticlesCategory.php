@@ -9,9 +9,9 @@
             <?php foreach ($articlesOfCategory as $key => $value) : ?>
 
                 <h1><?= $value->getArt_title() ?></h1>
-                <p>Ecrit par
+                <p><span class="information"> Ecrit par</span>
                     <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
-                    le <em><?= $value->getArt_date_creation() ?></em> dans le catégorie
+                    le <em><?= $value->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
                     <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
 
                 <h3>Description</h3>
