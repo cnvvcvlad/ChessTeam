@@ -358,7 +358,7 @@ try {
         exit();
 
     } else {
-        throw new Exception ('Veuillez télécharger une image ');
+        throw new Exception ('Une erreur c\'est produite ! Accès interdit!');
     }
 
 } catch (Exception $e) {

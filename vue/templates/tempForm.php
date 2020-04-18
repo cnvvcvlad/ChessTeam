@@ -229,12 +229,14 @@
                     </li>
 
                     <li class="item" id="settings">
-                        <a href="#settings" class="btn">FAQ / CGU</a>
+                        <a href="#settings" class="btn">FAQ / CGU / CONTACT</a>
 
                         <div class="smenu">
                             <a href="vue/questions.php">Questions fréquentes</a>
                             <a href="vue/conditions.php">Condition d'utilisation</a>
                             <a href="vue/mentions.php">Mentions légales</a>
+                            <a href="vue/contact.php">Contactez-nous</a>
+
                         </div>
                     </li>
                     <?php if (isConnected()) : ?>
