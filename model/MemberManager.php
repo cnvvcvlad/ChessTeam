@@ -150,7 +150,6 @@ class MemberManager extends DataBase
         $select->execute(["id_user" => $user_id]);
 
         $member = $select->fetch();
-
         return $member;
     }
 

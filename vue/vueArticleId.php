@@ -4,7 +4,7 @@
 
 <?php if (isConnected()) : ?>
 
-<h1>Voici vos créations ! </h1>
+    <h1>Voici vos créations ! </h1>
 
     <div class="top_article">
 
@@ -27,23 +27,27 @@
                 </div>
                 <p><span class="information"> Ecrit par</span>
                     <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
-                    le <em><?= $value->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
+                    le <em><?= $value->getArt_date_creation() ?></em> <span
+                            class="information"> dans la catégorie</span>
                     <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
                 <div class="justify_article">
-                    <p>
-                        <a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article" title="Cliquez pour agrandir"></a>
+                    <p><a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img
+                                    src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article"
+                                    title="Cliquez pour agrandir"></a>
 
-                    <span><h3><?= $value->getArt_description() ?></h3><br><a class="lire_suite" href="#cache"> [Lire la suite...] </a></span>
-                    <div id="cache"><span><?= $value->getArt_content() ?><br><a href="#detail_art"> [Voir moins]</a></span>
-                    </div>
+                        <span><h3><?= $value->getArt_description() ?></h3><br><a class="lire_suite" href="#cache"> [Lire la suite...] </a></span>
+                        <div id="cache"><span><?= $value->getArt_content() ?><br><a
+                                    href="#detail_art"> [Voir moins]</a></span></div>
                     </p>
-                    <p>
-                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(getAllCommentsOfArticle($value->getId())) ?>
-                            ) Commentaires </a></p>
+
+                    <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(getAllCommentsOfArticle($value->getId()))?>) Commentaires </a>
+                        <span class="react-like" data-likes="<?= $value->getArt_likes() ?>"
+                              data-is-liked="<?= $value->getIs_liked() ?>"></span>
+                        </p>
                 </div>
 
 
-<!--                <h3 class="button_creation"><a href="?action=createArticleId">Créer un article</a></h3>-->
+<!--                <h3 class=" button_creation"><a href="?action=createArticleId">Créer un article</a></h3>-->
                 <div class="separateur"></div>
 
 
@@ -53,8 +57,8 @@
         <?php endif; ?>
     </div>
     <div class="back-page">
-    <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
-    <div class="back-page"><a href="<?= $_SERVER['HTTP_REFERER']; ?>">Retour</a></div>
+        <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
+        <div class="back-page"><a href="<?= $_SERVER['HTTP_REFERER']; ?>">Retour</a></div>
     </div>
 
 

@@ -10,6 +10,8 @@ require '../model/ArticleManager.php';
 require '../classes/Article.php';
 require '../model/CommentsManager.php';
 require '../classes/Comment.php';
+require '../model/LikesManager.php';
+require '../classes/Likes.php';
 
 
 $manager_user = new MemberManager();
@@ -19,6 +21,8 @@ $manager_category = new CategoriesManager();
 $manager_article = new ArticleManager();
 
 $manager_comment = new CommentsManager();
+
+$manager_like = new LikesManager();
 
 
 try {
@@ -267,7 +271,7 @@ try {
                     'art_image' => $art_image
                 ]));
 
-                header("location: ../index.php?action=allArticles");
+                header("location: ../index.php?action=allArticles&alert=newArticle");
                 exit();
 
             } else {
