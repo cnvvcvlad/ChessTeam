@@ -11,13 +11,11 @@ require 'controller/controllerPosts.php';
 require 'controller/controllerCategory.php';
 require 'controller/controllerUser.php';
 require 'controller/controllerComments.php';
-require 'controller/controllerLikes.php';
 
 require 'model/ArticleManager.php';
 require 'model/CategoriesManager.php';
 require 'model/CommentsManager.php';
 require 'model/MemberManager.php';
-require 'model/LikesManager.php';
 
 /*****************************************/
 
@@ -28,7 +26,6 @@ try {
     $allArticles = getListe();
     $lastArticles = getLastArticles();
     $lastArticle_one = getLastArticle_one();
-
 
     if (isset($_GET['action'])) {
         $action = htmlspecialchars($_GET['action']);
@@ -49,7 +46,6 @@ try {
                 $myArticles = getMyArticles(htmlspecialchars($_GET['idAuthor']));
             } else {
                 $myArticles = getMyArticles(htmlspecialchars($_SESSION['id_user']));
-
             }
             require 'vue/vueArticleId.php';
 

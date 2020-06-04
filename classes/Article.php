@@ -13,10 +13,6 @@ class Article extends Generique
     private $art_date_creation;
     private $art_author;
     private $category_id;
-    private $art_likes;
-    private $is_liked;
-
-
 
     public function __construct(array $data)
     {
@@ -186,42 +182,4 @@ class Article extends Generique
 
         return $this;
     }
-
-
-    /**
-     * Get the value of art_likes
-     */
-    public function getArt_likes()
-    {
-        return $this->art_likes;
-    }
-
-    /**
-     * Set the value of art_likes
-     *
-     * @return  self
-     */
-    public function setArt_likes($art_likes)
-    {
-        $this->art_likes = $art_likes;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIs_liked()
-    {
-        return $this->is_liked;
-    }
-
-    /**
-     * @param mixed $is_liked
-     */
-    public function setIs_liked($is_liked)
-    {
-        $this->is_liked = $is_liked;
-    }
-
 }

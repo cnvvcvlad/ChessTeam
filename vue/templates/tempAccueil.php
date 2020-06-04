@@ -6,15 +6,12 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title><?= $title; ?></title>
     <meta name="description" content="<?= $description; ?>"/>
-    <!--    ===fontawesome===   -->
-    <script src="https://kit.fontawesome.com/a864bb51bb.js" crossorigin="anonymous"></script>
     <!-- ===css perso== -->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/caroussel.css" type="text/css">
     <link rel="stylesheet" href="assets/css/burger.css" type="text/css">
     <link rel="stylesheet" href="assets/css/normalize.css" type="text/css">
     <link rel="stylesheet" href="assets/css/icomoon.css" type="text/css">
-
 
 </head>
 <body>
@@ -121,13 +118,9 @@
 
         </div>
     </header>
-    <?php
-        if (isset($_GET['alert']) AND ($_GET['alert'] == 'contact')) {
-            echo '<h4>Votre message vient d\'être ajouté !</h4>';
-        }
-        if (isset($_GET['alert']) AND ($_GET['alert'] == 'newArticle')) {
-        echo '<h4>Votre article vient d\'être ajouté !</h4>';
-        }
+    <?php if (isset($_GET['alert']) AND ($_GET['alert'] == 'contact')) {
+        echo '<h4>Votre message vient d\'être ajouté !</h4>';
+    }
     ?>
 
 
@@ -193,17 +186,9 @@
 </div>
 
 
-
-<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-
-<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-
 <!-- ==javaScript perso== -->
-<script src="assets/js/posts.js" type="text/javascript"></script>
 <script src="assets/js/caroussel.js" type="text/javascript"></script>
 <script src="assets/js/burger.js" type="text/javascript"></script>
-<!--<script src="assets/js/likes.js" type="text/javascript"></script>-->
 
 </body>
 

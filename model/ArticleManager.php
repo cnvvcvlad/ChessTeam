@@ -74,38 +74,15 @@ class ArticleManager extends DataBase
         return $art;
     }
 
-    public function affichageLastOne($id_user)
+    public function affichageLastOne()
     {
-        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles INNER JOIN likes ON articles.id=likes.like_article AND articles.id = 77';
-
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE id = 77';
         $select = $this->dbConnect()->prepare($query);
         $select->execute();
         $art[] = new Article($select->fetch());
-//        var_dump($art[0]->getArt_author());
-//        var_dump($id_user);
-
-        if($id_user == $art[0]->getArt_author()){
-            $art[0]->setIs_liked(true);
-        }else{
-            $art[0]->setIs_liked(false);
-        }
-//        exit();
         return $art;
         }
 
-    /** Un article sur la page d'accueil sans le bouton like*/
-    public function showLastOne(){
-        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE articles.id = 77';
-
-        $select = $this->dbConnect()->prepare($query);
-        $select->execute();
-        $art[] = new Article($select->fetch());
-//        var_dump($art);
-//        exit();
-//
-        return $art;
-
-    }
 
     public function affichageParCategorie($category_id)
     {
@@ -121,7 +98,6 @@ class ArticleManager extends DataBase
 
         return $art;
     }
-
 
     public function affichageOne($art_id)
     {
