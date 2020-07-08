@@ -80,6 +80,9 @@
                                     <li>
                                         <div class="list_style"><a href="?action=allComments">Commentaires</a></div>
                                     </li>
+                                    <li>
+                                        <div class="list_style"><a href="?action=allVs">VS</a></div>
+                                    </li>
 
 
                                 <?php endif; ?>
@@ -118,9 +121,9 @@
 
         </div>
     </header>
-    <?php if (isset($_GET['alert']) AND ($_GET['alert'] == 'contact')) {
-        echo '<h4>Votre message vient d\'être ajouté !</h4>';
-    }
+    <?php if (isset($_GET['alert']) and ($_GET['alert'] == 'contact')) {
+    echo '<h4>Votre message vient d\'être ajouté !</h4>';
+}
     ?>
 
 

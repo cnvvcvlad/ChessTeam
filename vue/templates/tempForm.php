@@ -80,6 +80,9 @@
                                     <li>
                                         <div class="list_style"><a href="?action=allMembers">Membres</a></div>
                                     </li>
+                                    <li>
+                                        <div class="list_style"><a href="?action=allVs">VS</a></div>
+                                    </li>
 
                                 <?php endif; ?>
                                 <li>

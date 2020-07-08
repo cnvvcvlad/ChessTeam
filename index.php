@@ -21,7 +21,6 @@ require 'model/MemberManager.php';
 
 
 try {
-
     $allCategory = getAllCategory();
     $allArticles = getListe();
     $lastArticles = getLastArticles();
@@ -48,10 +47,8 @@ try {
                 $myArticles = getMyArticles(htmlspecialchars($_SESSION['id_user']));
             }
             require 'vue/vueArticleId.php';
-
         } elseif ($action == 'createArticleId') {
             require 'vue/vueCreateArticleId.php';
-
         } elseif ($action == 'allArticles') {
             if (isset($_GET['id'])) {
                 $commentsOfArticle = getAllCommentsOfArticle(htmlspecialchars($_GET['id']));
@@ -83,7 +80,6 @@ try {
                 $allCategory = getAllCategory();
                 require 'vue/vueAllCategory.php';
             }
-
         } elseif ($action == 'categoryId') {
             if (isset($_GET['id'])) {
                 $CategoryId = getCategory(htmlspecialchars($_GET['id']));
@@ -94,7 +90,6 @@ try {
                 $articlesOfCategory = getArticlesOfCategory(htmlspecialchars($_GET['id']));
                 require 'vue/vueArticlesCategory.php';
             }
-
         } elseif ($action == 'allComments') {
             if (isset($_GET['modifyC'])) {
                 $modifyComment = getComment(htmlspecialchars($_GET['modifyC']));
@@ -105,6 +100,8 @@ try {
                 $allComments = getAllComments();
                 require 'vue/vueAllComments.php';
             }
+        } elseif ($action == 'allVs') {
+            require 'vue/vueAllVs.php';
         } elseif ($action == 'home') {
             require 'vue/vueAccueil.php';
 //            header('location:./');
