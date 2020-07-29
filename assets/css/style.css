@@ -843,8 +843,8 @@ section.content:nth-child(3) {
 
 .copyright {
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: space-around;
+    align-items: center;
     z-index: 1;
     position: relative;
     margin-top: 156px;
@@ -926,6 +926,7 @@ a.btn:nth-child(2) {
     position: relative;
     text-decoration: none;
     flex: 1;
+    width: 100%;
 }
 
 .btn:before {

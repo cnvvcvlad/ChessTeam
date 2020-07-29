@@ -17,11 +17,10 @@ function validate($data)
 
 function validator($data)
 {
-
     if (strlen(validate($data)) < 6) {
         throw new Exception("Caractères insuffisants !");
     } elseif (strlen($data) > 10) {
-        throw new Exception ('Votre identifiant ou mot de pase ne doit pas déppasser 10 caractères !');
+        throw new Exception('Votre identifiant ou mot de pase ne doit pas déppasser 10 caractères !');
     }
     return $data;
 }
@@ -30,13 +29,12 @@ function emailValidator($data)
 {
     $valid = filter_var(validate($data), FILTER_VALIDATE_EMAIL);
     if (empty($valid)) {
-        throw new Exception ('Veuillez insérer une adresse mail valide !');
+        throw new Exception('Veuillez insérer une adresse mail valide !');
     } else {
-
         if (strlen(validate($data)) < 4) {
             throw new Exception("Caractères insuffisants !");
         } elseif (strlen(validate($data)) > 30) {
-            throw new Exception ('Veuillez ne pas déppasser 30 caractères !');
+            throw new Exception('Veuillez ne pas déppasser 30 caractères !');
         }
     }
     return $data;
@@ -46,8 +44,9 @@ function photoValidator($data)
 {
     if (strlen(validate($data)) < 4) {
         throw new Exception("Caractères insuffisants !");
-    } if (strlen(validate($data)) > 20) {
-        throw new Exception ('Le nom de la photo ne doit pas déppasser 20 caractères !');
+    }
+    if (strlen(validate($data)) > 20) {
+        throw new Exception('Le nom de la photo ne doit pas déppasser 20 caractères !');
     }
     return $data;
 }
@@ -73,7 +72,6 @@ function isAdmin()
 function helloUser()
 {
     if (isConnected()) {
-
         echo 'Salut ' . strtoupper(showNameAuthor(htmlspecialchars($_SESSION['id_user'])));
     }
 }
@@ -86,7 +84,3 @@ function backPageId()
         return false;
     }
 }
-
-
-
-

@@ -179,8 +179,18 @@
                 </ul>
             </div>
         </div>
-        <div class="copyright">
-            <p>&copy; Copyright 2019 </p>
+        <div>
+            <div class="copyright">
+                <p>&copy; Copyright 2020 </p>
+                <span class="compteur">
+                    <?php
+                    require_once dirname(__DIR__). DIRECTORY_SEPARATOR . 'compteur' . DIRECTORY_SEPARATOR . 'compteur.php';
+                    add_vue();
+                    $vues = nb_vues();
+                 ?>
+                 IL y a <?= $vues ?> visite<?php  if ($vues > 1) : ?>s<?php endif; ?> sur le site
+                 </span>
+            </div>
         </div>
 
     </footer>
