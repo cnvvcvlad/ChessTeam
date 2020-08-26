@@ -405,7 +405,8 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     padding: 1vh 1vw;
     text-decoration: none;
     column-count: 3;
-
+    text-align: justify;
+    hyphens: auto;
 }
 
 .justify_article img {
