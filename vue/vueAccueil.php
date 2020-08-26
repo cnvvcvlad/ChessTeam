@@ -12,7 +12,7 @@
         <!-- La structure du slide -->
         <div class="galleryContainer">
             <div class="slideShowContainer">
-                <div id="playPauseBtn" onclick="playPauseSlides()"></div>
+                <div id="playPauseBtn" onclick="playPauseSlides()" title="Pause"></div>
                 <div class="leftArrow" onclick="plusSlides(-1)"><span class="arrow arrowLeft"></span></div>
                 <div class="rightArrow" onclick="plusSlides(1)"><span class="arrow arrowRight"></span></div>
                 <div class="captionHolder">
