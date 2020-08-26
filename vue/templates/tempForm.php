@@ -141,7 +141,7 @@
                                 <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
                                 le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
                                 <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
-                            <div id="detail_art" class="justify_article">
+                            <div id="detail_art" class="justify_form">
                                 <p>
                                     <img src="assets/img/uploads/<?= $value->getArt_image() ?>"
                                          alt="Image de l'article">
@@ -260,7 +260,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; Copyright 2019 </p>
+            <p>&copy; Copyright 2019 - <?php echo date('Y');?> </p>
         </div>
 
     </footer>

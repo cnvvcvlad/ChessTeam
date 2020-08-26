@@ -181,7 +181,7 @@
         </div>
         <div>
             <div class="copyright">
-                <p>&copy; Copyright 2020 </p>
+                <p>&copy; Copyright 2019 - <?php echo date('Y');?> </p>
                 <span class="compteur">
                     <?php
                     require_once dirname(__DIR__). DIRECTORY_SEPARATOR . 'compteur' . DIRECTORY_SEPARATOR . 'compteur.php';

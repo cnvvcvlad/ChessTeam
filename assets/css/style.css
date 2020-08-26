@@ -358,7 +358,7 @@ ul .sous-menu {
     margin: 2px 10px;
 }
 
-.bouton_commande a, #cache a, .justify_article a, a.comment-modify {
+.bouton_commande a, #cache a, .justify_article a, .justify_form a, a.comment-modify {
     box-shadow: 1px 1px 1px #D83F3D;
     cursor: pointer;
     overflow: visible;
@@ -368,11 +368,11 @@ ul .sous-menu {
     border-radius: 5px;
 }
 
-.bouton_commande a:hover, #cache a:hover, .justify_article a:hover, a.comment-modify:hover {
+.bouton_commande a:hover, #cache a:hover, .justify_article a:hover, .justify_form a:hover,a.comment-modify:hover {
     background-color: #219FDC;
 }
 
-.bouton_commande a:active, #cache a:active, .justify_article a:active, a.comment-modify:active {
+.bouton_commande a:active, #cache a:active, .justify_article a:active, .justify_form a:active, a.comment-modify:active {
     background-color: #FCDEDE;
     box-shadow: 1px 1px 1px #D83F3D inset;
 }
@@ -410,6 +410,16 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
 }
 
 .justify_article img {
+    float: left;
+    margin-right: 1em;
+    width: 30vw;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 0.5em;
+}
+
+.justify_form img{
     float: left;
     margin-right: 1em;
     width: 30vw;
