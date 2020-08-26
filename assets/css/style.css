@@ -390,6 +390,8 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     padding: 1px 1px 5px 1px;
 }
 
+
+
 .top_article_form {
     display: flex;
     flex-direction: column;
@@ -402,6 +404,7 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
 .justify_article {
     padding: 1vh 1vw;
     text-decoration: none;
+    column-count: 3;
 
 }
 
@@ -1057,6 +1060,10 @@ a.btn:nth-child(2) {
         width: auto;
     }
 
+    .justify_article{
+        column-count: 2;
+    }
+
     .justify_article img {
         width: 15vw;
         max-width: 100%;
@@ -1210,6 +1217,12 @@ a.btn:nth-child(2) {
     /*********** Comments **********/
     .comment-added {
         flex-direction: column;
+    }
+}
+
+@media all and (max-width: 580px) {
+    .justify_article{
+        column-count: 1;
     }
 }
 
