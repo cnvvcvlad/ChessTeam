@@ -3,7 +3,7 @@
 class DataBase {
     private $host = 'localhost';
     private $username = 'root';
-    private $password = '';
+    private $password = 'laromaclub2008';
     private $database = 'team_chess';
     private $pdo;
 
