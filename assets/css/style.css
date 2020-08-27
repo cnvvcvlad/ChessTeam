@@ -37,6 +37,42 @@
     font-style: normal;
 }
 
+/*------------------------------------------------------
+            ANIMATION
+--------------------------------------------------------*/
+@keyframes masuperanimation {
+    0% {
+        transform: translateX(0px);
+    }
+
+    50% {
+        transform: translateX(15px);
+    }
+
+    100% {
+        transform: translateX(15px) rotate(30deg);
+    }
+}
+
+@keyframes movemyname {
+    from {
+        transform: translateX(0px);
+    }
+
+    30% {
+        transform: translateX(300px);
+    }
+
+    60% {
+        transform: translateX(-300px);
+    }
+
+    to {
+        transform: translateX(0px);
+    }
+}
+
+
 /*--------------------------------------------------------
            RESET
 --------------------------------------------------------*/
@@ -184,6 +220,10 @@ article {
     padding-bottom: 2vh;
 }
 
+.logo:hover {
+    animation: masuperanimation 2s; /* On utilise "ma super animation" définie plus tôt */
+    }
+
 .logo img {
     padding-left: 3px;
     padding-right: 3px;
@@ -213,10 +253,6 @@ nav ul {
     box-shadow: inset 0 0 0 1px #12a0bf, 0 1px 4px 0 rgba(0, 0, 0, 0.9);
     padding: 0;
     flex-wrap: wrap;
-}
-
-nav ul {
-
 }
 
 nav ul li {
@@ -262,7 +298,9 @@ ul .sous-menu {
     font-family:'kaushan-script', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 1.2em;
     margin-right: 4vw;
+    animation: movemyname 20s linear infinite; /* Boucle d'animation ! */
 }
+
 
 .list_style {
     display: flex;
@@ -382,6 +420,11 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     text-decoration: none;
 }
 
+.bouton_rouge > img:nth-child(1) {
+ transform: translateX(2px);
+}
+
+
 .top_article {
     display: flex;
     flex-direction: column;
@@ -389,6 +432,10 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     border-radius: 10px 10px;
     justify-content: flex-start;
     padding: 1px 1px 5px 1px;
+}
+
+.ico_categorie{
+    transform:scale(0.7);
 }
 
 
@@ -428,6 +475,9 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
     height: auto;
     border-radius: 10px;
     margin-bottom: 0.5em;
+    transform-origin: 50% 50%; /* Centre */
+    transform: rotate(10deg);
+    -webkit-transform: rotate(10deg); /* Safari */
 }
 
 .separateur {
@@ -1037,9 +1087,10 @@ a.btn:nth-child(2) {
         border-radius: 5px;
     }
     .memberInfo {
-        font-size: 0.8em;
+        display: none;
+        /* font-size: 0.8em;
         margin-left: 65%;
-        min-width: 20px;
+        min-width: 20px; */
     }
 
     #menu-bar {
