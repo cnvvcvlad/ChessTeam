@@ -41,6 +41,6 @@
     <?php endif; ?>
 </div>
 
-<?php $mentions = ob_get_clean(); ?>
+<?php $template_form = ob_get_clean(); ?>
 
-<?php require 'templates/tempBootstrap.php';?>
+<?php require 'templates/tempForm.php';?>
