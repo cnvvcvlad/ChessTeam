@@ -19,7 +19,7 @@
     <header>  
         <div class="header-body">
         <div class="countdown-body">
-                <h3 class="title-chess whitesmoke">La journée mondiale du jeu d'échecs le 20 juillet</h3>    
+                <h3 class="title-chess whitesmoke">La journée mondiale du jeu d'échecs arrive dans</h3>    
                 <div class="countdown-container">
                     <div class="countdown-el days-c">
                         <p class="big-text whitesmoke" id="days">0</p>
@@ -225,6 +225,8 @@
 <!-- ==javaScript perso== -->
 <script src="assets/js/caroussel.js" type="text/javascript"></script>
 <script src="assets/js/burger.js" type="text/javascript"></script>
+<script src="assets/js/timer.js" type="text/javascript"></script>
+
 
 </body>
 
