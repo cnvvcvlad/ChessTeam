@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="assets/css/burger.css" type="text/css">
     <link rel="stylesheet" href="assets/css/normalize.css" type="text/css">
     <link rel="stylesheet" href="assets/css/icomoon.css" type="text/css">
+    <link rel="stylesheet" href="assets/sass/styles.css" type="text/css">
+
 
 </head>
 <body>
@@ -126,7 +128,27 @@
 }
     ?>
 
-
+    <div class="timer-body">
+        <h3 class="timer-body__title">Le nouvel An arrive dans</h3>
+        <div class="timer-container">
+            <div class="timer-element">
+                <p class="timer-element__text">0</p>
+                <span class="whitesmoke">jours</span>
+            </div>
+            <div class="timer-element">
+                <p class="timer-element__text">0</p>
+                <span class="whitesmoke">heures</span>
+            </div>
+            <div class="timer-element">
+                <p class="timer-element__text">0</p>
+                <span class="whitesmoke">minutes</span>
+            </div>
+            <div class="timer-element">
+                <p class="timer-element__text">0</p>
+                <span class="whitesmoke">secondes</span>
+            </div>
+        </div>
+    </div>
     <main class="container">
 
         <?= $template; ?>
