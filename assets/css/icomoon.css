@@ -10,7 +10,7 @@
     font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"], [class*="icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     /*speak: none;*/
@@ -84,6 +84,11 @@
     color: #336791;
 }
 
+.icon-rss:before {
+    content: "\e90f";
+    color: #ffa500;
+}
+
 .icon-twitter:before {
     content: "\e90c";
     color: #1da1f2;
@@ -98,3 +103,5 @@
     content: "\e90e";
     color: #f00;
 }
+
+

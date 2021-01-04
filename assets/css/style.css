@@ -1083,6 +1083,10 @@ a.btn:nth-child(2) {
     text-decoration: none;
 }
 
+.smenu a img {
+    width: 0.8rem !important;
+}
+
 .smenu a:before {
     content: "";
     position: absolute;

@@ -228,6 +228,8 @@
                             <a href="">Facebook<span class="icon-facebook"></span></a>
                             <a href="">Twitter<span class="icon-twitter"></span></a>
                             <a href="">Whatsapp<span class="icon-whatsapp"></span></a>
+                            <a href="http://localhost:8080/ChessTeam/?action=rss" rel="noreferrer noopener" target="_blank">Flux RSS<img src="assets/img/logo/rss.png" alt="Le Flux RSS"
+                                            title="Flux RSS"/></a>
                         </div>
                     </li>
 

@@ -49,6 +49,8 @@ try {
             require 'vue/vueArticleId.php';
         } elseif ($action == 'createArticleId') {
             require 'vue/vueCreateArticleId.php';
+        } elseif ($action == 'rss') {
+            require 'vue/fluxRSS/rss.php';
         } elseif ($action == 'allArticles') {
             if (isset($_GET['id'])) {
                 $commentsOfArticle = getAllCommentsOfArticle(htmlspecialchars($_GET['id']));
