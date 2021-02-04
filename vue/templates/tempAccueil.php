@@ -134,19 +134,19 @@
         <div class="timer-container">
             <div class="timer-element">
                 <p class="timer-element__text">0</p>
-                <span class="whitesmoke">jours</span>
+                <span class="whitesmoke" id="days">jours</span>
             </div>
             <div class="timer-element">
                 <p class="timer-element__text">0</p>
-                <span class="whitesmoke">heures</span>
+                <span class="whitesmoke" id="hours">heures</span>
             </div>
             <div class="timer-element">
                 <p class="timer-element__text">0</p>
-                <span class="whitesmoke">minutes</span>
+                <span class="whitesmoke" id="minutes">minutes</span>
             </div>
             <div class="timer-element">
                 <p class="timer-element__text">0</p>
-                <span class="whitesmoke">secondes</span>
+                <span class="whitesmoke" id="seconds">secondes</span>
             </div>
         </div>
     </div>
@@ -215,6 +215,8 @@
 <!-- ==javaScript perso== -->
 <script src="assets/js/caroussel.js" type="text/javascript"></script>
 <script src="assets/js/burger.js" type="text/javascript"></script>
+<script src="assets/js/script.js" type="text/javascript"></script>
+
 
 </body>
 
