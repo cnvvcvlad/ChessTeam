@@ -6,6 +6,9 @@ function initGallery() {
     
     slideIndex = 0;
     slides = document.getElementsByClassName("imageHolder");
+    if (slides[0] === undefined) {
+        return false;
+    }
     slides[slideIndex].style.opacity = 1;
 
     captionText = document.querySelector(".captionHolder .captionText");
@@ -72,6 +75,9 @@ function moveSlide(n) {
         dots[n].classList.add("active");
         slideIndex = n;
 
+    }
+    if (captionText === undefined) {
+        return false;
     }
     captionText.style.display = "none";    
     captionText.className = "captionText" + slideTextAnimClass;

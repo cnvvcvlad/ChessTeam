@@ -7,6 +7,7 @@
     <title><?= $title; ?></title>
     <meta name="description" content="<?= $description; ?>"/>
     <!-- ==css perso== -->
+    <link rel="icon" type="image/png" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/caroussel.css" type="text/css">
     <link rel="stylesheet" href="assets/css/burger.css" type="text/css">
@@ -270,7 +271,7 @@
 
 
 <!-- ==javaScript perso== -->
-<script src="assets/js/caroussel.js" type="text/javascript"></script>
+<!-- <script src="assets/js/caroussel.js" type="text/javascript"></script> -->
 <script src="assets/js/burger.js" type="text/javascript"></script>
 
 </body>
