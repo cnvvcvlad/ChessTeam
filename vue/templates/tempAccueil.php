@@ -133,20 +133,20 @@
         <h3 class="timer-body__title">Le nouvel An arrive dans</h3>
         <div class="timer-container">
             <div class="timer-element">
-                <p class="timer-element__text">0</p>
-                <span class="whitesmoke" id="days">jours</span>
+                <p class="timer-element__text" id="days"></p>
+                <span class="whitesmoke">jours</span>
             </div>
             <div class="timer-element">
-                <p class="timer-element__text">0</p>
-                <span class="whitesmoke" id="hours">heures</span>
+                <p class="timer-element__text" id="hours"></p>
+                <span class="whitesmoke">heures</span>
             </div>
             <div class="timer-element">
-                <p class="timer-element__text">0</p>
-                <span class="whitesmoke" id="minutes">minutes</span>
+                <p class="timer-element__text" id="minutes"></p>
+                <span class="whitesmoke">minutes</span>
             </div>
             <div class="timer-element">
-                <p class="timer-element__text">0</p>
-                <span class="whitesmoke" id="seconds">secondes</span>
+                <p class="timer-element__text" id="seconds"></p>
+                <span class="whitesmoke">secondes</span>
             </div>
         </div>
     </div>
