@@ -8,19 +8,19 @@ require '../classes/Messages.php';
 $manager_message = new MessagesManager();
 
 try {
-
     if (isset($_GET['action'])) {
         session_destroy();
         header('location:./');
         exit();
     }
-// on verifie que la methode POST est utilisée
+    // on verifie que la methode POST est utilisée
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // on vérifie la validité du reCAPTHCHA, si le champ 'recaptcha-response' contient une valeur
         if (empty($_POST['recaptcha-response'])) {
+            var_dump($_POST);
             require '../vue/contact.php';
-            exit();
+        // exit();
         } else {
             // on prépare l'URL , on injecte la reponse donnée avec les 2 parametres obligatoires
             $url = "https://www.google.com/recaptcha/api/siteverify?secret=6LcgZ-oUAAAAAJbnWEAXwODWIOxgSYKAZAr08WhV&response={$_POST['recaptcha-response']}";
@@ -35,7 +35,7 @@ try {
 //                $response = curl_exec($curl);
 //            } else {
 //             on utlisera  file_get_contents
-                $response = file_get_contents($url);
+            $response = file_get_contents($url);
 //            }
 
             // on doit avoir une reponse (soit vide, soit null), donc on verifie qu'on a une reponse
@@ -81,7 +81,6 @@ try {
 
 
                         if (isset($_POST['contact'])) {
-
                             $manager_message->insertMessage(new Messages([
                                 'author_name' => $author_name,
                                 'mess_author' => $mess_author,
@@ -92,24 +91,18 @@ try {
 
                             header("location:../index.php?action=home&alert=contact");
                             exit();
-
                         } else {
                             throw new Exception("Veuillez rééssayer. Une erreur c'est produite.");
                         }
-
-
                     } else {
                         throw new Exception("Veuillez renseigner tous les champs du formulaire");
                     }
-
                 } else {
                     require '../vue/contact.php';
                     exit();
                 }
             }
         }
-
-
     } else {
         http_response_code(405);
         echo 'Methode non autorisé';
@@ -118,11 +111,3 @@ try {
     $ex = 'Erreur : ' . $e->getMessage();
     require '../vue/vueException.php';
 }
-
-
-
-
-
-
-
-

@@ -17,20 +17,16 @@ class MemberManager extends DataBase
 
     public function checkPassword($login, MemberManager $member)
     {
-
         $request = 'SELECT password FROM users WHERE login = :login';
         $select = $this->dbConnect()->prepare($request);
         $select->execute([
             "login" => $login
         ]);
         if ($select->rowCount() != 0) {
-
             $password = $select->fetch();
             return $password;
-
         }
         throw new Exception("Le login est invalide !");
-
     }
 
     public function insertMembre(Users $member)
@@ -89,7 +85,7 @@ class MemberManager extends DataBase
             $_SESSION['user_image'] = $user->getUser_image();
             $_SESSION['statut'] = $user->getStatut();
         } else {
-            throw new Exception("Login et/ou mot de passe incorrect! Veuillez r�essayer !");
+            throw new Exception("Login et/ou mot de passe incorrect! Veuillez réessayer !");
         }
     }
 
@@ -108,13 +104,11 @@ class MemberManager extends DataBase
             "password" => $member->getPassword(),
             "user_image" => $member->getUser_image()
         ]);
-        if (isAdmin() and $_SESSION['id_user'] != $id_user)  {
-           return $_SESSION['user_image'];
+        if (isAdmin() and $_SESSION['id_user'] != $id_user) {
+            return $_SESSION['user_image'];
+        } elseif (isConnected()) {
+            $_SESSION['user_image'] = $member->getUser_image();
         }
-            elseif (isConnected()) {
-                $_SESSION['user_image'] = $member->getUser_image();
-        }
-
     }
 
 
@@ -160,6 +154,4 @@ class MemberManager extends DataBase
         $delete = $this->dbConnect()->prepare($request);
         $delete->execute(["id_user" => $user_id]);
     }
-
-
 }

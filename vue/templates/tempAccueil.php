@@ -160,7 +160,7 @@
             <div class="middle">
                 <ul class="menu">
                     <li class="item" id="profile">
-                        <a href="#profile" class="btn">Notre adresse</a>
+                        <a class="btn" href="#profile">Notre adresse</a>
 
                         <div class="smenu">
                             <h5>15 rue Général Faidherbe</h5>
@@ -171,7 +171,7 @@
                     </li>
 
                     <li class="item" id="message">
-                        <a href="#message" class="btn">Réseaux Sociaux</a>
+                        <a class="btn" href="#message">Réseaux Sociaux</a>
 
                         <div class="smenu">
                             <a href="https://www.facebook.com/">Facebook<span class="icon-facebook"></span></a>
@@ -183,7 +183,7 @@
                     </li>
 
                     <li class="item" id="settings">
-                        <a href="#settings" class="btn">FAQ / CGU / CONTACT</a>
+                        <a class="btn" href="#settings">FAQ / CGU / CONTACT</a>
 
                         <div class="smenu">
                             <a href="vue/questions.php">Questions fréquentes</a>
@@ -197,7 +197,7 @@
                         <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a><div class="separate"></div><a
                                 class="btn" href="">#top</a></li>
                     <?php else : ?>
-                        <li class="item"><a href="https://www.chess.com/" target="_blank" class="btn">Chess.com</a><div class="separate"></div><a
+                        <li class="item"><a  target="_blank" class="btn" href="https://www.chess.com/" rel="noreferrer noopener">Chess.com</a><div class="separate"></div><a
                                 class="btn" href=""><i class="fas fa-arrow-up"></i>#top</a></li>
                     <?php endif; ?>
 
