@@ -1,5 +1,9 @@
 <?php
 
+namespace Democvidev\Controller;
+
+use Democvidev\Model\CategoriesManager;
+
 function getAllCategory() {
     $cat_manager = new CategoriesManager();
     $category = $cat_manager->showAllCategory();

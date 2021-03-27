@@ -1,6 +1,6 @@
 <?php
 
-namespace Democvidev\App;
+namespace Democvidev\Model;
 
 require_once 'DataBase.php';
 

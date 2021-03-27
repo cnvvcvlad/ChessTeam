@@ -1,6 +1,6 @@
 <?php
 
-namespace Democvidev\App;
+namespace Democvidev\Model;
 class DataBase {
     private $host = 'localhost';
     private $username = 'root';
@@ -20,7 +20,7 @@ class DataBase {
     public function dbConnect() {
 
         try {
-            $this->pdo = new PDO(
+            $this->pdo = new \PDO(
                 'mysql:host=' . $this->host . ';dbname=' . $this->database, $this->username, $this->password, [
                 \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                 \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC

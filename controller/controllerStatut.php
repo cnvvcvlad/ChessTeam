@@ -1,4 +1,5 @@
 <?php
+namespace Democvidev\Controller;
 
 
 function validate($data)

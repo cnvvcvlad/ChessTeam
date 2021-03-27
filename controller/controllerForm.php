@@ -1,4 +1,7 @@
 <?php
+
+namespace Democvidev\Controller;
+
 session_start();
 
 require 'controllerStatut.php';

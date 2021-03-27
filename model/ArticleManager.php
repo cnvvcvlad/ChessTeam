@@ -1,7 +1,10 @@
 <?php
 
-require_once 'DataBase.php';
+namespace Democvidev\Model;
 
+// use Democvidev\App\DataBase;
+
+require_once 'DataBase.php';
 class ArticleManager extends DataBase
 {
     public function getDataBase()

@@ -1,5 +1,7 @@
 <?php
 
+namespace Democvidev\Controller;
+
 function getAllCommentsOfArticle($article_id) {
     $comment_manager = new CommentsManager();
     $comments = $comment_manager->showCommentsOfArticle($article_id);

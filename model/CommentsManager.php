@@ -1,4 +1,5 @@
 <?php
+namespace Democvidev\Model;
 
 require_once 'DataBase.php';
 
