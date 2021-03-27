@@ -1,6 +1,8 @@
 <?php
 
-namespace App;
+namespace Democvidev\App;
+
+use Democvidev\App\Generique;
 
 class Category extends Generique
 {

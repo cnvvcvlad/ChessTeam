@@ -1,5 +1,6 @@
 <?php
 
+namespace Democvidev\App;
 class DataBase {
     private $host = 'localhost';
     private $username = 'root';
@@ -21,14 +22,14 @@ class DataBase {
         try {
             $this->pdo = new PDO(
                 'mysql:host=' . $this->host . ';dbname=' . $this->database, $this->username, $this->password, [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
                 ]);
                 $this->pdo->exec("SET NAMES UTF8");
                 
                 return $this->pdo;
             }
-            catch (PDOException $e) {
+            catch (\PDOException $e) {
                 die('Erreur : ' . $e->getMessage()) or die(print_r($this->pdo->errorInfo()));
             }
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Democvidev\App;
 
 abstract class Generique
 {
