@@ -1,9 +1,11 @@
 <?php
-session_start();
 
-spl_autoload_register(function ($class) {
-    require 'classes/' . $class . '.php';
-});
+session_start();
+require 'vendor/autoload.php';
+
+// spl_autoload_register(function ($class) {
+//     require 'classes/' . $class . '.php';
+// });
 
 /****************************************/
 require 'controller/controllerStatut.php';

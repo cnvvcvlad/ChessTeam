@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 require_once 'Generique.php';
 
 class Comment extends Generique

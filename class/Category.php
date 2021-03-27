@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class Category extends Generique
 {
     private $id;
