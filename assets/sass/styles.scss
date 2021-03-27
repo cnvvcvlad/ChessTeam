@@ -16,7 +16,17 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    min-width: 15rem;
+    min-width: 15rem;   
+}
+
+.timer-element {
+    width: 5rem;
+    padding-left: 1.5rem;
+    &:nth-child(n) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 

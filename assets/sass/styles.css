@@ -31,6 +31,23 @@
   min-width: 15rem;
 }
 
+.timer-element {
+  width: 5rem;
+  padding-left: 1.5rem;
+}
+
+.timer-element:nth-child(n) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .logo img {
   -webkit-transform: scale(1);
           transform: scale(1);
