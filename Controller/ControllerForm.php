@@ -4,9 +4,11 @@ namespace Democvidev\App;
 
 session_start();
 
-require 'controllerStatut.php';
-require '../model/MessagesManager.php';
-require '../classes/Messages.php';
+use Democvidev\App\ControllerStatut;
+
+require 'ControllerStatut.php';
+require '../Model/MessagesManager.php';
+require '../Class/Messages.php';
 
 $manager_message = new MessagesManager();
 
@@ -21,10 +23,10 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // on vérifie la validité du reCAPTHCHA, si le champ 'recaptcha-response' contient une valeur
-        if (empty($_POST['recaptcha-response'])) {
+        if (empty($_POST['recaptcha-response'])) {             
             require '../vue/contact.php';
             exit();
-        } else {
+        } else { // en localhost ca ne fonctionera pas
             // on prépare l'URL , on injecte la reponse donnée avec les 2 parametres obligatoires
             $url = "https://www.google.com/recaptcha/api/siteverify?secret=6LcgZ-oUAAAAAJbnWEAXwODWIOxgSYKAZAr08WhV&response={$_POST['recaptcha-response']}";
 
@@ -73,9 +75,9 @@ try {
 
 
                         //on nettoie le contenu, contre les failles xss et autre
-                        $author_name = validate($author_name);
-                        $mess_subject = validate($mess_subject);
-                        $mess_author = emailValidator($mess_author);
+                        $author_name = ControllerStatut::validate($author_name);
+                        $mess_subject = ControllerStatut::validate($mess_subject);
+                        $mess_author = ControllerStatut::emailValidator($mess_author);
                         // on garde les balises html, mais on les desactive
                         $mess_content = htmlspecialchars($mess_content);
 
@@ -97,12 +99,12 @@ try {
                             exit();
 
                         } else {
-                            throw new Exception("Veuillez rééssayer. Une erreur c'est produite.");
+                            throw new \Exception("Veuillez rééssayer. Une erreur c'est produite.");
                         }
 
 
                     } else {
-                        throw new Exception("Veuillez renseigner tous les champs du formulaire");
+                        throw new \Exception("Veuillez renseigner tous les champs du formulaire");
                     }
 
                 } else {
@@ -117,7 +119,7 @@ try {
         http_response_code(405);
         echo 'Methode non autorisé';
     }
-} catch (Exception $e) {
+} catch (\Exception $e) {
     $ex = 'Erreur : ' . $e->getMessage();
     require '../vue/vueException.php';
 }

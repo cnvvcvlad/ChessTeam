@@ -4,7 +4,7 @@ namespace Democvidev\App;
 
 require_once 'Generique.php';
 
-
+// use Democvidev\App\Generique;
 class Messages extends Generique
 {
 

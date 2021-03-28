@@ -1,9 +1,9 @@
 <?php
 namespace Democvidev\App;
 
-// require_once 'Generique.php';
+require_once 'Generique.php';
 
-use Democvidev\App\Generique;
+// use Democvidev\App\Generique;
 
 
 class Article extends Generique

@@ -2,7 +2,9 @@
 
 namespace Democvidev\App;
 
-use Democvidev\App\Generique;
+require_once 'Generique.php';
+
+// use Democvidev\App\Generique;
 
 class Category extends Generique
 {

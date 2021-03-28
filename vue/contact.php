@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="text-center">Contactez-nous !</h1>
 
-    <form action="../controller/controllerForm.php" method="post">
+    <form action="../Controller/ControllerForm.php" method="post">
         <div class="form-group">
             <label for="author_name">Nom : </label>
             <input type="text" class="form-control" id="author_name" placeholder="nom" name="author_name" required>

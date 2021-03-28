@@ -4,6 +4,8 @@ namespace Democvidev\App;
 
 require_once 'Generique.php';
 
+// use Democvidev\App\Generique;
+
 class Comment extends Generique
 {
     private $id;
