@@ -163,6 +163,7 @@ class MemberManager extends DataBase
 
     public function deleteU($user_id)
     {
+        // il faut penser a mettre un id de l'admin dans chaque article qui appartenait a  cet utilisateur
         $request = 'DELETE FROM users WHERE id_user = :id_user';
         $delete = $this->dbConnect()->prepare($request);
         $delete->execute(["id_user" => $user_id]);
