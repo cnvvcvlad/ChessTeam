@@ -43,7 +43,7 @@
                 <h1><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie"
                          class="ico_categorie"/><?= $value->getArt_title() ?></h1>
                 <div class="banniere_bouton">
-                    <?php if (isAdmin()) : ?>
+                    <?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
                         </div>
                     <?php endif; ?>
@@ -53,9 +53,9 @@
                     </div>
                 </div>
                 <p><span class="information"> Ecrit par</span>
-                    <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
+                    <span class="mark"><?= \Democvidev\App\ControllerUser::showNameAuthor($value->getArt_author()) ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
-                    <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
+                    <strong><?=  \Democvidev\App\ControllerCategory::showNameCategory($value->getCategory_id()) ?></strong></p>
                 <div id="detail_art" class="justify_article">
 
                     <a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article" title="Cliquez pour agrandir"></a>
@@ -67,7 +67,7 @@
                     </div>
                     <p>
                         <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">
-                            Commentaires(<?= numberCommentsOfArticle(getAllCommentsOfArticle($value->getId())); ?>)</a>
+                            Commentaires(<?= \Democvidev\App\ControllerComments::numberCommentsOfArticle(\Democvidev\App\ControllerComments::getAllCommentsOfArticle($value->getId())); ?>)</a>
                     </p>
                 </div>
             <?php endforeach; ?>
@@ -98,7 +98,8 @@
     </div>
 <?php endif; ?>
 
+
 <?php $template = ob_get_clean(); ?>
 
-
 <?php require 'templates/tempAccueil.php'; ?>
+

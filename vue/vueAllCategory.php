@@ -19,10 +19,10 @@
 </div>
 
 
-<?php if (isAdmin()) : ?>
+<?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
     <h2>Créer une nouvelle catégorie</h2>
 
-    <form action="controller/controllerFrontEnd.php" method="post" class="form-create"
+    <form action="Controller/ControllerFrontEnd.php" method="post" class="form-create"
           enctype="multipart/form-data">
         <fieldset>
             <legend>Introduisez vos informations</legend>

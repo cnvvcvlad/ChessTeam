@@ -3,7 +3,7 @@
 <?php $title = 'Liste des commentaires'; ?>
 <?php $description = 'Voir les commentaires des internautes sur différents sujets des échecs'; ?>
 
-<?php if(isAdmin()): ?>
+<?php if(\Democvidev\App\ControllerStatut::isAdmin()): ?>
 <?php if (isset($allComments)) : ?>
     <h1>Voici tous les commentaires postés</h1>
     <div class="top_article">
@@ -13,7 +13,7 @@
 
             <div class="comment-author">
                 <p>
-                    <span class="mark"><?= showNameAuthor($value->getCom_author()) ?></span>
+                    <span class="mark"><?= \Democvidev\App\ControllerUser::showNameAuthor($value->getCom_author()) ?></span>
                     le ( <?= $value->getCom_date_creation() ?> )
                 </p>
             </div>

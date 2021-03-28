@@ -1,6 +1,6 @@
 <?php
 
-namespace Democvidev\Model;
+namespace Democvidev\App;
 class DataBase {
     private $host = 'localhost';
     private $username = 'root';

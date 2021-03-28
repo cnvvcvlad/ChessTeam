@@ -1,9 +1,10 @@
 <?php
 
-namespace Democvidev\Model;
+namespace Democvidev\App;
 
 require_once 'DataBase.php';
 
+// use Democvidev\App\DataBase;
 use Democvidev\App\Category;
 
 class CategoriesManager extends DataBase

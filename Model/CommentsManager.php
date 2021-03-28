@@ -1,5 +1,5 @@
 <?php
-namespace Democvidev\Model;
+namespace Democvidev\App;
 
 require_once 'DataBase.php';
 

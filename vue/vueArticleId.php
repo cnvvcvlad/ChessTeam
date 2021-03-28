@@ -2,7 +2,7 @@
 <?php $title = 'Articles ajoutés par des membres'; ?>
 <?php $description = 'Retrouvez la listes des billets proposées par les internautes'; ?>
 
-<?php if (isConnected()) : ?>
+<?php if (\Democvidev\App\ControllerStatut::isConnected()) : ?>
 
 <h1>Voici vos créations ! </h1>
 
@@ -16,7 +16,7 @@
 
 
                 <div class="banniere_bouton">
-                    <?php if (isAdmin()) : ?>
+                    <?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
                         </div>
                     <?php endif; ?>
@@ -26,9 +26,9 @@
                     </div>
                 </div>
                 <p><span class="information"> Ecrit par</span>
-                    <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
+                    <span class="mark"><?= \Democvidev\App\ControllerUser::showNameAuthor($value->getArt_author()) ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
-                    <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
+                    <strong><?= \Democvidev\App\ControllerCategory::showNameCategory($value->getCategory_id()) ?></strong></p>
                 <div class="justify_article">
                     <p>
                         <a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article" title="Cliquez pour agrandir"></a>
@@ -38,7 +38,7 @@
                     </div>
                     </p>
                     <p>
-                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(getAllCommentsOfArticle($value->getId())) ?>
+                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(\Democvidev\App\ControllerComments::getAllCommentsOfArticle($value->getId())) ?>
                             ) Commentaires </a></p>
                 </div>
 

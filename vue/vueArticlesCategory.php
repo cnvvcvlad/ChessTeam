@@ -10,9 +10,9 @@
 
                 <h1><?= $value->getArt_title() ?></h1>
                 <p><span class="information"> Ecrit par</span>
-                    <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
+                    <span class="mark"><?= \Democvidev\App\ControllerUser::showNameAuthor($value->getArt_author()) ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
-                    <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
+                    <strong><?= \Democvidev\App\ControllerCategory::showNameCategory($value->getCategory_id()) ?></strong></p>
 
                 <h3>Description</h3>
 
@@ -22,7 +22,7 @@
                             <img src="assets/img/by_default/flecheblanchedroite.png"
                                  alt="le bouton rouge"/></a>
                     </div>
-                    <?php if (isAdmin()) : ?>
+                    <?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a></div>
                     <?php endif; ?>
                 </div>
@@ -35,7 +35,7 @@
                     </p>
 
                     <p>
-                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(getAllCommentsOfArticle($value->getId())) ?>
+                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= count(\Democvidev\App\ControllerComments::getAllCommentsOfArticle($value->getId())) ?>
                             ) Commentaires </a></p>
 
                 </div>

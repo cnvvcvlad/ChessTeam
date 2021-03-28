@@ -7,10 +7,8 @@
         }
     ],
     "autoload": {
-        "psr-4": {
-            "Democvidev/App\\": "class/",
-            "Democvidev/Model\\": "model/",
-            "Democvidev/Controller\\": "controller/"
+        "psr-4": {               
+            "Democvidev\\App\\":["Class/", "Model/", "Controller/"]
         }
     },
     "require": {}

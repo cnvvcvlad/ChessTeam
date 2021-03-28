@@ -1,8 +1,10 @@
 <?php
 
-namespace App;
+namespace Democvidev\App;
 
 require_once 'Generique.php';
+
+// use Democvidev\App\Generique;
 
 class Users extends Generique
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Democvidev\App;
 
 require_once 'Generique.php';
 

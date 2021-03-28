@@ -6,7 +6,7 @@
 <div class="form-connexion">
 
 
-    <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription"
+    <form action="Controller/ControllerFrontEnd.php" method="POST" class="form-inscription"
           enctype="multipart/form-data">
         <h1>Inscrivez-vous !</h1>
         <fieldset>

@@ -1,8 +1,13 @@
 <?php
 
-namespace Democvidev\Model;
+namespace Democvidev\App;
+
 
 require_once 'DataBase.php';
+
+// use Democvidev\App\DataBase;
+use Democvidev\App\ControllerStatut;
+use Democvidev\App\Users;
 
 class MemberManager extends DataBase
 {
@@ -31,14 +36,14 @@ class MemberManager extends DataBase
             return $password;
 
         }
-        throw new Exception("Le login est invalide !");
+        throw new \Exception("Le login est invalide !");
 
     }
 
     public function insertMembre(Users $member)
     {
         if ($this->existLogin($member->getLogin())) {
-            throw new Exception("Désolé cet utilisateur existe déjà");
+            throw new \Exception("Désolé cet utilisateur existe déjà");
         }
 
         $request = 'INSERT INTO users(login, email, password, user_image) VALUES(:login, :email, :password, :user_image)';
@@ -91,14 +96,14 @@ class MemberManager extends DataBase
             $_SESSION['user_image'] = $user->getUser_image();
             $_SESSION['statut'] = $user->getStatut();
         } else {
-            throw new Exception("Login et/ou mot de passe incorrect! Veuillez r�essayer !");
+            throw new \Exception("Login et/ou mot de passe incorrect! Veuillez r�essayer !");
         }
     }
 
     public function updateMembre($id_user, Users $member)
     {
         if ($this->existId($member->getId_user())) {
-            throw new Exception("Désolé cet utilisateur n'existe pas");
+            throw new \Exception("Désolé cet utilisateur n'existe pas");
         }
 
         $request = 'UPDATE users SET login = :login, email = :email, password = :password, user_image = :user_image  WHERE id_user = :id_user';
@@ -110,10 +115,10 @@ class MemberManager extends DataBase
             "password" => $member->getPassword(),
             "user_image" => $member->getUser_image()
         ]);
-        if (isAdmin() and $_SESSION['id_user'] != $id_user)  {
+        if (ControllerStatut::isAdmin() and $_SESSION['id_user'] != $id_user)  {
            return $_SESSION['user_image'];
         }
-            elseif (isConnected()) {
+            elseif (ControllerStatut::isConnected()) {
                 $_SESSION['user_image'] = $member->getUser_image();
         }
 

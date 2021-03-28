@@ -7,7 +7,7 @@
 }
 ?>
 
-<?php if (isAdmin()) : ?>
+<?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
     <h1>Voici tous les membres de ChessTeam</h1>
 
     <?php if (isset($allMembers)) : ?>
@@ -71,7 +71,7 @@
         <h2>Ajouter un nouveau membre :</h2>
         <div class="form-connexion">
 
-            <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription"
+            <form action="Controller/ControllerFrontEnd.php" method="POST" class="form-inscription"
                   enctype="multipart/form-data">
                 <div class="form-inscription">
                     <label for="login">Login :

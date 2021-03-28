@@ -58,7 +58,7 @@
                             </li>
 
 
-                            <?php if (isConnected()) : ?>
+                            <?php if (\Democvidev\App\ControllerStatut::isConnected()) : ?>
                                 <li>
                                     <div class="list_style"><a
                                             href="?action=myAccount&amp;id=<?= $_SESSION['id_user'] ?>">Mon Compte</a>
@@ -75,7 +75,7 @@
                                 </li>
 
 
-                                <?php if (isAdmin()) : ?>
+                                <?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
 
                                     <li>
                                         <div class="list_style"><a href="?action=allMembers">Membres</a></div>
@@ -106,7 +106,7 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="memberInfo"><span><?= helloUser(); ?></span></div>
+                <div class="memberInfo"><span><?= \Democvidev\App\ControllerStatut::helloUser(); ?></span></div>
 
             </div>
             <div class="menu-bg" id="menu-bg"></div>
@@ -191,7 +191,7 @@
 
                         </div>
                     </li>
-                    <?php if (isConnected()) : ?>
+                    <?php if (\Democvidev\App\ControllerStatut::isConnected()) : ?>
                         <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a><div class="separate"></div><a
                                 class="btn" href="">#top</a></li>
                     <?php else : ?>
@@ -213,9 +213,9 @@
 
 
 <!-- ==javaScript perso== -->
-<script src="assets/js/caroussel.js" type="text/javascript"></script>
-<script src="assets/js/burger.js" type="text/javascript"></script>
-<script src="assets/js/script.js" type="text/javascript"></script>
+<script defer src="assets/js/caroussel.js" type="text/javascript"></script>
+<script defer src="assets/js/burger.js" type="text/javascript"></script>
+<script defer src="assets/js/script.js" type="text/javascript"></script>
 
 
 </body>

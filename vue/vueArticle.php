@@ -17,7 +17,7 @@
                      class="ico_categorie"/><?= $values->getArt_title() ?></h1>
 
             <div class="banniere_bouton">
-                <?php if (isAdmin()) : ?>
+                <?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
                     <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $values->getId() ?>">Modifier</a>
                     </div>
                 <?php endif; ?>
@@ -27,9 +27,9 @@
                 </div>
             </div>
             <p><span class="information"> Ecrit par</span>
-                <span class="mark"><?= showNameAuthor($values->getArt_author()) ?></span>
+                <span class="mark"><?= \Democvidev\App\ControllerUser::showNameAuthor($values->getArt_author()) ?></span>
                 le <em><?= $values->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
-                <strong><?= showNameCategory($values->getCategory_id()) ?></strong></p>
+                <strong><?= \Democvidev\App\ControllerCategory::showNameCategory($values->getCategory_id()) ?></strong></p>
 
             <div id="detail_art" class="justify_article">
 
@@ -44,7 +44,7 @@
                 </div>
                 <p>
                     <a href="?action=allArticles&amp;id=<?= $values->getId() ?>">
-                        (<?= count(getAllCommentsOfArticle($values->getId())); ?>) Commentaires
+                        (<?= count(\Democvidev\App\ControllerComments::getAllCommentsOfArticle($values->getId())); ?>) Commentaires
                     </a>
                 </p>
 
@@ -57,7 +57,7 @@
 
 <?php endif; ?>
     <div class="back-page">
-        <?php if (backPageId()) : ?>
+        <?php if (\Democvidev\App\ControllerStatut::backPageId()) : ?>
             <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
 
         <?php else : ?>

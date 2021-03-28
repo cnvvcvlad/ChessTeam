@@ -15,9 +15,9 @@
 
             </div>
             <p><span class="information"> Ecrit par</span>
-                <span class="mark"><?= showNameAuthor($values->getArt_author()) ?></span>
+                <span class="mark"><?= \Democvidev\App\ControllerUser::showNameAuthor($values->getArt_author()) ?></span>
                 le <em><?= $values->getArt_date_creation() ?></em><span class="information"> dans la catégorie</span>
-                <strong><?= showNameCategory($values->getCategory_id()) ?></strong></p>
+                <strong><?= \Democvidev\App\ControllerCategory::showNameCategory($values->getCategory_id()) ?></strong></p>
             <div class="justify_article">
                 <h3><?= $values->getArt_description() ?></h3>
 
@@ -32,7 +32,7 @@
 
                 <h3 class="comment-libelle"> Modifier l'article : </h3>
 
-                <form action="controller/controllerFrontEnd.php" method="post" class="form-inscription"
+                <form action="Controller/ControllerFrontEnd.php" method="post" class="form-inscription"
                       enctype="multipart/form-data">
                     <fieldset>
                         <legend>Introduisez vos informations</legend>

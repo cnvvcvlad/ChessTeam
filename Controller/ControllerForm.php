@@ -1,6 +1,6 @@
 <?php
 
-namespace Democvidev\Controller;
+namespace Democvidev\App;
 
 session_start();
 

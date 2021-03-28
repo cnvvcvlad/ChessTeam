@@ -1,6 +1,6 @@
 <?php
 
-namespace Democvidev\Model;
+namespace Democvidev\App;
 
 // use Democvidev\App\DataBase;
 

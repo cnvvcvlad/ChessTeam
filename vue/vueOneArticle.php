@@ -10,7 +10,7 @@
     <?php foreach ($articleId as $key => $value) : ?>
         <h1><?= $value->getArt_title() ?></h1>
         <div class="banniere_bouton">
-            <?php if (isAdmin()) : ?>
+            <?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
                 <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>" >Modifier</a></div>
                 <div class="bouton_commande"><a
                         href="?action=allArticles&amp;deleteA=<?= $value->getId() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer</a></div>
@@ -18,9 +18,9 @@
             <?php endif; ?>
         </div>
         <p><span class="information"> Ecrit par</span>
-            <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
+            <span class="mark"><?= \Democvidev\App\ControllerUser::showNameAuthor($value->getArt_author()) ?></span>
             le <em><?= $value->getArt_date_creation() ?></em><span class="information"> dans la catégorie</span>
-            <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
+            <strong><?= \Democvidev\App\ControllerCategory::showNameCategory($value->getCategory_id()) ?></strong></p>
         <div id="detail_art" class="justify_article">
 
                 <img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article">
@@ -34,18 +34,18 @@
 
         <div class="comment-block">
 
-            <h3 class="comment-libelle">(<?php numberCommentsOfArticle($commentsOfArticle); ?>) Commentaires </h3>
+            <h3 class="comment-libelle">(<?php \Democvidev\App\ControllerComments::numberCommentsOfArticle($commentsOfArticle); ?>) Commentaires </h3>
             <?php foreach ($commentsOfArticle as $keys => $values) : ?>
                 <div class="comment-added">
 
                     <div class="comment-author">
                         <p>
-                            <mark><?=  showNameAuthor($values->getCom_author()) ?></mark>
+                            <mark><?=  \Democvidev\App\ControllerUser::showNameAuthor($values->getCom_author()) ?></mark>
                             le ( <?= $values->getCom_date_creation() ?> )
                         </p>
                     </div>
                     <div class="comment-description"><p><?= $values->getCom_content() ?></p></div>
-                    <?php if (isAdmin()) : ?>
+                    <?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
                     <div class="comment-modify">
                         <a href="?action=allComments&amp;modifyC=<?= $values->getId() ?>" class="comment-modify">Modifier</a>
                     </div>
@@ -54,7 +54,7 @@
                 </div>
             <?php endforeach; ?>
 
-            <?php if (isConnected()) : ?>
+            <?php if (\Democvidev\App\ControllerStatut::isConnected()) : ?>
                 <div class="comment-block">
                     <div class="comment-add">
                         <fieldset>
@@ -77,7 +77,7 @@
                 <p class="comment-foruser">Vous ne pouvez pas commenter si vous n'êtes pas connecté</p>
             <?php endif; ?>
             <div class="back-page">
-                <?php if (backPageId()) : ?>
+                <?php if (\Democvidev\App\ControllerStatut::backPageId()) : ?>
                     <a href="<?= basename($_SERVER['HTTP_REFERER']) ?>">Retour</a>
                 <?php else : ?>
                     <a href="?action=allArticles">Retour</a>

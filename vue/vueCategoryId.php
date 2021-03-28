@@ -7,14 +7,14 @@
         <?php if (!empty($CategoryId)): ?>
             <?php foreach ($CategoryId as $key => $value) : ?>
                 <h1>Catégorie : <?= $value->getTitle() ?> </h1>
-                <?php if (isAdmin()) : ?>
+                <?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
                     <div class="banniere_bouton">
                         <div class="bouton_commande" ><a href="?action=allCategory&amp;deleteC=<?= $value->getId() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer cette catégorie</a>
                         </div>
                     </div>
                 <?php endif ?>
                 <p><span class="information">Ecrit par</span>
-                    <span class="mark"><?= showNameAuthor($value->getCat_author()) ?></span>
+                    <span class="mark"><?= \Democvidev\App\ControllerUser::showNameAuthor($value->getCat_author()) ?></span>
                     le <em><?= $value->getCat_date_creation() ?></em></p>
 
                 <div class="justify_article">
@@ -32,9 +32,9 @@
         <?php endif; ?>
     </div>
 
-<?php if (isAdmin()) : ?>
+<?php if (\Democvidev\App\ControllerStatut::isAdmin()) : ?>
     <h3>Modifier cette catégorie</h3>
-    <form action="controller/controllerFrontEnd.php" method="post" class="form-create"
+    <form action="Controller/ControllerFrontEnd.php" method="post" class="form-create"
           enctype="multipart/form-data">
         <fieldset>
             <legend>Introduisez vos informations</legend>

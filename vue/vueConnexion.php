@@ -11,7 +11,7 @@
     <div class="form-connexion">
 
 
-        <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription">
+        <form action="Controller/ControllerFrontEnd.php" method="POST" class="form-inscription">
             <h1>Connectez - vous!</h1>
             <fieldset>
                 <legend>Vos identifiants : </legend>
