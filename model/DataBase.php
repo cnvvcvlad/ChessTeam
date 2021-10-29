@@ -5,6 +5,7 @@
  */
 class DataBase
 {
+    // les variables doivent être définies avant l'appel de la méthode dbConnect() sinon l’objet sera invalide
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
