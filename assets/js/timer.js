@@ -3,7 +3,7 @@ const hoursEl = document.getElementById('hours');
 const minutesEl = document.getElementById('minutes');
 const secondsEl = document.getElementById('seconds');
 
-const nextChessDay = '20 july 2021';
+const nextChessDay = '20 july 2022';
 
 function countDown() {
     const chessDate = new Date(nextChessDay);
