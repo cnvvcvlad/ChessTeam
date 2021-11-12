@@ -113,6 +113,9 @@
 
                             <?php else : ?>
                                 <li>
+                                    <div class="list_style"><a href="?action=coach">ChessCoach</a></div>
+                                </li>
+                                <li>
                                     <div class="list_style"><a href="?action=connexion">Connection</a></div>
                                 </li>
                                 <li>
