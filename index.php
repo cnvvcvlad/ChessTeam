@@ -62,6 +62,8 @@ try {
             } else {
                 require 'vue/vueCoachIndex.php';
             }
+        } elseif ($action == 'streetMap' && isset($_GET['ville'])) {
+                require 'vue/vueStreetMap.php';
         } elseif ($action == 'allArticles') {
             if (isset($_GET['id'])) {
                 $commentsOfArticle = getAllCommentsOfArticle(
