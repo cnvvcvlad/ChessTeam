@@ -1,47 +1,48 @@
 <?php ob_start(); ?>
 
 <?php $title = 'Accueil blog ChessTeam Nogent sur Marne'; ?>
-<?php $description = 'Le blog du ChessTeam Nogent sur Marne propose aux internautes passionés des échecs  de consulter ses articles publiés, s\'inscrire en tant que membre pour publier ses propres articles et commentaires'; ?>
-    <div class="main-vue">
+<?php $description =
+    'Le blog du ChessTeam Nogent sur Marne propose aux internautes passionés des échecs  de consulter ses articles 
+    publiés, s\'inscrire en tant que membre pour publier ses propres articles et commentaires'; ?>
+<div class="main-vue">
     <div class="banniere">
-    <h1 class="welcome_message">Bienvenue sur la page d'accueil de notre blog! <br>
-        On vous souhaite une agréable lecture!</h1>
-<?php if (!empty($lastArticles)): ?>
-    <article>
+        <h1 class="welcome_message">Bienvenue sur la page d'accueil de notre blog! <br>
+            On vous souhaite une agréable lecture!</h1>
+        <?php if (!empty($lastArticles)) : ?>
+            <article>
 
-        <!-- La structure du slide -->
-        <div class="galleryContainer">
-            <div class="slideShowContainer">
-                <div id="playPauseBtn" onclick="playPauseSlides()" title="Pause"></div>
-                <div class="leftArrow" onclick="plusSlides(-1)"><span class="arrow arrowLeft"></span></div>
-                <div class="rightArrow" onclick="plusSlides(1)"><span class="arrow arrowRight"></span></div>
-                <div class="captionHolder">
-                    <h1 class="captionTitle"></h1>
+                <!-- La structure du slide -->
+                <div class="galleryContainer">
+                    <div class="slideShowContainer">
+                        <div id="playPauseBtn" onclick="playPauseSlides()" title="Pause"></div>
+                        <div class="leftArrow" onclick="plusSlides(-1)"><span class="arrow arrowLeft"></span></div>
+                        <div class="rightArrow" onclick="plusSlides(1)"><span class="arrow arrowRight"></span></div>
+                        <div class="captionHolder">
+                            <h1 class="captionTitle"></h1>
 
-                    <p class="captionText"></p>
-                </div>
+                            <p class="captionText"></p>
+                        </div>
 
-                <?php foreach ($lastArticles as $key => $values): ?>
-                    <div class="imageHolder">
-                        <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image article">
+                        <?php foreach ($lastArticles as $key => $values) : ?>
+                            <div class="imageHolder">
+                                <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image article">
 
-                        <h1 class="captionTitle"><?= $values->getArt_title() ?></h1>
+                                <h1 class="captionTitle"><?= $values->getArt_title() ?></h1>
 
-                        <p class="captionText"><?= $values->getArt_description() ?></p>
+                                <p class="captionText"><?= $values->getArt_description() ?></p>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
-            <div id="dotsContainer"></div>
-        </div>
-    </article>
+                    <div id="dotsContainer"></div>
+                </div>
+            </article>
 
 
     </div>
     <div class="top_article">
         <?php if (!empty($lastArticle_one)) : ?>
             <?php foreach ($lastArticle_one as $key => $value) : ?>
-                <h1><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie"
-                         class="ico_categorie"/><?= $value->getArt_title() ?></h1>
+                <h1><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?></h1>
                 <div class="banniere_bouton">
                     <?php if (isAdmin()) : ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
@@ -49,25 +50,34 @@
                     <?php endif; ?>
                     <div class="bouton_commande">
                         <a href="?action=allArticles&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Voir l'article
-                            <img src="assets/img/by_default/flecheblanchedroite.png" alt="le bouton rouge"/></a>
+                            <img src="assets/img/by_default/flecheblanchedroite.png" alt="le bouton rouge" /></a>
                     </div>
                 </div>
                 <p><span class="information"> Ecrit par</span>
-                    <span class="mark"><?= showNameAuthor($value->getArt_author()) ?></span>
+                    <span class="mark"><?= showNameAuthor(
+                                            $value->getArt_author()
+                                        ) ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
-                    <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
+                    <strong><?= showNameCategory(
+                                $value->getCategory_id()
+                            ) ?></strong>
+                </p>
                 <div id="detail_art" class="justify_article">
 
                     <a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article" title="Cliquez pour agrandir"></a>
-                    <span><h3><?= $value->getArt_description() ?></h3><br><a class="lire_suite" href="#cache">[Lire la
-                            suite...] </a></span>
+                    <span>
+                        <h3><?= $value->getArt_description() ?></h3><br><a class="lire_suite" href="#cache">[Lire la
+                            suite...] </a>
+                    </span>
 
                     <div id="cache"><span><?= $value->getArt_content() ?><br><a href="#detail_art"> [Voir
                                 moins]</a></span>
                     </div>
                     <p>
                         <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">
-                            Commentaires(<?= numberCommentsOfArticle(getAllCommentsOfArticle($value->getId())); ?>)</a>
+                            Commentaires(<?= numberCommentsOfArticle(
+                                                getAllCommentsOfArticle($value->getId())
+                                            ) ?>)</a>
                     </p>
                 </div>
             <?php endforeach; ?>
@@ -95,7 +105,7 @@
 
         </section>
     </div>
-    </div>
+</div>
 <?php endif; ?>
 
 <?php $template = ob_get_clean(); ?>
