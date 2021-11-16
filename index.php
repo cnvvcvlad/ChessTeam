@@ -11,11 +11,13 @@ require 'controller/controllerPosts.php';
 require 'controller/controllerCategory.php';
 require 'controller/controllerUser.php';
 require 'controller/controllerComments.php';
+require_once 'controller/controllerCoachs.php';
 
 require 'model/ArticleManager.php';
 require 'model/CategoriesManager.php';
 require 'model/CommentsManager.php';
 require 'model/MemberManager.php';
+require 'model/CoachsManager.php';
 
 /*****************************************/
 
@@ -58,12 +60,17 @@ try {
             require 'vue/fluxRSS/rss.php';
         } elseif ($action == 'coach') {
             if (isset($_GET['id_coach'])) {
+                $coach = getCoach(htmlspecialchars($_GET['id_coach']));
                 require 'vue/vueCoachInfo.php';
             } else {
+                $coachs = getTopCoachs();
                 require 'vue/vueCoachIndex.php';
             }
-        } elseif ($action == 'streetMap' && isset($_GET['ville'])) {
-                require 'vue/vueStreetMap.php';
+        } elseif ($action == 'streetMap') {
+            require 'vue/vueStreetMap.php';
+        } elseif ($action == 'apiStreetMap') {
+            // $coordinateAdress = getCoordinateAdress(htmlspecialchars($_GET['ville']));
+            getAllCoordinateAdress();
         } elseif ($action == 'allArticles') {
             if (isset($_GET['id'])) {
                 $commentsOfArticle = getAllCommentsOfArticle(
