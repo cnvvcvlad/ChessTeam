@@ -71,8 +71,10 @@
                                         </div>
 
                                         <ul class="sous-menu">
-                                            <?php foreach ($allCategory
-                                                as $cat => $values) : ?>
+                                            <?php foreach (
+                                                $allCategory
+                                                as $cat => $values
+                                            ): ?>
                                                 <li>
                                                     <div class="list_style">
                                                         <a href="?action=categoryId&amp;id=<?= $values->getId() ?>">
@@ -86,15 +88,21 @@
                                     <li>
                                         <div class="list_style"><a href="?action=allArticles">Articles</a></div>
                                     </li>
+                                    <li>
+                                        <div class="list_style"><a href="?action=coach">ChessCoach</a></div>
+                                    </li>
 
-
-                                    <?php if (isConnected()) : ?>
+                                    <?php if (isConnected()): ?>
                                         <li>
-                                            <div class="list_style"><a href="?action=myAccount&amp;id=<?= $_SESSION['id_user'] ?>">Mon Compte</a>
+                                            <div class="list_style"><a href="?action=myAccount&amp;id=<?= $_SESSION[
+                                                'id_user'
+                                            ] ?>">Mon Compte</a>
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="list_style"><a href="?action=myArticlesId&amp;id=<?= $_SESSION['id_user'] ?>">Mes
+                                            <div class="list_style"><a href="?action=myArticlesId&amp;id=<?= $_SESSION[
+                                                'id_user'
+                                            ] ?>">Mes
                                                     articles</a>
                                             </div>
                                         </li>
@@ -103,7 +111,7 @@
                                         </li>
 
 
-                                        <?php if (isAdmin()) : ?>
+                                        <?php if (isAdmin()): ?>
 
                                             <li>
                                                 <div class="list_style"><a href="?action=allMembers">Membres</a></div>
@@ -121,10 +129,7 @@
                                             <div class="list_style"><a href="?action=deconnect">Déconnexion</a></div>
                                         </li>
 
-                                    <?php else : ?>
-                                        <li>
-                                            <div class="list_style"><a href="?action=coach">ChessCoach</a></div>
-                                        </li>
+                                    <?php else: ?>                                        
                                         <li>
                                             <div class="list_style"><a href="?action=connexion">Connection</a></div>
                                         </li>
@@ -142,14 +147,18 @@
                     </div>
                     <div class="menu-bg" id="menu-bg"></div>
                     <div class="photo">
-                        <?php if (empty($_SESSION['user_image'])) : ?>
+                        <?php if (empty($_SESSION['user_image'])): ?>
                             <a href="assets/img/logo/pawn_logo.jpg">
                                 <img src="assets/img/logo/pawn_logo.jpg" alt="Photo de profil" title="Cliquez pour agrandir" />
                             </a>
-                        <?php else : ?>
-                            <a href="assets/img/uploads/<?= $_SESSION['user_image'] ?>">
+                        <?php else: ?>
+                            <a href="assets/img/uploads/<?= $_SESSION[
+                                'user_image'
+                            ] ?>">
                             <img 
-                            src="assets/img/uploads/<?= $_SESSION['user_image'] ?>" 
+                            src="assets/img/uploads/<?= $_SESSION[
+                                'user_image'
+                            ] ?>" 
                             alt="Photo de profil" 
                             title="Cliquez pour agrandir" 
                             height="100em" />
@@ -213,11 +222,11 @@
 
                             </div>
                         </li>
-                        <?php if (isConnected()) : ?>
+                        <?php if (isConnected()): ?>
                             <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a>
                                 <div class="separate"></div><a class="btn" href="">#top</a>
                             </li>
-                        <?php else : ?>
+                        <?php else: ?>
                             <li class="item"><a target="_blank" class="btn" href="https://www.chess.com/" rel="noreferrer noopener">Chess.com</a>
                                 <div class="separate"></div><a class="btn" href=""><i class="fas fa-arrow-up"></i>#top</a>
                             </li>
@@ -240,8 +249,8 @@
                         $vues = nb_vues();
                         ?>
                         IL y a <?= $vues ?> visite<?php if (
-                                                        $vues > 1
-                                                    ) : ?>s<?php endif; ?> sur le site
+     $vues > 1
+ ): ?>s<?php endif; ?> sur le site
                     </span>
                 </div>
             </div>
