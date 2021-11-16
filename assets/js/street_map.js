@@ -71,7 +71,7 @@ function initMap() {
             marker.bindPopup(`<div class="popup"><img src="./assets/img/uploads/${coach[1].coach_image}" alt="" class="">
             <div class="coach-info">
                 <h3>${coach[1].first_name} ${coach[1].last_name}</h3>
-                <span>72€/h</span3>
+                <span>${coach[1].price}€/h</span3>
             </div><span><a href="?action=coach&amp;id_coach=${coach[1].id}">en savoir plus</a></span></div>`)
           })
         } else {

@@ -26,9 +26,9 @@
                         <h3><?= $value['first_name'] .
                             ' ' .
                             $value['last_name'] ?></h3>
-                        <span>72€/h</span3>
+                        <span><?= $value['price'] ?>€/h</span3>
                     </div>
-                    <div>⭐⭐⭐⭐⭐</div>
+                    <div><?php for($i = 0; $i < $value['nb_stars']; $i++) {echo '⭐';} ?></div>
                 </a>
             </li>            
             <?php endforeach; ?>

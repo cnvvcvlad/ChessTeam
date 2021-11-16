@@ -43,6 +43,10 @@ class CoachsManager extends DataBase
                 'last_name' => $last_name,
                 'city' => $city,
                 'coach_image' => $coach_image,
+                'price' => $price,
+                'description' => $description,
+                'nb_stars' => $nb_stars,
+                'nb_coachings' => $nb_coachings,
                 'lat' => $lat,
                 'lon' => $lon,
             ];
@@ -75,6 +79,10 @@ class CoachsManager extends DataBase
                 'last_name' => $last_name,
                 'city' => $city,
                 'coach_image' => $coach_image,
+                'price' => $price,
+                'description' => $description,
+                'nb_stars' => $nb_stars,
+                'nb_coachings' => $nb_coachings,
                 'lat' => $lat,
                 'lon' => $lon,
             ];
@@ -114,6 +122,10 @@ class CoachsManager extends DataBase
                 'last_name' => $last_name,
                 'city' => $city,
                 'coach_image' => $coach_image,
+                'price' => $price,
+                'description' => $description,
+                'nb_stars' => $nb_stars,
+                'nb_coachings' => $nb_coachings,
                 'lat' => $lat,
                 'lon' => $lon,
             ];

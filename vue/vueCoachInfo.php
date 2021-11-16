@@ -19,18 +19,13 @@
                 <h3><?= $coach['first_name'] .
                     ' ' .
                     $coach['last_name'] ?> </h3>
-                <span>72€/h</span3>
+                <span><?= $coach['price'] ?>€/h</span3>
             </div>
         </div>
-        <div>⭐⭐⭐⭐⭐<span> 98 coachings </span></div>
+        <div><?php for($i = 0; $i < $coach['nb_stars']; $i++){echo '⭐';} ?><span> <?= $coach['nb_coachings'] ?> coachings </span></div>
         <div class="coach-info">
             <h1>Présentation</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi eum voluptatem explicabo.
-                Eligendi officiis sit quo, esse dolore quisquam iure ab sed consequatur voluptas ipsum debitis
-                asperiores distinctio, adipisci maiores.
-                Hic harum, porro pariatur nostrum tenetur perspiciatis magni dignissimos quas alias culpa a
-                dolores vitae, atque nulla qui veniam aliquid ea fugit beatae odio consequatur. Labore, earum
-                distinctio! Impedit, aliquid?</p>
+            <p><?= $coach['description'] ?></p>
         </div>
         <div class="">
             <h2>Avis</h2>
