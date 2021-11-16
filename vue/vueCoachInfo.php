@@ -6,7 +6,7 @@
     'Cette page affiche l\'information d\'un coach et permet de réserver une séance'; ?>
 
 <?php if (isset($coach)): ?>
-<div class="container coach-data" style="border: 1px solid red;">
+<div class="container coach-data">
     <div class="container coach-description">
         <div>
         <a href="assets/img/uploads/<?= $coach['coach_image'] ?>">
@@ -57,10 +57,10 @@
 </div>
 <?php endif; ?>
 
-<div class="back-page"><a href="<?= substr(
-    basename($_SERVER['HTTP_REFERER']),
-    9
-) ?>">Retour</a></div>
+<div class="back-page">
+    <a href="<?= substr(basename($_SERVER['HTTP_REFERER']), 9) ?>">Retour</a>
+    <a href="?action=home">Retour à l'accueil</a>
+</div>
 
 <?php $template = ob_get_clean(); ?>
 

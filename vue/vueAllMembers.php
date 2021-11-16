@@ -2,21 +2,20 @@
 <?php $title = 'Membres ChessTeam Nogent sur Marne'; ?>
 <?php $description = 'Modifiez les informations des membres du blog'; ?>
 
-<?php if (isset($_GET['alert']) AND ($_GET['alert'] == 'aded')) {
+<?php if (isset($_GET['alert']) and $_GET['alert'] == 'aded') {
     echo '<h4>Nouveau membre vient d\'être ajouté !</h4>';
-}
-?>
+} ?>
 
-<?php if (isAdmin()) : ?>
+<?php if (isAdmin()): ?>
     <h1>Voici tous les membres de ChessTeam</h1>
 
-    <?php if (isset($allMembers)) : ?>
+    <?php if (isset($allMembers)): ?>
 
 
         <table class="all_members">
 
             <caption>Informations internaute</caption>
-            <?php foreach ($allMembers as $key => $value) : ?>
+            <?php foreach ($allMembers as $key => $value): ?>
                 <tr>
                     <th scope="col">Libellé</th>
                     <th scope="col"></th>
@@ -108,11 +107,10 @@
 
     <?php endif; ?>
 <?php endif; ?>
-    <div class="back-page">
-        <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
-
-
-    </div>
+<div class="back-page">
+    <a href="<?= substr(basename($_SERVER['HTTP_REFERER']), 9) ?>">Retour</a>
+    <a href="?action=home">Retour à l'accueil</a>
+</div>
 <?php $template = ob_get_clean(); ?>
 
 <?php require 'templates/tempAccueil.php'; ?>

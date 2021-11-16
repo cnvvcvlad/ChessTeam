@@ -5,6 +5,10 @@
     'La carte Open Street Map permet de rechercher un coach autour d\'une adresse'; ?>
 
     <div id="map"></div>
+    <div class="back-page">
+        <a href="<?= substr(basename($_SERVER['HTTP_REFERER']), 9) ?>">Retour</a>
+        <a href="?action=home">Retour à l'accueil</a>
+    </div>
 
 <?php $template = ob_get_clean(); ?>
 

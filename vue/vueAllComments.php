@@ -1,19 +1,22 @@
 <?php ob_start(); ?>
 
 <?php $title = 'Liste des commentaires'; ?>
-<?php $description = 'Voir les commentaires des internautes sur différents sujets des échecs'; ?>
+<?php $description =
+    'Voir les commentaires des internautes sur différents sujets des échecs'; ?>
 
-<?php if(isAdmin()): ?>
-<?php if (isset($allComments)) : ?>
+<?php if (isAdmin()): ?>
+<?php if (isset($allComments)): ?>
     <h1>Voici tous les commentaires postés</h1>
     <div class="top_article">
-    <?php foreach ($allComments as $key => $value) : ?>
+    <?php foreach ($allComments as $key => $value): ?>
 
         <div class="comment-added">
 
             <div class="comment-author">
                 <p>
-                    <span class="mark"><?= showNameAuthor($value->getCom_author()) ?></span>
+                    <span class="mark"><?= showNameAuthor(
+                        $value->getCom_author()
+                    ) ?></span>
                     le ( <?= $value->getCom_date_creation() ?> )
                 </p>
             </div>
@@ -26,10 +29,13 @@
         </div>
         <?php endforeach; ?>
 
-<?php endif ?>
-<?php endif ?>
+<?php endif; ?>
+<?php endif; ?>
     </div>
-<div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
+    <div class="back-page">
+        <a href="<?= substr(basename($_SERVER['HTTP_REFERER']), 9) ?>">Retour</a>
+        <a href="?action=home">Retour à l'accueil</a>
+    </div>
 
 
 <?php $template = ob_get_clean(); ?>

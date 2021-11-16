@@ -77,10 +77,11 @@
 
     </div>
     <div class="back-page">
-        <div class="back-page">
-            <a href="?action=allArticles">Retour</a>
-            <a href="?action=home">Retour à l'accueil</a>
-        </div>
+        <a href="<?= substr(
+            basename($_SERVER['HTTP_REFERER']),
+            9
+        ) ?>">Retour</a>
+        <a href="?action=home">Retour à l'accueil</a>
     </div>
 
 

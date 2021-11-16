@@ -7,13 +7,13 @@
 <tr>
         <td colspan="2" align="center">
             <!--L'en-tête-->
-            <?php require('tempVs/header.php');?>
+            <?php require 'tempVs/header.php'; ?>
         </td>
     </tr>      
     <tr>
         <td width="20%">
             <!--Le menu-->
-            <?php require('tempVs/menu.php');?>
+            <?php require 'tempVs/menu.php'; ?>
         </td>
         <td width="80%">
             <div id="corps">
@@ -35,12 +35,11 @@
         </td>
     </tr>
 </table>
-<div>
-    <?php if (isset($_SERVER['HTTP_REFERER'])) : ?>
-        <div class="d-flex justify-content-center"><a class="btn-primary" href="/ChessTeam/<?= basename($_SERVER['HTTP_REFERER']); ?>">Retour</a>
-    <?php endif; ?>
+<div class="back-page">
+    <a href="<?= substr(basename($_SERVER['HTTP_REFERER']), 9) ?>">Retour</a>
+    <a href="?action=home">Retour à l'accueil</a>
 </div>
 
 <?php $template_form = ob_get_clean(); ?>
 
-<?php require 'templates/tempForm.php';?>
+<?php require 'templates/tempForm.php'; ?>
