@@ -17,7 +17,7 @@
                      class="ico_categorie"/><?= $values->getArt_title() ?></h1>
 
             <div class="banniere_bouton">
-                <?php if (isAdmin()) : ?>
+                <?php if (isAdmin()): ?>
                     <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $values->getId() ?>">Modifier</a>
                     </div>
                 <?php endif; ?>
@@ -27,9 +27,13 @@
                 </div>
             </div>
             <p><span class="information"> Ecrit par</span>
-                <span class="mark"><?= showNameAuthor($values->getArt_author()) ?></span>
+                <span class="mark"><?= showNameAuthor(
+                    $values->getArt_author()
+                ) ?></span>
                 le <em><?= $values->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
-                <strong><?= showNameCategory($values->getCategory_id()) ?></strong></p>
+                <strong><?= showNameCategory(
+                    $values->getCategory_id()
+                ) ?></strong></p>
 
             <div id="detail_art" class="justify_article">
 
@@ -44,7 +48,9 @@
                 </div>
                 <p>
                     <a href="?action=allArticles&amp;id=<?= $values->getId() ?>">
-                        (<?= count(getAllCommentsOfArticle($values->getId())); ?>) Commentaires
+                        (<?= count(
+                            getAllCommentsOfArticle($values->getId())
+                        ) ?>) Commentaires
                     </a>
                 </p>
 
@@ -56,20 +62,12 @@
     </div>
 
 <?php endif; ?>
-    <div class="back-page">
-        <?php if (backPageId()) : ?>
-            <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
-
-        <?php else : ?>
-            <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
-
-        <?php endif; ?>
-
-    </div>
+<div class="back-page">
+    <a href="<?= substr(basename($_SERVER['HTTP_REFERER']), 9) ?>">Retour</a>
+    <a href="?action=home">Retour à l'accueil</a>
+</div>
 
 
 <?php $template = ob_get_clean(); ?>
 
-<?php
-require 'templates/tempAccueil.php';
-?>
+<?php require 'templates/tempAccueil.php'; ?>

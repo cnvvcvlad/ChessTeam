@@ -1,18 +1,19 @@
-<?php ob_start() ?>
+<?php ob_start(); ?>
 <?php $title = 'Créez un article sur ChessTeam'; ?>
-<?php $description = 'Tous les membres connectés peuvent ajouter des articles de blog et des commentaires'; ?>
+<?php $description =
+    'Tous les membres connectés peuvent ajouter des articles de blog et des commentaires'; ?>
 
-<?php if (isConnected()) : ?>
+<?php if (isConnected()): ?>
     <h1>Créez un article !</h1>
     <form action="controller/controllerFrontEnd.php" method="post" class="form-create" enctype="multipart/form-data">
         <fieldset>
             <legend>Introduisez vos informations</legend>
             <div class="form-create">
-                <?php if (isset($allCategory)) : ?>
+                <?php if (isset($allCategory)): ?>
                 <label for="category">Catégorie de l'article
                     <p><select required class="form-inscription" name="category">
                             <option value="">--Choisir une Catégorie--</option>
-                            <?php foreach ($allCategory as $key => $value) : ?>
+                            <?php foreach ($allCategory as $key => $value): ?>
                                 <option value="<?= $value->getId() ?>"><?= $value->getTitle() ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -42,7 +43,9 @@
                            required>
                 </label>
             </div>
-            <p><input type="hidden" name="id_user" value="<?= $_SESSION['id_user'] ?>"></p>
+            <p><input type="hidden" name="id_user" value="<?= $_SESSION[
+                'id_user'
+            ] ?>"></p>
 
             <div class="form-create">
                 <input type="submit" value="Envoyer" name="articleCreation">
@@ -52,7 +55,13 @@
             </div>
         </fieldset>
     </form>
-    <div class="back-page"><a href="?action=home">Retour à l'accueil</a></div>
+    <div class="back-page">
+        <a href="<?= substr(
+            basename($_SERVER['HTTP_REFERER']),
+            9
+        ) ?>">Retour</a>
+        <a href="?action=home">Retour à l'accueil</a>
+    </div>
 
 <?php endif; ?>
 <?php $template = ob_get_clean(); ?>

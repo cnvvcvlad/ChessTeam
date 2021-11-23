@@ -1,15 +1,16 @@
-<?php ob_start() ; ?>
+<?php ob_start(); ?>
 
 <?php $title = 'Modifier le commentaire d\'un article'; ?>
-<?php $description ='Gérez les avis des utilisateurs en réspectant la liberté de l\'expression'; ?>
+<?php $description =
+    'Gérez les avis des utilisateurs en réspectant la liberté de l\'expression'; ?>
 
-<?php if (isset($modifyComment)) : ?>
+<?php if (isset($modifyComment)): ?>
 
 
 <div class="comment-block">
 
     <h3 class="comment-libelle"> Modifier le commentaire : </h3>
-    <?php foreach ($modifyComment as $key => $value) : ?>
+    <?php foreach ($modifyComment as $key => $value): ?>
     <form action="controller/controllerFrontEnd.php" method="post" class="form-inscription">
         <fieldset>
             <legend>Commentaire</legend>
@@ -26,15 +27,21 @@
         <div class="form-inscription">
             <input type="submit" value="Envoyer" name="updateComment">
             <p><input type="reset" value="Annuler" /></p>
-            <p class="deleteCom"><a href="?action=allComments&amp;deleteCom=<?= $value->getId()?>" onclick="return(confirm('Supprimer le commentaire?'))" class="deleteCom">Supprimer</a></p>
+            <p class="deleteCom"><a href="?action=allComments&amp;deleteCom=<?= $value->getId() ?>" onclick="return(confirm('Supprimer le commentaire?'))" class="deleteCom">Supprimer</a></p>
         </div>
     </form>
-    <?php endforeach ; ?>
+    <?php endforeach; ?>
 
 
 </div>
-
+<div class="back-page">
+    <a href="<?= substr(
+        basename($_SERVER['HTTP_REFERER']),
+        9
+    ) ?>">Retour</a>
+    <a href="?action=home">Retour à l'accueil</a>
+</div>
 
 <?php endif; ?>
 <?php $template_form = ob_get_clean(); ?>
-<?php require 'templates/tempForm.php' ; ?>
+<?php require 'templates/tempForm.php'; ?>

@@ -11,14 +11,15 @@ require 'controller/controllerPosts.php';
 require 'controller/controllerCategory.php';
 require 'controller/controllerUser.php';
 require 'controller/controllerComments.php';
+require_once 'controller/controllerCoachs.php';
 
 require 'model/ArticleManager.php';
 require 'model/CategoriesManager.php';
 require 'model/CommentsManager.php';
 require 'model/MemberManager.php';
+require 'model/CoachsManager.php';
 
 /*****************************************/
-
 
 try {
     $allCategory = getAllCategory();
@@ -37,23 +38,44 @@ try {
             require 'vue/vueAccueil.php';
         } elseif ($action == 'myAccount') {
             if (isset($_SESSION['id_user'])) {
-                $myAccount = getInfoUser(htmlspecialchars($_SESSION['id_user']));
+                $myAccount = getInfoUser(
+                    htmlspecialchars($_SESSION['id_user'])
+                );
                 require 'vue/vueMember.php';
             }
         } elseif ($action == 'myArticlesId') {
             if (isset($_GET['idAuthor'])) {
-                $myArticles = getMyArticles(htmlspecialchars($_GET['idAuthor']));
+                $myArticles = getMyArticles(
+                    htmlspecialchars($_GET['idAuthor'])
+                );
             } else {
-                $myArticles = getMyArticles(htmlspecialchars($_SESSION['id_user']));
+                $myArticles = getMyArticles(
+                    htmlspecialchars($_SESSION['id_user'])
+                );
             }
             require 'vue/vueArticleId.php';
         } elseif ($action == 'createArticleId') {
             require 'vue/vueCreateArticleId.php';
         } elseif ($action == 'rss') {
             require 'vue/fluxRSS/rss.php';
+        } elseif ($action == 'coach') {
+            if (isset($_GET['id_coach'])) {
+                $coach = getCoach(htmlspecialchars($_GET['id_coach']));
+                require 'vue/vueCoachInfo.php';
+            } else {
+                $coachs = getTopCoachs();
+                require 'vue/vueCoachIndex.php';
+            }
+        } elseif ($action == 'streetMap') {
+            require 'vue/vueStreetMap.php';
+        } elseif ($action == 'apiStreetMap') {
+            // $coordinateAdress = getCoordinateAdress(htmlspecialchars($_GET['ville']));
+            getAllCoordinateAdress();
         } elseif ($action == 'allArticles') {
             if (isset($_GET['id'])) {
-                $commentsOfArticle = getAllCommentsOfArticle(htmlspecialchars($_GET['id']));
+                $commentsOfArticle = getAllCommentsOfArticle(
+                    htmlspecialchars($_GET['id'])
+                );
                 $articleId = getOneArticle(htmlspecialchars($_GET['id']));
                 require 'vue/vueOneArticle.php';
             } elseif (isset($_GET['deleteA'])) {
@@ -89,7 +111,9 @@ try {
             }
         } elseif ($action == 'articlesOfCategory') {
             if (isset($_GET['id'])) {
-                $articlesOfCategory = getArticlesOfCategory(htmlspecialchars($_GET['id']));
+                $articlesOfCategory = getArticlesOfCategory(
+                    htmlspecialchars($_GET['id'])
+                );
                 require 'vue/vueArticlesCategory.php';
             }
         } elseif ($action == 'allComments') {
@@ -106,7 +130,7 @@ try {
             require 'vue/vueAllVs.php';
         } elseif ($action == 'home') {
             require 'vue/vueAccueil.php';
-//            header('location:./');
+            //            header('location:./');
         } elseif ($action == 'deconnect') {
             session_destroy();
             header('location:./');
