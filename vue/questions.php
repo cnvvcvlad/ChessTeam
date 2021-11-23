@@ -7,10 +7,9 @@
     <h1>Questions et réponses</h1>
     <h3>Quia expedita hic natus optio vel ut. In sunt sit fugiat aut. Ut vero quos quis perspiciatis reiciendis qui. Omnis quas ipsa ut tenetur tempore maiores possimus.Quia expedita hic natus optio vel ut. In sunt sit fugiat aut?</h3>
     <h4>Quia expedita hic natus optio vel ut. In sunt sit fugiat aut. Ut vero quos quis perspiciatis reiciendis qui. Omnis quas ipsa ut tenetur tempore maiores possimus.Quia expedita hic natus optio vel ut. In sunt sit fugiat aut.</h4>
-    <?php if(isset($_SERVER['HTTP_REFERER'])) : ?>
-    <div class="d-flex justify-content-end" ><a class="btn btn-primary" href="/ChessTeam/<?= basename($_SERVER['HTTP_REFERER']); ?>">Retour à l'accueil</a></div>
-    <?php endif; ?>
-
+    <div class="d-flex justify-content-end">
+        <a class="btn mb-5 btn-primary" href="/ProjectTesting/ChessTeam/<?= substr(basename($_SERVER['HTTP_REFERER']), 0) ?>">Retour</a>
+    </div>
 </div>
 <?php $mentions = ob_get_clean(); ?>
 <?php require 'templates/tempBootstrap.php'; ?>

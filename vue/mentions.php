@@ -53,9 +53,9 @@
 
         <p>En utilisant notre site, vous consentez à notre politique de confidentialité.</p></li>
     </ol>
-    <?php if(isset($_SERVER['HTTP_REFERER'])) : ?>
-    <div class="d-flex justify-content-end"><a class="btn btn-primary" href="/ChessTeam/<?= basename($_SERVER['HTTP_REFERER']); ?>">Retour à l'accueil</a></div>
-    <?php endif; ?>
+    <div class="d-flex justify-content-end">
+        <a class="btn mb-5 btn-primary" href="/ProjectTesting/ChessTeam/<?= substr(basename($_SERVER['HTTP_REFERER']), 0) ?>">Retour</a>
+    </div>
 </div>
 
 
