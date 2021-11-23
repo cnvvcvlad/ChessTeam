@@ -53,11 +53,11 @@
 
         <p>En utilisant notre site, vous consentez à notre politique de confidentialité.</p></li>
     </ol>
-    <div class="d-flex justify-content-end">
-        <a class="btn mb-5 btn-primary" href="/ProjectTesting/ChessTeam/<?= substr(basename($_SERVER['HTTP_REFERER']), 0) ?>">Retour</a>
+    <div class="back-page">
+        <a class="" href="/ProjectTesting/ChessTeam/<?= substr(basename($_SERVER['HTTP_REFERER']), 0) ?>">Retour</a>
     </div>
 </div>
 
 
-<?php $mentions = ob_get_clean(); ?>
-<?php require 'templates/tempBootstrap.php'; ?>
+<?php $template = ob_get_clean(); ?>
+<?php require 'templates/tempAccueil.php'; ?>
