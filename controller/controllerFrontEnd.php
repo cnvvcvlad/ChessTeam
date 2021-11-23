@@ -396,11 +396,11 @@ try {
     } elseif (isset($_GET['city'])) {
         require_once 'controllerCoachs.php';
         require_once '../model/CoachsManager.php';
-        if (empty($_GET['city'])) {
-            getAllCoordinateAdress();
-        } else {
-            getCoordinateAdress($_GET['city']);
-        }
+        // if (empty($_GET['city'])) {
+        //     getAllCoordinateAdress();
+        // } else {
+        //     getCoordinateAdress($_GET['city']);
+        // }
         header('location: ../index.php?action=streetMap');
         exit();
     } else {
