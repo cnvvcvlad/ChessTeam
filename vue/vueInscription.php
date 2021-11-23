@@ -2,13 +2,13 @@
 <?php $title = 'Inscription blog Chess Team Nogent sur Marne'; ?>
 <?php $description = 'Inscrivez-vous pour publier des actualités liés aux échecs'; ?>
 
-
-<div class="form-connexion">
+<div class="container">
+<h1 class="text-center">Inscrivez-vous !</h1>
+<div class="container_form">
 
 
     <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription"
           enctype="multipart/form-data">
-        <h1>Inscrivez-vous !</h1>
         <fieldset>
             <legend>Vos coordonnées : </legend>
             <div class="form-inscription">
@@ -40,6 +40,13 @@
             <p><input type="reset" value="Annuler"/></p>
         </div>
     </form>
+</div>
+    <div class="">
+        <a class="" href="/ProjectTesting/ChessTeam/<?= substr(
+            basename($_SERVER['HTTP_REFERER']),
+            0
+            ) ?>">Retour</a>
+</div>
 </div>
 
 

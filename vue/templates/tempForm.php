@@ -6,6 +6,9 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title><?= $title; ?></title>
     <meta name="description" content="<?= $description; ?>"/>
+    <!-- Cookies doivent être chargées avant les pages-->
+    <script src="assets/tarteaucitron/tarteaucitron.js" type="text/javascript"></script>
+    <script src="assets/js/cookies.js" type="text/javascript"></script>
     <!-- ==css perso== -->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/caroussel.css" type="text/css">
@@ -240,10 +243,10 @@
                         <a href="#settings" class="btn">FAQ / CGU / CONTACT</a>
 
                         <div class="smenu">
-                            <a href="vue/questions.php">Questions fréquentes</a>
-                            <a href="vue/conditions.php">Condition d'utilisation</a>
-                            <a href="vue/mentions.php">Mentions légales</a>
-                            <a href="vue/contact.php">Contactez-nous</a>
+                            <a href="?action=questions">Questions fréquentes</a>
+                            <a href="?action=conditions">Condition d'utilisation</a>
+                            <a href="?action=mentions">Mentions légales</a>
+                            <a href="?action=contact">Contactez-nous</a>
 
                         </div>
                     </li>
