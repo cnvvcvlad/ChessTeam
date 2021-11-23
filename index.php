@@ -131,6 +131,14 @@ try {
         } elseif ($action == 'home') {
             require 'vue/vueAccueil.php';
             //            header('location:./');
+        } elseif ($action == 'conditions') {
+            require 'vue/vueConditions.php';
+        } elseif ($action == 'mentions') {
+            require 'vue/vueMentions.php';
+        } elseif ($action == 'contact') {
+            require 'vue/vueContact.php';
+        } elseif ($action == 'questions') {
+            require 'vue/vueQuestions.php';
         } elseif ($action == 'deconnect') {
             session_destroy();
             header('location:./');
