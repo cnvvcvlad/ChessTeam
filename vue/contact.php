@@ -24,14 +24,10 @@
         <input type="hidden" id="recaptchaResponse" name="recaptcha-response">
         <button type="submit" name="contact" class="btn btn-success">Envoyer</button>
 <!--        <input type="submit" name="contact" class="btn btn-success" value="Envoyer">-->
-    </form>
-
-
-    <?php if(isset($_SERVER['HTTP_REFERER'])) : ?>
-    <div class="d-flex justify-content-end"><a class="btn btn-primary" href="/ChessTeam/<?= basename($_SERVER['HTTP_REFERER']); ?>">Retour à l'accueil</a>
-        <?php endif; ?>
+    </form>    
+    <div class="d-flex justify-content-end">
+        <a class="btn mb-5 btn-primary" href="/ProjectTesting/ChessTeam/<?= substr(basename($_SERVER['HTTP_REFERER']), 0) ?>">Retour</a>
     </div>
-    </ol>
 </div>
 
 

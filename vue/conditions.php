@@ -28,9 +28,9 @@
             <p>Des sanctions peuvent être prises à l’encontre de l’utilisateur en cas de non-respect des consignes et <a href="https://fr.wikipedia.org/wiki/R%C3%A8glement_g%C3%A9n%C3%A9ral_sur_la_protection_des_donn%C3%A9es" target="_blank"> les règles RGPD.</a></p>
         </li>
 
-        <?php if(isset($_SERVER['HTTP_REFERER'])) : ?>
-        <div class="d-flex justify-content-end"><a class="btn btn-primary" href="/ChessTeam/<?= basename($_SERVER['HTTP_REFERER']); ?>">Retour à l'accueil</a>
-        <?php endif; ?>
+        <div class="d-flex justify-content-end">
+            <a class="btn mb-5 btn-primary" href="/ProjectTesting/ChessTeam/<?= substr(basename($_SERVER['HTTP_REFERER']), 0) ?>">Retour</a>
+        </div>
         </div>
     </ol>
 </div>

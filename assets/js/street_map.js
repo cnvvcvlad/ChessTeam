@@ -79,7 +79,7 @@ function initMap() {
         }
       }
     }
-
+    // TODO : Modifier sur le serveur de l'api l'url correspondante
     xmlhttp.open(
       'GET',
       'http://localhost/ProjectTesting/ChessTeam/index.php?action=apiStreetMap',
