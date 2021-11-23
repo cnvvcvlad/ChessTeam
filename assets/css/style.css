@@ -23,7 +23,8 @@
 
 @font-face {
   font-family: 'rubik';
-  src: url('font/rubik/Rubik-Regular.ttf') format('truetype'),
+  src: 
+    /* url('font/rubik/Rubik-Regular.ttf') format('truetype'), */
     url('font/rubik/Rubik-Regular.woff') format('woff'),
     url('font/rubik/Rubik-Regular.woff2') format('woff2');
   font-weight: normal;
