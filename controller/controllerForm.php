@@ -18,8 +18,10 @@ try {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // on vérifie la validité du reCAPTHCHA, si le champ 'recaptcha-response' contient une valeur
         if (empty($_POST['recaptcha-response'])) {
-            var_dump($_POST);
-            require '../vue/contact.php';
+            // var_dump($_POST);
+            // require '../vue/vueContact.php';
+            header("location:../index.php?action=contact&alert=errorContact");
+            exit();
         // exit();
         } else {
             // on prépare l'URL , on injecte la reponse donnée avec les 2 parametres obligatoires
@@ -41,7 +43,7 @@ try {
             // on doit avoir une reponse (soit vide, soit null), donc on verifie qu'on a une reponse
 
             if (empty($response) || is_null($response)) {
-                require '../vue/contact.php';
+                header("location:../index.php?action=contact&alert=errorContact");
                 exit();
             } else {
                 // on recupere la reponse dans un objet
@@ -98,7 +100,7 @@ try {
                         throw new Exception("Veuillez renseigner tous les champs du formulaire");
                     }
                 } else {
-                    require '../vue/contact.php';
+                    header("location:../index.php?action=contact&alert=errorContact");
                     exit();
                 }
             }

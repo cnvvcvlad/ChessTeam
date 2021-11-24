@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="assets/css/caroussel.css" type="text/css">
     <link rel="stylesheet" href="assets/css/burger.css" type="text/css">
     <link rel="stylesheet" href="assets/css/normalize.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/icomoon.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/icomoon.css" type="text/css">    
 </head>
 
 <body>
@@ -168,9 +168,13 @@
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
-
             </aside>
             <main class="container_form">
+            <?php 
+                if (isset($_GET['alert']) and $_GET['alert'] == 'errorContact') {
+                    echo '<h4>Veuillez rééssayer. Une erreur c\'est produite.</h4>';
+                }       
+            ?>
 
                 <?= $template_form; ?>
 
@@ -234,7 +238,7 @@
                             <a href="">Facebook<span class="icon-facebook"></span></a>
                             <a href="">Twitter<span class="icon-twitter"></span></a>
                             <a href="">Whatsapp<span class="icon-whatsapp"></span></a>
-                            <a href="http://localhost:8080/ChessTeam/?action=rss" rel="noreferrer noopener" target="_blank">Flux RSS<img src="assets/img/logo/rss.png" alt="Le Flux RSS"
+                            <a href="?action=rss" rel="noreferrer noopener" target="_blank">Flux RSS<img src="assets/img/logo/rss.png" alt="Le Flux RSS"
                                             title="Flux RSS"/></a>
                         </div>
                     </li>
@@ -280,6 +284,17 @@
 <!-- ==javaScript perso== -->
 <script src="assets/js/caroussel.js" type="text/javascript"></script>
 <script src="assets/js/burger.js" type="text/javascript"></script>
+<!--reCAPTCHA-->
+<script src="https://www.google.com/recaptcha/api.js?render=6LcgZ-oUAAAAAKdW6gHFYFBm7Qx-d52XntvALZma"></script>
+<script>
+    if(document.getElementById('recaptchaResponse')){
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LcgZ-oUAAAAAKdW6gHFYFBm7Qx-d52XntvALZma', {action: 'homepage'}).then(function(token) {
+                document.getElementById('recaptchaResponse').value = token;
+            });
+        });
+    }
+</script>
 
 </body>
 
