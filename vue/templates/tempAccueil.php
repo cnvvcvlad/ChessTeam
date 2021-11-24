@@ -173,9 +173,11 @@
                 </div>
             </div>
         </header>
-        <?php if (isset($_GET['alert']) and $_GET['alert'] == 'contact') {
+        <?php 
+        if (isset($_GET['alert']) and $_GET['alert'] == 'contact') {
             echo '<h4>Votre message vient d\'être ajouté !</h4>';
-        } ?>
+        }       
+        ?>
 
 
         <main class="container">
@@ -206,7 +208,7 @@
                                 <a href="https://www.twitter.com/">Twitter<span class="icon-twitter"></span></a>
                                 <a href="https://www.whatsapp.com/">Whatsapp<span class="icon-whatsapp"></span></a>
                                 <a 
-                                href="http://localhost:8080/ChessTeam/?action=rss" 
+                                href="?action=rss" 
                                 rel="noreferrer noopener" 
                                 target="_blank">
                                     Flux RSS<img src="assets/img/logo/rss.png" alt="Le Flux RSS" title="Flux RSS" />
