@@ -14,9 +14,9 @@
                 <!-- La structure du slide -->
                 <div class="galleryContainer">
                     <div class="slideShowContainer">
-                        <div id="playPauseBtn" onclick="playPauseSlides()" title="Pause"></div>
-                        <div class="leftArrow" onclick="plusSlides(-1)"><span class="arrow arrowLeft"></span></div>
-                        <div class="rightArrow" onclick="plusSlides(1)"><span class="arrow arrowRight"></span></div>
+                        <div id="playPauseBtn" title="Pause"></div>
+                        <div class="leftArrow" id="slideLeft"><span class="arrow arrowLeft"></span></div>
+                        <div class="rightArrow" id="slideRight"><span class="arrow arrowRight"></span></div>
                         <div class="captionHolder">
                             <h1 class="captionTitle"></h1>
 

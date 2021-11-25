@@ -1,5 +1,8 @@
 window.addEventListener('DOMContentLoaded', () => {
   var slideIndex, slides, dots, captionText, captionTitle
+  const playPauseBtn = document.getElementById('playPauseBtn')
+  const slideRight = document.getElementById('slideRight')
+  const slideLeft = document.getElementById('slideLeft')
 
   initGallery()
 
@@ -26,7 +29,8 @@ window.addEventListener('DOMContentLoaded', () => {
     for (var i = 0; i < slides.length; i++) {
       var dot = document.createElement('span')
       dot.classList.add('dots')
-      dot.setAttribute('onClick', 'moveSlide(' + i + ')')
+      // TODO : add event listener to each dot
+      // dot.setAttribute('onClick', 'moveSlide(' + i + ')')
       dotsContainer.append(dot)
       dots.push(dot)
     }
@@ -34,6 +38,13 @@ window.addEventListener('DOMContentLoaded', () => {
       dots[slideIndex].classList.add('active')
     }
   }
+
+  slideRight.addEventListener('click', function(){
+    moveSlide(slideIndex + 1)
+  })
+  slideLeft.addEventListener('click', function(){
+    moveSlide(slideIndex - 1)
+  })
 
   function plusSlides(n) {
     moveSlide(slideIndex + n)
@@ -101,8 +112,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   setTimer()
 
-  function playPauseSlides() {
-    var playPauseSlides = document.getElementById('playPauseBtn')
+  playPauseBtn.addEventListener('click', function () {
     if (timer == null) {
       setTimer()
       playPauseBtn.style.backgroundPositionY = '0px'
@@ -113,5 +123,5 @@ window.addEventListener('DOMContentLoaded', () => {
       playPauseBtn.style.backgroundPositionY = '-40px'
       playPauseBtn.title = 'Play'
     }
-  }
+  }) 
 })
