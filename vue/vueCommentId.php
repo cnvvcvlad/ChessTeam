@@ -37,7 +37,7 @@
 <div class="back-page">
     <a href="<?= substr(
         basename($_SERVER['HTTP_REFERER']),
-        9
+        0
     ) ?>">Retour</a>
     <a href="?action=home">Retour à l'accueil</a>
 </div>
