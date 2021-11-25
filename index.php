@@ -131,6 +131,11 @@ try {
         } elseif ($action == 'home') {
             require 'vue/vueAccueil.php';
             //            header('location:./');
+        } elseif ($action == 'search') {
+            if (isset($_POST['search'])) {
+                $searchResults = getPostsSearchResults(htmlspecialchars($_POST['search']));
+            }
+            require 'vue/vueSearch.php';
         } elseif ($action == 'conditions') {
             require 'vue/vueConditions.php';
         } elseif ($action == 'mentions') {

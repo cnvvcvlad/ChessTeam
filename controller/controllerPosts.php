@@ -1,12 +1,10 @@
 <?php
 
-
 function getListe()
 {
     $art_manager = new ArticleManager();
     $posts = $art_manager->affichageArt();
     return $posts;
-
 }
 
 function getLastArticles()
@@ -67,3 +65,11 @@ function deleteMyArticle($id_article)
     header('location:index.php?action=allArticles');
 }
 
+function getPostsSearchResults($search)
+{
+    // On remplace les caractères indésiables par des chaines de caractères vides
+    $search = preg_replace('#[^a-z çéèàùêôî?0-9]#i', '', $search);
+    $art_manager = new ArticleManager();
+    $posts = $art_manager->searchArticles($search);
+    return $posts;
+}
