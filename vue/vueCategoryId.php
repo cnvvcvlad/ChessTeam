@@ -71,7 +71,7 @@
         <div class="back-page">
             <a href="<?= substr(
                 basename($_SERVER['HTTP_REFERER']),
-                9
+                0
             ) ?>">Retour</a>
             <a href="?action=articlesOfCategory&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Consulter
                 les articles de cette catégorie <img src="assets/img/by_default/flecheblanchedroite.png"

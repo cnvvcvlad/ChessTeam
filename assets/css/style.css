@@ -64,11 +64,11 @@
   }
 
   30% {
-    transform: translateX(300px);
+    transform: translateX(100px);
   }
 
   60% {
-    transform: translateX(-300px);
+    transform: translateX(-100px);
   }
 
   to {
@@ -344,14 +344,6 @@ ul .sous-menu {
   margin-top: 2.4%;
 }
 
-.memberInfo {
-  font-family: 'kaushan-script', 'Gill Sans', 'Gill Sans MT', Calibri,
-    'Trebuchet MS', sans-serif;
-  font-size: 1.2em;
-  margin-right: 4vw;
-  animation: movemyname 20s linear infinite; /* Boucle d'animation ! */
-}
-
 .list_style {
   display: flex;
   justify-content: center;
@@ -399,6 +391,21 @@ ul .sous-menu {
   border-radius: 10px;
 }
 
+/****** Search button *******/
+.search{
+  display: inline-block;
+}
+
+/**** Animation du pseudo user ***/
+
+.memberInfo {
+  font-family: 'kaushan-script', 'Gill Sans', 'Gill Sans MT', Calibri,
+    'Trebuchet MS', sans-serif;
+  font-size: 1.2em;
+  margin-right: 4vw;
+  animation: movemyname 20s linear infinite; /* Boucle d'animation ! */
+}
+
 /* Main Vue */
 
 .banniere {
@@ -425,13 +432,13 @@ ul .sous-menu {
   font-family: 'kaushan-script', Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.search_bouton {
+/* .search_bouton {
   flex: 2;
 }
 
 .image_accueil {
   display: flex;
-}
+} */
 
 .banniere_bouton {
   display: flex;
@@ -723,7 +730,7 @@ main.container_form div.bouton_commande {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  /* min-height: 75vh; */
+  min-height: 75vh;
   /* min-width: 40vw; */ 
   max-width: 80vw;
   align-self: flex-start;

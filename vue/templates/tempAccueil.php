@@ -145,8 +145,15 @@
                                 </ul>
                             </div>
                         </nav>
-                        <div class="memberInfo"><span><?= helloUser() ?></span></div>
-
+                        <div class="search">
+                            <!-- <div class="memberInfo"><span><?= helloUser() ?></span></div> -->
+                            <div class="search">
+                                <form action="?action=search" method="post">
+                                    <input type="text" name="search" placeholder="Rechercher un article" required/>
+                                    <input type="submit" value="Rechercher" />
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="menu-bg" id="menu-bg"></div>
                     <div class="photo">

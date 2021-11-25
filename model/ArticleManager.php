@@ -130,4 +130,18 @@ class ArticleManager extends DataBase
         $delete->execute(["id_article" => $id_article]);
     }
 
+    public function searchArticles($search)
+    {
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE art_title LIKE :search OR art_description LIKE :search OR art_content LIKE :search OR art_author LIKE :search';
+        $select = $this->dbConnect()->prepare($query);
+        $select->execute(["search" => "%" . $search . "%"]);
+
+        $art = [];
+
+        while ($data = $select->fetch()) {
+            $art[] = new Article($data);
+        }
+        return $art;
+    }
+
 }
