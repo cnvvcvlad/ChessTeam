@@ -132,7 +132,10 @@ try {
             require 'vue/vueAccueil.php';
             //            header('location:./');
         } elseif ($action == 'search') {
-            if (isset($_POST['search'])) {
+            if (isset($_POST['search']) && empty($_POST['search'])) {
+                header('location:./index.php?action=home&alert=emptySearch');
+                exit();
+            } elseif (isset($_POST['search']) && !empty($_POST['search'])) {
                 $searchResults = getPostsSearchResults(htmlspecialchars($_POST['search']));
             }
             require 'vue/vueSearch.php';
