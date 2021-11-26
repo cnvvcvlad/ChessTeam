@@ -32,6 +32,8 @@
     <!-- ==javaScript perso== -->
     <script src="assets/js/caroussel.js"></script>
     <script src="assets/js/burger.js"></script>
+    <script src="assets/js/timer.js"></script>
+    <script src="assets/js/street_map.js"></script>
     <script src="assets/js/script.js"></script>
 
     <!--reCAPTCHA-->
