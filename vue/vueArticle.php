@@ -6,8 +6,8 @@
 
 <?php if (!empty($allArticles)): ?>
 
-    <h1>Voici tous nos articles!<br>
-        N'hésitez pas à nous donner votre avis dans les commentaires!</h1>
+    <!-- <h1>Voici tous nos articles!<br>
+        N'hésitez pas à nous donner votre avis dans les commentaires!</h1> -->
 
     <div class="top_article">
         <?php foreach ($allArticles as $key => $values): ?>
