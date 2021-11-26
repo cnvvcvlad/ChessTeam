@@ -1,10 +1,17 @@
 <?php
 
-function getListe()
+function getListe($firstArticle, $nbArticlesPerPage)
 {
     $art_manager = new ArticleManager();
-    $posts = $art_manager->affichageArt();
+    $posts = $art_manager->affichageArt($firstArticle, $nbArticlesPerPage);
     return $posts;
+}
+
+function getNbArticles()
+{
+    $art_manager = new ArticleManager();
+    $nbArticles = (int) $art_manager->countArticles();
+    return $nbArticles;
 }
 
 function getLastArticles()
