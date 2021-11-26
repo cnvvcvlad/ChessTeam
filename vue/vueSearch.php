@@ -26,5 +26,5 @@
     ) ?>">Retour</a>
     <a href="?action=home">Retour à l'accueil</a>
 </div>
-<?php $template = ob_get_clean(); ?>
-<?php require 'templates/tempAccueil.php'; ?>
+<?php $template_form = ob_get_clean(); ?>
+<?php require 'templates/tempForm.php'; ?>
