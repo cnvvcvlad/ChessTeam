@@ -65,11 +65,31 @@ function deleteMyArticle($id_article)
     header('location:index.php?action=allArticles');
 }
 
+function searchOneElement($element){
+    // On remplace les caractères indésiables par des chaines de caractères vides
+    $element = preg_replace('#[^a-z çéèàùêôî?0-9]#i', '', $element);
+    $art_manager = new ArticleManager();
+    $posts = $art_manager->searchArticles($element);    
+    return $posts;
+}
+
 function getPostsSearchResults($search)
 {
-    // On remplace les caractères indésiables par des chaines de caractères vides
-    $search = preg_replace('#[^a-z çéèàùêôî?0-9]#i', '', $search);
-    $art_manager = new ArticleManager();
-    $posts = $art_manager->searchArticles($search);
+    $posts = searchOneElement($search);
+
+    // On sépare la chaine en plusieurs éléments
+    if(empty($posts)) {
+        $posts = [];
+        $searchArray = explode(' ', $search);
+        usort($searchArray, function($a, $b) {
+            return strlen($b) <=> strlen($a);
+        });        
+        $sortedArray = array_filter($searchArray, function ($word){
+            return strlen($word) > 2;
+        });        
+        foreach ($sortedArray as $key => $value) {
+            $posts += searchOneElement($value);
+        }
+    }
     return $posts;
 }
