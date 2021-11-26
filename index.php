@@ -6,18 +6,18 @@ spl_autoload_register(function ($class) {
 });
 
 /****************************************/
-require 'controller/controllerStatut.php';
-require 'controller/controllerPosts.php';
-require 'controller/controllerCategory.php';
-require 'controller/controllerUser.php';
-require 'controller/controllerComments.php';
+require_once 'controller/controllerStatut.php';
+require_once 'controller/controllerPosts.php';
+require_once 'controller/controllerCategory.php';
+require_once 'controller/controllerUser.php';
+require_once 'controller/controllerComments.php';
 require_once 'controller/controllerCoachs.php';
 
-require 'model/ArticleManager.php';
-require 'model/CategoriesManager.php';
-require 'model/CommentsManager.php';
-require 'model/MemberManager.php';
-require 'model/CoachsManager.php';
+require_once 'model/ArticleManager.php';
+require_once 'model/CategoriesManager.php';
+require_once 'model/CommentsManager.php';
+require_once 'model/MemberManager.php';
+require_once 'model/CoachsManager.php';
 
 /****************** Pagination ***********************/
 // on détermine sur quelle page on se trouve
