@@ -18,16 +18,16 @@
                         <div class="leftArrow" id="slideLeft"><span class="arrow arrowLeft"></span></div>
                         <div class="rightArrow" id="slideRight"><span class="arrow arrowRight"></span></div>
                         <div class="captionHolder">
-                            <h1 class="captionTitle"></h1>
+                            <h2 class="captionTitle">Title</h2>
 
-                            <p class="captionText"></p>
+                            <p class="captionText">Text</p>
                         </div>
 
                         <?php foreach ($lastArticles as $key => $values) : ?>
                             <div class="imageHolder">
                                 <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image article">
 
-                                <h1 class="captionTitle"><?= $values->getArt_title() ?></h1>
+                                <h2 class="captionTitle"><?= $values->getArt_title() ?></h2>
 
                                 <p class="captionText"><?= $values->getArt_description() ?></p>
                             </div>
@@ -65,10 +65,8 @@
                 <div id="detail_art" class="justify_article">
 
                     <a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article" title="Cliquez pour agrandir"></a>
-                    <span>
                         <h3><?= $value->getArt_description() ?></h3><br><a class="lire_suite" href="#cache">[Lire la
                             suite...] </a>
-                    </span>
 
                     <div id="cache"><span><?= $value->getArt_content() ?><br><a href="#detail_art"> [Voir
                                 moins]</a></span>
