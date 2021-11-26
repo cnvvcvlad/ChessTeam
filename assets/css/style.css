@@ -569,6 +569,7 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
   height: auto;
   border-radius: 10px;
   margin-bottom: 0.5em;
+  margin-top: 0.8em;
   transform-origin: 50% 50%; /* Centre */
   transform: rotate(10deg);
   -webkit-transform: rotate(10deg); /* Safari */
