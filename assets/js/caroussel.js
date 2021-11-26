@@ -1,8 +1,8 @@
 window.addEventListener('DOMContentLoaded', () => {
   var slideIndex, slides, dots, captionText, captionTitle
-  const playPauseBtn = document.getElementById('playPauseBtn')
-  const slideRight = document.getElementById('slideRight')
-  const slideLeft = document.getElementById('slideLeft')
+  let playPauseBtn = document.getElementById('playPauseBtn')
+  let slideRight = document.getElementById('slideRight')
+  let slideLeft = document.getElementById('slideLeft')
 
   initGallery()
 
@@ -39,12 +39,17 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  slideRight.addEventListener('click', function(){
-    moveSlide(slideIndex + 1)
-  })
-  slideLeft.addEventListener('click', function(){
-    moveSlide(slideIndex - 1)
-  })
+  if (slideRight !== null) {
+    slideRight.addEventListener('click', function () {
+      moveSlide(slideIndex + 1)
+    })
+  }
+
+  if (slideLeft !== null) {
+    slideLeft.addEventListener('click', function () {
+      moveSlide(slideIndex - 1)
+    })
+  }
 
   function plusSlides(n) {
     moveSlide(slideIndex + n)
@@ -112,16 +117,18 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   setTimer()
 
-  playPauseBtn.addEventListener('click', function () {
-    if (timer == null) {
-      setTimer()
-      playPauseBtn.style.backgroundPositionY = '0px'
-      playPauseBtn.title = 'Pause'
-    } else {
-      clearInterval(timer)
-      timer = null
-      playPauseBtn.style.backgroundPositionY = '-40px'
-      playPauseBtn.title = 'Play'
-    }
-  }) 
+  if (playPauseBtn !== null) {
+    playPauseBtn.addEventListener('click', function () {
+      if (timer == null) {
+        setTimer()
+        playPauseBtn.style.backgroundPositionY = '0px'
+        playPauseBtn.title = 'Pause'
+      } else {
+        clearInterval(timer)
+        timer = null
+        playPauseBtn.style.backgroundPositionY = '-40px'
+        playPauseBtn.title = 'Play'
+      }
+    })
+  }
 })
