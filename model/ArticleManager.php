@@ -45,14 +45,24 @@ class ArticleManager extends DataBase
         ]);
     }
 
-    public function affichageArt()
+    public function countArticles()
     {
-        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles ORDER BY id DESC';
+        $request = 'SELECT COUNT(*) AS nb_art FROM articles';
+        $result = $this->dbConnect()->query($request);
+        $result = $result->fetch();        
+        return $result['nb_art'];
+    }
+
+    public function affichageArt($firstArticle, $nbArticlesPerPage)
+    {
+        // $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles ORDER BY id DESC';
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles LIMIT :firstArticle, :nbArticlesPerPage';
+
         $select = $this->dbConnect()->prepare($query);
+        $select->bindValue(':firstArticle', $firstArticle, PDO::PARAM_INT);
+        $select->bindValue(':nbArticlesPerPage', $nbArticlesPerPage, PDO::PARAM_INT);
         $select->execute();
-
         $art = [];
-
         while ($donnees = $select->fetch()) {
             $art[] = new Article($donnees);
         }

@@ -406,6 +406,32 @@ ul .sous-menu {
   animation: movemyname 20s linear infinite; /* Boucle d'animation ! */
 }
 
+/****** Paginator  ***********/
+.disabled {  
+  position : relative; 
+  color    : grey;
+  pointer-events: none !important;
+}
+
+.disabled:after {
+  position :absolute;
+  left     : 0;
+  top      : 0;
+  width    : 100%;
+  height   : 100%;
+  content  :' ';
+}
+
+.page-item {
+  min-width: 2rem !important;
+}
+
+/******* tarteaucitronIconBottomRight ********/
+
+.tarteaucitronIconBottomRight {
+  display: none !important;
+}
+
 /* Main Vue */
 
 .banniere {
@@ -478,7 +504,8 @@ a.comment-modify:hover {
 #cache a:active,
 .justify_article a:active,
 .justify_form a:active,
-a.comment-modify:active {
+a.comment-modify:active,
+.page-link-active {
   background-color: #fcdede;
   box-shadow: 1px 1px 1px #d83f3d inset;
 }
@@ -918,7 +945,7 @@ textarea.comment-text {
 }
 
 main div.back-page {
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .back-page {
@@ -926,7 +953,7 @@ main div.back-page {
   margin: 2px 0 2px 0;
   display: flex;
   justify-content: space-between;
-  align-self: center;
+  align-self: end;
   min-width: 80vw;
 }
 
