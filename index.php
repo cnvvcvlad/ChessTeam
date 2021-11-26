@@ -19,13 +19,31 @@ require 'model/CommentsManager.php';
 require 'model/MemberManager.php';
 require 'model/CoachsManager.php';
 
-/*****************************************/
+/****************** Pagination ***********************/
+// on détermine sur quelle page on se trouve
+if(isset($_GET['page']) && !empty($_GET['page'])){
+    // typage de la variable entière
+    $currentPage = (int) strip_tags($_GET['page']);
+}else{
+    $currentPage = 1;
+}
+// Nombre total d'articles
+$nbArticles = getNbArticles();
+// Nombre d'articles par page
+$nbArticlesPerPage = 1;
+// Nombre de pages total
+$nbPages = ceil($nbArticles / $nbArticlesPerPage);
+// Calcul du premier article de la page à afficher
+$firstArticle = ($currentPage - 1) * $nbArticlesPerPage;
+
+/***************************************/
 
 try {
     $allCategory = getAllCategory();
-    $allArticles = getListe();
+    $allArticles = getListe($firstArticle, $nbArticlesPerPage);    
     $lastArticles = getLastArticles();
     $lastArticle_one = getLastArticle_one();
+    
 
     if (isset($_GET['action'])) {
         $action = htmlspecialchars($_GET['action']);

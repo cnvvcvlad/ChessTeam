@@ -60,6 +60,16 @@
 
         <?php endforeach; ?>
     </div>
+    <nav class="paginator">
+        <li class="list_style page-item"><a href="?action=allArticles&amp;page=<?= $currentPage - 1 ?>" class="<?= ($currentPage == 1) ? 'disabled' : '' ?>">Précédente</a></li>
+        <?php for($page = 1; $page <= $nbPages; $page++): ?>
+            <li class="list_style page-item">
+                <a href="?action=allArticles&amp;page=<?= $page ?>" class="page-link-<?= ($currentPage == $page) ? 'active' : '' ?>"><?= $page ?>
+            </a>
+        </li>
+        <?php endfor; ?>
+        <li class="list_style page-item"><a href="?action=allArticles&amp;page=<?= $currentPage + 1 ?>" class="<?= ($currentPage == $nbPages) ? 'disabled' : '' ?>">Suivante</a></li>
+    </nav>
 
 <?php endif; ?>
 <div class="back-page">
