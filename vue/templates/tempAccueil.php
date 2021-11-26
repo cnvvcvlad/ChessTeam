@@ -154,6 +154,7 @@
                                 </form>
                             </div>
                         </div>
+                        <?php ?>
                     </div>
                     <div class="menu-bg" id="menu-bg"></div>
                     <div class="photo">
@@ -183,7 +184,10 @@
         <?php 
         if (isset($_GET['alert']) and $_GET['alert'] == 'contact') {
             echo '<h4>Votre message vient d\'être ajouté !</h4>';
-        }       
+        }
+        // if (isset($_GET['alert']) and $_GET['alert'] == 'emptySearch') {
+        //     echo '<h4>Erreur ! Champ vide.</h4>';
+        // }        
         ?>
 
 
