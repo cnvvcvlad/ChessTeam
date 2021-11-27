@@ -11,9 +11,9 @@
                         l'article <img src="assets/img/by_default/flecheblanchedroite.png" alt="le bouton rouge" /></a>
                 </div>
                 <p>Ecrit par
-                    <span class="mark"><?= showNameAuthor(
+                    <span class="mark"><?= isset($user) ? $user->showNameAuthor(
                         $value->getArt_author()
-                    ) ?></span>
+                    ) : '' ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
                     <strong><?= showNameCategory(
                         $value->getCategory_id()

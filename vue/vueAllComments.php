@@ -14,9 +14,9 @@
 
             <div class="comment-author">
                 <p>
-                    <span class="mark"><?= showNameAuthor(
+                    <span class="mark"><?= isset($user) ? $user->showNameAuthor(
                         $value->getCom_author()
-                    ) ?></span>
+                    ) : '' ?></span>
                     le ( <?= $value->getCom_date_creation() ?> )
                 </p>
             </div>

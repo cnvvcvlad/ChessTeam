@@ -9,7 +9,7 @@ spl_autoload_register(function ($class) {
 require_once 'src/controller/controllerStatut.php';
 require_once 'src/controller/controllerPosts.php';
 require_once 'src/controller/controllerCategory.php';
-require_once 'src/controller/controllerUser.php';
+require_once 'src/controller/UserController.php';
 require_once 'src/controller/controllerComments.php';
 require_once 'src/controller/controllerCoachs.php';
 
@@ -43,7 +43,7 @@ try {
     $allArticles = getListe($firstArticle, $nbArticlesPerPage);    
     $lastArticles = getLastArticles();
     $lastArticle_one = getLastArticle_one();
-    
+    $user = new UserController();
 
     if (isset($_GET['action'])) {
         $action = htmlspecialchars($_GET['action']);
@@ -56,7 +56,7 @@ try {
             require 'vue/vueAccueil.php';
         } elseif ($action == 'myAccount') {
             if (isset($_SESSION['id_user'])) {
-                $myAccount = getInfoUser(
+                $myAccount = $user->getInfoUser(
                     htmlspecialchars($_SESSION['id_user'])
                 );
                 require 'vue/vueMember.php';
@@ -107,12 +107,12 @@ try {
             }
         } elseif ($action == 'allMembers') {
             if (isset($_GET['memberId'])) {
-                $myAccount = getInfoUser(htmlspecialchars($_GET['memberId']));
+                $myAccount = $user->getInfoUser(htmlspecialchars($_GET['memberId']));
                 require 'vue/vueMember.php';
             } elseif (isset($_GET['deleteM'])) {
-                deleteUser(htmlspecialchars($_GET['deleteM']));
+                $user->deleteUser(htmlspecialchars($_GET['deleteM']));
             } else {
-                $allMembers = getAllMembers();
+                $allMembers = $user->getAllMembers();
                 require 'vue/vueAllMembers.php';
             }
         } elseif ($action == 'allCategory') {

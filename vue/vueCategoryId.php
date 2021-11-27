@@ -15,9 +15,9 @@
                     </div>
                 <?php endif; ?>
                 <p><span class="information">Ecrit par</span>
-                    <span class="mark"><?= showNameAuthor(
+                    <span class="mark"><?= isset($user) ? $user->showNameAuthor(
                         $value->getCat_author()
-                    ) ?></span>
+                    ) : '' ?></span>
                     le <em><?= $value->getCat_date_creation() ?></em></p>
 
                 <div class="justify_article">

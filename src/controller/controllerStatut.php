@@ -69,12 +69,12 @@ function isAdmin()
     return false;
 }
 
-function helloUser()
-{
-    if (isConnected()) {
-        echo 'Salut ' . strtoupper(showNameAuthor(htmlspecialchars($_SESSION['id_user'])));
-    }
-}
+// function helloUser()
+// {
+//     if (isConnected()) {
+//         echo 'Salut ' . strtoupper(showNameAuthor(htmlspecialchars($_SESSION['id_user'])));
+//     }
+// }
 
 function backPageId()
 {

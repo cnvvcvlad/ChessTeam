@@ -23,7 +23,7 @@
 <?php if (isAdmin()) : ?>
     <h2>Créer une nouvelle catégorie</h2>
 
-    <form action="controller/controllerFrontEnd.php" method="post" class="form-create" enctype="multipart/form-data">
+    <form action="src/controller/controllerFrontEnd.php" method="post" class="form-create" enctype="multipart/form-data">
         <fieldset>
             <legend>Introduisez vos informations</legend>
             <div class="form-create">

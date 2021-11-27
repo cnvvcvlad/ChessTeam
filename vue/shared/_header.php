@@ -110,7 +110,7 @@
                     </div>
                 </nav>
                 <div class="search">
-                    <!-- <div class="memberInfo"><span><?= helloUser() ?></span></div> -->
+                    <!-- <div class="memberInfo"><span><?= isset($user) ? $user->helloUser() : '' ?></span></div> -->
                     <div class="search">
                         <form action="?action=search" method="post">
                             <input type="text" name="search" placeholder="Rechercher un article" required />

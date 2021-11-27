@@ -18,9 +18,9 @@
             <?php endif; ?>
         </div>
         <p><span class="information"> Ecrit par</span>
-            <span class="mark"><?= showNameAuthor(
+            <span class="mark"><?= isset($user) ? $user->showNameAuthor(
                 $value->getArt_author()
-            ) ?></span>
+            ) : '' ?></span>
             le <em><?= $value->getArt_date_creation() ?></em><span class="information"> dans la catégorie</span>
             <strong><?= showNameCategory(
                 $value->getCategory_id()
@@ -46,9 +46,9 @@
 
                     <div class="comment-author">
                         <p>
-                            <mark><?= showNameAuthor(
+                            <mark><?= isset($user) ? $user->showNameAuthor(
                                 $values->getCom_author()
-                            ) ?></mark>
+                            ) : '' ?></mark>
                             le ( <?= $values->getCom_date_creation() ?> )
                         </p>
                     </div>
@@ -67,7 +67,7 @@
                     <div class="comment-add">
                         <fieldset>
                             <legend>Ajouter un commentaire</legend>
-                            <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription">
+                            <form action="src/controller/controllerFrontEnd.php" method="POST" class="form-inscription">
                                 <p><input type="hidden" name="com_author"
                                           value="<?= htmlspecialchars(
                                               $_SESSION['id_user']

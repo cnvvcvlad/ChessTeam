@@ -27,9 +27,9 @@
                 </div>
             </div>
             <p><span class="information"> Ecrit par</span>
-                <span class="mark"><?= showNameAuthor(
+                <span class="mark"><?= isset($user) ? $user->showNameAuthor(
                     $values->getArt_author()
-                ) ?></span>
+                ) : '' ?></span>
                 le <em><?= $values->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
                 <strong><?= showNameCategory(
                     $values->getCategory_id()

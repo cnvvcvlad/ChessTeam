@@ -39,7 +39,7 @@ try {
         if (password_verify($passwordUser, $passwordHash)) {
             $manager_user->log($login, $passwordHash);
 
-            header('location:../index.php?action=connected');
+            header('location:../../index.php?action=connected');
             exit();
         }
         throw new Exception('Le mot de passe est invalide !');
@@ -49,7 +49,8 @@ try {
         $_FILES['image_membre']['error'] == 0
     ) {
         extract($_POST);
-
+        // var_dump($_POST);
+        // exit();
         $login = validate($login);
 
         $email = emailValidator($email);
@@ -70,7 +71,7 @@ try {
                 $user_image = $_FILES['image_membre']['name'];
 
                 //                $user_image = uniqid() . $user_image;
-                $path = '../assets/img/uploads/' . $user_image;
+                $path = '../../assets/img/uploads/' . $user_image;
 
                 move_uploaded_file($_FILES['image_membre']['tmp_name'], $path);
 
@@ -85,11 +86,11 @@ try {
 
                 if (isAdmin()) {
                     header(
-                        'location:../index.php?action=allMembers&alert=aded'
+                        'location:../../index.php?action=allMembers&alert=aded'
                     );
                     exit();
                 }
-                header('location:../index.php?action=connexion&alert=inscrit');
+                header('location:../../index.php?action=connexion&alert=inscrit');
                 exit();
             } else {
                 throw new Exception(
@@ -128,7 +129,7 @@ try {
 
                     move_uploaded_file(
                         $_FILES['user_image']['tmp_name'],
-                        '../assets/img/uploads/' . $user_image
+                        '../../assets/img/uploads/' . $user_image
                     );
                 } else {
                     throw new Exception(
@@ -151,10 +152,12 @@ try {
             ])
         );
         if (isAdmin()) {
-            header('location:../index.php?action=home');
+            // header('location:../../index.php?action=home');
+            header('location:../../index.php?action=allMembers&memberId=' . $id_user);
+            // header('location:../../' . basename($_SERVER['HTTP_REFERER']));
             exit();
         } else {
-            header('location:../index.php?action=home');
+            header('location:../../index.php?action=home');
         }
         exit();
     } /************Add Update Category *************/ elseif (
@@ -180,7 +183,7 @@ try {
 
                 move_uploaded_file(
                     $_FILES['image_category']['tmp_name'],
-                    '../assets/img/uploads/' . $category_image
+                    '../../assets/img/uploads/' . $category_image
                 );
 
                 $manager_category->insertCategory(
@@ -192,7 +195,7 @@ try {
                     ])
                 );
 
-                header('location: ../index.php?action=allCategory');
+                header('location:../../index.php?action=allCategory');
                 exit();
             } else {
                 throw new Exception(
@@ -228,7 +231,7 @@ try {
 
                     move_uploaded_file(
                         $_FILES['category_image']['tmp_name'],
-                        '../assets/img/uploads/' . $category_image
+                        '../../assets/img/uploads/' . $category_image
                     );
                 } else {
                     throw new Exception(
@@ -251,7 +254,7 @@ try {
             ])
         );
 
-        header('location:../index.php?action=allCategory');
+        header('location:../../index.php?action=allCategory');
         exit();
     } /**************Add Update Article ****************/ elseif (
         isset($_POST['articleCreation']) and
@@ -278,7 +281,7 @@ try {
 
                 move_uploaded_file(
                     $_FILES['image_article']['tmp_name'],
-                    '../assets/img/uploads/' . $post_image
+                    '../../assets/img/uploads/' . $post_image
                 );
 
                 $manager_article->insertArticle(
@@ -292,7 +295,7 @@ try {
                     ])
                 );
 
-                header('location: ../index.php?action=allArticles');
+                header('location:../../index.php?action=allArticles');
                 exit();
             } else {
                 throw new Exception('Extension non autorisée !');
@@ -332,7 +335,7 @@ try {
 
                     move_uploaded_file(
                         $_FILES['art_image']['tmp_name'],
-                        '../assets/img/uploads/' . $art_image
+                        '../../assets/img/uploads/' . $art_image
                     );
                 } else {
                     throw new Exception(
@@ -357,7 +360,7 @@ try {
                 ])
             );
 
-            header('location:../index.php?action=allArticles');
+            header('location:../../index.php?action=allArticles');
             exit();
         }
     } /************Add Update Comments ****************/ elseif (
@@ -375,9 +378,9 @@ try {
             ])
         );
 
-        $url = $_SERVER['HTTP_REFERER'];
-        $url_referer = basename($url);
-        header('location: ../' . basename($_SERVER['HTTP_REFERER']));
+        // $url = $_SERVER['HTTP_REFERER'];
+        // $url_referer = basename($url);
+        header('location:../../' . basename($_SERVER['HTTP_REFERER']));
         exit();
     } elseif (isset($_POST['updateComment'])) {
         extract($_POST);
@@ -391,7 +394,7 @@ try {
             ])
         );
 
-        header('location:../index.php?action=allComments');
+        header('location:../../index.php?action=allComments');
         exit();
     } elseif (isset($_GET['city'])) {
         require_once 'controllerCoachs.php';
@@ -401,12 +404,12 @@ try {
         // } else {
         //     getCoordinateAdress($_GET['city']);
         // }
-        header('location: ../index.php?action=streetMap');
+        header('location:../../index.php?action=streetMap');
         exit();
     } else {
         throw new Exception('Une erreur c\'est produite ! Accès interdit!');
     }
 } catch (Exception $e) {
     $ex = 'Erreur : ' . $e->getMessage();
-    require '../vue/vueException.php';
+    require '../../vue/vueException.php';
 }
