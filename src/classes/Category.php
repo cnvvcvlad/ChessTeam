@@ -1,5 +1,9 @@
 <?php
 
+namespace Democvidev\ChessTeam\Classes;
+
+use Democvidev\ChessTeam\Classes\Generique;
+
 class Category extends Generique
 {
     private $id;

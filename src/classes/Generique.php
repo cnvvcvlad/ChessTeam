@@ -1,5 +1,7 @@
 <?php
 
+namespace Democvidev\ChessTeam\Classes;
+
 abstract class Generique
 {
 

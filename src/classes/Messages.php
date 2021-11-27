@@ -1,7 +1,8 @@
 <?php
 
-require_once 'Generique.php';
+namespace Democvidev\ChessTeam\Classes;
 
+use Democvidev\ChessTeam\Classes\Generique;
 
 class Messages extends Generique
 {
