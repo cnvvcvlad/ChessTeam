@@ -1,48 +1,49 @@
 <?php
 
-session_start();
-require 'controllerStatut.php';
-require '../model/MemberManager.php';
-require '../classes/Users.php';
-require '../model/CategoriesManager.php';
-require '../classes/Category.php';
-require '../model/ArticleManager.php';
-require '../classes/Article.php';
-require '../model/CommentsManager.php';
-require '../classes/Comment.php';
+use Democvidev\ChessTeam\Classes\Users;
+use Democvidev\ChessTeam\Classes\Article;
+use Democvidev\ChessTeam\Classes\Comment;
+use Democvidev\ChessTeam\Classes\Category;
+use Democvidev\ChessTeam\Model\MemberManager;
+use Democvidev\ChessTeam\Model\ArticleManager;
+use Democvidev\ChessTeam\Model\CommentsManager;
+use Democvidev\ChessTeam\Model\CategoriesManager;
+use Democvidev\ChessTeam\Service\RoleHandler;
+use Democvidev\ChessTeam\Service\ValidatorHandler;
 
 $manager_user = new MemberManager();
-
 $manager_category = new CategoriesManager();
-
 $manager_article = new ArticleManager();
-
 $manager_comment = new CommentsManager();
+$validator = new ValidatorHandler();
+$role = new RoleHandler();
+
+
 
 try {
-    if (isset($_GET['action'])) {
-        session_destroy();
-        header('location:./');
-        exit();
-    }
+    // if (isset($_GET['action'])) {
+    //     session_destroy();
+    //     header('location:./');
+    //     exit();
+    // }
 
     /**************Connexion Inscription Update User *************/
 
     if (isset($_POST['connexion'])) {
         sleep(1);
-        $login = validator($_POST['login']);
+        $login = $validator->validate($_POST['login']);
         $password = $manager_user->checkPassword($login, new MemberManager());
 
         $passwordHash = $password['password'];
-        $passwordUser = validator($_POST['password']);
+        $passwordUser = $validator->validate($_POST['password']);
 
         if (password_verify($passwordUser, $passwordHash)) {
             $manager_user->log($login, $passwordHash);
 
-            header('location:../../index.php?action=connected');
+            header('location:index.php?action=connected');
             exit();
         }
-        throw new Exception('Le mot de passe est invalide !');
+        throw new \Exception('Le mot de passe est invalide !');
     } elseif (
         isset($_POST['inscription']) and
         isset($_FILES['image_membre']) and
@@ -51,14 +52,14 @@ try {
         extract($_POST);
         // var_dump($_POST);
         // exit();
-        $login = validate($login);
+        $login = $validator->validate($login);
 
-        $email = emailValidator($email);
+        $email = $validator->validateEmail($email);
 
-        $password = validate($password);
+        $password = $validator->validate($password);
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        $user_image = photoValidator($_FILES['image_membre']['name']);
+        $user_image = $validator->validatePhoto($_FILES['image_membre']['name']);
 
         if ($_FILES['image_membre']['size'] <= 2000000) {
             $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
@@ -71,7 +72,7 @@ try {
                 $user_image = $_FILES['image_membre']['name'];
 
                 //                $user_image = uniqid() . $user_image;
-                $path = '../../assets/img/uploads/' . $user_image;
+                $path = 'assets/img/uploads/' . $user_image;
 
                 move_uploaded_file($_FILES['image_membre']['tmp_name'], $path);
 
@@ -84,38 +85,38 @@ try {
                     ])
                 );
 
-                if (isAdmin()) {
+                if ($role->isAdmin()) {
                     header(
-                        'location:../../index.php?action=allMembers&alert=aded'
+                        'location:index.php?action=allMembers&alert=aded'
                     );
                     exit();
                 }
-                header('location:../../index.php?action=connexion&alert=inscrit');
+                header('location:index.php?action=connexion&alert=inscrit');
                 exit();
             } else {
-                throw new Exception(
+                throw new \Exception(
                     "Veuillez rééssayer avec un autre format d'image !"
                 );
             }
         } else {
-            throw new Exception('Votre fichier ne doit pas dépasser 2 Mo !');
+            throw new \Exception('Votre fichier ne doit pas dépasser 2 Mo !');
         }
     } elseif (isset($_POST['update'])) {
         extract($_POST);
         $id_user = htmlspecialchars($id_user);
 
-        $login = validate($login);
+        $login = $validator->validate($login);
 
-        $email = validate($email);
+        $email = $validator->validateEmail($email);
 
-        $password = validate($password);
+        $password = $validator->validate($password);
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         if (
             isset($_FILES['user_image']) and
             $_FILES['user_image']['error'] == 0
         ) {
-            $user_image = photoValidator($_FILES['user_image']['name']);
+            $user_image = $validator->validatePhoto($_FILES['user_image']['name']);
 
             if ($_FILES['user_image']['size'] <= 2000000) {
                 $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
@@ -129,15 +130,15 @@ try {
 
                     move_uploaded_file(
                         $_FILES['user_image']['tmp_name'],
-                        '../../assets/img/uploads/' . $user_image
+                        'assets/img/uploads/' . $user_image
                     );
                 } else {
-                    throw new Exception(
+                    throw new \Exception(
                         'Veuillez rééssayer avec un autre format !'
                     );
                 }
             } else {
-                throw new Exception(
+                throw new \Exception(
                     'Votre fichier ne doit pas dépasser 1 Mo !'
                 );
             }
@@ -151,25 +152,27 @@ try {
                 'user_image' => $user_image,
             ])
         );
-        if (isAdmin()) {
+        if ($role->isAdmin()) {
             // header('location:../../index.php?action=home');
-            header('location:../../index.php?action=allMembers&memberId=' . $id_user);
+            header('location:index.php?action=allMembers&memberId=' . $id_user);
             // header('location:../../' . basename($_SERVER['HTTP_REFERER']));
             exit();
         } else {
-            header('location:../../index.php?action=home');
+            header('location:index.php?action=home');
         }
         exit();
-    } /************Add Update Category *************/ elseif (
+    }
+    /************Add Update Category *************/
+    elseif (
         isset($_POST['categoryCreation']) and
         isset($_FILES['image_category']) and
         $_FILES['image_category']['error'] == 0
     ) {
         extract($_POST);
 
-        $cat_title = validate($cat_title);
-        $cat_description = validate($cat_description);
-        $category_image = validate($_FILES['image_category']['name']);
+        $cat_title = $validator->valid($cat_title);
+        $cat_description = $validator->valid($cat_description);
+        $category_image = $validator->valid($_FILES['image_category']['name']);
         $cat_author = htmlspecialchars($_SESSION['id_user']);
 
         if ($_FILES['image_category']['size'] <= 2000000) {
@@ -183,7 +186,7 @@ try {
 
                 move_uploaded_file(
                     $_FILES['image_category']['tmp_name'],
-                    '../../assets/img/uploads/' . $category_image
+                    'assets/img/uploads/' . $category_image
                 );
 
                 $manager_category->insertCategory(
@@ -195,29 +198,29 @@ try {
                     ])
                 );
 
-                header('location:../../index.php?action=allCategory');
+                header('location:index.php?action=allCategory');
                 exit();
             } else {
-                throw new Exception(
+                throw new \Exception(
                     'Veuillez rééssayer avec un autre format !'
                 );
             }
         } else {
-            throw new Exception('Votre fichier ne doit pas dépasser 1 Mo !');
+            throw new \Exception('Votre fichier ne doit pas dépasser 1 Mo !');
         }
     } elseif (isset($_POST['updateCategory'])) {
         extract($_POST);
 
         $id = htmlspecialchars($id);
         $cat_author = htmlspecialchars($cat_author);
-        $title = validate($title);
+        $title = $validator->valid($title);
         $description = htmlspecialchars($description);
 
         if (
             isset($_FILES['category_image']) and
             $_FILES['category_image']['error'] == 0
         ) {
-            $category_image = validate($_FILES['category_image']['name']);
+            $category_image = $validator->valid($_FILES['category_image']['name']);
 
             if ($_FILES['category_image']['size'] <= 2000000) {
                 $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
@@ -231,15 +234,15 @@ try {
 
                     move_uploaded_file(
                         $_FILES['category_image']['tmp_name'],
-                        '../../assets/img/uploads/' . $category_image
+                        'assets/img/uploads/' . $category_image
                     );
                 } else {
-                    throw new Exception(
+                    throw new \Exception(
                         'Veuillez rééssayer avec un autre format !'
                     );
                 }
             } else {
-                throw new Exception(
+                throw new \Exception(
                     'Votre fichier ne doit pas dépasser 1 Mo !'
                 );
             }
@@ -254,19 +257,21 @@ try {
             ])
         );
 
-        header('location:../../index.php?action=allCategory');
+        header('location:index.php?action=allCategory');
         exit();
-    } /**************Add Update Article ****************/ elseif (
+    }
+    /**************Add Update Article ****************/
+    elseif (
         isset($_POST['articleCreation']) and
         isset($_FILES['image_article']) and
         $_FILES['image_article']['error'] == 0
     ) {
         extract($_POST);
 
-        $art_title = validate($art_title);
-        $art_description = validate($art_description);
-        $art_content = validate($art_content);
-        $art_image = photoValidator($_FILES['image_article']['name']);
+        $art_title = $validator->valid($art_title);
+        $art_description = $validator->valid($art_description);
+        $art_content = $validator->valid($art_content);
+        $art_image = $validator->validatePhoto($_FILES['image_article']['name']);
         $category_id = htmlspecialchars($_POST['category']);
         $art_author = htmlspecialchars($_SESSION['id_user']);
 
@@ -281,7 +286,7 @@ try {
 
                 move_uploaded_file(
                     $_FILES['image_article']['tmp_name'],
-                    '../../assets/img/uploads/' . $post_image
+                    'assets/img/uploads/' . $post_image
                 );
 
                 $manager_article->insertArticle(
@@ -295,13 +300,14 @@ try {
                     ])
                 );
 
-                header('location:../../index.php?action=allArticles');
+                // header('location:index.php?action=allArticles');
+                header('location:index.php?action=myArticlesId&id=' . $_SESSION['id_user']);
                 exit();
             } else {
-                throw new Exception('Extension non autorisée !');
+                throw new \Exception('Extension non autorisée !');
             }
         } else {
-            throw new Exception(
+            throw new \Exception(
                 'La taille de votre fichier doit etre inférieure à 1Mo !'
             );
         }
@@ -321,7 +327,7 @@ try {
             isset($_FILES['art_image']) and
             $_FILES['art_image']['error'] == 0
         ) {
-            $art_image = photoValidator($_FILES['art_image']['name']);
+            $art_image = $validator->validatePhoto($_FILES['art_image']['name']);
 
             if ($_FILES['art_image']['size'] <= 2000000) {
                 $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
@@ -335,15 +341,15 @@ try {
 
                     move_uploaded_file(
                         $_FILES['art_image']['tmp_name'],
-                        '../../assets/img/uploads/' . $art_image
+                        'assets/img/uploads/' . $art_image
                     );
                 } else {
-                    throw new Exception(
+                    throw new \Exception(
                         'Veuillez rééssayer avec un autre format !'
                     );
                 }
             } else {
-                throw new Exception(
+                throw new \Exception(
                     'Votre fichier ne doit pas dépasser 1 Mo !'
                 );
             }
@@ -360,10 +366,12 @@ try {
                 ])
             );
 
-            header('location:../../index.php?action=allArticles');
+            header('location:index.php?action=myArticlesId&id=' . $_SESSION['id_user']);
             exit();
         }
-    } /************Add Update Comments ****************/ elseif (
+    }
+    /************Add Update Comments ****************/
+    elseif (
         isset($_POST['commentCreation'])
     ) {
         $com_author = htmlspecialchars($_SESSION['id_user']);
@@ -380,7 +388,7 @@ try {
 
         // $url = $_SERVER['HTTP_REFERER'];
         // $url_referer = basename($url);
-        header('location:../../' . basename($_SERVER['HTTP_REFERER']));
+        header('location:./' . basename($_SERVER['HTTP_REFERER']));
         exit();
     } elseif (isset($_POST['updateComment'])) {
         extract($_POST);
@@ -394,22 +402,22 @@ try {
             ])
         );
 
-        header('location:../../index.php?action=allComments');
+        header('location:index.php?action=allComments');
         exit();
-    } elseif (isset($_GET['city'])) {
-        require_once 'controllerCoachs.php';
-        require_once '../model/CoachsManager.php';
+    } elseif (isset($_POST['city'])) {
+        // require_once 'controllerCoachs.php';
+        // require_once '../model/CoachsManager.php';
         // if (empty($_GET['city'])) {
         //     getAllCoordinateAdress();
         // } else {
         //     getCoordinateAdress($_GET['city']);
         // }
-        header('location:../../index.php?action=streetMap');
+        header('location:index.php?action=streetMap');
         exit();
     } else {
-        throw new Exception('Une erreur c\'est produite ! Accès interdit!');
+        throw new \Exception('Une erreur c\'est produite ! Accès interdit!');
     }
-} catch (Exception $e) {
+} catch (\Exception $e) {
     $ex = 'Erreur : ' . $e->getMessage();
-    require '../../vue/vueException.php';
+    require 'vue/vueException.php';
 }

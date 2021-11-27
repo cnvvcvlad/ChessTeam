@@ -1,5 +1,9 @@
 <?php
 
+namespace Democvidev\ChessTeam\Controller;
+
+use Democvidev\ChessTeam\Model\CommentsManager;
+
 class CommentController
 {
     // public function __construct()
@@ -20,12 +24,6 @@ class CommentController
         $comments = $comment_manager->showCommentsOfArticle($article_id);
         return $comments;
     }
-
-    
-    // function numberCommentsOfArticle($commentsOfArticle): void
-    // {
-    //     echo count($commentsOfArticle);
-    // }
 
     /**
      * Récuère tous les commentaires

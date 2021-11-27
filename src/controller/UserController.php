@@ -1,5 +1,10 @@
 <?php
 
+namespace Democvidev\ChessTeam\Controller;
+
+use Democvidev\ChessTeam\Model\MemberManager;
+use Democvidev\ChessTeam\Service\RoleHandler;
+
 class UserController
 {
     // private $model;
@@ -11,10 +16,10 @@ class UserController
      * @param int $user_id
      * @return array
      */
-    public function getInfoUser($user_id): array    
+    public function getInfoUser($user_id): array
     {
         $member_manager = new MemberManager();
-        $member = $member_manager->showOneUser($user_id);        
+        $member = $member_manager->showOneUser($user_id);
         return $member;
     }
 
@@ -59,8 +64,8 @@ class UserController
     {
         $member_manager = new MemberManager();
         $member_manager->deleteU($user_id);
-
-        if (isAdmin()) {
+        $role = new RoleHandler();
+        if ($role->isAdmin()) {
             header('location:index.php?action=allMembers');
             exit;
         } else {
@@ -72,7 +77,8 @@ class UserController
 
     public function helloUser()
     {
-        if (isConnected()) {
+        $role = new RoleHandler();
+        if ($role->isConnected()) {
             echo 'Salut ' .
                 strtoupper(
                     $this->showNameAuthor(

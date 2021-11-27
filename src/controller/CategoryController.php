@@ -1,5 +1,9 @@
 <?php
 
+namespace Democvidev\ChessTeam\Controller;
+
+use Democvidev\ChessTeam\Model\CategoriesManager;
+
 class CategoryController
 {
     /**
@@ -41,7 +45,7 @@ class CategoryController
             $category = $cat_manager->nameCategory($id_category);
             $category_name = implode($category);
             return $category_name;
-        } 
+        }
         return $category_name;
     }
 

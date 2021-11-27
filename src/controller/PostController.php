@@ -1,5 +1,9 @@
 <?php
 
+namespace Democvidev\ChessTeam\Controller;
+
+use Democvidev\ChessTeam\Model\ArticleManager;
+
 class PostController
 {
     // public function __construct()
