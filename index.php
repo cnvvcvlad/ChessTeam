@@ -2,22 +2,22 @@
 session_start();
 
 spl_autoload_register(function ($class) {
-    require 'classes/' . $class . '.php';
+    require 'src/classes/' . $class . '.php';
 });
 
 /****************************************/
-require_once 'controller/controllerStatut.php';
-require_once 'controller/controllerPosts.php';
-require_once 'controller/controllerCategory.php';
-require_once 'controller/controllerUser.php';
-require_once 'controller/controllerComments.php';
-require_once 'controller/controllerCoachs.php';
+require_once 'src/controller/controllerStatut.php';
+require_once 'src/controller/controllerPosts.php';
+require_once 'src/controller/controllerCategory.php';
+require_once 'src/controller/controllerUser.php';
+require_once 'src/controller/controllerComments.php';
+require_once 'src/controller/controllerCoachs.php';
 
-require_once 'model/ArticleManager.php';
-require_once 'model/CategoriesManager.php';
-require_once 'model/CommentsManager.php';
-require_once 'model/MemberManager.php';
-require_once 'model/CoachsManager.php';
+require_once 'src/model/ArticleManager.php';
+require_once 'src/model/CategoriesManager.php';
+require_once 'src/model/CommentsManager.php';
+require_once 'src/model/MemberManager.php';
+require_once 'src/model/CoachsManager.php';
 
 /****************** Pagination ***********************/
 // on détermine sur quelle page on se trouve
