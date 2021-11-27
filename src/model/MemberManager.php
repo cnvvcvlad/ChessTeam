@@ -1,21 +1,20 @@
 <?php
 
-require_once 'DataBase.php';
+namespace Democvidev\ChessTeam\Model;
+
+use Democvidev\ChessTeam\Classes\Users;
+use Democvidev\ChessTeam\Model\DataBase;
+use Democvidev\ChessTeam\Service\RoleHandler;
 
 class MemberManager extends DataBase
-{
-    public function getDataBase()
-    {
-        return $this->dataBase;
-    }
-
-    public function setDataBase($dataBase)
-    {
-        $this->dataBase = $dataBase;
-    }
-
-
-    public function checkPassword($login, MemberManager $member)
+{    
+    /**
+     * Verifier le mot de passe lors de la connexion
+     *
+     * @param string $login
+     * @return array
+     */
+    public function checkPassword($login): array 
     {
         $request = 'SELECT password FROM users WHERE login = :login';
         $select = $this->dbConnect()->prepare($request);
@@ -26,15 +25,20 @@ class MemberManager extends DataBase
             $password = $select->fetch();
             return $password;
         }
-        throw new Exception("Le login est invalide !");
+        throw new \Exception("Le mot de passe est invalide !");
     }
 
-    public function insertMembre(Users $member)
+    /**
+     * Insère un nouveau membre dans la base de données
+     *
+     * @param Users $member
+     * @return void
+     */
+    public function insertMembre(Users $member): void
     {
         if ($this->existLogin($member->getLogin())) {
-            throw new Exception("Désolé cet utilisateur existe déjà");
+            throw new \Exception("Désolé cet utilisateur existe déjà");
         }
-
         $request = 'INSERT INTO users(login, email, password, user_image) VALUES(:login, :email, :password, :user_image)';
         $insert = $this->dbConnect()->prepare($request);
         $insert = $insert->execute([
@@ -45,38 +49,54 @@ class MemberManager extends DataBase
         ]);
     }
 
-    public function existLogin($login)
+    /**
+     * Vérifie si le login existe déjà
+     *
+     * @param string $login
+     * @return boolean
+     */
+    public function existLogin($login): bool
     {
         $request = 'SELECT * FROM users WHERE login = :login';
         $insert = $this->dbConnect()->prepare($request);
         $insert->execute(["login" => $login]);
-
         if ($insert->rowCount() != 0) {
             return true;
         }
         return false;
     }
 
-    public function existId($id_user)
+    /**
+     * Vérifie si l'utilisateur existe déjà
+     *
+     * @param int $id_user
+     * @return boolean
+     */
+    public function existId($id_user): bool
     {
         $request = 'SELECT * FROM users WHERE id_user = :id_user';
         $insert = $this->dbConnect()->prepare($request);
         $insert->execute(["id_user" => $id_user]);
-
         if ($insert->rowCount() != 0) {
             return true;
         }
         return false;
     }
 
-    public function log($login, $password)
+    /**
+     * Vérifie les informations de connexion et créer une nouvelle session du membre
+     *
+     * @param string $login
+     * @param string $password
+     * @return void
+     */
+    public function log($login, $password): void
     {
         $request = 'SELECT * FROM users WHERE login = :login AND password = :password';
         $request = $this->dbConnect()->prepare($request);
         $request->execute(["login" => $login, "password" => $password]);
         if ($request->rowCount() != 0) {
             $resultat = $request->fetch();
-
             $user = new Users($resultat);
             $_SESSION['id_user'] = $user->getId_user();
             $_SESSION['email'] = $user->getEmail();
@@ -85,16 +105,22 @@ class MemberManager extends DataBase
             $_SESSION['user_image'] = $user->getUser_image();
             $_SESSION['statut'] = $user->getStatut();
         } else {
-            throw new Exception("Login et/ou mot de passe incorrect! Veuillez réessayer !");
+            throw new \Exception("Login et/ou mot de passe incorrect! Veuillez réessayer !");
         }
     }
 
-    public function updateMembre($id_user, Users $member)
+    /**
+     * Mis à jour des informations du membre
+     *
+     * @param int $id_user
+     * @param Users $member
+     * @return void
+     */
+    public function updateMembre($id_user, Users $member): void
     {
         if ($this->existId($member->getId_user())) {
-            throw new Exception("Désolé cet utilisateur n'existe pas");
+            throw new \Exception("Désolé cet utilisateur n'existe pas");
         }
-
         $request = 'UPDATE users SET login = :login, email = :email, password = :password, user_image = :user_image  WHERE id_user = :id_user';
         $update = $this->dbConnect()->prepare($request);
         $update = $update->execute([
@@ -104,51 +130,65 @@ class MemberManager extends DataBase
             "password" => $member->getPassword(),
             "user_image" => $member->getUser_image()
         ]);
-        if (isAdmin() and $_SESSION['id_user'] != $id_user) {
-            return $_SESSION['user_image'];
-        } elseif (isConnected()) {
+        $role = new RoleHandler();
+        if (!$role->isAdmin() and $_SESSION['id_user'] == $id_user) {
             $_SESSION['user_image'] = $member->getUser_image();
-        }
+        }         
     }
 
-
-    public function showOneUser($user_id)
+    /**
+     * Récupère les informations du membre
+     *
+     * @param int $user_id
+     * @return array
+     */
+    public function showOneUser($user_id): array
     {
         $request = 'SELECT * FROM users WHERE id_user = :id_user';
         $select = $this->dbConnect()->prepare($request);
         $select->execute(["id_user" => $user_id]);
-
         $member[] = new Users($select->fetch());
-
         return $member;
     }
 
-    public function showAllUsers()
+    /**
+     * Récupère la liste des membres en descendant
+     *
+     * @return array
+     */
+    public function showAllUsers(): array
     {
         $request = 'SELECT * FROM users WHERE statut = 0  ORDER BY id_user DESC';
-        $select = $this->dbConnect()->prepare($request);
-        $select->execute();
-
+        $select = $this->dbConnect()->query($request);
         $members = [];
-
         while ($data = $select->fetch()) {
             $members[] = new Users($data);
         }
         return $members;
     }
 
-    public function nameUser($user_id)
+    /**
+     * Récupère le nom du membre en fonction de son id
+     *
+     * @param int $user_id
+     * @return array
+     */
+    public function nameUser($user_id): array
     {
         $request = 'SELECT login FROM users WHERE id_user = :id_user';
         $select = $this->dbConnect()->prepare($request);
         $select->execute(["id_user" => $user_id]);
-
         $member = $select->fetch();
-
         return $member;
     }
 
-    public function deleteU($user_id)
+    /**
+     * Supprime le membre
+     *
+     * @param int $user_id
+     * @return void
+     */
+    public function deleteU($user_id): void
     {
         $request = 'DELETE FROM users WHERE id_user = :id_user';
         $delete = $this->dbConnect()->prepare($request);

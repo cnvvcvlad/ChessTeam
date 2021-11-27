@@ -1,16 +1,13 @@
 <?php
 
-/**
- * Cette classe n'aura jamais besoin d'être instanciée plusieurs fois
- */
+namespace Democvidev\ChessTeam\Model;
+
 class DataBase
 {
-    // les variables doivent être définies avant l'appel de la méthode dbConnect() sinon l’objet sera invalide
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
     private $database = 'team_chess';
-    // pattern singleton, retourne toujours une seule instance pdo
     private static $instancePDO = null;
 
     public function __construct(
@@ -19,7 +16,6 @@ class DataBase
         $password = null,
         $database = null
     ) {
-        // une fois la connexion établie avec le serveur
         if ($host != null) {
             $this->host = $host;
             $this->username = $username;

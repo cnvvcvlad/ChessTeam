@@ -1,21 +1,19 @@
 <?php
 
-require_once 'DataBase.php';
+namespace Democvidev\ChessTeam\Model;
+
+use Democvidev\ChessTeam\Model\DataBase;
+use Democvidev\ChessTeam\Classes\Messages;
 
 class MessagesManager extends DataBase
 {
-    public function getDatabase()
-    {
-        return $this->database;
-    }
-
-    public function setDatabase($database)
-    {
-        $this->database = $database;
-    }
-
-
-    public function insertMessage(Messages $messages)
+    /**
+     * Insère un message dans la base de données
+     *
+     * @param Messages $messages
+     * @return void
+     */
+    public function insertMessage(Messages $messages): void
     {
         $request = 'INSERT INTO messages (author_name, mess_author, mess_subject, mess_content) VALUES(:author_name, :mess_author, :mess_subject, :mess_content)';
         $insert = $this->dbConnect()->prepare($request);
@@ -26,6 +24,4 @@ class MessagesManager extends DataBase
             'mess_content' => $messages->getMess_content()
         ]);
     }
-
-
 }

@@ -1,27 +1,19 @@
 <?php
 
-require_once 'DataBase.php';
+namespace Democvidev\ChessTeam\Model;
 
-class CoachsManager extends DataBase
+use Democvidev\ChessTeam\Model\DataBase;
+
+class CoachManager extends DataBase
 {
-    private $table = 'coachs';
-
-    public function getDataBase()
-    {
-        return $this->database;
-    }
-
-    public function setDataBase($database)
-    {
-        $this->database = $database;
-    }
+    private $table = 'coachs';    
 
     /**
-     * Lecture des agences
+     * Récupère toutes les informations des coachs
      *
-     * @return void
+     * @return array
      */
-    public function getAllCoaches()
+    public function getAllCoaches(): array
     {
         // On écrit la requête
         $request = 'SELECT * FROM ' . $this->table;
@@ -57,7 +49,13 @@ class CoachsManager extends DataBase
         return $coachs;
     }
 
-    public function getCoachesByCity($city)
+    /**
+     * Récupère les informations d'un coach selon la ville
+     *
+     * @param [type] $city
+     * @return array
+     */
+    public function getCoachesByCity($city): array
     {
         // On écrit la requête
         $request = 'SELECT * FROM ' . $this->table . ' WHERE city = :city';
@@ -88,26 +86,31 @@ class CoachsManager extends DataBase
             ];
             $coachs['coachs'][] = $coach;
         }
-
-        // On retourne le résultat
         return $coachs;
     }
 
-    public function getInfoCoach($id)
+    /**
+     * Récupère les informations d'un coach selon son id
+     *
+     * @param int $id
+     * @return array
+     */
+    public function getInfoCoach($id): array
     {
-        // On écrit la requête
         $request = 'SELECT * FROM ' . $this->table . ' WHERE id = :id';
-        // On prépare la requête
         $select = $this->dbConnect()->prepare($request);
-        // On exécute la requête
-        $select->execute(['id' => $id]);
-        $coach = $select->fetch(\PDO::FETCH_ASSOC);
-        // var_dump($coach);
-        // exit;
+        $select->bindValue('id', $id, \PDO::PARAM_INT);
+        $select->execute();
+        $coach = $select->fetch(\PDO::FETCH_ASSOC);        
         return $coach;
     }
 
-    public function getInfoTopCoachs()
+    /**
+     * Récupère les informations des 3 meilleurs coachs
+     *
+     * @return array
+     */
+    public function getInfoTopCoachs(): array
     {
         $request =
             'SELECT * FROM ' . $this->table . ' ORDER BY id DESC LIMIT 3';
@@ -131,7 +134,6 @@ class CoachsManager extends DataBase
             ];
             $coachs[] = $coach;
         }
-
         return $coachs;
     }
 }
