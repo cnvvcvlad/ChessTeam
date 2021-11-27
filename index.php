@@ -1,29 +1,30 @@
 <?php
 session_start();
 
-spl_autoload_register(function ($class) {
-    require 'src/classes/' . $class . '.php';
-});
+require 'vendor/autoload.php';
 
-/****************************************/
-require_once 'src/controller/controllerStatut.php';
+use Democvidev\ChessTeam\Service\RoleHandler;
+use Democvidev\ChessTeam\Controller\PostController;
+use Democvidev\ChessTeam\Controller\UserController;
+use Democvidev\ChessTeam\Controller\CoachController;
+use Democvidev\ChessTeam\Controller\CommentController;
+use Democvidev\ChessTeam\Controller\CategoryController;
+
+/***************** Controllers & Helpers ***********************/
 require_once 'src/controller/PostController.php';
 require_once 'src/controller/CategoryController.php';
 require_once 'src/controller/UserController.php';
 require_once 'src/controller/CommentController.php';
-require_once 'src/controller/controllerCoachs.php';
-
-require_once 'src/model/ArticleManager.php';
-require_once 'src/model/CategoriesManager.php';
-require_once 'src/model/CommentsManager.php';
-require_once 'src/model/MemberManager.php';
-require_once 'src/model/CoachsManager.php';
+require_once 'src/controller/CoachController.php';
+require_once 'src/Service/RoleHandler.php';
 
 /******** Instanciation ************/
 $user = new UserController();
 $post = new PostController();
 $category = new CategoryController();
 $comment = new CommentController();
+$role = new RoleHandler();
+$coco = new CoachController();
 
 /****************** Pagination ***********************/
 // on détermine sur quelle page on se trouve
@@ -57,6 +58,10 @@ try {
             require 'vue/vueInscription.php';
         } elseif ($action == 'connexion') {
             require 'vue/vueConnexion.php';
+        } elseif ($action == 'controllerFrontEnd') {
+            require 'src/Controller/controllerFrontEnd.php';
+        } elseif ($action == 'controllerForm') {
+            require 'src/Controller/controllerForm.php';
         } elseif ($action == 'connected') {
             require 'vue/vueAccueil.php';
         } elseif ($action == 'myAccount') {
@@ -83,17 +88,17 @@ try {
             require 'vue/fluxRSS/rss.php';
         } elseif ($action == 'coach') {
             if (isset($_GET['id_coach'])) {
-                $coach = getCoach(htmlspecialchars($_GET['id_coach']));
+                $coach = $coco->getCoach(htmlspecialchars($_GET['id_coach']));
                 require 'vue/vueCoachInfo.php';
             } else {
-                $coachs = getTopCoachs();
+                $coachs = $coco->getTopCoachs();
                 require 'vue/vueCoachIndex.php';
             }
         } elseif ($action == 'streetMap') {
             require 'vue/vueStreetMap.php';
         } elseif ($action == 'apiStreetMap') {
             // $coordinateAdress = getCoordinateAdress(htmlspecialchars($_GET['ville']));
-            getAllCoordinateAdress();
+            $coco->getAllCoordinateAdress();
         } elseif ($action == 'allArticles') {
             if (isset($_GET['id'])) {
                 $commentsOfArticle = $comment->getAllCommentsOfArticle(
@@ -155,7 +160,6 @@ try {
             require 'vue/vueAllVs.php';
         } elseif ($action == 'home') {
             require 'vue/vueAccueil.php';
-            //            header('location:./');
         } elseif ($action == 'search') {
             if (isset($_POST['search']) && empty($_POST['search'])) {
                 header('location:./index.php?action=home&alert=emptySearch');
