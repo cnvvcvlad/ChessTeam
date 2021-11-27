@@ -3,7 +3,7 @@
         <?php if (!empty($lastArticle_one)): ?>
             <?php foreach ($lastArticle_one as $key => $value): ?>
                 <h2><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?></h2>
-                <?php if (isAdmin()): ?>
+                <?php if ($role->isAdmin()): ?>
                     <div class="bouton_commande"><a href="">Modifier</a></div>
                 <?php endif; ?>
                 <div class="bouton_commande">
@@ -11,11 +11,11 @@
                         l'article <img src="assets/img/by_default/flecheblanchedroite.png" alt="le bouton rouge" /></a>
                 </div>
                 <p>Ecrit par
-                    <span class="mark"><?= isset($user) ? $user->showNameAuthor(
-                        $value->getArt_author()
-                    ) : '' ?></span>
+                    <span class="mark"><?= isset($user)
+                        ? $user->showNameAuthor($value->getArt_author())
+                        : '' ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
-                    <strong><?= showNameCategory(
+                    <strong><?= $category->showNameCategory(
                         $value->getCategory_id()
                     ) ?></strong>
                 </p>
@@ -28,8 +28,10 @@
                         </span>
                     </div>
                     <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">Commentaires
-                            (<?= numberCommentsOfArticle(
-                                getAllCommentsOfArticle($value->getId())
+                            (<?= count(
+                                $comment->getAllCommentsOfArticle(
+                                    $value->getId()
+                                )
                             ) ?>)</a>
                     </p>
                 </div>

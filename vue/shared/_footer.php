@@ -37,7 +37,7 @@
 
                     </div>
                 </li>
-                <?php if (isConnected()) : ?>
+                <?php if ($role->isConnected()) : ?>
                     <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a>
                         <div class="separate"></div><a class="btn" href="">#top</a>
                     </li>
