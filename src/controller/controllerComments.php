@@ -26,4 +26,5 @@ function deleteComment($comment_id) {
     $comment_manager = new CommentsManager();
     $comment_manager->deleteCom($comment_id);
     header('location:index.php?action=allComments');
+    exit();
 }
