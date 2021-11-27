@@ -4,7 +4,7 @@
 <?php $description =
     'Voir les commentaires des internautes sur différents sujets des échecs'; ?>
 
-<?php if (isAdmin()): ?>
+<?php if ($role->isAdmin()): ?>
 <?php if (isset($allComments)): ?>
     <h1>Voici tous les commentaires postés</h1>
     <div class="top_article">
@@ -14,9 +14,9 @@
 
             <div class="comment-author">
                 <p>
-                    <span class="mark"><?= showNameAuthor(
+                    <span class="mark"><?= isset($user) ? $user->showNameAuthor(
                         $value->getCom_author()
-                    ) ?></span>
+                    ) : '' ?></span>
                     le ( <?= $value->getCom_date_creation() ?> )
                 </p>
             </div>

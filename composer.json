@@ -1,0 +1,10 @@
+{
+    "name": "democvidev/chess-team",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Democvidev\\ChessTeam\\": "src/"
+        }
+    },
+    "require": {}
+}

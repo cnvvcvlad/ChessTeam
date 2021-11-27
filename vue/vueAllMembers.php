@@ -6,7 +6,7 @@
     echo '<h4>Nouveau membre vient d\'être ajouté !</h4>';
 } ?>
 
-<?php if (isAdmin()): ?>
+<?php if ($role->isAdmin()): ?>
     <h1>Voici tous les membres de ChessTeam</h1>
 
     <?php if (isset($allMembers)): ?>
@@ -70,7 +70,7 @@
         <h2>Ajouter un nouveau membre :</h2>
         <div class="form-connexion">
 
-            <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription"
+            <form action="?action=controllerFrontEnd" method="POST" class="form-inscription"
                   enctype="multipart/form-data">
                 <div class="form-inscription">
                     <label for="login">Login :

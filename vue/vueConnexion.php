@@ -9,7 +9,7 @@
 <div class="container">
     <h1 class="text-center">Connectez - vous!</h1>
     <div class="container_form">
-        <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription">
+        <form action="?action=controllerFrontEnd" method="POST" class="form-inscription">
             <fieldset>
                 <legend>Vos identifiants : </legend>
                 <div class="form-inscription">

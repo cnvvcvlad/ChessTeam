@@ -7,7 +7,7 @@
 <div class="container_form">
 
 
-    <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription"
+    <form action="?action=controllerFrontEnd" method="POST" class="form-inscription"
           enctype="multipart/form-data">
         <fieldset>
             <legend>Vos coordonnées : </legend>
