@@ -48,9 +48,9 @@
                 </div>
                 <p>
                     <a href="?action=allArticles&amp;id=<?= $values->getId() ?>">
-                        (<?= count(
-                            getAllCommentsOfArticle($values->getId())
-                        ) ?>) Commentaires
+                        (<?= isset($comment) ?  count(
+                            $comment->getAllCommentsOfArticle($values->getId())
+                        ) : '' ?>) Commentaires
                     </a>
                 </p>
 

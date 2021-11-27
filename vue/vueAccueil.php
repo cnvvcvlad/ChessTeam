@@ -73,9 +73,9 @@
                     </div>
                     <p>
                         <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">
-                            Commentaires(<?= numberCommentsOfArticle(
-                                                getAllCommentsOfArticle($value->getId())
-                                            ) ?>)</a>
+                            Commentaires(<?= isset($comment) ? count(
+                                                $comment->getAllCommentsOfArticle($value->getId())
+                                            ) : '' ?>)</a>
                     </p>
                 </div>
             <?php endforeach; ?>

@@ -38,9 +38,9 @@
 
         <div class="comment-block">
 
-            <h3 class="comment-libelle">(<?php numberCommentsOfArticle(
+            <h3 class="comment-libelle">(<?= isset($commentsOfArticle) ? count(
                 $commentsOfArticle
-            ); ?>) Commentaires </h3>
+            ) : '' ?>) Commentaire<?= count($commentsOfArticle) == 1 ? '' : 's' ?></h3>
             <?php foreach ($commentsOfArticle as $keys => $values): ?>
                 <div class="comment-added">
 

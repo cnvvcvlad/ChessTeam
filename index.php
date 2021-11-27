@@ -10,7 +10,7 @@ require_once 'src/controller/controllerStatut.php';
 require_once 'src/controller/PostController.php';
 require_once 'src/controller/CategoryController.php';
 require_once 'src/controller/UserController.php';
-require_once 'src/controller/controllerComments.php';
+require_once 'src/controller/CommentController.php';
 require_once 'src/controller/controllerCoachs.php';
 
 require_once 'src/model/ArticleManager.php';
@@ -23,6 +23,7 @@ require_once 'src/model/CoachsManager.php';
 $user = new UserController();
 $post = new PostController();
 $category = new CategoryController();
+$comment = new CommentController();
 
 /****************** Pagination ***********************/
 // on détermine sur quelle page on se trouve
@@ -95,7 +96,7 @@ try {
             getAllCoordinateAdress();
         } elseif ($action == 'allArticles') {
             if (isset($_GET['id'])) {
-                $commentsOfArticle = getAllCommentsOfArticle(
+                $commentsOfArticle = $comment->getAllCommentsOfArticle(
                     htmlspecialchars($_GET['id'])
                 );
                 $articleId = $post->getOneArticle(htmlspecialchars($_GET['id']));
@@ -142,12 +143,12 @@ try {
             }
         } elseif ($action == 'allComments') {
             if (isset($_GET['modifyC'])) {
-                $modifyComment = getComment(htmlspecialchars($_GET['modifyC']));
+                $modifyComment = $comment->getComment(htmlspecialchars($_GET['modifyC']));
                 require 'vue/vueCommentId.php';
             } elseif (isset($_GET['deleteCom'])) {
-                deleteComment(htmlspecialchars($_GET['deleteCom']));
+                $comment->deleteComment(htmlspecialchars($_GET['deleteCom']));
             } else {
-                $allComments = getAllComments();
+                $allComments = $comment->getAllComments();
                 require 'vue/vueAllComments.php';
             }
         } elseif ($action == 'allVs') {
