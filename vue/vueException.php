@@ -27,7 +27,7 @@
 
             <div class="top-button-exception">
 
-                <a href="../../">Retour</a>
+                <a href="./">Retour</a>
 
             </div>
             <div class="copyright-exception">

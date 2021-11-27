@@ -10,7 +10,7 @@
     <?php foreach ($articleId as $key => $value): ?>
         <h1><?= $value->getArt_title() ?></h1>
         <div class="banniere_bouton">
-            <?php if (isAdmin()): ?>
+            <?php if ($role->isAdmin()): ?>
                 <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>" >Modifier</a></div>
                 <div class="bouton_commande"><a
                         href="?action=allArticles&amp;deleteA=<?= $value->getId() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer</a></div>
@@ -53,7 +53,7 @@
                         </p>
                     </div>
                     <div class="comment-description"><p><?= $values->getCom_content() ?></p></div>
-                    <?php if (isAdmin()): ?>
+                    <?php if ($role->isAdmin()): ?>
                     <div class="comment-modify">
                         <a href="?action=allComments&amp;modifyC=<?= $values->getId() ?>" class="comment-modify">Modifier</a>
                     </div>
@@ -62,12 +62,12 @@
                 </div>
             <?php endforeach; ?>
 
-            <?php if (isConnected()): ?>
+            <?php if ($role->isConnected()): ?>
                 <div class="comment-block">
                     <div class="comment-add">
                         <fieldset>
                             <legend>Ajouter un commentaire</legend>
-                            <form action="src/controller/controllerFrontEnd.php" method="POST" class="form-inscription">
+                            <form action="?action=controllerFrontEnd" method="POST" class="form-inscription">
                                 <p><input type="hidden" name="com_author"
                                           value="<?= htmlspecialchars(
                                               $_SESSION['id_user']

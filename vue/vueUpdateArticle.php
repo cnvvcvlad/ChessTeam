@@ -32,7 +32,7 @@
 
                 <h3 class="comment-libelle"> Modifier l'article : </h3>
 
-                <form action="src/controller/controllerFrontEnd.php" method="post" class="form-inscription"
+                <form action="?action=controllerFrontEnd" method="post" class="form-inscription"
                       enctype="multipart/form-data">
                     <fieldset>
                         <legend>Introduisez vos informations</legend>

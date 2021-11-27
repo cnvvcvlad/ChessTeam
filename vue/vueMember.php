@@ -2,7 +2,7 @@
 
 <?php $title = 'Accueil Membre'; ?>
 <?php $description = 'Administrez les informations personnelles et actualisez-les'; ?>
-<h1> Bienvenue dans l'espace <?php if (isAdmin()) : ?> administrateur <?php else : ?> membre<?php endif; ?></h1>
+<h1> Bienvenue dans l'espace <?php if ($role->isAdmin()) : ?> administrateur <?php else : ?> membre<?php endif; ?></h1>
 
 <div class="top_article">
 
@@ -10,7 +10,7 @@
 
     <div class="view">
 
-        <?php if (isConnected()) : ?>
+        <?php if ($role->isConnected()) : ?>
             <ul>
                 <li>consulter et modifier ses informations personnelles</li>
             </ul>
@@ -30,7 +30,7 @@
                 <li>consulter et écrire des commentaires</li>
             </ul>
 
-            <?php if (isAdmin()) : ?>
+            <?php if ($role->isAdmin()) : ?>
 
                 <ul>
                     <li>consulter la liste des membres</li>
@@ -86,14 +86,14 @@
                             </td>
 
                         </tr>
-                        <?php if (!isAdmin()) : ?>
+                        <?php if (!$role->isAdmin()) : ?>
                             <tr>
                                 <th><a href="?action=allMembers&amp;deleteM=<?= $_SESSION['id_user'] ?>" class="comment-modify" onclick="return(confirm('Supprimer vraiment?'))">Supprimer
                                         mon compte</a></th>
                             </tr>
                         <?php endif ?>
                     </table>
-                    <form action="src/controller/controllerFrontEnd.php" method="POST" enctype="multipart/form-data"
+                    <form action="?action=controllerFrontEnd" method="POST" enctype="multipart/form-data"
                           class="form-create">
                         <fieldset>
                             <legend>Introduisez vos informations</legend>

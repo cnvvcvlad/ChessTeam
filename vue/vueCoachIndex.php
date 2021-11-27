@@ -6,7 +6,7 @@
 <div class="coach-container">
     <div class="meet-coach">
         <h1 class="tag-coach">Trouvez le mentor de vos rêves en quelques clics</h1>
-        <form action="src/controller/controllerFrontEnd.php" method="GET" class="form-coach">
+        <form action="?action=controllerFrontEnd" method="POST" class="form-coach">
             <label for="">
                 <input type="text" name="city" placeholder="VILLE" id="">
                 <p class="tag-coach">Plus de critères</p>
