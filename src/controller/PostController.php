@@ -92,7 +92,7 @@ class PostController
 
     public function getPostsSearchResults($search)
     {
-        $posts = searchOneElement($search);
+        $posts = $this->searchOneElement($search);
 
         // On sépare la chaine en plusieurs éléments
         if (empty($posts)) {
@@ -105,7 +105,7 @@ class PostController
                 return strlen($word) > 2;
             });
             foreach ($sortedArray as $key => $value) {
-                $posts += searchOneElement($value);
+                $posts += $this->searchOneElement($value);
             }
         }
         return $posts;
