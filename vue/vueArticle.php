@@ -31,9 +31,9 @@
                     $values->getArt_author()
                 ) : '' ?></span>
                 le <em><?= $values->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
-                <strong><?= showNameCategory(
+                <strong><?= isset($category) ? $category->showNameCategory(
                     $values->getCategory_id()
-                ) ?></strong></p>
+                ) : '' ?></strong></p>
 
             <div id="detail_art" class="justify_article">
 

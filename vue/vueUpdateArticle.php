@@ -17,7 +17,7 @@
             <p><span class="information"> Ecrit par</span>
                 <span class="mark"><?= isset($user) ? $user->showNameAuthor($values->getArt_author()) : '' ?></span>
                 le <em><?= $values->getArt_date_creation() ?></em><span class="information"> dans la catégorie</span>
-                <strong><?= showNameCategory($values->getCategory_id()) ?></strong></p>
+                <strong><?= isset($category) ? $category->showNameCategory($values->getCategory_id()) : '' ?></strong></p>
             <div class="justify_article">
                 <h3><?= $values->getArt_description() ?></h3>
 

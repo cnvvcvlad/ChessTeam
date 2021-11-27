@@ -8,7 +8,7 @@ spl_autoload_register(function ($class) {
 /****************************************/
 require_once 'src/controller/controllerStatut.php';
 require_once 'src/controller/PostController.php';
-require_once 'src/controller/controllerCategory.php';
+require_once 'src/controller/CategoryController.php';
 require_once 'src/controller/UserController.php';
 require_once 'src/controller/controllerComments.php';
 require_once 'src/controller/controllerCoachs.php';
@@ -22,6 +22,7 @@ require_once 'src/model/CoachsManager.php';
 /******** Instanciation ************/
 $user = new UserController();
 $post = new PostController();
+$category = new CategoryController();
 
 /****************** Pagination ***********************/
 // on détermine sur quelle page on se trouve
@@ -43,7 +44,7 @@ $firstArticle = ($currentPage - 1) * $nbArticlesPerPage;
 /***************************************/
 
 try {
-    $allCategory = getAllCategory();
+    $allCategory = $category->getAllCategory();
     $allArticles = $post->getListe($firstArticle, $nbArticlesPerPage);
     $lastArticles = $post->getLastArticles();
     $lastArticle_one = $post->getLastArticle_one();
@@ -122,14 +123,14 @@ try {
             }
         } elseif ($action == 'allCategory') {
             if (isset($_GET['deleteC'])) {
-                deleteCategory(htmlspecialchars($_GET['deleteC']));
+                $category->deleteCategory(htmlspecialchars($_GET['deleteC']));
             } elseif (empty($_GET['id'])) {
-                $allCategory = getAllCategory();
+                $allCategory = $category->getAllCategory();
                 require 'vue/vueAllCategory.php';
             }
         } elseif ($action == 'categoryId') {
             if (isset($_GET['id'])) {
-                $CategoryId = getCategory(htmlspecialchars($_GET['id']));
+                $CategoryId = $category->getCategory(htmlspecialchars($_GET['id']));
                 require 'vue/vueCategoryId.php';
             }
         } elseif ($action == 'articlesOfCategory') {

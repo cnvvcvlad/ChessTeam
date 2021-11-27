@@ -12,7 +12,7 @@
                 <p><span class="information"> Ecrit par</span>
                     <span class="mark"><?= isset($user) ? $user->showNameAuthor($value->getArt_author()) : '' ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
-                    <strong><?= showNameCategory($value->getCategory_id()) ?></strong></p>
+                    <strong><?= isset($category) ? $category->showNameCategory($value->getCategory_id()) : '' ?></strong></p>
 
                 <h3>Description</h3>
 
