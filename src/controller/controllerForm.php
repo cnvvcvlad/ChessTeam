@@ -2,8 +2,10 @@
 
 use Democvidev\ChessTeam\Classes\Messages;
 use Democvidev\ChessTeam\Model\MessagesManager;
+use Democvidev\ChessTeam\Service\ValidatorHandler;
 
 $manager_message = new MessagesManager();
+$validator = new ValidatorHandler();
 
 try {
     // if (isset($_GET['action'])) {
@@ -69,9 +71,9 @@ try {
 
 
                         //on nettoie le contenu, contre les failles xss et autre
-                        $author_name = validate($author_name);
-                        $mess_subject = validate($mess_subject);
-                        $mess_author = emailValidator($mess_author);
+                        $author_name = $validator->valid($author_name);
+                        $mess_subject = $validator->valid($mess_subject);
+                        $mess_author = $validator->validateEmail($mess_author);
                         // on garde les balises html, mais on les desactive
                         $mess_content = htmlspecialchars($mess_content);
 
