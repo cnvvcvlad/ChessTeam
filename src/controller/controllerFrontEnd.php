@@ -32,7 +32,7 @@ try {
     if (isset($_POST['connexion'])) {
         sleep(1);
         $login = $validator->validate($_POST['login']);
-        $password = $manager_user->checkPassword($login, new MemberManager());
+        $password = $manager_user->checkPassword($login);
 
         $passwordHash = $password['password'];
         $passwordUser = $validator->validate($_POST['password']);
