@@ -7,7 +7,7 @@ spl_autoload_register(function ($class) {
 
 /****************************************/
 require_once 'src/controller/controllerStatut.php';
-require_once 'src/controller/controllerPosts.php';
+require_once 'src/controller/PostController.php';
 require_once 'src/controller/controllerCategory.php';
 require_once 'src/controller/UserController.php';
 require_once 'src/controller/controllerComments.php';
@@ -19,16 +19,20 @@ require_once 'src/model/CommentsManager.php';
 require_once 'src/model/MemberManager.php';
 require_once 'src/model/CoachsManager.php';
 
+/******** Instanciation ************/
+$user = new UserController();
+$post = new PostController();
+
 /****************** Pagination ***********************/
 // on détermine sur quelle page on se trouve
-if(isset($_GET['page']) && !empty($_GET['page'])){
+if (isset($_GET['page']) && !empty($_GET['page'])) {
     // typage de la variable entière
     $currentPage = (int) strip_tags($_GET['page']);
-}else{
+} else {
     $currentPage = 1;
 }
 // Nombre total d'articles
-$nbArticles = getNbArticles();
+$nbArticles = $post->getNbArticles();
 // Nombre d'articles par page
 $nbArticlesPerPage = 1;
 // Nombre de pages total
@@ -40,10 +44,9 @@ $firstArticle = ($currentPage - 1) * $nbArticlesPerPage;
 
 try {
     $allCategory = getAllCategory();
-    $allArticles = getListe($firstArticle, $nbArticlesPerPage);    
-    $lastArticles = getLastArticles();
-    $lastArticle_one = getLastArticle_one();
-    $user = new UserController();
+    $allArticles = $post->getListe($firstArticle, $nbArticlesPerPage);
+    $lastArticles = $post->getLastArticles();
+    $lastArticle_one = $post->getLastArticle_one();
 
     if (isset($_GET['action'])) {
         $action = htmlspecialchars($_GET['action']);
@@ -63,11 +66,11 @@ try {
             }
         } elseif ($action == 'myArticlesId') {
             if (isset($_GET['idAuthor'])) {
-                $myArticles = getMyArticles(
+                $myArticles = $post->getMyArticles(
                     htmlspecialchars($_GET['idAuthor'])
                 );
             } else {
-                $myArticles = getMyArticles(
+                $myArticles = $post->getMyArticles(
                     htmlspecialchars($_SESSION['id_user'])
                 );
             }
@@ -94,12 +97,12 @@ try {
                 $commentsOfArticle = getAllCommentsOfArticle(
                     htmlspecialchars($_GET['id'])
                 );
-                $articleId = getOneArticle(htmlspecialchars($_GET['id']));
+                $articleId = $post->getOneArticle(htmlspecialchars($_GET['id']));
                 require 'vue/vueOneArticle.php';
             } elseif (isset($_GET['deleteA'])) {
-                deleteMyArticle(htmlspecialchars($_GET['deleteA']));
+                $post->deleteMyArticle(htmlspecialchars($_GET['deleteA']));
             } elseif (isset($_GET['updateA'])) {
-                $articleId = getOneArticle(htmlspecialchars($_GET['updateA']));
+                $articleId = $post->getOneArticle(htmlspecialchars($_GET['updateA']));
 
                 require 'vue/vueUpdateArticle.php';
             } else {
@@ -107,7 +110,9 @@ try {
             }
         } elseif ($action == 'allMembers') {
             if (isset($_GET['memberId'])) {
-                $myAccount = $user->getInfoUser(htmlspecialchars($_GET['memberId']));
+                $myAccount = $user->getInfoUser(
+                    htmlspecialchars($_GET['memberId'])
+                );
                 require 'vue/vueMember.php';
             } elseif (isset($_GET['deleteM'])) {
                 $user->deleteUser(htmlspecialchars($_GET['deleteM']));
@@ -129,7 +134,7 @@ try {
             }
         } elseif ($action == 'articlesOfCategory') {
             if (isset($_GET['id'])) {
-                $articlesOfCategory = getArticlesOfCategory(
+                $articlesOfCategory = $post->getArticlesOfCategory(
                     htmlspecialchars($_GET['id'])
                 );
                 require 'vue/vueArticlesCategory.php';
@@ -154,7 +159,9 @@ try {
                 header('location:./index.php?action=home&alert=emptySearch');
                 exit();
             } elseif (isset($_POST['search']) && !empty($_POST['search'])) {
-                $searchResults = getPostsSearchResults(htmlspecialchars($_POST['search']));
+                $searchResults = $post->getPostsSearchResults(
+                    htmlspecialchars($_POST['search'])
+                );
             }
             require 'vue/vueSearch.php';
         } elseif ($action == 'conditions') {

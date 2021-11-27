@@ -5,7 +5,7 @@
 
 <?php if (isConnected()): ?>
     <h1>Créez un article !</h1>
-    <form action="controller/controllerFrontEnd.php" method="post" class="form-create" enctype="multipart/form-data">
+    <form action="src/controller/controllerFrontEnd.php" method="post" class="form-create" enctype="multipart/form-data">
         <fieldset>
             <legend>Introduisez vos informations</legend>
             <div class="form-create">
