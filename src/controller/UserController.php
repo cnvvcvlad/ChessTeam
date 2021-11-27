@@ -75,6 +75,11 @@ class UserController
         }
     }
 
+    /**
+     * Affichage d'un message de salutation pour les membres connectés
+     *
+     * @return void
+     */
     public function helloUser()
     {
         $role = new RoleHandler();
