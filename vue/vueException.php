@@ -5,8 +5,8 @@
     <title>Erreur lors du chargement ChessTeam</title>
     <meta name="description" content="Cette page affiche les erreurs du site ChessTeam Nogent sur Marne"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
-    <link rel="stylesheet" href="../assets/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="../../assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../../assets/css/normalize.css" type="text/css">
 
 </head>
 
@@ -27,7 +27,7 @@
 
             <div class="top-button-exception">
 
-                <a href="../">Retour</a>
+                <a href="./">Retour</a>
 
             </div>
             <div class="copyright-exception">

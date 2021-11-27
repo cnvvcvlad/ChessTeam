@@ -1,3 +1,4 @@
 /assets/img/uploads
 /vue/compteur
 .htaccess
+/vendor/

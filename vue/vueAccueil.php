@@ -18,16 +18,16 @@
                         <div class="leftArrow" id="slideLeft"><span class="arrow arrowLeft"></span></div>
                         <div class="rightArrow" id="slideRight"><span class="arrow arrowRight"></span></div>
                         <div class="captionHolder">
-                            <h1 class="captionTitle"></h1>
+                            <h2 class="captionTitle">Title</h2>
 
-                            <p class="captionText"></p>
+                            <p class="captionText">Text</p>
                         </div>
 
                         <?php foreach ($lastArticles as $key => $values) : ?>
                             <div class="imageHolder">
                                 <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image article">
 
-                                <h1 class="captionTitle"><?= $values->getArt_title() ?></h1>
+                                <h2 class="captionTitle"><?= $values->getArt_title() ?></h2>
 
                                 <p class="captionText"><?= $values->getArt_description() ?></p>
                             </div>
@@ -44,7 +44,7 @@
             <?php foreach ($lastArticle_one as $key => $value) : ?>
                 <h1><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?></h1>
                 <div class="banniere_bouton">
-                    <?php if (isAdmin()) : ?>
+                    <?php if ($role->isAdmin()) : ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
                         </div>
                     <?php endif; ?>
@@ -54,30 +54,28 @@
                     </div>
                 </div>
                 <p><span class="information"> Ecrit par</span>
-                    <span class="mark"><?= showNameAuthor(
+                    <span class="mark"><?= isset($user) ? $user->showNameAuthor(
                                             $value->getArt_author()
-                                        ) ?></span>
+                                        ) : '' ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> <span class="information"> dans la catégorie</span>
-                    <strong><?= showNameCategory(
+                    <strong><?= isset($category) ? $category->showNameCategory(
                                 $value->getCategory_id()
-                            ) ?></strong>
+                            ) : '' ?></strong>
                 </p>
                 <div id="detail_art" class="justify_article">
 
                     <a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article" title="Cliquez pour agrandir"></a>
-                    <span>
                         <h3><?= $value->getArt_description() ?></h3><br><a class="lire_suite" href="#cache">[Lire la
                             suite...] </a>
-                    </span>
 
                     <div id="cache"><span><?= $value->getArt_content() ?><br><a href="#detail_art"> [Voir
                                 moins]</a></span>
                     </div>
                     <p>
                         <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">
-                            Commentaires(<?= numberCommentsOfArticle(
-                                                getAllCommentsOfArticle($value->getId())
-                                            ) ?>)</a>
+                            Commentaires(<?= isset($comment) ? count(
+                                                $comment->getAllCommentsOfArticle($value->getId())
+                                            ) : '' ?>)</a>
                     </p>
                 </div>
             <?php endforeach; ?>

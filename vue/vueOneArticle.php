@@ -10,7 +10,7 @@
     <?php foreach ($articleId as $key => $value): ?>
         <h1><?= $value->getArt_title() ?></h1>
         <div class="banniere_bouton">
-            <?php if (isAdmin()): ?>
+            <?php if ($role->isAdmin()): ?>
                 <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>" >Modifier</a></div>
                 <div class="bouton_commande"><a
                         href="?action=allArticles&amp;deleteA=<?= $value->getId() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer</a></div>
@@ -18,13 +18,13 @@
             <?php endif; ?>
         </div>
         <p><span class="information"> Ecrit par</span>
-            <span class="mark"><?= showNameAuthor(
+            <span class="mark"><?= isset($user) ? $user->showNameAuthor(
                 $value->getArt_author()
-            ) ?></span>
+            ) : '' ?></span>
             le <em><?= $value->getArt_date_creation() ?></em><span class="information"> dans la catégorie</span>
-            <strong><?= showNameCategory(
+            <strong><?= isset($category) ? $category->showNameCategory(
                 $value->getCategory_id()
-            ) ?></strong></p>
+            ) : '' ?></strong></p>
         <div id="detail_art" class="justify_article">
 
                 <img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article">
@@ -38,22 +38,22 @@
 
         <div class="comment-block">
 
-            <h3 class="comment-libelle">(<?php numberCommentsOfArticle(
+            <h3 class="comment-libelle">(<?= isset($commentsOfArticle) ? count(
                 $commentsOfArticle
-            ); ?>) Commentaires </h3>
+            ) : '' ?>) Commentaire<?= count($commentsOfArticle) == 1 ? '' : 's' ?></h3>
             <?php foreach ($commentsOfArticle as $keys => $values): ?>
                 <div class="comment-added">
 
                     <div class="comment-author">
                         <p>
-                            <mark><?= showNameAuthor(
+                            <mark><?= isset($user) ? $user->showNameAuthor(
                                 $values->getCom_author()
-                            ) ?></mark>
+                            ) : '' ?></mark>
                             le ( <?= $values->getCom_date_creation() ?> )
                         </p>
                     </div>
                     <div class="comment-description"><p><?= $values->getCom_content() ?></p></div>
-                    <?php if (isAdmin()): ?>
+                    <?php if ($role->isAdmin()): ?>
                     <div class="comment-modify">
                         <a href="?action=allComments&amp;modifyC=<?= $values->getId() ?>" class="comment-modify">Modifier</a>
                     </div>
@@ -62,12 +62,12 @@
                 </div>
             <?php endforeach; ?>
 
-            <?php if (isConnected()): ?>
+            <?php if ($role->isConnected()): ?>
                 <div class="comment-block">
                     <div class="comment-add">
                         <fieldset>
                             <legend>Ajouter un commentaire</legend>
-                            <form action="controller/controllerFrontEnd.php" method="POST" class="form-inscription">
+                            <form action="?action=controllerFrontEnd" method="POST" class="form-inscription">
                                 <p><input type="hidden" name="com_author"
                                           value="<?= htmlspecialchars(
                                               $_SESSION['id_user']
