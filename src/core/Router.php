@@ -3,7 +3,7 @@
 namespace Democvidev\ChessTeam\Core;
 
 use Democvidev\ChessTeam\Service\RoleHandler;
-use Democvidev\ChessTeam\Controller\FormController;
+use Democvidev\ChessTeam\Form\ContactForm;
 use Democvidev\ChessTeam\Controller\PostController;
 use Democvidev\ChessTeam\Controller\UserController;
 use Democvidev\ChessTeam\Controller\CoachController;
@@ -71,8 +71,8 @@ class Router
                 } elseif ($action == 'controllerFrontEnd') {
                     require 'src/controller/controllerFrontEnd.php';
                 } elseif ($action == 'contactForm') {
-                    require $this->path . '/../src/controller/FormController.php';
-                    $form = new FormController();
+                    require $this->path . '/../src/form/ContactForm.php';
+                    $form = new ContactForm();
                     $form->contactForm();
                 } elseif ($action == 'connected') {
                     require 'vue/vueAccueil.php';
