@@ -16,7 +16,7 @@ require_once 'src/controller/CategoryController.php';
 require_once 'src/controller/UserController.php';
 require_once 'src/controller/CommentController.php';
 require_once 'src/controller/CoachController.php';
-require_once 'src/Service/RoleHandler.php';
+require_once 'src/service/RoleHandler.php';
 
 /******** Instanciation ************/
 $user = new UserController();
@@ -59,9 +59,9 @@ try {
         } elseif ($action == 'connexion') {
             require 'vue/vueConnexion.php';
         } elseif ($action == 'controllerFrontEnd') {
-            require 'src/Controller/controllerFrontEnd.php';
+            require 'src/controller/controllerFrontEnd.php';
         } elseif ($action == 'controllerForm') {
-            require 'src/Controller/controllerForm.php';
+            require 'src/controller/controllerForm.php';
         } elseif ($action == 'connected') {
             require 'vue/vueAccueil.php';
         } elseif ($action == 'myAccount') {
