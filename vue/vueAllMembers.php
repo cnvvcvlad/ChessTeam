@@ -70,7 +70,7 @@
         <h2>Ajouter un nouveau membre :</h2>
         <div class="form-connexion">
 
-            <form action="?action=controllerFrontEnd" method="POST" class="form-inscription"
+            <form action="?action=registerForm" method="POST" class="form-inscription"
                   enctype="multipart/form-data">
                 <div class="form-inscription">
                     <label for="login">Login :
