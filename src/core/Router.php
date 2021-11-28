@@ -3,6 +3,7 @@
 namespace Democvidev\ChessTeam\Core;
 
 use Democvidev\ChessTeam\Form\ContactForm;
+use Democvidev\ChessTeam\Form\CategoryForm;
 use Democvidev\ChessTeam\Form\RegisterForm;
 use Democvidev\ChessTeam\Service\RoleHandler;
 use Democvidev\ChessTeam\Form\AuthenticationForm;
@@ -84,6 +85,10 @@ class Router
                     require $this->path . '/../src/form/AuthenticationForm.php';
                     $form = new AuthenticationForm();
                     $form->authenticationForm();
+                } elseif ($action == 'categoryForm') {
+                    require $this->path . '/../src/form/CategoryForm.php';
+                    $form = new CategoryForm();
+                    $form->categoryForm();
                 } elseif ($action == 'connected') {
                     require 'vue/vueAccueil.php';
                 } elseif ($action == 'myAccount') {
