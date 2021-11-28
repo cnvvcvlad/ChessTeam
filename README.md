@@ -19,7 +19,7 @@
       * Gère la liste des membres
       * Gèrer les informations des catégories, des articles et des commentaires
 
-::: warning
+:::
 *enjoy !*
 :::
 
