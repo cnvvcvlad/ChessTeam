@@ -5,7 +5,7 @@
     <h1 class="text-center">Contactez-nous !</h1>
     <div class="container_form">
 
-        <form action="?action=controllerForm" method="post" class="form-inscription">
+        <form action="?action=contactForm" method="post" class="form-inscription">
         <fieldset>
         <legend>Vos identifiants : </legend>
             <div class="form-inscription">
