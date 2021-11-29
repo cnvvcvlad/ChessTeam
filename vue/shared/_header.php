@@ -63,7 +63,7 @@
                                 <div class="list_style"><a href="?action=coach">ChessCoach</a></div>
                             </li>
 
-                            <?php if ($role->isConnected()) : ?>
+                            <?php if ($this->role->isConnected()) : ?>
                                 <li>
                                     <div class="list_style"><a href="?action=myAccount&amp;id=<?= $_SESSION['id_user'] ?>">Mon Compte</a>
                                     </div>
@@ -78,7 +78,7 @@
                                 </li>
 
 
-                                <?php if ($role->isAdmin()) : ?>
+                                <?php if ($this->role->isAdmin()) : ?>
 
                                     <li>
                                         <div class="list_style"><a href="?action=allMembers">Membres</a></div>

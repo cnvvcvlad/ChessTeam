@@ -3,7 +3,7 @@
         <?php if (!empty($lastArticle_one)): ?>
             <?php foreach ($lastArticle_one as $key => $value): ?>
                 <h2><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?></h2>
-                <?php if ($role->isAdmin()): ?>
+                <?php if ($this->role->isAdmin()): ?>
                     <div class="bouton_commande"><a href="">Modifier</a></div>
                 <?php endif; ?>
                 <div class="bouton_commande">
@@ -15,7 +15,7 @@
                         ? $user->showNameAuthor($value->getArt_author())
                         : '' ?></span>
                     le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
-                    <strong><?= $category->showNameCategory(
+                    <strong><?= $this->category->showNameCategory(
                         $value->getCategory_id()
                     ) ?></strong>
                 </p>
@@ -29,7 +29,7 @@
                     </div>
                     <p><a href="?action=allArticles&amp;id=<?= $value->getId() ?>">Commentaires
                             (<?= count(
-                                $comment->getAllCommentsOfArticle(
+                                $this->comment->getAllCommentsOfArticle(
                                     $value->getId()
                                 )
                             ) ?>)</a>

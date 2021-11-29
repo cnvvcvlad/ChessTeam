@@ -11,7 +11,7 @@
 
     <h3 class="comment-libelle"> Modifier le commentaire : </h3>
     <?php foreach ($modifyComment as $key => $value): ?>
-    <form action="?action=controllerFrontEnd" method="post" class="form-inscription">
+    <form action="?action=commentForm" method="post" class="form-inscription">
         <fieldset>
             <legend>Commentaire</legend>
 

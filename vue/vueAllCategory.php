@@ -20,10 +20,10 @@
 </div>
 
 
-<?php if ($role->isAdmin()) : ?>
+<?php if ($this->role->isAdmin()) : ?>
     <h2>Créer une nouvelle catégorie</h2>
 
-    <form action="?action=controllerFrontEnd" method="post" class="form-create" enctype="multipart/form-data">
+    <form action="?action=categoryForm" method="post" class="form-create" enctype="multipart/form-data">
         <fieldset>
             <legend>Introduisez vos informations</legend>
             <div class="form-create">
