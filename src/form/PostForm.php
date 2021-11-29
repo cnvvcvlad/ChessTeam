@@ -68,6 +68,53 @@ class PostForm
                         'La taille de votre fichier doit etre inférieure à 1Mo !'
                     );
                 }
+            } elseif (isset($_POST['updateArticle'])) {                
+                extract($_POST);        
+                $id = htmlspecialchars($id);
+                $art_author = htmlspecialchars($art_author);
+                $art_title = htmlspecialchars($art_title);
+                $art_description = htmlspecialchars($art_description);
+                $art_content = htmlspecialchars($art_content);
+                $category_id = htmlspecialchars($category_id);        
+                if (
+                    isset($_FILES['art_image']) and
+                    $_FILES['art_image']['error'] == 0
+                ) {
+                    $art_image = $this->validator->validatePhoto($_FILES['art_image']['name']);        
+                    if ($_FILES['art_image']['size'] <= 2000000) {
+                        $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];        
+                        $info = pathinfo($_FILES['art_image']['name']);        
+                        $extension_uploadee = $info['extension'];        
+                        if (in_array($extension_uploadee, $extension_autorisee)) {
+                            $art_image = $_FILES['art_image']['name'];        
+                            move_uploaded_file(
+                                $_FILES['art_image']['tmp_name'],
+                                'assets/img/uploads/' . $art_image
+                            );
+                        } else {
+                            throw new \Exception(
+                                'Veuillez rééssayer avec un autre format !'
+                            );
+                        }
+                    } else {
+                        throw new \Exception(
+                            'Votre fichier ne doit pas dépasser 1 Mo !'
+                        );
+                    }        
+                    $this->manager_article->updateArticle(
+                        $id,
+                        new Article([
+                            'art_title' => $art_title,
+                            'art_description' => $art_description,
+                            'art_image' => $art_image,
+                            'art_author' => $art_author,
+                            'art_content' => $art_content,
+                            'category_id' => $category_id,
+                        ])
+                    );        
+                    header('location:index.php?action=myArticlesId&id=' . $_SESSION['id_user']);
+                    exit();
+                }
             }
         }
     }
