@@ -67,7 +67,7 @@
                     <div class="comment-add">
                         <fieldset>
                             <legend>Ajouter un commentaire</legend>
-                            <form action="?action=controllerFrontEnd" method="POST" class="form-inscription">
+                            <form action="?action=commentForm" method="POST" class="form-inscription">
                                 <p><input type="hidden" name="com_author"
                                           value="<?= htmlspecialchars(
                                               $_SESSION['id_user']

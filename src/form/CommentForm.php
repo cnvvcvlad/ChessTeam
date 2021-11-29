@@ -29,6 +29,21 @@ class CommentForm
                 );
                 header('location:index.php?action=allComments');
                 exit();
+            } elseif (
+                isset($_POST['commentCreation'])
+            ) {
+                $com_author = htmlspecialchars($_SESSION['id_user']);
+                $com_content = htmlspecialchars($_POST['com_content']);
+                $article_id = htmlspecialchars($_POST['article_id']);
+                $this->manager_comment->insertComment(
+                    new Comment([
+                        'com_author' => $com_author,
+                        'com_content' => $com_content,
+                        'article_id' => $article_id,
+                    ])
+                );
+                header('location:./' . basename($_SERVER['HTTP_REFERER']));
+                exit();
             }
         }
     }
