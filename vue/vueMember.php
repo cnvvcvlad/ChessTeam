@@ -93,7 +93,7 @@
                             </tr>
                         <?php endif ?>
                     </table>
-                    <form action="?action=controllerFrontEnd" method="POST" enctype="multipart/form-data"
+                    <form action="?action=registerForm" method="POST" enctype="multipart/form-data"
                           class="form-create">
                         <fieldset>
                             <legend>Introduisez vos informations</legend>
