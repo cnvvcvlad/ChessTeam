@@ -10,7 +10,7 @@
     <?php foreach ($articleId as $key => $value): ?>
         <h1><?= $value->getArt_title() ?></h1>
         <div class="banniere_bouton">
-            <?php if ($role->isAdmin()): ?>
+            <?php if ($this->role->isAdmin()): ?>
                 <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>" >Modifier</a></div>
                 <div class="bouton_commande"><a
                         href="?action=allArticles&amp;deleteA=<?= $value->getId() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer</a></div>
@@ -53,7 +53,7 @@
                         </p>
                     </div>
                     <div class="comment-description"><p><?= $values->getCom_content() ?></p></div>
-                    <?php if ($role->isAdmin()): ?>
+                    <?php if ($this->role->isAdmin()): ?>
                     <div class="comment-modify">
                         <a href="?action=allComments&amp;modifyC=<?= $values->getId() ?>" class="comment-modify">Modifier</a>
                     </div>
@@ -62,7 +62,7 @@
                 </div>
             <?php endforeach; ?>
 
-            <?php if ($role->isConnected()): ?>
+            <?php if ($this->role->isConnected()): ?>
                 <div class="comment-block">
                     <div class="comment-add">
                         <fieldset>

@@ -44,7 +44,7 @@
             <?php foreach ($lastArticle_one as $key => $value) : ?>
                 <h1><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?></h1>
                 <div class="banniere_bouton">
-                    <?php if ($role->isAdmin()) : ?>
+                    <?php if ($this->role->isAdmin()) : ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
                         </div>
                     <?php endif; ?>

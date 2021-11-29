@@ -2,7 +2,7 @@
 
 <?php $title = 'Accueil Membre'; ?>
 <?php $description = 'Administrez les informations personnelles et actualisez-les'; ?>
-<h1> Bienvenue dans l'espace <?php if ($role->isAdmin()) : ?> administrateur <?php else : ?> membre<?php endif; ?></h1>
+<h1> Bienvenue dans l'espace <?php if ($this->role->isAdmin()) : ?> administrateur <?php else : ?> membre<?php endif; ?></h1>
 
 <div class="top_article">
 
@@ -10,7 +10,7 @@
 
     <div class="view">
 
-        <?php if ($role->isConnected()) : ?>
+        <?php if ($this->role->isConnected()) : ?>
             <ul>
                 <li>consulter et modifier ses informations personnelles</li>
             </ul>
@@ -30,7 +30,7 @@
                 <li>consulter et écrire des commentaires</li>
             </ul>
 
-            <?php if ($role->isAdmin()) : ?>
+            <?php if ($this->role->isAdmin()) : ?>
 
                 <ul>
                     <li>consulter la liste des membres</li>
@@ -86,7 +86,7 @@
                             </td>
 
                         </tr>
-                        <?php if (!$role->isAdmin()) : ?>
+                        <?php if (!$this->role->isAdmin()) : ?>
                             <tr>
                                 <th><a href="?action=allMembers&amp;deleteM=<?= $_SESSION['id_user'] ?>" class="comment-modify" onclick="return(confirm('Supprimer vraiment?'))">Supprimer
                                         mon compte</a></th>

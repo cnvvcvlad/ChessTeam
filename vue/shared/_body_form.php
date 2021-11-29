@@ -2,7 +2,7 @@
     <?php include_once 'vue/shared/_header.php'; ?>
     <div id="main_wrapper">
 
-        <?php if (!$role->isAdmin()) : ?>
+        <?php if (!$this->role->isAdmin()) : ?>
         <div class="form_view">
                 <?php include_once 'vue/shared/_aside_left.php'; ?>                
                 <main class="container_form">

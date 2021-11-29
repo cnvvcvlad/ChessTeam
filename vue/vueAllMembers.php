@@ -6,7 +6,7 @@
     echo '<h4>Nouveau membre vient d\'être ajouté !</h4>';
 } ?>
 
-<?php if ($role->isAdmin()): ?>
+<?php if ($this->role->isAdmin()): ?>
     <h1>Voici tous les membres de ChessTeam</h1>
 
     <?php if (isset($allMembers)): ?>

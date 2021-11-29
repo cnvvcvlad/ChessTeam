@@ -2,7 +2,7 @@
 <?php $title = 'Articles ajoutés par des membres'; ?>
 <?php $description = 'Retrouvez la listes des billets proposées par les internautes'; ?>
 
-<?php if ($role->isConnected()) : ?>
+<?php if ($this->role->isConnected()) : ?>
 
 <h1>Voici vos créations ! </h1>
 
@@ -16,7 +16,7 @@
 
 
                 <div class="banniere_bouton">
-                    <?php if ($role->isAdmin()) : ?>
+                    <?php if ($this->role->isAdmin()) : ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
                         </div>
                     <?php endif; ?>
