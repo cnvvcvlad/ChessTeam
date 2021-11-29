@@ -2,6 +2,7 @@
 
 namespace Democvidev\ChessTeam\Core;
 
+use Democvidev\ChessTeam\Form\CoachForm;
 use Democvidev\ChessTeam\Form\ContactForm;
 use Democvidev\ChessTeam\Form\CategoryForm;
 use Democvidev\ChessTeam\Form\RegisterForm;
@@ -73,6 +74,10 @@ class Router
                     require 'vue/vueConnexion.php';
                 } elseif ($action == 'controllerFrontEnd') {
                     require 'src/controller/controllerFrontEnd.php';
+                } elseif ($action == 'coachForm') {
+                    require $this->path . '/../src/form/CoachForm.php';
+                    $coachForm = new CoachForm();
+                    $coachForm->coachForm();
                 } elseif ($action == 'contactForm') {
                     require $this->path . '/../src/form/ContactForm.php';
                     $form = new ContactForm();
