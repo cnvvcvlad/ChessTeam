@@ -22,7 +22,7 @@
                             <img src="assets/img/by_default/flecheblanchedroite.png"
                                  alt="le bouton rouge"/></a>
                     </div>
-                    <?php if ($role->isAdmin()) : ?>
+                    <?php if ($this->role->isAdmin()) : ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a></div>
                     <?php endif; ?>
                 </div>
