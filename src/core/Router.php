@@ -2,6 +2,7 @@
 
 namespace Democvidev\ChessTeam\Core;
 
+use Democvidev\ChessTeam\Form\PostForm;
 use Democvidev\ChessTeam\Form\CoachForm;
 use Democvidev\ChessTeam\Form\CommentForm;
 use Democvidev\ChessTeam\Form\ContactForm;
@@ -75,8 +76,12 @@ class Router
                     require 'vue/vueConnexion.php';
                 } elseif ($action == 'controllerFrontEnd') {
                     require 'src/controller/controllerFrontEnd.php';
+                } elseif ($action == 'postForm') {
+                    require $this->path . '/../src/form/PostForm.php';
+                    $postForm = new PostForm();
+                    $postForm->postForm();
                 } elseif ($action == 'commentForm') {
-                    require $this->path . '/../src/form/commentForm.php';
+                    require $this->path . '/../src/form/CommentForm.php';
                     $commentForm = new CommentForm();
                     $commentForm->commentForm();
                 } elseif ($action == 'coachForm') {

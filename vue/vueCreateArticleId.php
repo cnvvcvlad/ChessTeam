@@ -5,7 +5,7 @@
 
 <?php if ($role->isConnected()): ?>
     <h1>Créez un article !</h1>
-    <form action="?action=controllerFrontEnd" method="post" class="form-create" enctype="multipart/form-data">
+    <form action="?action=postForm" method="post" class="form-create" enctype="multipart/form-data">
         <fieldset>
             <legend>Introduisez vos informations</legend>
             <div class="form-create">
