@@ -34,7 +34,7 @@
 
 <?php if ($role->isAdmin()): ?>
     <h3>Modifier cette catégorie</h3>
-    <form action="?action=controllerFrontEnd" method="post" class="form-create"
+    <form action="?action=categoryForm" method="post" class="form-create"
           enctype="multipart/form-data">
         <fieldset>
             <legend>Introduisez vos informations</legend>
