@@ -6,5 +6,7 @@
             "Democvidev\\ChessTeam\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "php": ">=7.3.0"
+    }
 }
