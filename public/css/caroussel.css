@@ -1,0 +1,306 @@
+/* Carousel style*/
+
+.galleryContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 400px;
+    max-width: 600px;
+    user-select: none;
+    box-shadow: 0px 0px 3px 1px rgba(177, 202, 199, 0.7);
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.galleryContainer .slideShowContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(238, 238, 238);
+    position: relative;
+    z-index: 1;
+
+}
+
+.galleryContainer .slideShowContainer .imageHolder {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+}
+
+.galleryContainer .slideShowContainer .imageHolder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.galleryContainer .slideShowContainer .imageHolder .captionText {
+    display: none;
+}
+
+.galleryContainer .slideShowContainer .leftArrow, .galleryContainer .slideShowContainer .rightArrow {
+    width: 50px;
+    background: rgba(34, 102, 129, 0.6);
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    transition: background 0.5s;
+    height: 72px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.galleryContainer .slideShowContainer .rightArrow {
+    left: auto;
+    right: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.galleryContainer .slideShowContainer .leftArrow:hover, .galleryContainer .slideShowContainer .rightArrow:hover {
+    background: rgba(143, 144, 145, 0.7);
+    cursor: pointer;
+}
+
+.galleryContainer .slideShowContainer .arrow {
+    display: inline-block;
+    border: 3px solid white;
+    width: 10px;
+    height: 10px;
+    border-left: none;
+    border-bottom: none;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.galleryContainer .slideShowContainer .arrow.arrowLeft {
+    transform: rotateZ(-135deg);
+}
+
+.galleryContainer .slideShowContainer .arrow.arrowRight {
+    transform: rotateZ(45deg);
+}
+
+.galleryContainer .slideShowContainer > .captionHolder {
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+    color: white;
+    font-family: sans-serif;
+    font-size: 11px;
+    text-align: center;
+    width: 100%;
+    background: rgba(177, 202, 199, 0.7);
+    height: 100px;
+    /* line-height: -50px; */
+    overflow: hidden;
+}
+
+.galleryContainer .slideShowContainer > .captionHolder > .captionText {
+    margin: 0;
+}
+
+.galleryContainer .slideShowContainer #playPauseBtn {
+    position: absolute;
+    z-index: 5;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 40px;
+    height: 40px;
+    margin: 25px;
+    background-image: url("../img/by_default/pause_btn4.png");
+}
+
+.galleryContainer #dotsContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+.galleryContainer #dotsContainer .dots {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-left: 10px;
+    background-color: silver;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+.galleryContainer #dotsContainer .dots:hover, .galleryContainer #dotsContainer .dots.active {
+    background-color: slategray;
+}
+
+.galleryContainer #dotsContainer .dots:first-child {
+    margin-left: 0;
+}
+
+.galleryContainer .moveLeftCurrentSlide {
+    animation-name: moveLeftCurrent;
+    /*animation-duration: 0.5s;*/
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.galleryContainer .moveLeftNextSlide {
+    animation-name: moveLeftNext;
+    /*animation-duration: 0.5s;*/
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes moveLeftCurrent {
+    from {
+        margin-left: 0;
+        opacity: 1;
+    }
+    to {
+        margin-left: -100%;
+        opacity: 1;
+    }
+}
+
+@keyframes moveLeftNext {
+    from {
+        margin-left: 100%;
+        opacity: 1;
+    }
+    to {
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+
+.galleryContainer .moveRightCurrentSlide {
+    animation-name: moveRightCurrent;
+    /*animation-duration: 0.5s;*/
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes moveRightCurrent {
+    from {
+        margin-left: -100%;
+        opacity: 1;
+    }
+    to {
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+
+.galleryContainer .moveRightNextSlide {
+    animation-name: moveRightNext;
+    /*animation-duration: 0.5s;*/
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes moveRightNext {
+    from {
+        margin-left: 0;
+        opacity: 1;
+    }
+    to {
+        margin-left: 100%;
+        opacity: 1;
+    }
+}
+
+.slideTextFromBottom {
+    animation-name: slideTextFromBottom;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes slideTextFromBottom {
+    from {
+        opacity: 0;
+        margin-top: 100px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+.slideTextFromTop {
+    animation-name: slideTextFromTop;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes slideTextFromTop {
+    from {
+        opacity: 0;
+        margin-top: -100px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+.slideTitleFromBottom {
+    animation-name: slideTitleFromBottom;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes slideTitleFromBottom {
+    from {
+        opacity: 0;
+        margin-top: 100px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+.slideTitleFromTop {
+    animation-name: slideTitleFromTop;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes slideTitleFromTop {
+    from {
+        opacity: 0;
+        margin-top: -100px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .galleryContainer {
+        display: none;
+    }
+}
