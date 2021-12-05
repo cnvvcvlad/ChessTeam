@@ -29,7 +29,7 @@ class DataBase
      *
      * @return PDO
      */
-    public function dbConnect()
+    public function dbConnect(): \PDO
     {
         // pattern singleton, retourne toujours une seule instance pdo
         if (self::$instancePDO === null) {
