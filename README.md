@@ -19,6 +19,14 @@
       * Gère la liste des membres
       * Gèrer les informations des catégories, des articles et des commentaires
 
+### Liste de spécification :
+   - Architecture MVC
+   - POO
+   - Autoloading
+   - Pagination des articles
+   - Recaptcha
+   - Gestion des cookies
+
 :::
 *enjoy !*
 :::
