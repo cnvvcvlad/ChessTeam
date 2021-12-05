@@ -6,7 +6,7 @@
     <div class="banniere">
         <h1 class="welcome_message">Bienvenue sur la page d'accueil de notre blog! <br>
             On vous souhaite une agréable lecture!</h1>
-        <?php if (!empty($lastArticles)) : ?>
+        <?php if (!empty($params['lastArticles'])) : ?>
             <article>
 
                 <!-- La structure du slide -->
@@ -21,9 +21,11 @@
                             <p class="captionText">Text</p>
                         </div>
 
-                        <?php foreach ($lastArticles as $key => $values) : ?>
+                        <?php foreach ($params['lastArticles'] as $key => $values) : ?>
                             <div class="imageHolder">
-                                <img src="assets/img/uploads/<?= $values->getArt_image() ?>" alt="Image article">
+                                <img src="<?= SCRIPTS . 'img' .
+                                                DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $values->getArt_image() ?>" alt="Image article">
+
 
                                 <h2 class="captionTitle"><?= $values->getArt_title() ?></h2>
 
@@ -38,17 +40,22 @@
 
     </div>
     <div class="top_article">
-        <?php if (!empty($lastArticle_one)) : ?>
-            <?php foreach ($lastArticle_one as $key => $value) : ?>
-                <h1><img src="assets/img/by_default/ico_epingle.png" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?></h1>
+        <?php if (!empty($params['lastArticle_one'])) : ?>
+            <?php foreach ($params['lastArticle_one'] as $key => $value) : ?>
+                <h1>
+
+                    <img src="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'by_default' . DIRECTORY_SEPARATOR . 'ico_epingle.png' ?>" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?>
+                </h1>
                 <div class="banniere_bouton">
-                    <?php if ($this->role->isAdmin()) : ?>
+                    <?php if (isset($this->role) && $this->role->isAdmin()) : ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
                         </div>
                     <?php endif; ?>
                     <div class="bouton_commande">
                         <a href="?action=allArticles&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Voir l'article
-                            <img src="assets/img/by_default/flecheblanchedroite.png" alt="le bouton rouge" /></a>
+                            <img src="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'by_default' . DIRECTORY_SEPARATOR . 'flecheblanchedroite.png' ?>" alt="le bouton rouge" />
+
+                        </a>
                     </div>
                 </div>
                 <p><span class="information"> Ecrit par</span>
@@ -61,10 +68,11 @@
                             ) : '' ?></strong>
                 </p>
                 <div id="detail_art" class="justify_article">
-
-                    <a class="grand_image" href="assets/img/uploads/<?= $value->getArt_image() ?>"><img src="assets/img/uploads/<?= $value->getArt_image() ?>" alt="Image de l'article" title="Cliquez pour agrandir"></a>
-                        <h3><?= $value->getArt_description() ?></h3><br><a class="lire_suite" href="#cache">[Lire la
-                            suite...] </a>
+                    <a class="grand_image" href="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $value->getArt_image() ?>">
+                        <img src="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $value->getArt_image() ?>" alt="Image de l'article" title="Cliquez pour agrandir">
+                    </a>
+                    <h3><?= $value->getArt_description() ?></h3><br><a class="lire_suite" href="#cache">[Lire la
+                        suite...] </a>
 
                     <div id="cache"><span><?= $value->getArt_content() ?><br><a href="#detail_art"> [Voir
                                 moins]</a></span>
