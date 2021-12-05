@@ -21,7 +21,11 @@
                         <a href="https://www.twitter.com/">Twitter<span class="icon-twitter"></span></a>
                         <a href="https://www.whatsapp.com/">Whatsapp<span class="icon-whatsapp"></span></a>
                         <a href="?action=rss" rel="noreferrer noopener" target="_blank">
-                            Flux RSS<img src="assets/img/logo/rss.png" alt="Le Flux RSS" title="Flux RSS" />
+                            Flux RSS<img src="<?= SCRIPTS .
+                        'img' .
+                        DIRECTORY_SEPARATOR . 'logo'. DIRECTORY_SEPARATOR .
+                        'rss.png' ?>" alt="Le Flux RSS" title="Flux RSS" />
+
                         </a>
                     </div>
                 </li>
@@ -37,7 +41,7 @@
 
                     </div>
                 </li>
-                <?php if ($this->role->isConnected()) : ?>
+                <?php if (isset($this->role) && $this->role->isConnected()) : ?>
                     <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a>
                         <div class="separate"></div><a class="btn" href="">#top</a>
                     </li>

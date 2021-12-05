@@ -2,6 +2,7 @@
 
 namespace Democvidev\ChessTeam\Core;
 
+use Democvidev\ChessTeam\Core\Route;
 use Democvidev\ChessTeam\Form\PostForm;
 use Democvidev\ChessTeam\Form\CoachForm;
 use Democvidev\ChessTeam\Form\CommentForm;
@@ -18,26 +19,46 @@ use Democvidev\ChessTeam\Controller\CategoryController;
 
 class Router
 {
-    private $path;
-    private $user;
-    private $post;
-    private $coco;
-    private $comment;
-    private $category;
-    private $role;
+    public $url;
+    public $routes = [];
+    // private $path;
+    // private $user;
+    // private $post;
+    // private $coco;
+    // private $comment;
+    // private $category;
+    // private $role;
 
-    public function __construct()
+    public function __construct($url)
     {
-        $this->path = dirname(__DIR__);
-        $this->user = new UserController();
-        $this->post = new PostController();
-        $this->coco = new CoachController();
-        $this->comment = new CommentController();
-        $this->category = new CategoryController();
-        $this->role = new RoleHandler();
+        $this->url = trim($url, '/');
+        // $this->path = dirname(__DIR__);
+        // $this->user = new UserController();
+        // $this->post = new PostController();
+        // $this->coco = new CoachController();
+        // $this->comment = new CommentController();
+        // $this->category = new CategoryController();
+        // $this->role = new RoleHandler();
+    }
+
+    public function get(string $path, string $action)
+    {
+        $this->routes['GET'][] = new Route($path, $action);
+        return $this;
     }
 
     public function run()
+    {
+        foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+            if($route->matches($this->url)) {
+                return $route->execute();
+            }
+        }
+
+        return header('HTTP/1.0 404 Not Found');
+    }
+
+    public function run_old()
     {
         /****************** Pagination ***********************/
         // on détermine sur quelle page on se trouve

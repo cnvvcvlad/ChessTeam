@@ -3,9 +3,14 @@
 namespace Democvidev\ChessTeam\Controller;
 
 use Democvidev\ChessTeam\Model\ArticleManager;
+use Democvidev\ChessTeam\Controller\AbstractController;
 
-class PostController
+class PostController extends AbstractController
 {
+    public function show(int $id)
+    {
+        return $this->view('posts.show', compact('id'));
+    }
     // public function __construct()
     // {
     //     $this->postModel = new Post();
