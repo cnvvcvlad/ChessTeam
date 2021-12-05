@@ -13,6 +13,7 @@ $router = new Router($_GET['action']);
 
 $router
     ->get('/', 'Democvidev\ChessTeam\Controller\HomeController@index')
+    ->get('/posts', 'Democvidev\ChessTeam\Controller\PostController@index')
     ->get('/posts/:id', 'Democvidev\ChessTeam\Controller\PostController@show')
     ->run();
 
