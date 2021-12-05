@@ -221,10 +221,12 @@
                         'pawn_logo.jpg' ?>" alt="Photo de profil" title="Cliquez pour agrandir" />
                     </a>
                 <?php else: ?>
-                    <a href="assets/img/uploads/<?= $_SESSION['user_image'] ?>">
-                        <img src="assets/img/uploads/<?= $_SESSION[
-                            'user_image'
-                        ] ?>" alt="Photo de profil" title="Cliquez pour agrandir" height="100em" />
+                    <a href="<?= SCRIPTS .
+                        'img' .
+                        DIRECTORY_SEPARATOR . 'uploads'. DIRECTORY_SEPARATOR . $_SESSION['user_image'] ?>">
+                        <img src="<?= SCRIPTS .
+                        'img' .
+                        DIRECTORY_SEPARATOR . 'uploads'. DIRECTORY_SEPARATOR . $_SESSION['user_image'] ?>" alt="Photo de profil" title="Cliquez pour agrandir" height="100em" />
                     </a>
                 <?php endif; ?>
             </div>
