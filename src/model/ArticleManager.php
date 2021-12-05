@@ -74,6 +74,23 @@ class ArticleManager extends DataBase
     }
 
     /**
+     * Récupère tous les articles de la base de données
+     * 
+     * @return array
+     */
+    public function getPosts(): array
+    {
+        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles ORDER BY id DESC';
+        $select = $this->dbConnect()->prepare($query);
+        $select->execute();
+        $art = [];
+        while ($donnees = $select->fetch()) {
+            $art[] = new Article($donnees);
+        }
+        return $art;
+    }
+
+    /**
      * Affichage de tous les articles compris entre deux identifiants
      *
      * @param int $firstArticle

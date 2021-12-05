@@ -7,8 +7,36 @@ use Democvidev\ChessTeam\Controller\AbstractController;
 
 class PostController extends AbstractController
 {
+    /**
+     * On stocke l'instance de la classe ArticleManager dans une variable
+     *
+     * @var object
+     */
+    private $articleManager;
+
+    /**
+     * Initialise les instances necessaires pour l'affichage des articles
+     */
+    public function __construct()
+    {
+        $this->articleManager = new ArticleManager();
+    }
+
+    /**
+     * Récupère tous les articles et les transmet à la vue
+     *
+     * @return void
+     */
+    public function index()
+    {
+        return $this->view('posts.index', [
+            'posts' => $this->articleManager->getPosts()
+        ]);
+    }
+
     public function show(int $id)
     {
+        $articles = $this->articleManager->affichageRecentes();        
         return $this->view('posts.show', compact('id'));
     }
     // public function __construct()
