@@ -2,20 +2,12 @@
 
 namespace Democvidev\ChessTeam\Model;
 
-use Democvidev\ChessTeam\Model\DataBase;
 use Democvidev\ChessTeam\Classes\Article;
+use Democvidev\ChessTeam\Model\AbstractModel;
 
-class ArticleManager extends DataBase
+class ArticleManager extends AbstractModel
 {
-    // public function getDataBase()
-    // {
-    //     return $this->dataBase;
-    // }
-
-    // public function setDataBase($dataBase)
-    // {
-    //     $this->dataBase = $dataBase;
-    // }
+    protected $table = 'article';
 
     /**
      * Insère un article dans la base de données
@@ -26,14 +18,44 @@ class ArticleManager extends DataBase
     public function insertArticle(Article $article): void
     {
         $request =
-            'INSERT INTO articles(art_title, art_description, art_content, art_image, art_author, category_id) VALUES(:art_title, :art_description, :art_content, :art_image, :art_author, :category_id)';
-        $insert = $this->dbConnect()->prepare($request);
-        $insert->bindValue(':art_title', $article->getArt_title(), \PDO::PARAM_STR);
-        $insert->bindValue(':art_description', $article->getArt_description(), \PDO::PARAM_STR);
-        $insert->bindValue(':art_content', $article->getArt_content(), \PDO::PARAM_STR);
-        $insert->bindValue(':art_image', $article->getArt_image(), \PDO::PARAM_STR);
-        $insert->bindValue(':art_author', $article->getArt_author(), \PDO::PARAM_STR);
-        $insert->bindValue(':category_id', $article->getCategory_id(), \PDO::PARAM_INT);
+            'INSERT INTO ' .
+            $this->table .
+            '(
+                art_title, art_description, art_content, 
+                art_image, art_author, category_id) 
+            VALUES(:art_title, :art_description, :art_content, 
+            :art_image, :art_author, :category_id)';
+        $insert = $this->db->getPDO()->prepare($request);
+        $insert->bindValue(
+            ':art_title',
+            $article->getArt_title(),
+            \PDO::PARAM_STR
+        );
+        $insert->bindValue(
+            ':art_description',
+            $article->getArt_description(),
+            \PDO::PARAM_STR
+        );
+        $insert->bindValue(
+            ':art_content',
+            $article->getArt_content(),
+            \PDO::PARAM_STR
+        );
+        $insert->bindValue(
+            ':art_image',
+            $article->getArt_image(),
+            \PDO::PARAM_STR
+        );
+        $insert->bindValue(
+            ':art_author',
+            $article->getArt_author(),
+            \PDO::PARAM_STR
+        );
+        $insert->bindValue(
+            ':category_id',
+            $article->getCategory_id(),
+            \PDO::PARAM_INT
+        );
         $insert = $insert->execute();
     }
 
@@ -47,15 +69,48 @@ class ArticleManager extends DataBase
     public function updateArticle($id, Article $article): void
     {
         $request =
-            'UPDATE articles SET art_title = :art_title, art_description = :art_description, art_content = :art_content, art_image = :art_image, art_author = :art_author, category_id = :category_id WHERE id =:id';
-        $update = $this->dbConnect()->prepare($request);
+            'UPDATE ' .
+            $this->table .
+            ' 
+            SET art_title = :art_title, 
+            art_description = :art_description, 
+            art_content = :art_content, 
+            art_image = :art_image, 
+            art_author = :art_author, 
+            category_id = :category_id 
+            WHERE id =:id';
+        $update = $this->db->getPDO()->prepare($request);
         $update->bindValue(':id', $id, \PDO::PARAM_INT);
-        $update->bindValue(':art_title', $article->getArt_title(), \PDO::PARAM_STR);
-        $update->bindValue(':art_description', $article->getArt_description(), \PDO::PARAM_STR);
-        $update->bindValue(':art_content', $article->getArt_content(), \PDO::PARAM_STR);
-        $update->bindValue(':art_image', $article->getArt_image(), \PDO::PARAM_STR);
-        $update->bindValue(':art_author', $article->getArt_author(), \PDO::PARAM_STR);
-        $update->bindValue(':category_id', $article->getCategory_id(), \PDO::PARAM_INT);
+        $update->bindValue(
+            ':art_title',
+            $article->getArt_title(),
+            \PDO::PARAM_STR
+        );
+        $update->bindValue(
+            ':art_description',
+            $article->getArt_description(),
+            \PDO::PARAM_STR
+        );
+        $update->bindValue(
+            ':art_content',
+            $article->getArt_content(),
+            \PDO::PARAM_STR
+        );
+        $update->bindValue(
+            ':art_image',
+            $article->getArt_image(),
+            \PDO::PARAM_STR
+        );
+        $update->bindValue(
+            ':art_author',
+            $article->getArt_author(),
+            \PDO::PARAM_STR
+        );
+        $update->bindValue(
+            ':category_id',
+            $article->getCategory_id(),
+            \PDO::PARAM_INT
+        );
         $update = $update->execute();
     }
 
@@ -66,25 +121,35 @@ class ArticleManager extends DataBase
      */
     public function countArticles(): int
     {
-        $request = 'SELECT COUNT(*) AS nb_art FROM articles';
-        $result = $this->dbConnect()->query($request);
+        $request = 'SELECT COUNT(*) AS nb_art FROM ' . $this->table;
+        $result = $this->db->getPDO()->query($request);
         $result = $result->fetch();
-        
         return (int) $result['nb_art'];
     }
 
     /**
      * Récupère tous les articles de la base de données
-     * 
+     *
      * @return array
      */
-    public function getPosts(): array
+    public function getAllPosts(): array
     {
-        $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles ORDER BY id DESC';
-        $select = $this->dbConnect()->prepare($query);
-        $select->execute();
+        $stmt = $this->requestAll();
+        $posts = $this->returnPosts($stmt);
+        return $posts;
+    }
+
+    /**
+     * Encapsule les données d'un article dans un objet Article
+     * et le stocke dans un tableau
+     *
+     * @param \PDOStatement $stmt
+     * @return array
+     */
+    private function returnPosts(\PDOStatement $stmt): array
+    {
         $art = [];
-        while ($donnees = $select->fetch()) {
+        while ($donnees = $stmt->fetch()) {
             $art[] = new Article($donnees);
         }
         return $art;
@@ -99,19 +164,26 @@ class ArticleManager extends DataBase
      */
     public function affichageArt($firstArticle, $nbArticlesPerPage): array
     {
-        // $query = 'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles ORDER BY id DESC';
+        // $query = 'SELECT *, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation FROM articles ORDER BY id DESC';
         $query =
-            'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles LIMIT :firstArticle, :nbArticlesPerPage';
+            'SELECT *, 
+            DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
+            AS date_creation 
+            FROM ' .
+            $this->table .
+            ' 
+            LIMIT :firstArticle, :nbArticlesPerPage';
 
-        $select = $this->dbConnect()->prepare($query);
+        $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':firstArticle', $firstArticle, \PDO::PARAM_INT);
-        $select->bindValue(':nbArticlesPerPage', $nbArticlesPerPage, \PDO::PARAM_INT);
+        $select->bindValue(
+            ':nbArticlesPerPage',
+            $nbArticlesPerPage,
+            \PDO::PARAM_INT
+        );
         $select->execute();
-        $art = [];
-        while ($donnees = $select->fetch()) {
-            $art[] = new Article($donnees);
-        }
-        return $art;
+        $posts = $this->returnPosts($select);
+        return $posts;
     }
 
     /**
@@ -119,34 +191,22 @@ class ArticleManager extends DataBase
      *
      * @return array
      */
-    public function affichageRecentes(): array
+    public function affichageRecentes($offset = null, $limit = null): array
     {
         $query =
-            'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE id > 40 ORDER BY id DESC LIMIT 5 ';
-        $select = $this->dbConnect()->prepare($query);
+            'SELECT *, 
+            DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
+            AS date_creation 
+            FROM ' .
+            $this->table .
+            ' WHERE id > ' .
+            $offset .
+            ' ORDER BY id DESC LIMIT ' .
+            $limit;
+        $select = $this->db->getPDO()->prepare($query);
         $select->execute();
-
-        $art = [];
-
-        while ($donnees = $select->fetch()) {
-            $art[] = new Article($donnees);
-        }
-        return $art;
-    }
-
-    /**
-     * Affichage d'un article en fonction de son identifiant codé en dur, article de la page d'accueil
-     *
-     * @return array
-     */
-    public function affichageLastOne(): array
-    {
-        $query =
-            'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE id = 77';
-        $select = $this->dbConnect()->prepare($query);
-        $select->execute();
-        $art[] = new Article($select->fetch());
-        return $art;
+        $posts = $this->returnPosts($select);
+        return $posts;
     }
 
     /**
@@ -158,18 +218,18 @@ class ArticleManager extends DataBase
     public function affichageParCategorie($category_id): array
     {
         $query =
-            'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE category_id = :category_id';
-        $select = $this->dbConnect()->prepare($query);
+            'SELECT *, 
+            DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
+            AS date_creation 
+            FROM ' .
+            $this->table .
+            ' 
+            WHERE category_id = :category_id';
+        $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':category_id', $category_id, \PDO::PARAM_INT);
         $select->execute();
-
-        $art = [];
-
-        while ($data = $select->fetch()) {
-            $art[] = new Article($data);
-        }
-
-        return $art;
+        $posts = $this->returnPosts($select);
+        return $posts;
     }
 
     /**
@@ -181,11 +241,15 @@ class ArticleManager extends DataBase
     public function affichageOne($art_id): array
     {
         $query =
-            'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE id = :art_id';
-        $select = $this->dbConnect()->prepare($query);
+            'SELECT *, 
+            DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
+            AS date_creation 
+            FROM ' .
+            $this->table .
+            ' WHERE id = :art_id';
+        $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':art_id', $art_id, \PDO::PARAM_INT);
         $select->execute();
-
         $art[] = new Article($select->fetch());
         return $art;
     }
@@ -199,17 +263,18 @@ class ArticleManager extends DataBase
     public function affichageMyArticles($id_user): array
     {
         $query =
-            'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE art_author = :id_user';
-        $select = $this->dbConnect()->prepare($query);
+            'SELECT *, 
+            DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
+            AS date_creation 
+            FROM ' .
+            $this->table .
+            ' 
+            WHERE art_author = :id_user';
+        $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':id_user', $id_user, \PDO::PARAM_INT);
         $select->execute();
-
-        $art = [];
-
-        while ($data = $select->fetch()) {
-            $art[] = new Article($data);
-        }
-        return $art;
+        $posts = $this->returnPosts($select);
+        return $posts;
     }
 
     /**
@@ -221,7 +286,7 @@ class ArticleManager extends DataBase
     public function deleteArticle($id_article): void
     {
         $query = 'DELETE FROM articles WHERE id = :id_article';
-        $delete = $this->dbConnect()->prepare($query);
+        $delete = $this->db->getPDO()->prepare($query);
         $delete->bindValue(':id_article', $id_article, \PDO::PARAM_INT);
         $delete->execute();
     }
@@ -235,15 +300,20 @@ class ArticleManager extends DataBase
     public function searchArticles($search): array
     {
         $query =
-            'SELECT *, DATE_FORMAT(art_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS art_date_creation FROM articles WHERE art_title LIKE :search OR art_description LIKE :search OR art_content LIKE :search OR art_author LIKE :search';
-        $select = $this->dbConnect()->prepare($query);
+            'SELECT *, 
+            DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
+            AS date_creation 
+            FROM ' .
+            $this->table .
+            ' 
+            WHERE art_title 
+            LIKE :search OR art_description 
+            LIKE :search OR art_content 
+            LIKE :search OR art_author 
+            LIKE :search';
+        $select = $this->db->getPDO()->prepare($query);
         $select->execute(['search' => '%' . $search . '%']);
-
-        $art = [];
-
-        while ($data = $select->fetch()) {
-            $art[] = new Article($data);
-        }
-        return $art;
+        $posts = $this->returnPosts($select);
+        return $posts;
     }
 }

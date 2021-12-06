@@ -2,10 +2,10 @@
 
 namespace Democvidev\ChessTeam\Model;
 
-use Democvidev\ChessTeam\Model\DataBase;
 use Democvidev\ChessTeam\Classes\Comment;
+use Democvidev\ChessTeam\Database\DataBaseConnection;
 
-class CommentsManager extends DataBase
+class CommentsManager extends DataBaseConnection
 {
    /**
     * Insère un commentaire dans la base de données
@@ -16,7 +16,7 @@ class CommentsManager extends DataBase
     public function insertComment(Comment $comment): void
     {
         $request = 'INSERT INTO comments(com_author, com_content, article_id) VALUES(:com_author, :com_content, :article_id)';
-        $insert = $this->dbConnect()->prepare($request);        
+        $insert = $this->db->getPDO()->prepare($request);        
         $insert = $insert->execute([
             'com_author' => $comment->getCom_author(),
             'com_content' => $comment->getCom_content(),
@@ -33,7 +33,7 @@ class CommentsManager extends DataBase
      */
     public function updateComment($id, Comment $comment) {
         $request = 'UPDATE comments SET com_content = :com_content WHERE id =:id';
-        $update = $this->dbConnect()->prepare($request);
+        $update = $this->db->getPDO()->prepare($request);
         $update = $update->execute([
             'id' => $id,
             'com_content' => $comment->getCom_content()
@@ -49,7 +49,7 @@ class CommentsManager extends DataBase
     public function showCommentsOfArticle($article_id): array
     {
         $request = 'SELECT *, DATE_FORMAT(com_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS com_date_creation FROM comments WHERE article_id = :article_id';
-        $select = $this->dbConnect()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);
         $select->execute(["article_id" => $article_id]);
         $comments = [];
         while ($data = $select->fetch()) {
@@ -66,7 +66,7 @@ class CommentsManager extends DataBase
     public function allComments(): array
     {
         $request = 'SELECT *, DATE_FORMAT(com_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS com_date_creation FROM comments ORDER BY id DESC';
-        $select = $this->dbConnect()->query($request);
+        $select = $this->db->getPDO()->query($request);
         $comments = [];
         while ($data = $select->fetch()) {
             $comments[] = new Comment($data);
@@ -83,7 +83,7 @@ class CommentsManager extends DataBase
     public function commentId($id): array
     {
         $request = 'SELECT *, DATE_FORMAT(com_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS com_date_creation FROM comments WHERE id = :id';
-        $select = $this->dbConnect()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);
         $select->execute(["id" => $id]);
         $comment[] = new Comment($select->fetch());
         return $comment;
@@ -98,7 +98,7 @@ class CommentsManager extends DataBase
     public function deleteCom($id): void
     {
         $request = 'DELETE FROM comments WHERE id = :id';
-        $delete = $this->dbConnect()->prepare($request);
+        $delete = $this->db->getPDO()->prepare($request);
         $delete->execute(["id" => $id]);
     }
 }

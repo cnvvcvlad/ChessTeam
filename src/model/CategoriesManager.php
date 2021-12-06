@@ -3,9 +3,11 @@
 namespace Democvidev\ChessTeam\Model;
 
 use Democvidev\ChessTeam\Classes\Category;
+use Democvidev\ChessTeam\Model\AbstractModel;
 
-class CategoriesManager extends DataBase
+class CategoriesManager extends AbstractModel
 {
+    protected $table = 'category';
     /**
      * Insère une catégorie dans la base de données
      * 
@@ -14,8 +16,10 @@ class CategoriesManager extends DataBase
      */
     public function insertCategory(Category $category): void
     {
-        $request = 'INSERT INTO category(title, description, category_image, cat_author) VALUES(:cat_title, :cat_description, :cat_image, :cat_author)';
-        $insert = $this->dbConnect()->prepare($request);
+        $request = 'INSERT INTO ' . $this->table . '(
+            title, description, category_image, cat_author) 
+            VALUES(:cat_title, :cat_description, :cat_image, :cat_author)';
+        $insert = $this->db->getPDO()->prepare($request);
         $insert->bindValue(':cat_title', $category->getTitle(), \PDO::PARAM_STR);
         $insert->bindValue(':cat_description', $category->getDescription(), \PDO::PARAM_STR);
         $insert->bindValue(':cat_image', $category->getCategory_image(), \PDO::PARAM_STR);
@@ -32,8 +36,10 @@ class CategoriesManager extends DataBase
      */
     public function updateCategory($id, Category $category): void
     {
-        $request = 'UPDATE category SET title = :title, description = :description, category_image = :category_image, cat_author = :cat_author WHERE id = :id ';
-        $update = $this->dbConnect()->prepare($request);
+        $request = 'UPDATE ' . $this->table . ' 
+        SET title = :title, description = :description, category_image = :category_image, 
+        cat_author = :cat_author WHERE id = :id ';
+        $update = $this->db->getPDO()->prepare($request);
         $update->bindValue(':id', $id, \PDO::PARAM_INT);
         $update->bindValue(':title', $category->getTitle(), \PDO::PARAM_STR);
         $update->bindValue(':description', $category->getDescription(), \PDO::PARAM_STR);
@@ -49,10 +55,22 @@ class CategoriesManager extends DataBase
      */
     public function showAllCategory(): array
     {
-        $request = 'SELECT *, DATE_FORMAT(cat_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS cat_date_creation FROM category';
-        $select = $this->dbConnect()->query($request);
+        $stmt = $this->requestAll();
+        $categories = $this->returnCategories($stmt);
+        return $categories;
+    }
+
+    /**
+     * Encapsule les données d'une catégorie dans un objet Category
+     * et les stocke dans un tableau
+     *
+     * @param \PDOStatement $stmt
+     * @return array
+     */
+    public function returnCategories(\PDOStatement $stmt): array
+    {
         $cat = [];
-        while ($data = $select->fetch()) {
+        while ($data = $stmt->fetch()) {
             $cat[] = new Category($data);
         }
         return $cat;
@@ -66,14 +84,12 @@ class CategoriesManager extends DataBase
      */
     public function showCategory($id_category): array
     {
-        $request = 'SELECT *, DATE_FORMAT(cat_date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS cat_date_creation FROM category WHERE id = :id';
-        $select = $this->dbConnect()->prepare($request);
+        $request = 'SELECT *, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
+        AS date_creation FROM ' . $this->table . ' WHERE id = :id';
+        $select = $this->db->getPDO()->prepare($request);
         $select->bindValue(':id', $id_category, \PDO::PARAM_INT);
         $select->execute();
-        $cat = [];
-        while ($data = $select->fetch()) {
-            $cat[] = new Category($data);
-        }
+        $cat[] = new Category($select->fetch());        
         return $cat;
     }
 
@@ -85,11 +101,11 @@ class CategoriesManager extends DataBase
      */
     public function nameCategory($id_category): array
     {
-        $request = 'SELECT title FROM category WHERE id = :id';
-        $select = $this->dbConnect()->prepare($request);
+        $request = 'SELECT title FROM ' . $this->table . ' WHERE id = :id';
+        $select = $this->db->getPDO()->prepare($request);
         $select->bindValue(':id', $id_category, \PDO::PARAM_INT);
         $select->execute();
-        $cat =$select->fetch();
+        $cat = $select->fetch();
         return $cat;
     }
 
@@ -101,8 +117,8 @@ class CategoriesManager extends DataBase
      */
     public function deleteCat($id_category): void
     {
-        $request = 'DELETE FROM category WHERE id = :id';
-        $delete = $this->dbConnect()->prepare($request);
+        $request = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
+        $delete = $this->db->getPDO()->prepare($request);
         $delete->bindValue(':id', $id_category, \PDO::PARAM_INT);
         $delete->execute();
     }

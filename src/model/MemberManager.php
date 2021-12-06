@@ -3,10 +3,10 @@
 namespace Democvidev\ChessTeam\Model;
 
 use Democvidev\ChessTeam\Classes\Users;
-use Democvidev\ChessTeam\Model\DataBase;
+use Democvidev\ChessTeam\Database\DataBaseConnection;
 use Democvidev\ChessTeam\Service\RoleHandler;
 
-class MemberManager extends DataBase
+class MemberManager extends DataBaseConnection
 {    
     /**
      * Verifier le mot de passe lors de la connexion
@@ -17,7 +17,7 @@ class MemberManager extends DataBase
     public function checkPassword($login): array 
     {
         $request = 'SELECT password FROM users WHERE login = :login';
-        $select = $this->dbConnect()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);
         $select->execute([
             "login" => $login
         ]);
@@ -40,7 +40,7 @@ class MemberManager extends DataBase
             throw new \Exception("Désolé cet utilisateur existe déjà");
         }
         $request = 'INSERT INTO users(login, email, password, user_image) VALUES(:login, :email, :password, :user_image)';
-        $insert = $this->dbConnect()->prepare($request);
+        $insert = $this->db->getPDO()->prepare($request);
         $insert = $insert->execute([
             "login" => $member->getLogin(),
             "email" => $member->getEmail(),
@@ -58,7 +58,7 @@ class MemberManager extends DataBase
     public function existLogin($login): bool
     {
         $request = 'SELECT * FROM users WHERE login = :login';
-        $insert = $this->dbConnect()->prepare($request);
+        $insert = $this->db->getPDO()->prepare($request);
         $insert->execute(["login" => $login]);
         if ($insert->rowCount() != 0) {
             return true;
@@ -75,7 +75,7 @@ class MemberManager extends DataBase
     public function existId($id_user): bool
     {
         $request = 'SELECT * FROM users WHERE id_user = :id_user';
-        $insert = $this->dbConnect()->prepare($request);
+        $insert = $this->db->getPDO()->prepare($request);
         $insert->execute(["id_user" => $id_user]);
         if ($insert->rowCount() != 0) {
             return true;
@@ -93,7 +93,7 @@ class MemberManager extends DataBase
     public function log($login, $password): void
     {
         $request = 'SELECT * FROM users WHERE login = :login AND password = :password';
-        $request = $this->dbConnect()->prepare($request);
+        $request = $this->db->getPDO()->prepare($request);
         $request->execute(["login" => $login, "password" => $password]);
         if ($request->rowCount() != 0) {
             $resultat = $request->fetch();
@@ -122,7 +122,7 @@ class MemberManager extends DataBase
             throw new \Exception("Désolé cet utilisateur n'existe pas");
         }
         $request = 'UPDATE users SET login = :login, email = :email, password = :password, user_image = :user_image  WHERE id_user = :id_user';
-        $update = $this->dbConnect()->prepare($request);
+        $update = $this->db->getPDO()->prepare($request);
         $update = $update->execute([
             "id_user" => $id_user,
             "login" => $member->getLogin(),
@@ -145,7 +145,7 @@ class MemberManager extends DataBase
     public function showOneUser($user_id): array
     {
         $request = 'SELECT * FROM users WHERE id_user = :id_user';
-        $select = $this->dbConnect()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);
         $select->execute(["id_user" => $user_id]);
         $member[] = new Users($select->fetch());
         return $member;
@@ -159,7 +159,7 @@ class MemberManager extends DataBase
     public function showAllUsers(): array
     {
         $request = 'SELECT * FROM users WHERE statut = 0  ORDER BY id_user DESC';
-        $select = $this->dbConnect()->query($request);
+        $select = $this->db->getPDO()->query($request);
         $members = [];
         while ($data = $select->fetch()) {
             $members[] = new Users($data);
@@ -176,7 +176,7 @@ class MemberManager extends DataBase
     public function nameUser($user_id): array
     {
         $request = 'SELECT login FROM users WHERE id_user = :id_user';
-        $select = $this->dbConnect()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);
         $select->execute(["id_user" => $user_id]);
         $member = $select->fetch();
         return $member;
@@ -191,7 +191,7 @@ class MemberManager extends DataBase
     public function deleteU($user_id): void
     {
         $request = 'DELETE FROM users WHERE id_user = :id_user';
-        $delete = $this->dbConnect()->prepare($request);
+        $delete = $this->db->getPDO()->prepare($request);
         $delete->execute(["id_user" => $user_id]);
     }
 }
