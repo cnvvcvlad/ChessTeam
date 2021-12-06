@@ -3,6 +3,8 @@
 namespace Democvidev\ChessTeam\Controller;
 
 use Democvidev\ChessTeam\Model\ArticleManager;
+use Democvidev\ChessTeam\Model\CommentsManager;
+use Democvidev\ChessTeam\Controller\CommentController;
 use Democvidev\ChessTeam\Controller\AbstractController;
 
 class PostController extends AbstractController
@@ -12,38 +14,46 @@ class PostController extends AbstractController
      *
      * @var object
      */
-    private $articleManager;
+    private $postManager;
+    private $commentManager;
+    private $commentController;
 
     /**
      * Initialise les instances necessaires pour l'affichage des articles
      */
     public function __construct()
     {
-        $this->articleManager = new ArticleManager();
+        $this->postManager = new ArticleManager($this->getDatabase());
+        $this->commentManager = new CommentsManager();
+        $this->commentController = new CommentController();
     }
 
     /**
-     * Récupère tous les articles et les transmet à la vue
+     * Récupère tous les articles et les transmet à la vue avec une instance de la classe commentController
      *
      * @return void
      */
     public function index()
     {
         return $this->view('posts.index', [
-            'posts' => $this->articleManager->getPosts()
+            'posts' => $this->postManager->getAllPosts(),
+            'comment' => $this->commentController
         ]);
     }
 
     public function show(int $id)
     {
-        $articles = $this->articleManager->affichageRecentes();        
-        return $this->view('posts.show', compact('id'));
+        $post = $this->postManager->affichageOne($id);  
+        $commentsOfArticle = $this->commentManager->showCommentsOfArticle($id);      
+        return $this->view('posts.show', compact('post', 'commentsOfArticle'));
+    }    
+
+    public function showCategoryPosts(int $id)
+    {
+        $posts = $this->postManager->affichageParCategorie($id);
+        $comment = $this->commentController;        
+        return $this->view('posts.category', compact('posts', 'comment'));
     }
-    // public function __construct()
-    // {
-    //     $this->postModel = new Post();
-    //     $this->userModel = new User();
-    // }
 
     /**
      * Récupérer les posts selon les paramètres
@@ -54,8 +64,7 @@ class PostController extends AbstractController
      */
     public function getListe($firstArticle, $nbArticlesPerPage): array
     {
-        $art_manager = new ArticleManager();
-        $posts = $art_manager->affichageArt($firstArticle, $nbArticlesPerPage);
+        $posts = $this->postManager->affichageArt($firstArticle, $nbArticlesPerPage);
         return $posts;
     }
 
@@ -66,8 +75,7 @@ class PostController extends AbstractController
      */
     public function getNbArticles(): int
     {
-        $art_manager = new ArticleManager();
-        $nbArticles = (int) $art_manager->countArticles();
+        $nbArticles = (int) $this->postManager->countArticles();
         return $nbArticles;
     }
 
@@ -78,8 +86,7 @@ class PostController extends AbstractController
      */
     public function getLastArticles(): array
     {
-        $art_manager = new ArticleManager();
-        $posts = $art_manager->affichageRecentes();
+        $posts = $this->postManager->affichageRecentes();
         return $posts;
     }
 
@@ -90,8 +97,7 @@ class PostController extends AbstractController
      */
     public function getLastArticle_one(): array
     {
-        $art_manager = new ArticleManager();
-        $post = $art_manager->affichageLastOne();
+        $post = $this->postManager->affichageLastOne();
         return $post;
     }
 
@@ -103,8 +109,7 @@ class PostController extends AbstractController
      */
     public function getArticlesOfCategory($category_id): array
     {
-        $art_manager = new ArticleManager();
-        $posts = $art_manager->affichageParCategorie($category_id);
+        $posts = $this->postManager->affichageParCategorie($category_id);
         return $posts;
     }
 
@@ -116,8 +121,7 @@ class PostController extends AbstractController
      */
     public function getOneArticle($art_id): array
     {
-        $art_manager = new ArticleManager();
-        $post = $art_manager->affichageOne($art_id);
+        $post = $this->postManager->affichageOne($art_id);
         return $post;
     }
 
@@ -131,8 +135,7 @@ class PostController extends AbstractController
     {
         $isAuthor = false;
         if (isset($_SESSION['id_user'])) {
-            $art_manager = new ArticleManager();
-            $art_manager = $art_manager->AffichageMyArticles($art_author);
+            $art_manager = $this->postManager->AffichageMyArticles($art_author);
             foreach ($art_manager as $key => $value) {
                 $value->getArt_author();
             }
@@ -151,8 +154,7 @@ class PostController extends AbstractController
      */
     public function getMyArticles($id_user): array
     {
-        $art_manager = new ArticleManager();
-        $posts = $art_manager->AffichageMyArticles($id_user);
+        $posts = $this->postManager->AffichageMyArticles($id_user);
         return $posts;
     }
 
@@ -164,8 +166,7 @@ class PostController extends AbstractController
      */
     public function deleteMyArticle($id_article): void
     {
-        $art_manager = new ArticleManager();
-        $art_manager->deleteArticle($id_article);
+        $this->postManager->deleteArticle($id_article);
         header('location:index.php?action=allArticles');
     }
 
@@ -179,8 +180,7 @@ class PostController extends AbstractController
     {
         // On remplace les caractères indésiables par des chaines de caractères vides
         $element = preg_replace('#[^a-z çéèàùêôî?0-9]#i', '', $element);
-        $art_manager = new ArticleManager();
-        $posts = $art_manager->searchArticles($element);
+        $posts = $this->postManager->searchArticles($element);
         return $posts;
     }
 
