@@ -3,9 +3,49 @@
 namespace Democvidev\ChessTeam\Controller;
 
 use Democvidev\ChessTeam\Model\CategoriesManager;
+use Democvidev\ChessTeam\Controller\AbstractController;
 
-class CategoryController
+class CategoryController extends AbstractController
 {
+   
+    /**
+     * Instance of CategoriesManager
+     *
+     * @var CategoriesManager
+     */
+    private $categoryManager;
+
+    /**
+     * Initialize the CategoryController
+     */
+    public function __construct()
+    {
+        $this->categoryManager = new CategoriesManager($this->getDatabase());
+    }
+
+    /**
+     * Get all categories and return the display
+     *
+     * @return void
+     */
+    public function index()
+    {
+        $categories = $this->categoryManager->showAllCategory();
+        return $this->view('categories.index', ['categories' => $categories]);
+    }
+
+    /**
+     * Get the category and return the display
+     *
+     * @param int $id
+     * @return void
+     */
+    public function show($id)
+    {
+        $category = $this->categoryManager->showCategory($id);
+        return $this->view('categories.show', ['category' => $category]);
+    }
+
     /**
      * Récupère la liste des catégories
      *
@@ -13,8 +53,7 @@ class CategoryController
      */
     function getAllCategory(): array
     {
-        $cat_manager = new CategoriesManager();
-        $category = $cat_manager->showAllCategory();
+        $category = $this->categoryManager->showAllCategory();
         return $category;
     }
 
@@ -26,8 +65,7 @@ class CategoryController
      */
     function getCategory($id_category): array
     {
-        $cat_manager = new CategoriesManager();
-        $category = $cat_manager->showCategory($id_category);
+        $category = $this->categoryManager->showCategory($id_category);
         return $category;
     }
 
@@ -41,8 +79,7 @@ class CategoryController
     {
         $category_name = 'Generique';
         if (!empty($id_category)) {
-            $cat_manager = new CategoriesManager();
-            $category = $cat_manager->nameCategory($id_category);
+            $category = $this->categoryManager->nameCategory($id_category);
             $category_name = implode($category);
             return $category_name;
         }
@@ -57,8 +94,7 @@ class CategoryController
      */
     function deleteCategory($id_category): void
     {
-        $cat_manager = new CategoriesManager();
-        $cat_manager->deleteCat($id_category);
+        $this->categoryManager->deleteCat($id_category);
         header('location:index.php?action=allCategory');
         exit();
     }
