@@ -52,7 +52,7 @@
                         </div>
                     <?php endif; ?>
                     <div class="bouton_commande">
-                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Voir l'article
+                        <a href="<?= dirname(SCRIPTS) ?>/posts/<?= $value->getId() ?>" class="bouton_rouge">Voir l'article
                             <img src="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'by_default' . DIRECTORY_SEPARATOR . 'flecheblanchedroite.png' ?>" alt="le bouton rouge" />
 
                         </a>

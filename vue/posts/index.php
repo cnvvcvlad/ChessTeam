@@ -16,11 +16,11 @@
 
             <div class="banniere_bouton">
                 <?php if (isset($this->role) && $this->role->isAdmin()): ?>
-                    <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
+                    <div class="bouton_commande"><a href="<?= dirname(SCRIPTS) ?>/posts/<?= $value->getId() ?>">Modifier</a>
                     </div>
                 <?php endif; ?>
                 <div class="bouton_commande">
-                    <a href="?action=allArticles&amp;id=<?= $value->getId() ?>" class="bouton_rouge">Voir l'article
+                    <a href="<?= dirname(SCRIPTS) ?>/posts/<?= $value->getId() ?>" class="bouton_rouge">Voir l'article
                         <img src="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'by_default' . DIRECTORY_SEPARATOR . 'flecheblanchedroite.png' ?>" alt="le bouton rouge"/></a>
                 </div>
             </div>
@@ -39,22 +39,17 @@
                         src="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $value->getArt_image() ?>" alt="Image de l'article"
                         title="Cliquez pour agrandir"></a>
 
-                <span><h3><?= $value->getArt_description() ?></h3><br><a class="lire_suite" href="#cache"> [Lire la
-                        suite...] </a></span>
-
-                <div id="cache"><span><?= $value->getArt_content() ?><br><a href="#detail_art"> [Voir moins]</a></span>
-                </div>
+                <h3><?= $value->getArt_description() ?></h3>
                 <p>
-                    <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">
-                        (<?= isset($comment) ?  count(
-                            $comment->getAllCommentsOfArticle($value->getId())
+                    <a href="<?= dirname(SCRIPTS) ?>/posts/<?= $value->getId() ?>">
+                        (<?= isset($params['comment']) ?  count(
+                            $params['comment']->getAllCommentsOfArticle($value->getId())
                         ) : '' ?>) Commentaires
                     </a>
                 </p>
 
             </div>
             <div class="separateur"></div>
-
 
         <?php endforeach; ?>
     </div>
@@ -74,5 +69,5 @@
 <?php endif; ?>
 <div class="back-page">
     <a href="<?= isset($_SERVER['HTTP_REFERER']) ? substr(basename($_SERVER['HTTP_REFERER']), 0) : '' ?>">Retour</a>
-    <a href="?action=home">Retour à l'accueil</a>
+    <a href="<?= dirname(SCRIPTS) ?>">Retour à l'accueil</a>
 </div>
