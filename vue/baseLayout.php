@@ -66,6 +66,8 @@
 
 </head>
 <body>
+<?php // var_dump($GLOBALS['allCategories']); exit; ?>
+
 <header>
     <div class="header-body">
         <div class="countdown-body">
@@ -91,7 +93,7 @@
         </div>
         <div class="en-tete">
             <div class="logo">
-                <a href="?action=home">
+                <a href="<?= dirname(SCRIPTS) ?>">
                     <!-- <img src="assets/img/logo/logo.png" alt="Le logo du Chess Team Nogent sur Marne" title="Logo" /> -->
                     <img src="<?= SCRIPTS .
                         'img' .
@@ -110,33 +112,31 @@
                         </div>
                         <ul class="navigate" id="navigate">
                             <li>
-                                <div class="list_style"><a href="?action=home">Accueil</a></div>
+                                <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>">Accueil</a></div>
                             </li>
                             <li class="has-children">
-                                <div class="list_style"><a href="?action=allCategory">Catégories</a>
+                                <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/categories">Catégories</a>
                                 </div>
-    <?php if (isset($allCategory) && !empty($allCategory)): ?>
                                 <ul class="sous-menu">
                                     <?php foreach (
-                                        $allCategory
+                                        $GLOBALS['allCategories']
                                         as $cat => $values
                                     ): ?>
                                         <li>
                                             <div class="list_style">
-                                                <a href="?action=categoryId&amp;id=<?= $values->getId() ?>">
+                                                <a href="<?= dirname(SCRIPTS) ?>/categories/<?= $values->getId() ?>">
                                                     <?= $values->getTitle() ?>
                                                 </a>
                                             </div>
                                         </li>
                                     <?php endforeach; ?>
                                 </ul>
-    <?php endif; ?>
                             </li>
                             <li>
-                                <div class="list_style"><a href="?action=allArticles">Articles</a></div>
+                                <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/posts">Articles</a></div>
                             </li>
                             <li>
-                                <div class="list_style"><a href="?action=coach">ChessCoach</a></div>
+                                <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/coach">ChessCoach</a></div>
                             </li>
 
                             <?php if (
