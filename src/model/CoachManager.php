@@ -2,11 +2,11 @@
 
 namespace Democvidev\ChessTeam\Model;
 
-use Democvidev\ChessTeam\Database\DataBaseConnection;
+use Democvidev\ChessTeam\Model\AbstractModel;
 
-class CoachManager extends DataBaseConnection
+class CoachManager extends AbstractModel
 {
-    private $table = 'coachs';    
+    protected $table = 'coach';    
 
     /**
      * Récupère toutes les informations des coachs

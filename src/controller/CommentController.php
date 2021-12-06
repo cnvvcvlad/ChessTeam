@@ -3,14 +3,16 @@
 namespace Democvidev\ChessTeam\Controller;
 
 use Democvidev\ChessTeam\Model\CommentsManager;
+use Democvidev\ChessTeam\Controller\AbstractController;
 
-class CommentController
+class CommentController extends AbstractController
 {
-    // public function __construct()
-    // {
-    //     $this->commentModel = new CommentModel();
-    //     $this->commentView = new CommentView();
-    // }
+    private $commentManager;
+
+    public function __construct()
+    {
+        $this->commentManager = new CommentsManager($this->getDatabase());
+    }
 
     /**
      * Récupère les commentaires d'un article
@@ -20,8 +22,7 @@ class CommentController
      */
     function getAllCommentsOfArticle($article_id): array
     {
-        $comment_manager = new CommentsManager();
-        $comments = $comment_manager->showCommentsOfArticle($article_id);
+        $comments = $this->commentManager->showCommentsOfArticle($article_id);
         return $comments;
     }
 
@@ -32,8 +33,7 @@ class CommentController
      */
     function getAllComments(): array
     {
-        $comment_manager = new CommentsManager();
-        $comments = $comment_manager->allComments();
+        $comments = $this->commentManager->allComments();
         return $comments;
     }
 
@@ -45,8 +45,7 @@ class CommentController
      */
     function getComment($comment_id): array
     {
-        $comment_manager = new CommentsManager();
-        $comment = $comment_manager->commentId($comment_id);
+        $comment = $this->commentManager->commentId($comment_id);
         return $comment;
     }
 
@@ -58,8 +57,7 @@ class CommentController
      */
     function deleteComment($comment_id): void
     {
-        $comment_manager = new CommentsManager();
-        $comment_manager->deleteCom($comment_id);
+        $this->commentManager->deleteCom($comment_id);
         header('location:index.php?action=allComments');
         exit();
     }

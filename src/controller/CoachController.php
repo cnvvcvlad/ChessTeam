@@ -3,9 +3,16 @@
 namespace Democvidev\ChessTeam\Controller;
 
 use Democvidev\ChessTeam\Model\CoachManager;
+use Democvidev\ChessTeam\Controller\AbstractController;
 
-class CoachController
+class CoachController extends AbstractController
 {
+    private $coachManager;
+
+    public function __construct()
+    {
+        $this->coachManager = new CoachManager($this->getDatabase());
+    }
     // Headers requis
     // header('Access-Control-Allow-Origin: *');
     // header('Content-Type: application/json; charset=UTF-8');
@@ -24,8 +31,7 @@ class CoachController
     public function getCoordinateAdress(string $city): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $coach_manager = new CoachManager();
-            $coachsAdress = $coach_manager->getCoachesByCity($city);
+            $coachsAdress = $this->coachManager->getCoachesByCity($city);
             // var_dump($coachsAdress);
             // exit();
             // On envoie le code réponse 200 OK
@@ -48,8 +54,7 @@ class CoachController
     {
         // On vérifie que la méthode utilisée est correcte
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $coach_manager = new CoachManager();
-            $coachsAdress = $coach_manager->getAllCoaches();
+            $coachsAdress = $this->coachManager->getAllCoaches();
             // var_dump($coachsAdress);
             // exit();
             // On envoie le code réponse 200 OK
@@ -73,8 +78,7 @@ class CoachController
      */
     public function getCoach($id_coach): array
     {
-        $coach_manager = new CoachManager();
-        $coach = $coach_manager->getInfoCoach($id_coach);
+        $coach = $this->coachManager->getInfoCoach($id_coach);
         return $coach;
     }
 
@@ -85,8 +89,7 @@ class CoachController
      */
     public function getTopCoachs(): array
     {
-        $coach_manager = new CoachManager();
-        $coachs = $coach_manager->getInfoTopCoachs();
+        $coachs = $this->coachManager->getInfoTopCoachs();
         return $coachs;
     }
 }
