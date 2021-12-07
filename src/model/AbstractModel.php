@@ -7,7 +7,7 @@ use Democvidev\ChessTeam\Database\DataBaseConnection;
 abstract class AbstractModel
 {
     /**
-     * On stocke le nom de la table
+     * On stocke le nom de la table pour une gestion dynamique des requêtes
      *
      * @var string
      */
@@ -40,6 +40,22 @@ abstract class AbstractModel
         $sql = 'SELECT *, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
         AS date_creation FROM ' . $this->table . ' ORDER BY date_creation DESC';
         $stmt = $this->db->getPDO()->prepare($sql);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    /**
+     * Récupère les données d'un enregistrement
+     * 
+     * @param int $id
+     * @return \PDOStatement
+     */
+    public function requestOneById(int $id): \PDOStatement
+    {
+        $sql = 'SELECT *, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
+        AS date_creation FROM ' . $this->table . ' WHERE id = :id';
+        $stmt = $this->db->getPDO()->prepare($sql);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
         $stmt->execute();
         return $stmt;
     }
