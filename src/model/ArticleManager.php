@@ -3,6 +3,7 @@
 namespace Democvidev\ChessTeam\Model;
 
 use Democvidev\ChessTeam\Classes\Article;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Model\AbstractModel;
 
 class ArticleManager extends AbstractModel
@@ -272,8 +273,13 @@ class ArticleManager extends AbstractModel
         $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':art_id', $art_id, \PDO::PARAM_INT);
         $select->execute();
-        $art[] = new Article($select->fetch());
-        return $art;
+        if($select->rowCount() > 0) {
+            $art[] = new Article($select->fetch());
+            return $art;
+        } else {
+            throw new NotFoundException('Article non trouvé');
+        }
+        
     }
 
     /**

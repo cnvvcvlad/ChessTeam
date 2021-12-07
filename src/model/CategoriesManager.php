@@ -3,6 +3,7 @@
 namespace Democvidev\ChessTeam\Model;
 
 use Democvidev\ChessTeam\Classes\Category;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Model\AbstractModel;
 
 class CategoriesManager extends AbstractModel
@@ -86,11 +87,16 @@ class CategoriesManager extends AbstractModel
     {
         $request = 'SELECT *, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
         AS date_creation FROM ' . $this->table . ' WHERE id = :id';
-        $select = $this->db->getPDO()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);        
         $select->bindValue(':id', $id_category, \PDO::PARAM_INT);
-        $select->execute();
-        $cat[] = new Category($select->fetch());        
+        $select->execute();        
+        if($select->rowCount() > 0) {
+            $cat[] = new Category($select->fetch());        
         return $cat;
+        } else {
+            throw new NotFoundException('Cette catégorie n\'existe pas');
+        }
+        
     }
 
     /**
