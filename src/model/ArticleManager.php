@@ -156,6 +156,28 @@ class ArticleManager extends AbstractModel
     }
 
     /**
+     * Retourne une date formatée
+     * 
+     * @return string
+     */
+    public function getCreatedAt(): string
+    {
+        return (new \DateTime($this->date_creation))->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * Retourne un extrait de contenu
+     *
+     * @return string
+     */
+    public function getExcerpt()
+    {
+        $content = $this->art_content;
+        $excerpt = substr($content, 0, 200) . '...';
+        return $excerpt;
+    }
+
+    /**
      * Affichage de tous les articles compris entre deux identifiants
      *
      * @param int $firstArticle
