@@ -14,6 +14,7 @@ use Democvidev\ChessTeam\Form\AuthenticationForm;
 use Democvidev\ChessTeam\Controller\PostController;
 use Democvidev\ChessTeam\Controller\UserController;
 use Democvidev\ChessTeam\Controller\CoachController;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Controller\CommentController;
 use Democvidev\ChessTeam\Controller\CategoryController;
 
@@ -54,8 +55,10 @@ class Router
                 return $route->execute();
             }
         }
-
-        return header('HTTP/1.0 404 Not Found');
+        // si aucune route ne correspond, on affiche la page d'erreur 404
+        // return header('HTTP/1.0 404 Not Found');
+        // throw new \Exception('Page not found', 404);
+        throw new NotFoundException('Error : Page not found', 404);
     }
 
     public function run_old()
