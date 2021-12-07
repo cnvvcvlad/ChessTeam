@@ -12,6 +12,11 @@ require '../vendor/autoload.php';
 
 define('VIEWS', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vue' . DIRECTORY_SEPARATOR);
 define('SCRIPTS', dirname($_SERVER['SCRIPT_NAME']) . DIRECTORY_SEPARATOR);
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'team_chess');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
+
 $db = new DataBaseConnection();
 $categoryManager = new CategoriesManager($db);
 $allCategories = $categoryManager->showAllCategory();

@@ -10,13 +10,12 @@ class DataBaseConnection
     private $database;
     private static $instancePDO = null;
 
-    public function __construct($host = 'localhost', $username = 'root', $password = '', $database = 'team_chess') {
-        if ($host != null) {
-            $this->host = $host;
-            $this->username = $username;
-            $this->password = $password;
-            $this->database = $database;
-        }
+    public function __construct()
+    {
+        $this->host = DB_HOST;
+        $this->username = DB_USER;
+        $this->password = DB_PASSWORD;
+        $this->database = DB_NAME;
     }
 
     /**
