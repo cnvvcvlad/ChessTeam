@@ -724,9 +724,10 @@ select {
 
 input[type='submit'],
 input[type='reset'] {
-  min-width: 105px;
-  margin-left: 5px;
+  /* min-width: 105px; */
+  /* margin-left: 5px; */
   box-shadow: 1px 1px 1px #d83f3d;
+  margin: 5px 0 0 0;
   cursor: pointer;
 }
 
