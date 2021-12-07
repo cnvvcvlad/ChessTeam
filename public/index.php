@@ -27,5 +27,8 @@ $router
     ->get('/category/:id/posts', 'Democvidev\ChessTeam\Controller\PostController@showCategoryPosts')
     ->get('/categories', 'Democvidev\ChessTeam\Controller\CategoryController@index')
     ->get('/categories/:id', 'Democvidev\ChessTeam\Controller\CategoryController@show')
+    ->get('/coachs', 'Democvidev\ChessTeam\Controller\CoachController@index')
+    ->get('/coachs/:id', 'Democvidev\ChessTeam\Controller\CoachController@show')
+    ->get('/coachs/map', 'Democvidev\ChessTeam\Controller\CoachController@map')
     ->run();
 
