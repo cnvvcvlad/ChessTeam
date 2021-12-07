@@ -44,7 +44,15 @@ class Router
 
     public function get(string $path, string $action)
     {
+        // on stock la route dans un tableau avec la clé GET
         $this->routes['GET'][] = new Route($path, $action);
+        return $this;
+    }
+
+    public function post(string $path, string $action)
+    {
+        // on stocke les routes dans un tableau avec la clé POST
+        $this->routes['POST'][] = new Route($path, $action);
         return $this;
     }
 
