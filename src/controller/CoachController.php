@@ -22,6 +22,25 @@ class CoachController extends AbstractController
     //     'Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
     // );
 
+    public function index()
+    {
+        return $this->view('coach.index', [
+            'coaches' => $this->coachManager->getInfoTopCoachs()
+        ]);
+    }
+
+    public function show($id)
+    {
+        return $this->view('coach.show', [
+            'coach' => $this->coachManager->getInfoCoach($id)
+        ]);
+    }
+
+    public function map()
+    {
+        return $this->view('coach.map');
+    }
+
     /**
      * Récupère les coordonnées de la ville d'un coach
      *
