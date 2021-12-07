@@ -68,6 +68,5 @@
 
 <?php endif; ?>
 <div class="back-page">
-    <a href="<?= isset($_SERVER['HTTP_REFERER']) ? substr(basename($_SERVER['HTTP_REFERER']), 0) : '' ?>">Retour</a>
     <a href="<?= dirname(SCRIPTS) ?>">Retour à l'accueil</a>
-</div>
+</div
