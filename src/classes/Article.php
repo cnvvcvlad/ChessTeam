@@ -11,7 +11,7 @@ class Article extends Generique
     private $art_description;
     private $art_content;
     private $art_image;
-    private $art_date_creation;
+    private $date_creation;
     private $art_author;
     private $category_id;
 
@@ -115,9 +115,9 @@ class Article extends Generique
     /**
      * Get the value of art_date_creation
      */
-    public function getArt_date_creation()
+    public function getDate_creation()
     {
-        return $this->art_date_creation;
+        return $this->date_creation;
     }
 
     /**
@@ -125,9 +125,9 @@ class Article extends Generique
      *
      * @return  self
      */
-    public function setArt_date_creation($art_date_creation)
+    public function setDate_creation($date_creation)
     {
-        $this->art_date_creation = $art_date_creation;
+        $this->date_creation = $date_creation;
 
         return $this;
     }
