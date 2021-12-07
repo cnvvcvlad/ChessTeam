@@ -6,6 +6,11 @@ use Democvidev\ChessTeam\Model\AbstractModel;
 
 class CoachManager extends AbstractModel
 {
+    /**
+     * Redéfinition de la propriété $table
+     *
+     * @var string
+     */
     protected $table = 'coach';    
 
     /**
@@ -23,7 +28,7 @@ class CoachManager extends AbstractModel
         $select->execute();
         // On initialise le tableau associatif de résultats
         $coachs = [];
-        $coachs['coachs'] = [];
+        // $coachs['coachs'] = [];
 
         while ($data = $select->fetch(\PDO::FETCH_ASSOC)) {
             // $coachs[] = new Coachs($data);
@@ -42,7 +47,7 @@ class CoachManager extends AbstractModel
                 'lat' => $lat,
                 'lon' => $lon,
             ];
-            $coachs['coachs'][] = $coach;
+            $coachs[] = $coach;
         }
 
         // On retourne le résultat
@@ -101,7 +106,7 @@ class CoachManager extends AbstractModel
         $select = $this->db->getPDO()->prepare($request);
         $select->bindValue('id', $id, \PDO::PARAM_INT);
         $select->execute();
-        $coach = $select->fetch(\PDO::FETCH_ASSOC);        
+        $coach = $select->fetch(\PDO::FETCH_ASSOC); 
         return $coach;
     }
 
