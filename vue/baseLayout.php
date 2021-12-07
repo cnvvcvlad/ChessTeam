@@ -140,8 +140,8 @@
                             </li>
 
                             <?php if (
-                                isset($this->role) &&
-                                $this->role->isConnected()
+                                isset($role) &&
+                                $role->isConnected()
                             ): ?>
                                 <li>
                                     <div class="list_style"><a href="?action=myAccount&amp;id=<?= $_SESSION[
@@ -162,8 +162,8 @@
 
 
                                 <?php if (
-                                    isset($this->role) &&
-                                    $this->role->isAdmin()
+                                    isset($role) &&
+                                    $role->isAdmin()
                                 ): ?>
 
                                     <li>
