@@ -3,6 +3,7 @@
 namespace Democvidev\ChessTeam\Controller;
 
 use Democvidev\ChessTeam\Model\CoachManager;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Controller\AbstractController;
 
 class CoachController extends AbstractController
@@ -31,6 +32,9 @@ class CoachController extends AbstractController
 
     public function show($id)
     {
+        if (!preg_match("/^\d+$/", $id)){
+            throw new NotFoundException('Erreur 404');
+        }
         return $this->view('coach.show', [
             'coach' => $this->coachManager->getInfoCoach($id)
         ]);

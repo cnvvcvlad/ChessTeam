@@ -6,6 +6,7 @@ use Democvidev\ChessTeam\Model\ArticleManager;
 use Democvidev\ChessTeam\Model\CommentsManager;
 use Democvidev\ChessTeam\Controller\CommentController;
 use Democvidev\ChessTeam\Controller\AbstractController;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 
 class PostController extends AbstractController
 {
@@ -41,11 +42,14 @@ class PostController extends AbstractController
         ]);
     }
 
-    public function show(int $id)
-    {
-        $post = $this->postManager->affichageOne($id);  
-        $commentsOfArticle = $this->commentManager->showCommentsOfArticle($id);      
-        return $this->view('posts.show', compact('post', 'commentsOfArticle'));
+    public function show($id)
+    {        
+        if (!preg_match("/^\d+$/", $id)){
+            throw new NotFoundException('Erreur 404');
+        }
+            $post = $this->postManager->affichageOne($id);  
+            $commentsOfArticle = $this->commentManager->showCommentsOfArticle($id);      
+            return $this->view('posts.show', compact('post', 'commentsOfArticle'));
     }    
 
     public function showCategoryPosts(int $id)
