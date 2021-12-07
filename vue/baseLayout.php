@@ -136,7 +136,7 @@
                                 <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/posts">Articles</a></div>
                             </li>
                             <li>
-                                <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/coach">ChessCoach</a></div>
+                                <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/coachs">ChessCoach</a></div>
                             </li>
 
                             <?php if (
