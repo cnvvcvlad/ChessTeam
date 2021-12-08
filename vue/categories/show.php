@@ -16,7 +16,7 @@
                     <span class="mark"><?= isset($user) ? $user->showNameAuthor(
                         $value->getCat_author()
                     ) : '' ?></span>
-                    le <em><?= $value->getCat_date_creation() ?></em></p>
+                    le <em><?= $value->getDate_creation() ?></em></p>
 
                 <div class="justify_article">
                     <a class="grand_image" href="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $value->getCategory_image() ?>">
