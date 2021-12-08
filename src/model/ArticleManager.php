@@ -65,9 +65,9 @@ class ArticleManager extends AbstractModel
      *
      * @param int $id
      * @param Article $article
-     * @return void
+     * @return bool
      */
-    public function updateArticle($id, Article $article): void
+    public function updateArticle($id, Article $article): bool
     {
         $request =
             'UPDATE ' .
@@ -112,7 +112,8 @@ class ArticleManager extends AbstractModel
             $article->getCategory_id(),
             \PDO::PARAM_INT
         );
-        $update = $update->execute();
+        $result = $update->execute();        
+        return $result;
     }
 
     /**
@@ -136,7 +137,7 @@ class ArticleManager extends AbstractModel
     public function getAllPosts(): array
     {
         $stmt = $this->requestAll();
-        $posts = $this->returnPosts($stmt);
+        $posts = $this->returnPosts($stmt);        
         return $posts;
     }
 
@@ -313,7 +314,7 @@ class ArticleManager extends AbstractModel
      */
     public function deleteArticle($id_article): void
     {
-        $query = 'DELETE FROM articles WHERE id = :id_article';
+        $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id_article';
         $delete = $this->db->getPDO()->prepare($query);
         $delete->bindValue(':id_article', $id_article, \PDO::PARAM_INT);
         $delete->execute();
