@@ -30,6 +30,23 @@ abstract class AbstractModel
         $this->db = $db;
     }
 
+    public function create(array $data, array $relations = null)
+    {
+        $firstParenthesis = "";
+        $secondParenthesis = "";
+        $counter = 1;
+
+        foreach ($data as $key => $value) {
+            $comma = $counter === count($data) ? "" : ", ";
+            $firstParenthesis .= "{$key}{$comma}";
+            $secondParenthesis .= ":{$key}{$comma}";
+            $counter++;
+        }
+
+        return $this->db->getPDO->query(
+            "INSERT INTO {$this->table} ({$firstParenthesis}) VALUES ({$secondParenthesis})", $data);
+    }
+
     /**
      * Récupère toutes les donées de la table, dans une liste de ressources
      *

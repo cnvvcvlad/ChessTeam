@@ -14,9 +14,9 @@ class ArticleManager extends AbstractModel
      * Insère un article dans la base de données
      *
      * @param Article $article
-     * @return void
+     * @return bool
      */
-    public function insertArticle(Article $article): void
+    public function insertArticle(Article $article): bool
     {
         $request =
             'INSERT INTO ' .
@@ -58,6 +58,7 @@ class ArticleManager extends AbstractModel
             \PDO::PARAM_INT
         );
         $insert = $insert->execute();
+        return $insert;
     }
 
     /**

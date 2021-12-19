@@ -1,5 +1,8 @@
 <div class="container">  
     <h1>Administration des articles</h1>
+    <div class="justify_article">
+        <a href="<?= dirname(SCRIPTS) ?>/admin/posts/create" class="">Créer un nouvel article</a>
+    </div>
     <table id="posts" class="posts">
         <thead>
             <tr>
