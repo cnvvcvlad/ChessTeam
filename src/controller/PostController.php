@@ -182,7 +182,7 @@ class PostController extends AbstractController
      */
     public function searchOneElement($element): array
     {
-        // On remplace les caractères indésiables par des chaines de caractères vides
+        // On remplace les caractères indésirables par des chaines de caractères vides
         $element = preg_replace('#[^a-z çéèàùêôî?0-9]#i', '', $element);
         $posts = $this->postManager->searchArticles($element);
         return $posts;
@@ -213,5 +213,12 @@ class PostController extends AbstractController
             }
         }
         return $posts;
+    }
+
+    public function search()
+    {
+        $search = $_POST['search'];
+        $posts = $this->getPostsSearchResults($search);
+        return $this->view('posts.search', compact('posts'));
     }
 }
