@@ -140,54 +140,48 @@
                             </li>
 
                             <?php if (
-                                isset($role) &&
-                                $role->isConnected()
-                            ): ?>
+                                isset($_SESSION['id_user'])): ?>
                                 <li>
-                                    <div class="list_style"><a href="?action=myAccount&amp;id=<?= $_SESSION[
-                                        'id_user'
-                                    ] ?>">Mon Compte</a>
+                                    <div class="list_style"><a href="">Mon Compte</a>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="list_style"><a href="?action=myArticlesId&amp;id=<?= $_SESSION[
-                                        'id_user'
-                                    ] ?>">Mes
+                                    <div class="list_style"><a href="">Mes
                                             articles</a>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="list_style"><a href="?action=createArticleId">Créer article</a></div>
+                                    <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/admin/posts/create">Créer article</a></div>
                                 </li>
 
 
                                 <?php if (
-                                    isset($role) &&
-                                    $role->isAdmin()
+                                    isset($_SESSION['statut']) &&
+                                    $_SESSION['statut'] === 1
                                 ): ?>
 
                                     <li>
-                                        <div class="list_style"><a href="?action=allMembers">Membres</a></div>
+                                        <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/admin/members">Membres</a></div>
                                     </li>
                                     <li>
-                                        <div class="list_style"><a href="?action=allComments">Commentaires</a></div>
+                                        <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/admin/comments">Commentaires</a></div>
                                     </li>
                                     <li>
-                                        <div class="list_style"><a href="?action=allVs">VS</a></div>
+                                        <div class="list_style"><a href="">VS</a></div>
                                     </li>
 
 
                                 <?php endif; ?>
                                 <li>
-                                    <div class="list_style"><a href="?action=deconnect">Déconnexion</a></div>
+                                    <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/logout">Déconnexion</a></div>
                                 </li>
 
                             <?php else: ?>
                                 <li>
-                                    <div class="list_style"><a href="?action=connexion">Connection</a></div>
+                                    <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/login">Connection</a></div>
                                 </li>
                                 <li>
-                                    <div class="list_style"><a href="?action=inscription">Inscription</a></div>
+                                    <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/register">Inscription</a></div>
                                 </li>
                             <?php endif; ?>
 
