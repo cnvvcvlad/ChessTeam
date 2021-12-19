@@ -174,9 +174,9 @@ abstract class AbstractModel
      * @param string $sql
      * @param array $param
      * @param boolean|null $single
-     * @return bool
+     * @return boolean|array
      */
-    public function query(string $sql, array $param, bool $single = null): bool
+    public function query(string $sql, array $param, bool $single = null)
     {
         $method = is_null($param) ? 'query' : 'prepare';
 
