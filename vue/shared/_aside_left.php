@@ -14,7 +14,7 @@
                     <span class="mark"><?= isset($user)
                         ? $user->showNameAuthor($value->getArt_author())
                         : '' ?></span>
-                    le <em><?= $value->getArt_date_creation() ?></em> dans la catégorie
+                    le <em><?= $value->getDate_creation() ?></em> dans la catégorie
                     <strong><?= $this->category->showNameCategory(
                         $value->getCategory_id()
                     ) ?></strong>

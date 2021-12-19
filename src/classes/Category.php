@@ -10,7 +10,7 @@ class Category extends Generique
     private $title;
     private $description;
     private $category_image;
-    private $cat_date_creation;
+    private $date_creation;
     private $cat_author;
 
     public function __construct(array $data)
@@ -91,21 +91,21 @@ class Category extends Generique
     }
 
     /**
-     * Get the value of cat_date_creation
+     * Get the value of date_creation
      */
-    public function getCat_date_creation()
+    public function getDate_creation()
     {
-        return $this->cat_date_creation;
+        return $this->date_creation;
     }
 
     /**
-     * Set the value of cat_date_creation
+     * Set the value of date_creation
      *
      * @return  self
      */
-    public function setCat_date_creation($cat_date_creation)
+    public function setDate_creation($date_creation)
     {
-        $this->cat_date_creation = $cat_date_creation;
+        $this->date_creation = $date_creation;
 
         return $this;
     }
