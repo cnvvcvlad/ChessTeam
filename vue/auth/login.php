@@ -1,3 +1,5 @@
+<?php $title = 'Formulaire'; ?>
+<?php $description = 'Page du formulaire'; ?>
 <div class="container">
     <h1 class="text-center">Connectez - vous!</h1>
     <div class="container_form">

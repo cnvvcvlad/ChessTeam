@@ -1,3 +1,5 @@
+<?php $title = 'Formulaire'; ?>
+<?php $description = 'Page du formulaire'; ?>
 <div class="container">
     <h1><?= isset($params['post'][0]) ? $params['post'][0]->getArt_title() : 'Créer un nouvel article' ?></h1>
 <form action="<?= isset($params['post'][0]) ? dirname(SCRIPTS) . "/admin/posts/edit/" . $params['post'][0]->getId() : dirname(SCRIPTS) . "/admin/posts/create" ?>" method="post" class="form-inscription"

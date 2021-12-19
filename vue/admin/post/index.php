@@ -1,3 +1,5 @@
+<?php $title = 'Administration des articles'; ?>
+<?php $description = 'Page de l\'administrateur'; ?>
 <div class="container">  
     <h1>Administration des articles</h1>
     <div class="justify_article">
