@@ -36,6 +36,10 @@ $router
     ->get('/register', 'Democvidev\ChessTeam\Controller\UserController@register')
     ->post('/register', 'Democvidev\ChessTeam\Controller\UserController@registerUser')
     ->get('/logout', 'Democvidev\ChessTeam\Controller\UserController@logout')
+    ->get('/profile', 'Democvidev\ChessTeam\Controller\UserController@profile')
+    ->get('/profile/update/:id', 'Democvidev\ChessTeam\Controller\UserController@update')
+    ->post('/profile/update/:id', 'Democvidev\ChessTeam\Controller\UserController@updateUser')
+    ->post('/profile/delete/:id', 'Democvidev\ChessTeam\Controller\UserController@destroy')
 
     ->post('/search', 'Democvidev\ChessTeam\Controller\PostController@search')
     ->get('/posts', 'Democvidev\ChessTeam\Controller\PostController@index')

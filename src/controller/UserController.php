@@ -86,8 +86,80 @@ class UserController extends AbstractController
         }
     }
 
+    public function profile()
+    {
+        $user = $this->memberManager->showOneUser($_SESSION['id_user']);        
+        $this->view('user.profile', [
+            'user' => $user,
+        ]);
+    }
+
+    public function update($id)
+    {
+        $user = $this->memberManager->showOneUser($id);
+        $this->view('user.update', [
+            'user' => $user,
+        ]);
+    }
+
+    public function updateUser($id)
+    {
+        
+        if(isset($_POST['update']) and
+        isset($_FILES['image_membre']) and
+        $_FILES['image_membre']['error'] == 0) {
+            extract($_POST);
+            // TODO validation des données nord coders
+
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            
+
+            if ($_FILES['image_membre']['size'] <= 2000000) {
+                $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
+    
+                $info = pathinfo($_FILES['image_membre']['name']);
+    
+                $extension_uploadee = $info['extension'];
+    
+                if (in_array($extension_uploadee, $extension_autorisee)) {
+                    $user_image = $_FILES['image_membre']['name'];
+    
+                    //                $user_image = uniqid() . $user_image;
+                    $path = dirname(__FILE__, 3) .'/public/img/uploads/' . $user_image;
+    
+                    move_uploaded_file($_FILES['image_membre']['tmp_name'], $path);
+    
+                    $this->memberManager->updateMembre(
+                        $id,
+                        new Users([
+                            'login' => $login,
+                            'email' => $email,
+                            'password' => $password,
+                            'user_image' => $user_image,
+                        ])
+                    );                        
+                    header('Location:' . dirname(SCRIPTS) . '/profile');
+                    exit();
+                } else {
+                    throw new NotFoundException(
+                        "Veuillez rééssayer avec un autre format d'image !"
+                    );
+                }
+            } else {
+                throw new NotFoundException('Votre fichier ne doit pas dépasser 2 Mo !');
+            }
+        }
+    }
+
     public function logout()
     {
+        session_destroy();
+        return header('Location:' . dirname(SCRIPTS) . '/');
+    }
+
+    public function destroy($id)
+    {        
+        $this->memberManager->deleteU($id);
         session_destroy();
         return header('Location:' . dirname(SCRIPTS) . '/');
     }

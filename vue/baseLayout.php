@@ -142,7 +142,7 @@
                             <?php if (
                                 isset($_SESSION['id_user'])): ?>
                                 <li>
-                                    <div class="list_style"><a href="">Mon Compte</a>
+                                    <div class="list_style"><a href="<?= dirname(SCRIPTS) ?>/profile">Mon Compte</a>
                                     </div>
                                 </li>
                                 <li>
@@ -189,17 +189,12 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="search">
-                    <!-- <div class="memberInfo"><span><?= isset($user)
-                        ? $user->helloUser()
-                        : '' ?></span></div> -->
                     <div class="search">
                         <form action="<?= dirname(SCRIPTS) ?>/search" method="post">
                             <input type="text" name="search" placeholder="Rechercher un article" required />
                             <input type="submit" value="Rechercher" />
                         </form>
                     </div>
-                </div>
                 <?php  ?>
             </div>
             <div class="menu-bg" id="menu-bg"></div>
