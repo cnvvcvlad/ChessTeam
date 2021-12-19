@@ -35,6 +35,8 @@ class PostController extends AbstractController
      */
     public function index()
     {
+        // protection de l'accès à la page, pour l'admin uniquement
+        $this->isAdmin();
         return $this->view('admin.post.index', [
             'posts' => $this->postManager->getAllPosts(),
         ]);
@@ -42,6 +44,7 @@ class PostController extends AbstractController
 
     public function create()
     {
+        $this->isAdmin();
         return $this->view('admin.post.form', [
             'categories' => $this->categoryManager->showAllCategory(),
         ]);
@@ -49,6 +52,7 @@ class PostController extends AbstractController
 
     public function createPost()
     {
+        $this->isAdmin();
         if (!empty($_POST) || !empty($_FILES)) {
             extract($_POST);
             // var_dump($_POST);
@@ -112,6 +116,7 @@ class PostController extends AbstractController
      */
     public function edit($id)
     {
+        $this->isAdmin();
         return $this->view('admin.post.form', [
             'post' => $this->postManager->affichageOne($id),
         ]);
@@ -125,6 +130,7 @@ class PostController extends AbstractController
      */
     public function update($id)
     {
+        $this->isAdmin();
         if (!empty($_POST) || !empty($_FILES)) {
             extract($_POST);
             // TODO: validation
@@ -184,6 +190,7 @@ class PostController extends AbstractController
      */
     public function destroy($id)
     {
+        $this->isAdmin();
         $post = $this->postManager->affichageOne($id);
         if ($post) {
             //    $result = $this->postManager->deleteArticle($id);

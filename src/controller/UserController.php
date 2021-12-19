@@ -4,15 +4,40 @@ namespace Democvidev\ChessTeam\Controller;
 
 use Democvidev\ChessTeam\Model\MemberManager;
 use Democvidev\ChessTeam\Service\RoleHandler;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
     private $memberManager;
 
-    public function __construct(MemberManager $memberManager)
+    public function __construct()
     {
         $this->memberManager = new MemberManager($this->getDatabase());
+    }
+
+    public function login()
+    {
+        return $this->view('auth.login');
+    }
+
+    public function loginUser()
+    {
+        $user = $this->memberManager->getByLogin($_POST['login']);
+        
+        if(password_verify($_POST['password'], $user->password)) {
+            $_SESSION['id_user'] = (int) $user->id_user;
+            $_SESSION['statut'] = (int) $user->statut;
+            return header('Location:' . dirname(SCRIPTS) . '/');
+        } else {
+            throw new NotFoundException('Le mot de passe est invalide !');
+        }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        return header('Location:' . dirname(SCRIPTS) . '/');
     }
 
     /**
