@@ -909,6 +909,10 @@ table {
   align-items: center;
 }
 
+.posts {
+  margin-top: 1rem;
+}
+
 /***********Formulaire CreateArticle***********/
 
 div.top_article:nth-child(n) {
@@ -921,6 +925,10 @@ div.form-create:nth-child(6) > label:nth-child(1) {
   border-radius: 5px;
   border: 1px solid #1c0a77;
   cursor: pointer;
+}
+
+.art_image {
+  margin-left: 5px;
 }
 
 /**********Category***************/
