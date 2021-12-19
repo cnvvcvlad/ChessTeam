@@ -10,13 +10,17 @@ class MemberManager extends AbstractModel
 {    
     protected $table = 'user';
 
+    public function getByLogin(string $login)
+    {
+        return $this->query("SELECT * FROM $this->table WHERE login = ?", [$login], true);
+    }
+
     /**
      * Verifier le mot de passe lors de la connexion
      *
      * @param string $login
-     * @return array
      */
-    public function checkPassword($login): array 
+    public function checkPassword(string $login)
     {
         $request = 'SELECT password FROM ' . $this->table . ' WHERE login = :login';
         $select = $this->db->getPDO()->prepare($request);
@@ -24,7 +28,7 @@ class MemberManager extends AbstractModel
             "login" => $login
         ]);
         if ($select->rowCount() != 0) {
-            $password = $select->fetch();
+            $password = $select->fetch();            
             return $password;
         }
         throw new \Exception("Le mot de passe est invalide !");
