@@ -29,6 +29,12 @@ $router = new Router($_GET['action']);
 
 $router
     ->get('/', 'Democvidev\ChessTeam\Controller\HomeController@index')
+    // on affiche le formulaire de connexion
+    ->get('/login', 'Democvidev\ChessTeam\Controller\UserController@login')
+    // on traite le formulaire de connexion
+    ->post('/login', 'Democvidev\ChessTeam\Controller\UserController@loginUser')
+    ->get('/logout', 'Democvidev\ChessTeam\Controller\UserController@logout')
+
     ->get('/posts', 'Democvidev\ChessTeam\Controller\PostController@index')
     ->get('/posts/:id', 'Democvidev\ChessTeam\Controller\PostController@show')
     ->get(
@@ -51,6 +57,10 @@ $router
     // TODO: ne pas mettre en production qu'après les validations faites !
     ->post('/admin/posts/delete/:id', 'Democvidev\ChessTeam\Controller\Admin\PostController@destroy')
     ->get('/admin/posts/edit/:id', 'Democvidev\ChessTeam\Controller\Admin\PostController@edit')
+    // on affiche le formulaire de création d'un nouveau post
+    ->get('/admin/posts/create', 'Democvidev\ChessTeam\Controller\Admin\PostController@create')
+    // on enregistre le nouveau post
+    ->post('/admin/posts/create', 'Democvidev\ChessTeam\Controller\Admin\PostController@createPost')
     ->post('/admin/posts/edit/:id', 'Democvidev\ChessTeam\Controller\Admin\PostController@update');
 
 // on ratrappe les erreurs personnalisées dans le cas où l'action n'existe pas
