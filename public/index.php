@@ -35,6 +35,7 @@ $router
     ->post('/login', 'Democvidev\ChessTeam\Controller\UserController@loginUser')
     ->get('/logout', 'Democvidev\ChessTeam\Controller\UserController@logout')
 
+    ->post('/search', 'Democvidev\ChessTeam\Controller\PostController@search')
     ->get('/posts', 'Democvidev\ChessTeam\Controller\PostController@index')
     ->get('/posts/:id', 'Democvidev\ChessTeam\Controller\PostController@show')
     ->get(
