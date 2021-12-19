@@ -2,6 +2,7 @@
 
 namespace Democvidev\ChessTeam\Controller;
 
+use Democvidev\ChessTeam\Classes\Users;
 use Democvidev\ChessTeam\Model\MemberManager;
 use Democvidev\ChessTeam\Service\RoleHandler;
 use Democvidev\ChessTeam\Exception\NotFoundException;
@@ -31,6 +32,57 @@ class UserController extends AbstractController
             return header('Location:' . dirname(SCRIPTS) . '/');
         } else {
             throw new NotFoundException('Le mot de passe est invalide !');
+        }
+    }
+
+    public function register()
+    {
+        return $this->view('auth.register');
+    }
+
+    public function registerUser()
+    {
+        if(isset($_POST['inscription']) and
+        isset($_FILES['image_membre']) and
+        $_FILES['image_membre']['error'] == 0) {
+            extract($_POST);
+            // TODO validation des données nord coders
+
+            $password = password_hash($password, PASSWORD_DEFAULT);
+
+            if ($_FILES['image_membre']['size'] <= 2000000) {
+                $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
+    
+                $info = pathinfo($_FILES['image_membre']['name']);
+    
+                $extension_uploadee = $info['extension'];
+    
+                if (in_array($extension_uploadee, $extension_autorisee)) {
+                    $user_image = $_FILES['image_membre']['name'];
+    
+                    //                $user_image = uniqid() . $user_image;
+                    $path = dirname(__FILE__, 3) .'/public/img/uploads/' . $user_image;
+    
+                    move_uploaded_file($_FILES['image_membre']['tmp_name'], $path);
+    
+                    $this->memberManager->insertMembre(
+                        new Users([
+                            'login' => $login,
+                            'email' => $email,
+                            'password' => $password,
+                            'user_image' => $user_image,
+                        ])
+                    );                        
+                    header('Location:' . dirname(SCRIPTS) . '/login');
+                    exit();
+                } else {
+                    throw new NotFoundException(
+                        "Veuillez rééssayer avec un autre format d'image !"
+                    );
+                }
+            } else {
+                throw new NotFoundException('Votre fichier ne doit pas dépasser 2 Mo !');
+            }
         }
     }
 
