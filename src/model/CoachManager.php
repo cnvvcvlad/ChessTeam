@@ -2,11 +2,16 @@
 
 namespace Democvidev\ChessTeam\Model;
 
-use Democvidev\ChessTeam\Model\DataBase;
+use Democvidev\ChessTeam\Model\AbstractModel;
 
-class CoachManager extends DataBase
+class CoachManager extends AbstractModel
 {
-    private $table = 'coachs';    
+    /**
+     * Redéfinition de la propriété $table
+     *
+     * @var string
+     */
+    protected $table = 'coach';    
 
     /**
      * Récupère toutes les informations des coachs
@@ -18,12 +23,12 @@ class CoachManager extends DataBase
         // On écrit la requête
         $request = 'SELECT * FROM ' . $this->table;
         // On prépare la requête
-        $select = $this->dbConnect()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);
         // On exécute la requête
         $select->execute();
         // On initialise le tableau associatif de résultats
         $coachs = [];
-        $coachs['coachs'] = [];
+        // $coachs['coachs'] = [];
 
         while ($data = $select->fetch(\PDO::FETCH_ASSOC)) {
             // $coachs[] = new Coachs($data);
@@ -42,7 +47,7 @@ class CoachManager extends DataBase
                 'lat' => $lat,
                 'lon' => $lon,
             ];
-            $coachs['coachs'][] = $coach;
+            $coachs[] = $coach;
         }
 
         // On retourne le résultat
@@ -60,7 +65,7 @@ class CoachManager extends DataBase
         // On écrit la requête
         $request = 'SELECT * FROM ' . $this->table . ' WHERE city = :city';
         // On prépare la requête
-        $select = $this->dbConnect()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);
         // On exécute la requête
         $select->execute(['city' => $city]);
         // On initialise le tableau associatif de résultats
@@ -98,10 +103,10 @@ class CoachManager extends DataBase
     public function getInfoCoach($id): array
     {
         $request = 'SELECT * FROM ' . $this->table . ' WHERE id = :id';
-        $select = $this->dbConnect()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);
         $select->bindValue('id', $id, \PDO::PARAM_INT);
         $select->execute();
-        $coach = $select->fetch(\PDO::FETCH_ASSOC);        
+        $coach = $select->fetch(\PDO::FETCH_ASSOC); 
         return $coach;
     }
 
@@ -114,7 +119,7 @@ class CoachManager extends DataBase
     {
         $request =
             'SELECT * FROM ' . $this->table . ' ORDER BY id DESC LIMIT 3';
-        $select = $this->dbConnect()->prepare($request);
+        $select = $this->db->getPDO()->prepare($request);
         $select->execute();
         $coachs = [];
         while ($data = $select->fetch(\PDO::FETCH_ASSOC)) {

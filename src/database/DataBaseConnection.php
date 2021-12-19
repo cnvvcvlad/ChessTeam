@@ -1,27 +1,21 @@
 <?php
 
-namespace Democvidev\ChessTeam\Model;
+namespace Democvidev\ChessTeam\Database;
 
-class DataBase
+class DataBaseConnection
 {
-    private $host = 'localhost';
-    private $username = 'root';
-    private $password = '';
-    private $database = 'team_chess';
+    private $host;
+    private $username;
+    private $password;
+    private $database;
     private static $instancePDO = null;
 
-    public function __construct(
-        $host = null,
-        $username = null,
-        $password = null,
-        $database = null
-    ) {
-        if ($host != null) {
-            $this->host = $host;
-            $this->username = $username;
-            $this->password = $password;
-            $this->database = $database;
-        }
+    public function __construct()
+    {
+        $this->host = DB_HOST;
+        $this->username = DB_USER;
+        $this->password = DB_PASSWORD;
+        $this->database = DB_NAME;
     }
 
     /**
@@ -29,7 +23,7 @@ class DataBase
      *
      * @return PDO
      */
-    public function dbConnect()
+    public function getPDO(): \PDO
     {
         // pattern singleton, retourne toujours une seule instance pdo
         if (self::$instancePDO === null) {
@@ -45,7 +39,7 @@ class DataBase
                 );
                 $pdo->exec('SET NAMES UTF8');
                 self::$instancePDO = $pdo;
-                return $pdo;
+                // return $pdo;
             } catch (\Exception $e) {
                 die('Erreur : ' . $e->getMessage()) or
                     die(print_r($pdo->errorInfo()));

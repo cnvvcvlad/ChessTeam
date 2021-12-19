@@ -4,11 +4,41 @@ namespace Democvidev\ChessTeam\Controller;
 
 use Democvidev\ChessTeam\Model\MemberManager;
 use Democvidev\ChessTeam\Service\RoleHandler;
+use Democvidev\ChessTeam\Exception\NotFoundException;
+use Democvidev\ChessTeam\Controller\AbstractController;
 
-class UserController
+class UserController extends AbstractController
 {
-    // private $model;
-    // private $view;
+    private $memberManager;
+
+    public function __construct()
+    {
+        $this->memberManager = new MemberManager($this->getDatabase());
+    }
+
+    public function login()
+    {
+        return $this->view('auth.login');
+    }
+
+    public function loginUser()
+    {
+        $user = $this->memberManager->getByLogin($_POST['login']);
+        
+        if(password_verify($_POST['password'], $user->password)) {
+            $_SESSION['id_user'] = (int) $user->id_user;
+            $_SESSION['statut'] = (int) $user->statut;
+            return header('Location:' . dirname(SCRIPTS) . '/');
+        } else {
+            throw new NotFoundException('Le mot de passe est invalide !');
+        }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        return header('Location:' . dirname(SCRIPTS) . '/');
+    }
 
     /**
      * Recupérer les données de l'utilisateur
@@ -18,8 +48,7 @@ class UserController
      */
     public function getInfoUser($user_id): array
     {
-        $member_manager = new MemberManager();
-        $member = $member_manager->showOneUser($user_id);
+        $member = $this->memberManager->showOneUser($user_id);
         return $member;
     }
 
@@ -30,8 +59,7 @@ class UserController
      */
     public function getAllMembers(): array
     {
-        $member_manager = new MemberManager();
-        $members = $member_manager->showAllUsers();
+        $members = $this->memberManager->showAllUsers();
         return $members;
     }
 
@@ -44,8 +72,7 @@ class UserController
     public function showNameAuthor($user_id): string
     {
         if (!empty($user_id)) {
-            $member_manager = new MemberManager();
-            $member = $member_manager->nameUser($user_id);
+            $member = $this->memberManager->nameUser($user_id);
             $login_user = implode($member);
             return $login_user;
         } else {
@@ -62,8 +89,7 @@ class UserController
      */
     public function deleteUser($user_id)
     {
-        $member_manager = new MemberManager();
-        $member_manager->deleteU($user_id);
+        $this->memberManager->deleteU($user_id);
         $role = new RoleHandler();
         if ($role->isAdmin()) {
             header('location:index.php?action=allMembers');

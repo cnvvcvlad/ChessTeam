@@ -5,7 +5,7 @@ namespace Democvidev\ChessTeam\Classes;
 use Democvidev\ChessTeam\Classes\Generique;
 
 
-class Coachs extends Generique
+class Coach extends Generique
 {
     private $id;
     private $last_name;
