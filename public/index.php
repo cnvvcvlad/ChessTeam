@@ -33,6 +33,8 @@ $router
     ->get('/login', 'Democvidev\ChessTeam\Controller\UserController@login')
     // on traite le formulaire de connexion
     ->post('/login', 'Democvidev\ChessTeam\Controller\UserController@loginUser')
+    ->get('/register', 'Democvidev\ChessTeam\Controller\UserController@register')
+    ->post('/register', 'Democvidev\ChessTeam\Controller\UserController@registerUser')
     ->get('/logout', 'Democvidev\ChessTeam\Controller\UserController@logout')
 
     ->post('/search', 'Democvidev\ChessTeam\Controller\PostController@search')
