@@ -50,7 +50,15 @@ class PostController extends AbstractController
             $post = $this->postManager->affichageOne($id);  
             $commentsOfArticle = $this->commentManager->showCommentsOfArticle($id);      
             return $this->view('posts.show', compact('post', 'commentsOfArticle'));
-    }    
+    }  
+    
+    public function profilePosts()
+    {
+        $this->isConnected();
+        return $this->view('user.posts', [
+            'posts' => $this->postManager->affichageMyArticles($_SESSION['id_user']),
+        ]);
+    }
 
     public function showCategoryPosts(int $id)
     {
