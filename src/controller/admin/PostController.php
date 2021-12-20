@@ -37,22 +37,22 @@ class PostController extends AbstractController
     {
         // protection de l'accès à la page, pour l'admin uniquement
         $this->isAdmin();
-        return $this->view('admin.post.index', [
+        return $this->view('admin.posts.index', [
             'posts' => $this->postManager->getAllPosts(),
         ]);
     }
 
     public function create()
     {
-        $this->isAdmin();
-        return $this->view('admin.post.form', [
+        $this->isConnected();
+        return $this->view('admin.posts.form', [
             'categories' => $this->categoryManager->showAllCategory(),
         ]);
     }
 
     public function createPost()
     {
-        $this->isAdmin();
+        $this->isConnected();
         if (!empty($_POST) || !empty($_FILES)) {
             extract($_POST);
             // var_dump($_POST);
@@ -85,7 +85,8 @@ class PostController extends AbstractController
                     );
                 }
                 // TODO art_author from session
-                isset($art_author) ? $art_author = 235 : $art_author;
+                $art_author = $_SESSION['id_user'];
+                isset($art_author) ? $art_author = $art_author : 235;
                 $result = $this->postManager->insertArticle(
                     new Article([
                         'art_title' => $art_title,
@@ -100,7 +101,7 @@ class PostController extends AbstractController
                 throw new NotFoundException('Erreur de l\'upload de l\'image!');
             }
             if ($result) {
-                return header('Location:' . dirname(SCRIPTS) . '/admin/posts');
+                return header('Location:' . dirname(SCRIPTS) . '/posts');
             }
         } else {
             throw new NotFoundException('Aucune donnée reçue');
@@ -116,8 +117,8 @@ class PostController extends AbstractController
      */
     public function edit($id)
     {
-        $this->isAdmin();
-        return $this->view('admin.post.form', [
+        $this->isConnected();
+        return $this->view('admin.posts.form', [
             'post' => $this->postManager->affichageOne($id),
         ]);
     }
@@ -130,7 +131,7 @@ class PostController extends AbstractController
      */
     public function update($id)
     {
-        $this->isAdmin();
+        $this->isConnected();
         if (!empty($_POST) || !empty($_FILES)) {
             extract($_POST);
             // TODO: validation
@@ -180,7 +181,7 @@ class PostController extends AbstractController
         } else {
             throw new NotFoundException('Aucune donnée reçue');
         }
-    }
+    }    
 
     /**
      * Supprime un article

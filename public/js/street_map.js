@@ -63,16 +63,16 @@ function initMap() {
           // console.log(donnees)
 
           // On boucle sur les données (ES8)
-          Object.entries(donnees.coachs).forEach((coach) => {
+          Object.entries(donnees).forEach((coach) => {
             // Ici j'ai une seule agence
             // On crée un marqueur pour l'agence
             let marker = L.marker([coach[1].lat, coach[1].lon]).addTo(macarte)
             // marker.bindPopup(coach[1].first_name)
-            marker.bindPopup(`<div class="popup"><img src="./assets/img/uploads/${coach[1].coach_image}" alt="" class="">
+            marker.bindPopup(`<div class="popup"><img src="../public/img/uploads/${coach[1].coach_image}" alt="" class="">
             <div class="coach-info">
                 <h3>${coach[1].first_name} ${coach[1].last_name}</h3>
                 <span>${coach[1].price}€/h</span3>
-            </div><span><a href="?action=coach&amp;id_coach=${coach[1].id}">en savoir plus</a></span></div>`)
+            </div><span><a href="./${coach[1].id}">en savoir plus</a></span></div>`)
           })
         } else {
           console.log(xmlhttp.statusText)
@@ -82,7 +82,7 @@ function initMap() {
     // TODO : Modifier sur le serveur de l'api l'url correspondante
     xmlhttp.open(
       'GET',
-      'http://localhost/ProjectTesting/ChessTeam/index.php?action=apiStreetMap',
+      'http://localhost/ProjectTesting/ChessTeam/api/coachs',
     )
 
     xmlhttp.send(null)

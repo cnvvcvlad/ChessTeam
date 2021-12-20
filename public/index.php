@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 session_start();
@@ -33,7 +34,14 @@ $router
     ->get('/login', 'Democvidev\ChessTeam\Controller\UserController@login')
     // on traite le formulaire de connexion
     ->post('/login', 'Democvidev\ChessTeam\Controller\UserController@loginUser')
+    ->get('/register', 'Democvidev\ChessTeam\Controller\UserController@register')
+    ->post('/register', 'Democvidev\ChessTeam\Controller\UserController@registerUser')
     ->get('/logout', 'Democvidev\ChessTeam\Controller\UserController@logout')
+    ->get('/profile', 'Democvidev\ChessTeam\Controller\UserController@profile')
+    ->get('/profile/update/:id', 'Democvidev\ChessTeam\Controller\UserController@update')
+    ->post('/profile/update/:id', 'Democvidev\ChessTeam\Controller\UserController@updateUser')
+    ->post('/profile/delete/:id', 'Democvidev\ChessTeam\Controller\UserController@destroy')
+    ->get('/profile/posts', 'Democvidev\ChessTeam\Controller\PostController@profilePosts')
 
     ->post('/search', 'Democvidev\ChessTeam\Controller\PostController@search')
     ->get('/posts', 'Democvidev\ChessTeam\Controller\PostController@index')
@@ -52,7 +60,14 @@ $router
     )
     ->get('/coachs', 'Democvidev\ChessTeam\Controller\CoachController@index')
     ->get('/coachs/:id', 'Democvidev\ChessTeam\Controller\CoachController@show')
-    ->get('/coachs/map', 'Democvidev\ChessTeam\Controller\CoachController@map')
+    ->get('/api/coachs', 'Democvidev\ChessTeam\Controller\CoachController@getAllCoordinateAdress')
+    ->post('/coachs/map', 'Democvidev\ChessTeam\Controller\CoachController@map')
+
+    ->get('/admin/members', 'Democvidev\ChessTeam\Controller\Admin\UserController@members')
+    ->get('/admin/comments', 'Democvidev\ChessTeam\Controller\Admin\CommentController@index')
+    ->get('/admin/comments/edit/:id', 'Democvidev\ChessTeam\Controller\Admin\CommentController@edit')
+    ->post('/admin/comments/edit/:id', 'Democvidev\ChessTeam\Controller\Admin\CommentController@update')
+    ->post('/admin/comments/delete/:id', 'Democvidev\ChessTeam\Controller\Admin\CommentController@destroy')
 
     ->get('/admin/posts', 'Democvidev\ChessTeam\Controller\Admin\PostController@index')
     // TODO: ne pas mettre en production qu'après les validations faites !
