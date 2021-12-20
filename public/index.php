@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 session_start();
@@ -40,6 +41,7 @@ $router
     ->get('/profile/update/:id', 'Democvidev\ChessTeam\Controller\UserController@update')
     ->post('/profile/update/:id', 'Democvidev\ChessTeam\Controller\UserController@updateUser')
     ->post('/profile/delete/:id', 'Democvidev\ChessTeam\Controller\UserController@destroy')
+    ->get('/profile/posts', 'Democvidev\ChessTeam\Controller\PostController@profilePosts')
 
     ->post('/search', 'Democvidev\ChessTeam\Controller\PostController@search')
     ->get('/posts', 'Democvidev\ChessTeam\Controller\PostController@index')
