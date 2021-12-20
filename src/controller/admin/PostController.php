@@ -37,7 +37,7 @@ class PostController extends AbstractController
     {
         // protection de l'accès à la page, pour l'admin uniquement
         $this->isAdmin();
-        return $this->view('admin.post.index', [
+        return $this->view('admin.posts.index', [
             'posts' => $this->postManager->getAllPosts(),
         ]);
     }
@@ -45,7 +45,7 @@ class PostController extends AbstractController
     public function create()
     {
         $this->isConnected();
-        return $this->view('admin.post.form', [
+        return $this->view('admin.posts.form', [
             'categories' => $this->categoryManager->showAllCategory(),
         ]);
     }
@@ -118,7 +118,7 @@ class PostController extends AbstractController
     public function edit($id)
     {
         $this->isConnected();
-        return $this->view('admin.post.form', [
+        return $this->view('admin.posts.form', [
             'post' => $this->postManager->affichageOne($id),
         ]);
     }
