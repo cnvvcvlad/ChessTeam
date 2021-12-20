@@ -30,7 +30,7 @@ class CommentsManager extends AbstractModel
      * 
      * @param Comment $comment
      * @param int $id
-     * @return void
+     * @return bool
      */
     public function updateComment($id, Comment $comment) {
         $request = 'UPDATE ' . $this->table . ' SET com_content = :com_content WHERE id =:id';
@@ -39,6 +39,7 @@ class CommentsManager extends AbstractModel
             'id' => $id,
             'com_content' => $comment->getCom_content()
         ]);
+        return $update;
     }
 
     /**
