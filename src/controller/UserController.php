@@ -159,9 +159,14 @@ class UserController extends AbstractController
 
     public function destroy($id)
     {        
+        $this->isConnected();
         $this->memberManager->deleteU($id);
-        session_destroy();
-        return header('Location:' . dirname(SCRIPTS) . '/');
+        if($_SESSION['statut'] == 1) {
+            header('Location:' . dirname(SCRIPTS) . '/admin/members');
+        } else {
+            session_destroy();
+            header('Location:' . dirname(SCRIPTS) . '/');
+        }
     }
 
     /**

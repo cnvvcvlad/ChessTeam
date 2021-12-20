@@ -63,6 +63,7 @@ $router
     ->get('/api/coachs', 'Democvidev\ChessTeam\Controller\CoachController@getAllCoordinateAdress')
     ->post('/coachs/map', 'Democvidev\ChessTeam\Controller\CoachController@map')
 
+    ->get('/admin/members', 'Democvidev\ChessTeam\Controller\Admin\UserController@members')
     ->get('/admin/posts', 'Democvidev\ChessTeam\Controller\Admin\PostController@index')
     // TODO: ne pas mettre en production qu'après les validations faites !
     ->post('/admin/posts/delete/:id', 'Democvidev\ChessTeam\Controller\Admin\PostController@destroy')
