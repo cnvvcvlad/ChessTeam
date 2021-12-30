@@ -2,6 +2,7 @@
 
     .en-tete {
         justify-content: space-around;
+        padding-bottom: 13px;
     }
 
     /*style du burger*/
