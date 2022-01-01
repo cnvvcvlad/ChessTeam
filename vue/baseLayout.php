@@ -268,6 +268,10 @@
                         'js' .
                         DIRECTORY_SEPARATOR .
                         'script.js' ?>"></script>
+    <script src="<?= SCRIPTS .
+                        'ckeditor5' .
+                        DIRECTORY_SEPARATOR .
+                        'ckeditor.js' ?>"></script>
 
 
     <!--reCAPTCHA-->

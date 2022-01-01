@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-create">
                             <label for="">Contenu de l'article
-                                <p><textarea name="art_content" placeholder="Contenu de l'article" rows="5"
+                                <p><textarea id="editor" name="art_content" placeholder="Contenu de l'article" rows="5"
                                              cols="33"><?= isset($params['post'][0]) ? $params['post'][0]->getArt_content() : '' ?></textarea></p>
                             </label>
                         </div>

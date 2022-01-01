@@ -24,8 +24,8 @@
 @font-face {
   font-family: 'rubik';
   src: 
-    /* url('font/rubik/Rubik-Regular.ttf') format('truetype'), */
-    url('font/rubik/Rubik-Regular.woff') format('woff'),
+    /* url('font/rubik/Rubik-Regular.ttf') format('truetype'), */ url('font/rubik/Rubik-Regular.woff')
+      format('woff'),
     url('font/rubik/Rubik-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
@@ -393,7 +393,7 @@ ul .sous-menu {
 }
 
 /****** Search button *******/
-.search{
+.search {
   display: inline-block;
 }
 
@@ -408,19 +408,19 @@ ul .sous-menu {
 }
 
 /****** Paginator  ***********/
-.disabled {  
-  position : relative; 
-  color    : grey;
+.disabled {
+  position: relative;
+  color: grey;
   pointer-events: none !important;
 }
 
 .disabled:after {
-  position :absolute;
-  left     : 0;
-  top      : 0;
-  width    : 100%;
-  height   : 100%;
-  content  :' ';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  content: ' ';
 }
 
 .page-item {
@@ -553,8 +553,8 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
   float: left;
   margin-right: 1em;
   margin-top: 1rem;
-  width: 10vw;
-  height: 10vh;
+  /* width: 10vw; */
+  height: 25vh;
   max-width: 100%;
   /* height: auto; */
   border-radius: 10px;
@@ -761,7 +761,7 @@ main.container_form div.bouton_commande {
   justify-content: flex-start;
   align-items: center;
   min-height: 75vh;
-  /* min-width: 40vw; */ 
+  /* min-width: 40vw; */
   max-width: 80vw;
   align-self: flex-start;
   flex: 1;
@@ -1265,7 +1265,6 @@ ul li div.smenu a {
   float: left;
 }
 
-
 /********** Styles CoachInfo ************/
 
 .coach-data {
@@ -1307,13 +1306,15 @@ ul li div.smenu a {
   line-height: 2rem;
 }
 
-.full-width{
+.full-width {
   width: 100%;
 }
 
-
 @media all and (max-width: 1024px) {
-  span, .search,
+  span, li,
+  .search,
+  i,
+  strong,
   p,
   a,
   .bouton_commande,
@@ -1397,9 +1398,9 @@ ul li div.smenu a {
     width: auto;
   }
 
-  .justify_article {
+  /* .justify_article {
     column-count: 2;
-  }
+  } */
 
   .justify_article img {
     width: 15vw;

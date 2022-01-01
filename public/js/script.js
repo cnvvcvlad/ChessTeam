@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {    
-// Recaptcha
-if (document.getElementById('recaptchaResponse')) {
+document.addEventListener('DOMContentLoaded', function () {
+  // Recaptcha
+  if (document.getElementById('recaptchaResponse')) {
     grecaptcha.ready(function () {
       grecaptcha
         .execute('6LcgZ-oUAAAAAKdW6gHFYFBm7Qx-d52XntvALZma', {
@@ -11,4 +11,8 @@ if (document.getElementById('recaptchaResponse')) {
         })
     })
   }
-});
+
+  ClassicEditor.create(document.querySelector('#editor')).catch((error) => {
+    // console.error(error)
+  })
+})
