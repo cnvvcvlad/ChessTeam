@@ -18,7 +18,7 @@
             <?php foreach ($params['posts'] as $post) : ?>
                 <tr>
                     <th><?= $post->getId() ?></th>
-                    <td><?= $post->getArt_title() ?></td>
+                    <td><a href="<?= dirname(SCRIPTS) ?>/posts/<?= $post->getId() ?>"><?= $post->getArt_title() ?></a></td>
                     <td><?= $post->getDate_creation() ?></td>
                     <td>
                         <div class="justify_article">
