@@ -479,6 +479,10 @@ ul .sous-menu {
   margin: 2px 10px;
 }
 
+.updateBtn {
+  margin-bottom: 5px;
+}
+
 .bouton_commande a,
 #cache a,
 .justify_article a,
