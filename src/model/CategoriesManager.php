@@ -13,9 +13,9 @@ class CategoriesManager extends AbstractModel
      * Insère une catégorie dans la base de données
      * 
      * @param Category $category
-     * @return void
+     * @return bool
      */
-    public function insertCategory(Category $category): void
+    public function insertCategory(Category $category): bool
     {
         $request = 'INSERT INTO ' . $this->table . '(
             title, description, category_image, cat_author) 
@@ -26,6 +26,7 @@ class CategoriesManager extends AbstractModel
         $insert->bindValue(':cat_image', $category->getCategory_image(), \PDO::PARAM_STR);
         $insert->bindValue(':cat_author', $category->getCat_author(), \PDO::PARAM_STR);
         $insert = $insert->execute();
+        return $insert;
     }
 
     /**
@@ -33,9 +34,9 @@ class CategoriesManager extends AbstractModel
      *
      * @param int $id
      * @param Category $category
-     * @return void
+     * @return bool
      */
-    public function updateCategory($id, Category $category): void
+    public function updateCategory($id, Category $category): bool
     {
         $request = 'UPDATE ' . $this->table . ' 
         SET title = :title, description = :description, category_image = :category_image, 
@@ -47,6 +48,7 @@ class CategoriesManager extends AbstractModel
         $update->bindValue(':category_image', $category->getCategory_image(), \PDO::PARAM_STR);
         $update->bindValue(':cat_author', $category->getCat_author(), \PDO::PARAM_STR);
         $update = $update->execute();
+        return $update;
     }
 
     /**
@@ -119,13 +121,14 @@ class CategoriesManager extends AbstractModel
      * Supprime une catégorie
      *
      * @param int $id_category
-     * @return void
+     * @return bool
      */
-    public function deleteCat($id_category): void
+    public function deleteCat($id_category): bool
     {
         $request = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
         $delete = $this->db->getPDO()->prepare($request);
         $delete->bindValue(':id', $id_category, \PDO::PARAM_INT);
-        $delete->execute();
+        $isDeketed = $delete->execute();
+        return $isDeketed;
     }
 }
