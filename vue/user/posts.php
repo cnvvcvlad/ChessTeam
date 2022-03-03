@@ -10,7 +10,7 @@
                     <h1><img src="<?= SCRIPTS ?>/img/by_default/ico_epingle.png" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?></h1>
                     <div class="banniere_bouton">
                         <?php if ((isset($_SESSION['id_user']) && $_SESSION['statut'] === 1)) : ?>
-                            <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
+                            <div class="bouton_commande"><a href="<?= dirname(SCRIPTS) . '/admin/posts/edit/' . $value->getId() ?>">Modifier</a>
                             </div>
                         <?php endif; ?>
                         <div class="bouton_commande">
