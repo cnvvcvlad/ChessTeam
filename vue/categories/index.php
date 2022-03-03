@@ -18,7 +18,6 @@
 </div>
 
 
-<?php if (isset($this->role) && $this->role->isAdmin()) : ?>
     <h2>Créer une nouvelle catégorie</h2>
 
     <form action="?action=categoryForm" method="post" class="form-create" enctype="multipart/form-data">
@@ -39,9 +38,8 @@
                     <input type="file" class="image" id="image" name="image_category" accept='.gif, .png , .jpg' required>
                 </label>
             </div>
-            <p><input type="hidden" name="id_user" value="<?= htmlspecialchars(
-                                                                $_SESSION['id_user']
-                                                            ) ?>"></p>
+            <p><input type="hidden" name="id_user" value="<?php if(isset($_SESSION['id_user'])) 
+            { echo htmlspecialchars($_SESSION['id_user']); } ?>"></p>
 
             <div class="form-create">
                 <input type="submit" value="Envoyer" name="categoryCreation">
@@ -54,8 +52,7 @@
     </form>
 
 
-<?php endif; ?>
 <div class="back-page">
-    <a href="<?= substr(basename($_SERVER['HTTP_REFERER']), 0) ?>">Retour</a>
+    <a href="<?php // substr(basename($_SERVER['HTTP_REFERER']), 0) ?>">Retour</a>
     <a href="?action=home">Retour à l'accueil</a>
 </div>

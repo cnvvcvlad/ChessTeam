@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-header('Cache-Control: no cache'); //no cache
-session_cache_limiter('private_no_expire'); // works
-//session_cache_limiter('public'); // works too
 session_start();
 
 use Democvidev\ChessTeam\Core\Router;

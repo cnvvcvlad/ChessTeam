@@ -59,7 +59,7 @@
 
 </head>
 
-<body>
+<body>    
     <header>
         <div class="header-body">
             <div class="countdown-body">
@@ -143,7 +143,8 @@
                                     ) ?>/coachs">ChessCoach</a></div>
                                 </li>
 
-                                <?php if (isset($_SESSION['id_user'])): ?>
+                                <?php                                
+                                 if (isset($_SESSION['id_user'])): ?>
                                     <li>
                                         <div class="list_style"><a href="<?= dirname(
                                             SCRIPTS
