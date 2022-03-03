@@ -6,10 +6,12 @@
 <h1>Voici toutes nos catégories dédiées aux jeux d'échecs</h1>
 <div class="top_article">
     <div class="view">
-        <?php if (isset($params['categories'])) : ?>
-            <?php foreach ($params['categories'] as $key => $value) : ?>
+        <?php if (isset($params['categories'])): ?>
+            <?php foreach ($params['categories'] as $key => $value): ?>
                 <ul>
-                    <li><a href="<?= dirname(SCRIPTS) ?>/categories/<?= $value->getId() ?>"><?= $value->getTitle() ?></a>
+                    <li><a href="<?= dirname(
+                        SCRIPTS
+                    ) ?>/categories/<?= $value->getId() ?>"><?= $value->getTitle() ?></a>
                     </li>
                 </ul>
             <?php endforeach; ?>
@@ -38,8 +40,11 @@
                     <input type="file" class="image" id="image" name="image_category" accept='.gif, .png , .jpg' required>
                 </label>
             </div>
-            <p><input type="hidden" name="id_user" value="<?php if(isset($_SESSION['id_user'])) 
-            { echo htmlspecialchars($_SESSION['id_user']); } ?>"></p>
+            <p><input type="hidden" name="id_user" value="<?php if (
+                isset($_SESSION['id_user'])
+            ) {
+                echo htmlspecialchars($_SESSION['id_user']);
+            } ?>"></p>
 
             <div class="form-create">
                 <input type="submit" value="Envoyer" name="categoryCreation">
@@ -53,6 +58,6 @@
 
 
 <div class="back-page">
-    <a href="<?php // substr(basename($_SERVER['HTTP_REFERER']), 0) ?>">Retour</a>
-    <a href="?action=home">Retour à l'accueil</a>
+    <a href="<?php substr(basename($_SERVER['HTTP_REFERER']), 0); ?>">Retour</a>
+    <a href="<?= dirname(SCRIPTS) ?>/">Retour à l'accueil</a>
 </div>
