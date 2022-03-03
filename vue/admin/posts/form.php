@@ -27,18 +27,23 @@
             </div>
             <div class="form-create">
                 <label for="">Description de l'article
-                    <p><textarea name="art_description" placeholder="Description de l'article" rows="5" cols="33"><?= isset(
-                        $params['post'][0]
-                    )
+                    <p><textarea 
+                    name="art_description"
+                    placeholder="Description de l'article" 
+                    rows="5" 
+                    cols="33"><?= isset($params['post'][0])
                         ? $params['post'][0]->getArt_description()
                         : '' ?></textarea></p>
                 </label>
             </div>
             <div class="form-create">
                 <label for="">Contenu de l'article
-                    <p><textarea id="editor" name="art_content" placeholder="Contenu de l'article" rows="5" cols="33"><?= isset(
-                        $params['post'][0]
-                    )
+                    <p><textarea 
+                    id="editor" 
+                    name="art_content"
+                    placeholder="Contenu de l'article" 
+                    rows="5" 
+                    cols="33"><?= isset($params['post'][0])
                         ? $params['post'][0]->getArt_content()
                         : '' ?></textarea></p>
                 </label>
@@ -62,7 +67,10 @@
             <div class="form-inscription art_image">
                 <label class="form-inscription" for="image">Choisir une image</label>
                 <input type="file" class="image" id="image" name="art_image" accept='.gif, .png , .jpg, .jpeg'>
-                <?php if (isset($params['post'][0]) and !empty($params['post'][0]->getArt_image())): ?>
+                <?php if (
+                    isset($params['post'][0]) and
+                    !empty($params['post'][0]->getArt_image())
+                ): ?>
                     <img src="<?= dirname(SCRIPTS) .
                         '/public/img/uploads/' .
                         $params[
@@ -96,9 +104,14 @@
 )
     ? 'updateArticle'
     : 'articleCreation' ?>"></p>
-
                 <p><input type="reset" value="Annuler" /></p>
             </div>
         </fieldset>
     </form>
+    <div class="back-page">
+        <?php
+// substr($_SERVER['HTTP_REFERER'], 0)
+?>
+        <a href="<?= dirname(SCRIPTS) ?>">Retour à l'accueil</a>
+    </div>
 </div>
