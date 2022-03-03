@@ -92,11 +92,11 @@ class PostController extends AbstractController
                         in_array($extension_uploadee, $this->extensions_valides)
                     ) {
                         $uploads_dir =
-                            dirname(__FILE__, 4) . '/public/img/uploads';
+                            dirname(__FILE__, 4) . '/public/img/uploads/';
                         // $art_image = $_FILES['art_image']['name'];
                         $isUploaded = move_uploaded_file(
                             $_FILES['art_image']['tmp_name'],
-                            "$uploads_dir/$art_image"
+                            $uploads_dir . $art_image
                         );
                         if (!$isUploaded) {
                             throw new NotFoundException(
@@ -146,7 +146,7 @@ class PostController extends AbstractController
      * @param int $id
      * @return void
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $this->isConnected();
         // TODO: éditer ses propres articles soit être admin
