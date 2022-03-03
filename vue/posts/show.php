@@ -1,18 +1,17 @@
 <?php $title = 'Consulter un billet de ChessTeam'; ?>
 <?php $description = 'Trouvez votre article de blog préféré'; ?>
 
-
 <div class="top_article">
 
 <?php if (!empty($params['post'])): ?>
     <?php foreach ($params['post'] as $key => $value): ?>
         <h1><?= $value->getArt_title() ?></h1>
         <div class="banniere_bouton">
-            <?php if (isset($this->role) && $this->role->isAdmin()): ?>
-                <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>" >Modifier</a></div>
-                <div class="bouton_commande"><a
-                        href="?action=allArticles&amp;deleteA=<?= $value->getId() ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">Supprimer</a></div>
-
+            <?php if (isset($_SESSION['statut']) && $_SESSION['statut'] === 1): ?>
+                <div class="bouton_commande updateBtn"><a href="<?= dirname(SCRIPTS) . '/admin/posts/edit/' . $value->getId() ?>" >Modifier</a></div>
+                <form method="POST" action="<?= dirname(SCRIPTS) . "/admin/posts/delete/" . $value->getId() ?>" class="bouton_commande">
+                    <input type="submit" value="Supprimer" name="delete" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">
+                </form>
             <?php endif; ?>
         </div>
         <p><span class="information"> Ecrit par</span>

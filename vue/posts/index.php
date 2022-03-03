@@ -5,7 +5,7 @@
 <?php if (!empty($params['posts'])): ?>
 
     <!-- <h1>Voici tous nos articles!<br>
-        N'hésitez pas à nous donner votre avis dans les commentaires!</h1> -->
+        N'hésitez pas à nous donner votre avis dans les commentaires!</h1> -->   
 
     <div class="top_article">
         <?php foreach ($params['posts'] as $key => $value): ?>
