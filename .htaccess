@@ -1,0 +1,19 @@
+#<IfModule mod_expires.c>
+#    ExpiresActive On
+#    ExpiresDefault "access plus 2 hours"
+#    ExpiresDefault image/jpg A3600
+#    ExpiresDefault image/jpeg A3600
+#</IfModule>
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ public/index.php?action=$1 [QSA,L]
+
+# Recommandation Google
+<IfModule mod_headers.c>
+    <FilesMatch "\\.(jpe?g|js|css|png|svg|html|webp|ico|gif|ttf|woff|woff2|eot)$">
+        Header set Cache-Control "max-age=3600"
+    </FilesMatch>
+</IfModule>
+
+
