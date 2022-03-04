@@ -7,9 +7,19 @@
 <div class="container coach-data">
     <div class="container coach-description">
         <div>
-        <a href="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $params['coach']['coach_image'] ?>">
+        <a href="<?= SCRIPTS .
+            'img' .
+            DIRECTORY_SEPARATOR .
+            'uploads' .
+            DIRECTORY_SEPARATOR .
+            $params['coach']['coach_image'] ?>">
         <img 
-        src="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $params['coach']['coach_image'] ?>" 
+        src="<?= SCRIPTS .
+            'img' .
+            DIRECTORY_SEPARATOR .
+            'uploads' .
+            DIRECTORY_SEPARATOR .
+            $params['coach']['coach_image'] ?>" 
         alt="Photo de profil" title="Cliquez pour agrandir" 
         class="image-coach">
         </a>
@@ -20,7 +30,11 @@
                 <span><?= $params['coach']['price'] ?>€/h</span3>
             </div>
         </div>
-        <div><?php for($i = 0; $i < $params['coach']['nb_stars']; $i++){echo '⭐';} ?><span> <?= $params['coach']['nb_coachings'] ?> coachings </span></div>
+        <div><?php for ($i = 0; $i < $params['coach']['nb_stars']; $i++) {
+            echo '⭐';
+        } ?><span> <?= $params['coach'][
+    'nb_coachings'
+] ?> coachings </span></div>
         <div class="coach-info">
             <h1>Présentation</h1>
             <p><?= $params['coach']['description'] ?></p>
@@ -37,7 +51,9 @@
         </div>
     </div>
     <div class="container">
-        <h1>Où est-ce que <?= $params['coach']['first_name'] ?> doit vous rejoindre ?</h1>
+        <h1>Où est-ce que <?= $params['coach'][
+            'first_name'
+        ] ?> doit vous rejoindre ?</h1>
         <form action="#" class="container">
             <div>
                 <input type="text" name="town" placeholder="Ville" id="" class="coach-input">
