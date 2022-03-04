@@ -2,3 +2,4 @@
 /vue/compteur
 .htaccess
 /vendor/
+/public/dist.text
