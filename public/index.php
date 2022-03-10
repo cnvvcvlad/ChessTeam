@@ -21,6 +21,13 @@ define('DB_NAME', 'team_chess');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
 
+define('GOOGLE_ID', '474228917287-2kmb80d65behd3bbns01krp8ka9hg7lf.apps.googleusercontent.com');
+define('GOOGLE_SECRET', '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');
+
+// Postman
+// https://oauth2.googleapis.com/token?code=4/0AX4XfWgWJtzIBYxf4fLl6l7XV1-5ijOFHH9U3tUE6I0S0dDLNpLD2uGt7ptKf4LmD1_zqA&client_id=474228917287-2kmb80d65behd3bbns01krp8ka9hg7lf.apps.googleusercontent.com&client_secret=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&redirect_uri=http://localhost/ProjectTesting/ChessTeam/login&grant_type=authorization_code
+// https://www.googleapis.com/drive/v2/files?Authorization=Bearer ya29.A0ARrdaM_ndYoHf8QD8Q0ll5w7_O34i0DqyrN8Cxr1aAeLRL-K2sa68zq5onQEnBKmC1i4z4YLUaY92KWDB7aDPgJxCxvSsKzoCKSCtdLXTdr447wk6TFcprlRu0RV-fRejCbmaOGa1YCnm0FpRbyWWMWPzkH3aw
+
 $db = new DataBaseConnection();
 $categoryManager = new CategoriesManager($db);
 $allCategories = $categoryManager->showAllCategory();
