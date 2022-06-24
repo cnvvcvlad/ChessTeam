@@ -1220,13 +1220,18 @@ ul li div.smenu a {
 
 .form-coach {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: start;
+  align-items: center;
   width: inherit;
 }
 
-.form-coach input {
+.form-coach input, .form-coach select {
   border: none;
+}
+
+.form-coach select{
+  font-size: 1.2rem;
 }
 
 .coach-button {
@@ -1267,6 +1272,14 @@ ul li div.smenu a {
   border-radius: 50%;
   height: 90px;
   float: left;
+}
+
+.coach-criteria {
+  display: none;
+}
+
+.switch {
+  display: initial;
 }
 
 /********** Styles CoachInfo ************/

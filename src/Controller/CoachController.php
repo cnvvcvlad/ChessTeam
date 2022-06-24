@@ -26,23 +26,47 @@ class CoachController extends AbstractController
     public function index()
     {
         return $this->view('coach.index', [
-            'coaches' => $this->coachManager->getInfoTopCoachs()
+            'coaches' => $this->coachManager->getInfoTopCoachs(),
         ]);
     }
 
     public function show($id)
     {
-        if (!preg_match("/^\d+$/", $id)){
+        if (!preg_match('/^\d+$/', $id)) {
             throw new NotFoundException('Erreur 404');
         }
         return $this->view('coach.show', [
-            'coach' => $this->coachManager->getInfoCoach($id)
+            'coach' => $this->coachManager->getInfoCoach($id),
         ]);
     }
 
     public function map()
     {
-        return $this->view('coach.map');
+        return $this->view('coach.map', []);
+    }
+
+    public function getCoachsByCriteria()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $city = $_POST['city'];
+            $price = $_POST['price'];
+            $stars = $_POST['stars'];
+            $coachings = $_POST['coachings'];
+            $coachsAdress = $this->coachManager->findByCriteria(
+                $city,
+                $price,
+                $stars,
+                $coachings
+            );
+            var_dump($coachsAdress);
+            exit();
+            http_response_code(200);
+            echo json_encode($coachsAdress);
+        } else {
+            http_response_code(405);
+            echo json_encode(['message' => "La méthode n'est pas autorisée"]);
+        }
+        return $this->view('coach.criteria');
     }
 
     /**

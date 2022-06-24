@@ -17,8 +17,8 @@
     </div>
 </div> 
 <div class="back-page">
-<?= $_SERVER['HTTP_REFERER']
+<?php /*$_SERVER['HTTP_REFERER']
     ? '<a href="' . $_SERVER['HTTP_REFERER'] . '">Retour</a>'
-    : '' ?>
+    : '' */?>
     <a href="<?= dirname(SCRIPTS) ?>/">Retour à l'accueil</a>
 </div>

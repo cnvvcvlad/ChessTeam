@@ -11,8 +11,20 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     })
   }
-
+  // Ckeditor
   ClassicEditor.create(document.querySelector('#editor')).catch((error) => {
     // console.error(error)
   })
+
+  // Criteria
+  const btnCriteria = document.getElementById('criteria')
+  const coachCriteriaSelect = document.querySelectorAll('.coach-criteria')
+  if (btnCriteria) {
+    btnCriteria.addEventListener('click', (e) => {
+      e.stopPropagation()
+      coachCriteriaSelect.forEach(function (criteria) {
+        criteria.classList.toggle('switch')
+      })
+    })
+  }  
 })

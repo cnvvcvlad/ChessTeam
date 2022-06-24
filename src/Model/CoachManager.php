@@ -2,6 +2,7 @@
 
 namespace Democvidev\ChessTeam\Model;
 
+use Democvidev\ChessTeam\Classes\Coach;
 use Democvidev\ChessTeam\Model\AbstractModel;
 
 class CoachManager extends AbstractModel
@@ -11,7 +12,7 @@ class CoachManager extends AbstractModel
      *
      * @var string
      */
-    protected $table = 'coach';    
+    protected $table = 'coach';
 
     /**
      * Récupère toutes les informations des coachs
@@ -106,7 +107,7 @@ class CoachManager extends AbstractModel
         $select = $this->db->getPDO()->prepare($request);
         $select->bindValue('id', $id, \PDO::PARAM_INT);
         $select->execute();
-        $coach = $select->fetch(\PDO::FETCH_ASSOC); 
+        $coach = $select->fetch(\PDO::FETCH_ASSOC);
         return $coach;
     }
 
@@ -140,5 +141,56 @@ class CoachManager extends AbstractModel
             $coachs[] = $coach;
         }
         return $coachs;
+    }
+
+    /**
+     * Récupère les infos selon les critères
+     *
+     * @param string $city
+     * @param string $price
+     * @param string $stars
+     * @param string $coachings
+     * @return mixed
+     */
+    public function findByCriteria(
+        $city = null,
+        $price = null,
+        $stars = null,
+        $coachings = null
+    ): ?array {
+        $request = 'SELECT * FROM ' . $this->table;
+        $select = $this->db->getPDO()->prepare($request);
+        $select->execute();
+        $rows = $select->fetch(\PDO::FETCH_NUM);
+        if ($rows > 0 && $city != null) {
+            $query =
+                'SELECT * FROM ' .
+                $this->table .
+                " WHERE city LIKE '" .
+                $city .
+                "' ";
+            if ($price != null) {
+                $query .= 'AND price ' . $price . ' ';
+            }
+            if ($stars != null) {
+                $query .= 'AND nb_stars ' . $stars . ' ';
+            }
+            if ($coachings != null) {
+                $query .= 'AND nb_coachings ' . $coachings . ' ';
+            }
+            $query .= 'ORDER BY price ';
+        } else {
+            return null;
+        }
+        $select = $this->db->getPDO()->prepare($query);
+        $select->execute();
+        return $select->fetchAll();    
+        
+        // On initialise le tableau associatif de résultats
+        $coachs = [];
+        while ($donnees = $select->fetch()) {
+            $coachs[] = new Coach($donnees);
+        }
+        // return $coachs;
     }
 }
