@@ -180,12 +180,15 @@ class CoachManager extends AbstractModel
             }
             $query .= 'ORDER BY price ';
         } else {
-            return null;
+            $request = 'SELECT * FROM ' . $this->table;
+            $select = $this->db->getPDO()->prepare($request);
+            $select->execute();
+            return $select->fetchAll();
         }
         $select = $this->db->getPDO()->prepare($query);
         $select->execute();
-        return $select->fetchAll();    
-        
+        return $select->fetchAll();
+
         // On initialise le tableau associatif de résultats
         $coachs = [];
         while ($donnees = $select->fetch()) {
