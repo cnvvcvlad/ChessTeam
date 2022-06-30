@@ -20,8 +20,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const btnCriteria = document.getElementById('criteria')
   const coachCriteriaSelect = document.querySelectorAll('.coach-criteria')
   if (btnCriteria) {
+    let isHided = true
+    btnCriteria.setAttribute('value', 'Plus de critères')
     btnCriteria.addEventListener('click', (e) => {
       e.stopPropagation()
+      if(isHided){
+        btnCriteria.removeAttribute('value')
+        btnCriteria.setAttribute('value', 'Moins de critères')
+        isHided = false
+      }else{
+        btnCriteria.removeAttribute('value')
+        btnCriteria.setAttribute('value', 'Plus de critères')
+        isHided = true
+      }
       coachCriteriaSelect.forEach(function (criteria) {
         criteria.classList.toggle('switch')
       })
