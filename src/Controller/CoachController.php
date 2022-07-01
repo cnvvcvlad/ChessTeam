@@ -45,6 +45,13 @@ class CoachController extends AbstractController
         return $this->view('coach.map', []);
     }
 
+    public function paiement()
+    {
+        $months = range(1, 12);
+        $years = range(date("Y"), date("Y")+30);
+        return $this->view('coach.paiement', ['years' => $years, 'months' => $months]);
+    }
+
     public function getCoachsByCriteria()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {

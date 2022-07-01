@@ -7,37 +7,39 @@
         <form action="<?= dirname(SCRIPTS) .
             '/coachs/map' ?>" method="POST" class="form-coach" name="coachForm" id="coachCriteria">
             <div>
-
                 <label for="city">
                     <input type="text" name="city" placeholder="VILLE" id="city">
                 </label>
-                <label for="price"></label>
-                <select name="price" class="coach-criteria" id="price">
-                    <option value="">Prix €</option>
-                    <option value="<50">moins de 50</option>
-                    <option value="<75">moins de 75</option>
-                    <option value="<100">moins de 100</option>
-                    <option value=">=100">plus de 100</option>
-                </select>
-                <label for="stars"></label>
-                <select name="stars" class="coach-criteria" id="stars">
-                    <option value="">Etoiles</option>
-                    <option value="<3">moins de 3</option>
-                    <option value="<4">moins de 4</option>
-                    <option value="<5">moins de 5</option>
-                    <option value=">=5">5 et plus</option>
-                </select>
-                <label for="coachs"></label>
-                <select name="coachings" class="coach-criteria" id="coachs">
-                    <option value="">Missions</option>
-                    <option value="<10">moins de 10</option>
-                    <option value="<50">moins de 50</option>
-                    <option value="<100">moins de 100</option>
-                    <option value=">100">100 et plus</option>
-                </select>
+                <label for="price">
+                    <select name="price" class="coach-criteria" id="price">
+                        <option value="">Prix €</option>
+                        <option value="<50">moins de 50</option>
+                        <option value="<75">moins de 75</option>
+                        <option value="<100">moins de 100</option>
+                        <option value=">=100">plus de 100</option>
+                    </select>
+                </label>
+                <label for="stars">
+                    <select name="stars" class="coach-criteria" id="stars">
+                        <option value="">Etoiles</option>
+                        <option value="<3">moins de 3</option>
+                        <option value="<4">moins de 4</option>
+                        <option value="<5">moins de 5</option>
+                        <option value=">=5">5 et plus</option>
+                    </select>
+                </label>
+                <label for="coachs">
+                    <select name="coachings" class="coach-criteria" id="coachs">
+                        <option value="">Missions</option>
+                        <option value="<10">moins de 10</option>
+                        <option value="<50">moins de 50</option>
+                        <option value="<100">moins de 100</option>
+                        <option value=">100">100 et plus</option>
+                    </select>
+                </label>
             </div>
             <div class="coach-input">
-                <input type="button" id="criteria" value="Plus de critères" class="coach-button">
+                <input type="button" id="criteria" value="" class="coach-button">
                 <input
                  type="submit" 
                  id="coachMeeting"                  

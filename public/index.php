@@ -111,6 +111,7 @@ $router
     ->get('/coachs', 'Democvidev\ChessTeam\Controller\CoachController@index')
     ->get('/coachs/:id', 'Democvidev\ChessTeam\Controller\CoachController@show')
     ->post('/coachs/map', 'Democvidev\ChessTeam\Controller\CoachController@map')
+    ->post('/coachs/paiement', 'Democvidev\ChessTeam\Controller\CoachController@paiement')
 
     ->get(
         '/api/coachs',
