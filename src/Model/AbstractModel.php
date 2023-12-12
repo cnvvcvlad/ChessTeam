@@ -4,6 +4,7 @@ namespace Democvidev\ChessTeam\Model;
 
 use Democvidev\ChessTeam\Database\DataBaseConnection;
 
+#[\AllowDynamicProperties]
 abstract class AbstractModel
 {
     /**
@@ -43,7 +44,7 @@ abstract class AbstractModel
             $counter++;
         }
 
-        return $this->db->getPDO->query(
+        return $this->db->getPDO()->query(
             "INSERT INTO {$this->table} ({$firstParenthesis}) VALUES ({$secondParenthesis})", $data);
     }
 
