@@ -5,6 +5,7 @@ namespace Democvidev\ChessTeam\Form;
 use Democvidev\ChessTeam\Classes\Messages;
 use Democvidev\ChessTeam\Model\MessagesManager;
 use Democvidev\ChessTeam\Service\ValidatorHandler;
+use Democvidev\ChessTeam\Database\DataBaseConnection;
 
 class ContactForm
 {
@@ -22,7 +23,7 @@ class ContactForm
             'mess_content' => '',
             'mess_date_creation' => '',
         ]);
-        $this->messagesManager = new MessagesManager();
+        $this->messagesManager = new MessagesManager(new DataBaseConnection());
     }
 
     // public function getForm()

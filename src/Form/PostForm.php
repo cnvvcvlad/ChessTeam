@@ -5,6 +5,7 @@ namespace Democvidev\ChessTeam\Form;
 use Democvidev\ChessTeam\Classes\Article;
 use Democvidev\ChessTeam\Model\ArticleManager;
 use Democvidev\ChessTeam\Service\ValidatorHandler;
+use Democvidev\ChessTeam\Database\DataBaseConnection;
 
 class PostForm
 {
@@ -14,7 +15,7 @@ class PostForm
     public function __construct()
     {
         $this->validator = new ValidatorHandler();
-        $this->manager_article = new ArticleManager();
+        $this->manager_article = new ArticleManager(new DataBaseConnection());  
     }
 
     public function postForm()

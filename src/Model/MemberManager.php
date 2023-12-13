@@ -5,10 +5,16 @@ namespace Democvidev\ChessTeam\Model;
 use Democvidev\ChessTeam\Classes\Users;
 use Democvidev\ChessTeam\Model\AbstractModel;
 use Democvidev\ChessTeam\Service\RoleHandler;
+use Democvidev\ChessTeam\Database\DataBaseConnection;
 
 class MemberManager extends AbstractModel
 {    
     protected $table = 'user';
+
+    public function __construct(DataBaseConnection $db)
+    {
+        parent::__construct($db);
+    }
 
     public function getByLogin(string $login)
     {

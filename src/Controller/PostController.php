@@ -43,15 +43,15 @@ class PostController extends AbstractController
     }
 
     public function show($id)
-    {        
-        if (!preg_match("/^\d+$/", $id)){
+    {
+        if (!preg_match("/^\d+$/", $id)) {
             throw new NotFoundException('Erreur 404');
         }
-            $post = $this->postManager->affichageOne($id);  
-            $commentsOfArticle = $this->commentManager->showCommentsOfArticle($id);      
-            return $this->view('posts.show', compact('post', 'commentsOfArticle'));
-    }  
-    
+        $post = $this->postManager->affichageOne($id);
+        $commentsOfArticle = $this->commentManager->showCommentsOfArticle($id);
+        return $this->view('posts.show', compact('post', 'commentsOfArticle'));
+    }
+
     public function profilePosts()
     {
         $this->isConnected();
@@ -63,7 +63,7 @@ class PostController extends AbstractController
     public function showCategoryPosts(int $id)
     {
         $posts = $this->postManager->affichageParCategorie($id);
-        $comment = $this->commentController;        
+        $comment = $this->commentController;
         return $this->view('posts.category', compact('posts', 'comment'));
     }
 

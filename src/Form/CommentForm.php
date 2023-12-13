@@ -4,6 +4,7 @@ namespace Democvidev\ChessTeam\Form;
 
 use Democvidev\ChessTeam\Classes\Comment;
 use Democvidev\ChessTeam\Model\CommentsManager;
+use Democvidev\ChessTeam\Database\DataBaseConnection;
 
 class CommentForm
 {
@@ -11,7 +12,7 @@ class CommentForm
 
     public function __construct()
     {
-        $this->manager_comment = new CommentsManager();
+        $this->manager_comment = new CommentsManager(new DataBaseConnection());
     }
 
     public function commentForm()

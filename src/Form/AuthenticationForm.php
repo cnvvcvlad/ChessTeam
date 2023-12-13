@@ -4,6 +4,7 @@ namespace Democvidev\ChessTeam\Form;
 
 use Democvidev\ChessTeam\Model\MemberManager;
 use Democvidev\ChessTeam\Service\ValidatorHandler;
+use Democvidev\ChessTeam\Database\DataBaseConnection;
 
 class AuthenticationForm
 {
@@ -13,7 +14,7 @@ class AuthenticationForm
     public function __construct()
     {
         $this->validator = new ValidatorHandler();
-        $this->manager_user = new MemberManager();
+        $this->manager_user = new MemberManager(new DataBaseConnection());
     }
 
     public function authenticationForm()

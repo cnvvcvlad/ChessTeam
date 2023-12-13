@@ -3,6 +3,8 @@
 namespace Democvidev\ChessTeam\Form;
 
 use Democvidev\ChessTeam\Classes\Users;
+use Democvidev\ChessTeam\Database\DataBaseConnection;
+use Democvidev\ChessTeam\Model\AbstractModel;
 use Democvidev\ChessTeam\Model\MemberManager;
 use Democvidev\ChessTeam\Service\RoleHandler;
 use Democvidev\ChessTeam\Service\ValidatorHandler;
@@ -16,7 +18,7 @@ class RegisterForm
     public function __construct()
     {
         $this->validator = new ValidatorHandler();
-        $this->manager_user = new MemberManager();
+        $this->manager_user = new MemberManager(new DataBaseConnection());
         $this->role = new RoleHandler();
     }
 

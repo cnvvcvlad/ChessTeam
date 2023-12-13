@@ -5,6 +5,7 @@ namespace Democvidev\ChessTeam\Form;
 use Democvidev\ChessTeam\Classes\Category;
 use Democvidev\ChessTeam\Model\CategoriesManager;
 use Democvidev\ChessTeam\Service\ValidatorHandler;
+use Democvidev\ChessTeam\Database\DataBaseConnection;
 
 class CategoryForm
 {
@@ -14,7 +15,7 @@ class CategoryForm
     public function __construct()
     {
         $this->validator = new ValidatorHandler();
-        $this->manager_category = new CategoriesManager();
+        $this->manager_category = new CategoriesManager(new DataBaseConnection());
     }
 
     public function categoryForm()
