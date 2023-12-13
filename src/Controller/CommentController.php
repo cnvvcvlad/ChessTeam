@@ -11,6 +11,7 @@ class CommentController extends AbstractController
 
     public function __construct()
     {
+        parent::__construct();
         $this->commentManager = new CommentsManager($this->getDatabase());
     }
 

@@ -7,7 +7,7 @@ use Democvidev\ChessTeam\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
-   
+
     /**
      * Instance of CategoriesManager
      *
@@ -20,6 +20,7 @@ class CategoryController extends AbstractController
      */
     public function __construct()
     {
+        parent::__construct();
         $this->categoryManager = new CategoriesManager($this->getDatabase());
     }
 

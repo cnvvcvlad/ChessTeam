@@ -14,6 +14,7 @@ class UserController extends AbstractController
 
     public function __construct()
     {
+        parent::__construct();
         $this->memberManager = new MemberManager($this->getDatabase());
     }
 
@@ -25,8 +26,8 @@ class UserController extends AbstractController
     public function loginUser()
     {
         $user = $this->memberManager->getByLogin($_POST['login']);
-        
-        if(password_verify($_POST['password'], $user->password)) {
+
+        if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['id_user'] = (int) $user->id_user;
             $_SESSION['statut'] = (int) $user->statut;
             return header('Location:' . dirname(SCRIPTS) . '/');
@@ -42,9 +43,11 @@ class UserController extends AbstractController
 
     public function registerUser()
     {
-        if(isset($_POST['inscription']) and
-        isset($_FILES['image_membre']) and
-        $_FILES['image_membre']['error'] == 0) {
+        if (
+            isset($_POST['inscription']) and
+            isset($_FILES['image_membre']) and
+            $_FILES['image_membre']['error'] == 0
+        ) {
             extract($_POST);
             // TODO validation des données nord coders
 
@@ -52,19 +55,19 @@ class UserController extends AbstractController
 
             if ($_FILES['image_membre']['size'] <= 2000000) {
                 $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
-    
+
                 $info = pathinfo($_FILES['image_membre']['name']);
-    
+
                 $extension_uploadee = $info['extension'];
-    
+
                 if (in_array($extension_uploadee, $extension_autorisee)) {
                     $user_image = $_FILES['image_membre']['name'];
-    
+
                     //                $user_image = uniqid() . $user_image;
-                    $path = dirname(__FILE__, 3) .'/public/img/uploads/' . $user_image;
-    
+                    $path = dirname(__FILE__, 3) . '/public/img/uploads/' . $user_image;
+
                     move_uploaded_file($_FILES['image_membre']['tmp_name'], $path);
-    
+
                     $this->memberManager->insertMembre(
                         new Users([
                             'login' => $login,
@@ -72,7 +75,7 @@ class UserController extends AbstractController
                             'password' => $password,
                             'user_image' => $user_image,
                         ])
-                    );                        
+                    );
                     header('Location:' . dirname(SCRIPTS) . '/login');
                     exit();
                 } else {
@@ -88,7 +91,7 @@ class UserController extends AbstractController
 
     public function profile()
     {
-        $user = $this->memberManager->showOneUser($_SESSION['id_user']);        
+        $user = $this->memberManager->showOneUser($_SESSION['id_user']);
         $this->view('user.profile', [
             'user' => $user,
         ]);
@@ -104,31 +107,33 @@ class UserController extends AbstractController
 
     public function updateUser($id)
     {
-        
-        if(isset($_POST['update']) and
-        isset($_FILES['image_membre']) and
-        $_FILES['image_membre']['error'] == 0) {
+
+        if (
+            isset($_POST['update']) and
+            isset($_FILES['image_membre']) and
+            $_FILES['image_membre']['error'] == 0
+        ) {
             extract($_POST);
             // TODO validation des données nord coders
 
             $password = password_hash($password, PASSWORD_DEFAULT);
-            
+
 
             if ($_FILES['image_membre']['size'] <= 2000000) {
                 $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
-    
+
                 $info = pathinfo($_FILES['image_membre']['name']);
-    
+
                 $extension_uploadee = $info['extension'];
-    
+
                 if (in_array($extension_uploadee, $extension_autorisee)) {
                     $user_image = $_FILES['image_membre']['name'];
-    
+
                     //                $user_image = uniqid() . $user_image;
-                    $path = dirname(__FILE__, 3) .'/public/img/uploads/' . $user_image;
-    
+                    $path = dirname(__FILE__, 3) . '/public/img/uploads/' . $user_image;
+
                     move_uploaded_file($_FILES['image_membre']['tmp_name'], $path);
-    
+
                     $this->memberManager->updateMembre(
                         $id,
                         new Users([
@@ -137,7 +142,7 @@ class UserController extends AbstractController
                             'password' => $password,
                             'user_image' => $user_image,
                         ])
-                    );                        
+                    );
                     header('Location:' . dirname(SCRIPTS) . '/profile');
                     exit();
                 } else {
@@ -158,10 +163,10 @@ class UserController extends AbstractController
     }
 
     public function destroy($id)
-    {        
+    {
         $this->isConnected();
         $this->memberManager->deleteU($id);
-        if($_SESSION['statut'] == 1) {
+        if ($_SESSION['statut'] == 1) {
             header('Location:' . dirname(SCRIPTS) . '/admin/members');
         } else {
             session_destroy();

@@ -24,6 +24,7 @@ class PostController extends AbstractController
      */
     public function __construct()
     {
+        parent::__construct();
         $this->postManager = new ArticleManager($this->getDatabase());
         $this->commentManager = new CommentsManager($this->getDatabase());
         $this->commentController = new CommentController();

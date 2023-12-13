@@ -14,13 +14,14 @@ class HomeController extends AbstractController
 
     public function __construct()
     {
+        parent::__construct();
         $this->articleManager = new ArticleManager($this->getDatabase());
     }
 
     public function index()
     {
         $lastArticles = $this->articleManager->affichageRecentes($this->offset, $this->limit);
-        $lastArticle_one = $this->articleManager->affichageOne($this->id_post);        
+        $lastArticle_one = $this->articleManager->affichageOne($this->id_post);
         return $this->view('home.index', [
             'lastArticles' => $lastArticles,
             'lastArticle_one' => $lastArticle_one

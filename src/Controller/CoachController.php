@@ -12,6 +12,7 @@ class CoachController extends AbstractController
 
     public function __construct()
     {
+        parent::__construct();
         $this->coachManager = new CoachManager($this->getDatabase());
     }
     // Headers requis
@@ -48,7 +49,7 @@ class CoachController extends AbstractController
     public function paiement()
     {
         $months = range(1, 12);
-        $years = range(date("Y"), date("Y")+30);
+        $years = range(date("Y"), date("Y") + 30);
         return $this->view('coach.paiement', ['years' => $years, 'months' => $months]);
     }
 
