@@ -51,7 +51,7 @@
         <?php endforeach; ?>
     <?php endif; ?>
 </div>
-<?php if (isset($this->role) && $this->role->isAdmin()): ?>
+<?php if ($this->isConnected() && $_SESSION['statut'] === 1): ?>
     <h3>Modifier cette catégorie</h3>
     <form action="?action=categoryForm" method="post" class="form-create" enctype="multipart/form-data">
         <fieldset>

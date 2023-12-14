@@ -3,7 +3,7 @@
     'Voir les commentaires des internautes sur différents sujets des échecs'; ?>
 
 <div class="container">
-    <?php if (isset($_SESSION['id_user']) && $_SESSION['statut'] === 1) : ?>
+    <?php if ($this->isConnected() && $_SESSION['statut'] === 1) : ?>
         <?php if (isset($params['comments'])) : ?>
             <h1>Voici tous les commentaires postés</h1>
             <div class="top_article">

@@ -1,7 +1,7 @@
 <?php $title = 'Membres ChessTeam Nogent sur Marne'; ?>
 <?php $description = 'Modifiez les informations des membres du blog'; ?>
 <div class="container">
-    <?php if (isset($_SESSION['id_user']) && $_SESSION['statut'] === 1) : ?>
+    <?php if ($this->isConnected() && $_SESSION['statut'] === 1) : ?>
         <h1>Voici tous les membres de ChessTeam</h1>
         <?php if (isset($params['members'])) : ?>
             <table class="all_members">

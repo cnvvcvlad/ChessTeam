@@ -30,7 +30,7 @@
                                 'flecheblanchedroite.png' ?>" alt="le bouton rouge"/></a>
 
                     </div>
-                    <?php if (isset($this->role) && $this->role->isAdmin()): ?>
+                    <?php if ($this->isConnected() && $_SESSION['statut'] === 1): ?>
                         <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a></div>
                     <?php endif; ?>
                 </div>

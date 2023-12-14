@@ -7,7 +7,7 @@
     <div class="top_article">
         <h3>Vous trouverez ci-dessus une barre de navigation qui vous permettra de:</h3>
         <div class="view">
-            <?php if (!is_null($_SESSION['id_user'])) : ?>
+            <?php if ($this->isConnected()) : ?>
                 <ul>
                     <li>consulter et modifier ses informations personnelles</li>
                 </ul>
@@ -27,7 +27,7 @@
                     <li>consulter et écrire des commentaires</li>
                 </ul>
 
-                <?php if (!is_null($_SESSION['id_user']) && $_SESSION['statut'] === 1) : ?>
+                <?php if ($this->isConnected() && $_SESSION['statut'] === 1) : ?>
 
                     <ul>
                         <li>consulter la liste des membres</li>
@@ -96,7 +96,6 @@
                     </table>
                 </div>
             </div>
-
         <?php endforeach; ?>
     <?php endif; ?>
 </div>

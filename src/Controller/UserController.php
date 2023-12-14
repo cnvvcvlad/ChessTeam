@@ -91,6 +91,7 @@ class UserController extends AbstractController
 
     public function profile()
     {
+        $this->isConnected();
         $user = $this->memberManager->showOneUser($_SESSION['id_user']);
         $this->view('user.profile', [
             'user' => $user,
@@ -99,6 +100,7 @@ class UserController extends AbstractController
 
     public function update($id)
     {
+        $this->isConnected();
         $user = $this->memberManager->showOneUser($id);
         $this->view('user.update', [
             'user' => $user,
@@ -107,7 +109,7 @@ class UserController extends AbstractController
 
     public function updateUser($id)
     {
-
+        $this->isConnected();
         if (
             isset($_POST['update']) and
             isset($_FILES['image_membre']) and
@@ -225,7 +227,7 @@ class UserController extends AbstractController
     {
         $this->memberManager->deleteU($user_id);
         $role = new RoleHandler();
-        if ($role->isAdmin()) {
+        if ($this->isConnected() && $_SESSION['statut'] === 1) {
             header('location:index.php?action=allMembers');
             exit;
         } else {
