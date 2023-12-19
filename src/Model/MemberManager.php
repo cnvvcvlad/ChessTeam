@@ -8,7 +8,7 @@ use Democvidev\ChessTeam\Service\RoleHandler;
 use Democvidev\ChessTeam\Database\DataBaseConnection;
 
 class MemberManager extends AbstractModel
-{    
+{
     protected $table = 'user';
 
     public function __construct(DataBaseConnection $db)
@@ -16,6 +16,12 @@ class MemberManager extends AbstractModel
         parent::__construct($db);
     }
 
+    /**
+     * Rechercher un membre dans la base de données
+     *
+     * @param string $login
+     * @return mixed
+     */
     public function getByLogin(string $login)
     {
         return $this->query("SELECT * FROM $this->table WHERE login = ?", [$login], true);
@@ -34,7 +40,7 @@ class MemberManager extends AbstractModel
             "login" => $login
         ]);
         if ($select->rowCount() != 0) {
-            $password = $select->fetch();            
+            $password = $select->fetch();
             return $password;
         }
         throw new \Exception("Le mot de passe est invalide !");
@@ -126,26 +132,22 @@ class MemberManager extends AbstractModel
      *
      * @param int $id_user
      * @param Users $member
-     * @return void
+     * @return boolean
      */
-    public function updateMembre($id_user, Users $member): void
+    public function updateMembre($id_user, Users $member): bool
     {
         if ($this->existId($member->getId_user())) {
             throw new \Exception("Désolé cet utilisateur n'existe pas");
         }
         $request = 'UPDATE ' . $this->table . ' SET login = :login, email = :email, password = :password, user_image = :user_image  WHERE id_user = :id_user';
         $update = $this->db->getPDO()->prepare($request);
-        $update = $update->execute([
-            "id_user" => $id_user,
-            "login" => $member->getLogin(),
-            "email" => $member->getEmail(),
-            "password" => $member->getPassword(),
-            "user_image" => $member->getUser_image()
-        ]);
-        $role = new RoleHandler();
-        if (!$role->isAdmin() and $_SESSION['id_user'] == $id_user) {
-            $_SESSION['user_image'] = $member->getUser_image();
-        }         
+        $update->bindValue(':id_user', $id_user, \PDO::PARAM_INT);
+        $update->bindValue(':login', $member->getLogin(), \PDO::PARAM_STR);
+        $update->bindValue(':email', $member->getEmail(), \PDO::PARAM_STR);
+        $update->bindValue(':password', $member->getPassword(), \PDO::PARAM_STR);
+        $update->bindValue(':user_image', $member->getUser_image(), \PDO::PARAM_STR);
+        $result = $update->execute();
+        return $result;
     }
 
     /**
