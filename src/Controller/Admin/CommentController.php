@@ -53,4 +53,13 @@ class CommentController extends AbstractController
         $this->commentManager->deleteCom($id);
         return header('Location:' . dirname(SCRIPTS) . '/admin/comments');
     }
+
+    public function showPostComments($id)
+    {
+        $this->isAdmin();
+        $comments = $this->commentManager->showCommentsOfArticle($id);
+        $this->view('admin.comments.index', [
+            'comments' => $comments
+        ]);
+    }
 }
