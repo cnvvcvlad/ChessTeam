@@ -50,7 +50,30 @@ class PostController extends AbstractController
         }
         $post = $this->postManager->affichageOne($id);
         $commentsOfArticle = $this->commentManager->showCommentsOfArticle($id);
+        // var_dump($post[0]->getCategory_id());
+        // exit;
         return $this->view('posts.show', compact('post', 'commentsOfArticle'));
+    }
+
+    public function showNameAuthor($id): string
+    {
+        if ($id === null) {
+            return 'Directeur';
+        }
+        if (!preg_match("/^\d+$/", $id)) {
+            throw new NotFoundException('Erreur 404');
+        }
+        $name = $this->postManager->getNameAuthor($id);
+        return $name;
+    }
+
+    public function showNameCategory($id): string
+    {
+        if (!preg_match("/^\d+$/", $id)) {
+            throw new NotFoundException('Erreur 404');
+        }
+        $name = $this->postManager->getNameCategory($id);
+        return $name;
     }
 
     public function profilePosts()
@@ -58,6 +81,7 @@ class PostController extends AbstractController
         $this->isConnected();
         return $this->view('user.posts', [
             'posts' => $this->postManager->affichageMyArticles($_SESSION['id_user']),
+            'comment' => $this->commentController
         ]);
     }
 
