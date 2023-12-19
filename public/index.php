@@ -5,6 +5,7 @@ declare(strict_types=1);
 session_start();
 
 use Democvidev\ChessTeam\Core\Router;
+use Democvidev\ChessTeam\Model\MemberManager;
 use Democvidev\ChessTeam\Model\CategoriesManager;
 use Democvidev\ChessTeam\Database\DataBaseConnection;
 use Democvidev\ChessTeam\Exception\NotFoundException;
@@ -67,6 +68,10 @@ $router
         '/profile/posts',
         'Democvidev\ChessTeam\Controller\PostController@profilePosts'
     )
+    ->post(
+        'profile/add-comment',
+        'Democvidev\ChessTeam\Controller\CommentController@addComment'
+    )
 
     ->post('/search', 'Democvidev\ChessTeam\Controller\PostController@search')
     ->get('/posts', 'Democvidev\ChessTeam\Controller\PostController@index')
@@ -84,27 +89,27 @@ $router
         'Democvidev\ChessTeam\Controller\CategoryController@show'
     )
     ->get(
-        'admin/categories/create',
+        '/admin/categories/create',
         'Democvidev\ChessTeam\Controller\Admin\CategoryController@create'
     )
     ->get(
-        'admin/categories/edit/:id',
+        '/admin/categories/edit/:id',
         'Democvidev\ChessTeam\Controller\Admin\CategoryController@edit'
     )
     ->get(
-        'admin/categories',
+        '/admin/categories',
         'Democvidev\ChessTeam\Controller\Admin\CategoryController@index'
     )
     ->post(
-        'admin/categories/create-category',
+        '/admin/categories/create-category',
         'Democvidev\ChessTeam\Controller\Admin\CategoryController@createCategory'
     )
     ->post(
-        'admin/categories/update-category/:id',
+        '/admin/categories/update-category/:id',
         'Democvidev\ChessTeam\Controller\Admin\CategoryController@editCategory'
     )
     ->post(
-        'admin/categories/delete/:id',
+        '/admin/categories/delete/:id',
         'Democvidev\ChessTeam\Controller\Admin\CategoryController@delete'
     )
 
@@ -126,6 +131,10 @@ $router
     ->get(
         '/admin/comments',
         'Democvidev\ChessTeam\Controller\Admin\CommentController@index'
+    )
+    ->get(
+        '/admin/comments/post/:id',
+        'Democvidev\ChessTeam\Controller\Admin\CommentController@showPostComments'
     )
     ->get(
         '/admin/comments/edit/:id',
