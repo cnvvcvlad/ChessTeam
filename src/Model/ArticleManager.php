@@ -113,7 +113,7 @@ class ArticleManager extends AbstractModel
             $article->getCategory_id(),
             \PDO::PARAM_INT
         );
-        $result = $update->execute();        
+        $result = $update->execute();
         return $result;
     }
 
@@ -138,7 +138,7 @@ class ArticleManager extends AbstractModel
     public function getAllPosts(): array
     {
         $stmt = $this->requestAll();
-        $posts = $this->returnPosts($stmt);        
+        $posts = $this->returnPosts($stmt);
         return $posts;
     }
 
@@ -166,6 +166,38 @@ class ArticleManager extends AbstractModel
     public function getCreatedAt(): string
     {
         return (new \DateTime($this->date_creation))->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * Retourne le nom de l'auteur
+     *
+     * @param [type] $user
+     * @return string
+     */
+    public function getNameAuthor($user): string
+    {
+        $request = 'SELECT login FROM user WHERE id_user = :id';
+        $stmt = $this->db->getPDO()->prepare($request);
+        $stmt->bindValue(':id', $user, \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result ? $result['login'] : 'Directeur';
+    }
+
+    /**
+     * Retourne le nom de la catégorie
+     *
+     * @param [type] $category
+     * @return string
+     */
+    public function getNameCategory($category): string
+    {
+        $request = 'SELECT title FROM category WHERE id = :id';
+        $stmt = $this->db->getPDO()->prepare($request);
+        $stmt->bindValue(':id', $category, \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['title'];
     }
 
     /**
@@ -275,13 +307,12 @@ class ArticleManager extends AbstractModel
         $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':art_id', $art_id, \PDO::PARAM_INT);
         $select->execute();
-        if($select->rowCount() > 0) {
+        if ($select->rowCount() > 0) {
             $art[] = new Article($select->fetch());
             return $art;
         } else {
             throw new NotFoundException('Article non trouvé');
         }
-        
     }
 
     /**
