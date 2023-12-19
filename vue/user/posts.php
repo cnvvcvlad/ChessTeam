@@ -34,8 +34,11 @@
                         </div>
                         </p>
                         <p>
-                            <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">(<?= isset($comment) ? count($comment->getAllCommentsOfArticle($value->getId())) : '' ?>
-                                ) Commentaires </a>
+                            <a href="
+                            <?= dirname(SCRIPTS) ?>/posts/<?= $value->getId() ?>
+                            ">(<?= isset($params['comment']) ?
+                             count($params['comment']->getAllCommentsOfArticle($value->getId())) :
+                              '' ?>) Commentaires </a>
                         </p>
                     </div>
                     <div class="separateur"></div>
@@ -45,4 +48,10 @@
             <?php endif; ?>
         </div>
     <?php endif ?>
+    <div class="back-page">
+        <?= isset($_SERVER['HTTP_REFERER'])
+            ? '<a href="' . $_SERVER['HTTP_REFERER'] . '">Retour</a>'
+            : '' ?>
+        <a href="<?= dirname(SCRIPTS) ?>">Retour à l'accueil</a>
+    </div>
 </div>
