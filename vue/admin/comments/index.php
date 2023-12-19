@@ -28,4 +28,10 @@
             </div>
         <?php endif; ?>
     <?php endif; ?>
+    <div class="back-page">
+    <?= isset($_SERVER['HTTP_REFERER'])
+        ? '<a href="' . $_SERVER['HTTP_REFERER'] . '">Retour</a>'
+        : '' ?>
+        <a href="<?= dirname(SCRIPTS) ?>">Retour à l'accueil</a>
+    </div>
 </div>
