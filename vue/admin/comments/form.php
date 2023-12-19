@@ -12,7 +12,7 @@
 
                         <div class="form-inscription">
                             <label for="">
-                                <p><textarea name="com_content" class="comment-text" placeholder="Contenu du commentaire" rows="5" cols="33"><?= $value->getCom_content() ?></textarea></p>
+                                <p><textarea maxlength="50" minlength="5" required name="com_content" class="comment-text" placeholder="Contenu du commentaire" rows="5" cols="33"><?= $value->getCom_content() ?></textarea></p>
                             </label>
                         </div>
                         <p><input type="hidden" name="id" value="<?= $value->getId() ?>"></p>
