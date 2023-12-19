@@ -70,7 +70,7 @@
                             </th>
                             <td><input type="text" readonly name="email" value="<?= $value->getEmail() ?>"></td>
                             <td>
-                                <form method="POST" action="<?= dirname(SCRIPTS) . "/profile/delete/" . $value->getId_user() ?>" class="bouton_commande">
+                                <form method="POST" onclick="return(confirm('Etes-vous sur de vouloir supprimer votre compte?'));" action="<?= dirname(SCRIPTS) . "/profile/delete/" . $value->getId_user() ?>" class="bouton_commande">
                                     <input type="submit" value="Supprimer mon compte" name="delete">
                                 </form>
                             </td>
