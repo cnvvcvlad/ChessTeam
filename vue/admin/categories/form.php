@@ -29,7 +29,7 @@
             </div>
             <div class="form-create">
                 <label for="">Description de la catégorie
-                    <p><textarea name="cat_description" placeholder="Description de la catégorie" rows="5" cols="33"><?= isset(
+                    <p><textarea maxlength="20" minlength="5" required name="cat_description" placeholder="Description de la catégorie" rows="5" cols="33"><?= isset(
                         $params['category'][0]
                     )
                         ? $params['category'][0]->getDescription()
@@ -38,7 +38,7 @@
             </div>
             <div class="form-inscription art_image">
                 <label class="form-inscription" for="image">Choisir une image</label>
-                <input type="file" class="image" id="image" name="image_category" accept='.gif, .png , .jpg, .jpeg' required>
+                <input type="file" class="image" id="image" name="image_category" accept='.gif, .png , .jpg, .jpeg'>
                 <?php if (
                     isset($params['category'][0]) and
                     !empty($params['category'][0]->getCategory_image())
