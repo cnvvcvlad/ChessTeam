@@ -22,7 +22,7 @@
                             <div class="bouton_commande">
                                 <a href="<?= dirname(SCRIPTS) ?>/profile/update/<?= $value->getId_user() ?>">Modifier le compte</a>
                             </div>
-                            <form method="POST" action="<?= dirname(SCRIPTS) . "/profile/delete/" . $value->getId_user() ?>" class="bouton_commande">
+                            <form method="POST" onclick="return(confirm('Etes-vous sûr de vouloir supprimer votre compte?'));" action="<?= dirname(SCRIPTS) . "/profile/delete/" . $value->getId_user() ?>" class="bouton_commande">
                                 <input type="submit" value="Supprimer le compte" name="delete">
                             </form>
                         </td>
