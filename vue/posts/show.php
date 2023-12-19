@@ -8,7 +8,7 @@
             <h1><?= $value->getArt_title() ?></h1>
             <div class="banniere_bouton">
                 <?php if (
-                    $this->isConnected() && $_SESSION['statut'] === 1
+                    isset($_SESSION['statut']) && $_SESSION['statut'] === 1
                 ) : ?>
                     <div class="bouton_commande updateBtn"><a href="<?= dirname(
                                                                         SCRIPTS
@@ -23,12 +23,10 @@
                 <?php endif; ?>
             </div>
             <p><span class="information"> Ecrit par</span>
-                <span class="mark"><?= isset($user)
-                                        ? $user->showNameAuthor($value->getArt_author())
-                                        : '' ?></span>
+                <span class="mark"><?= $this->showNameAuthor($value->getArt_author()) ?></span>
                 le <em><?= $value->getDate_creation() ?></em><span class="information"> dans la catégorie</span>
-                <strong><?= isset($category)
-                            ? $category->showNameCategory($value->getCategory_id())
+                <strong><?= isset($value)
+                            ? $this->showNameCategory($value->getCategory_id())
                             : '' ?></strong>
             </p>
             <div id="detail_art" class="justify_article">
@@ -70,26 +68,27 @@
                         <div class="comment-description">
                             <p><?= $values->getCom_content() ?></p>
                         </div>
-                        <?php if ($this->isConnected() && $_SESSION['statut'] === 1) : ?>
+                        <?php if (isset($_SESSION['statut']) && $_SESSION['statut'] === 1) : ?>
                             <div class="comment-modify">
-                                <a href="?action=allComments&amp;modifyC=<?= $values->getId() ?>" class="comment-modify">Modifier</a>
+                                <a href="<?= dirname(SCRIPTS)?>/admin/comments/edit/<?= $values->getId() ?>" class="comment-modify">Modifier</a>
                             </div>
                         <?php endif; ?>
 
                     </div>
                 <?php endforeach; ?>
 
-                <?php if ($this->isConnected()) : ?>
+                <?php if (isset($_SESSION['id_user']) && null !== $_SESSION['id_user']) : ?>
                     <div class="comment-block">
                         <div class="comment-add">
                             <fieldset>
                                 <legend>Ajouter un commentaire</legend>
-                                <form action="?action=commentForm" method="POST" class="form-inscription">
+                                <form action="<?= dirname(SCRIPTS) .
+            '/profile/add-comment' ?>" method="POST" class="form-inscription">
                                     <p><input type="hidden" name="com_author" value="<?= htmlspecialchars(
                                                                                             $_SESSION['id_user']
                                                                                         ) ?>"></p>
                                     <input type="hidden" name="article_id" value="<?= $value->getId() ?>">
-                                    <textarea class="comment-text" name="com_content" id="" cols="40" rows="5" placeholder="Commenter" wrap="off"></textarea>
+                                    <textarea minlength="5" required class="comment-text" name="com_content" id="" cols="40" rows="5" placeholder="Commenter" wrap="off"></textarea>
 
                                     <p><input type="submit" name="commentCreation" value="Envoyer"></p>
                                 </form>
@@ -101,7 +100,7 @@
                     <p class="comment-foruser">Vous ne pouvez pas commenter si vous n'êtes pas connecté</p>
                 <?php endif; ?>
                 <div class="back-page">
-                    <?= $_SERVER['HTTP_REFERER']
+                    <?= isset($_SERVER['HTTP_REFERER'])
                         ? '<a href="' . $_SERVER['HTTP_REFERER'] . '">Retour</a>'
                         : '' ?>
                     <a href="<?= dirname(SCRIPTS) ?>">Retour à la page d'accueil</a>
