@@ -19,7 +19,7 @@
                                 'ico_epingle.png' ?>" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?></h1>
 
             <div class="banniere_bouton">
-                <?php if ($this->isConnected() && $_SESSION['statut'] === 1) : ?>
+                <?php if (isset($_SESSION['statut']) && $_SESSION['statut'] === 1) : ?>
                     <div class="bouton_commande"><a href="<?= dirname(
                                                                 SCRIPTS
                                                             ) ?>/posts/<?= $value->getId() ?>">Modifier</a>
@@ -105,7 +105,7 @@
     </div>
 <?php endif; ?>
 <div class="back-page">
-    <?= $_SERVER['HTTP_REFERER']
+    <?= isset($_SERVER['HTTP_REFERER'])
         ? '<a href="' . $_SERVER['HTTP_REFERER'] . '">Retour</a>'
         : '' ?>
     <a href="<?= dirname(SCRIPTS) ?>">Retour à l'accueil</a>
