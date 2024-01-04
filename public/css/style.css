@@ -766,7 +766,8 @@ main.container_form div.bouton_commande {
   align-items: center;
   min-height: 75vh;
   /* min-width: 40vw; */
-  max-width: 80vw;
+  /* max-width: 80vw; */
+  width: 80vw;
   align-self: flex-start;
   flex: 1;
   margin: auto;
