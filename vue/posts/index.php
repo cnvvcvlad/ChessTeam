@@ -8,7 +8,7 @@
         N'hésitez pas à nous donner votre avis dans les commentaires!</h1> -->
 
     <div class="top_article">
-        <?php foreach ($params['posts'] as $key => $value) : ?>
+        <?php /*var_dump($this); exit;*/ foreach ($params['posts'] as $key => $value) : ?>
 
 
             <h1><img src="<?= SCRIPTS .
@@ -38,9 +38,9 @@
                 </div>
             </div>
             <p><span class="information"> Ecrit par</span>
-                <span class="mark"><?= isset($user)
-                                        ? $user->showNameAuthor($value->getArt_author())
-                                        : '' ?></span>
+                <span class="mark"><?= is_null($value->getArt_author())
+                                        ? 'Inconnu' 
+                                        : $this->showNameAuthor($value->getArt_author()) ?></span>
                 le <em><?= $value->getDate_creation() ?></em> <span class="information"> dans la catégorie</span>
                 <strong><?= isset($category)
                             ? $category->showNameCategory($value->getCategory_id())
@@ -81,23 +81,23 @@
 
         <?php endforeach; ?>
     </div>
-    <?php if (isset($page)) : ?>
+    <?php if (isset($params['pagination'])) : ?>
         <nav class="paginator">
-            <li class="list_style page-item"><a href="?action=allArticles&amp;page=<?= $currentPage -
-                                                                                        1 ?>" class="<?= $currentPage == 1
+            <li class="list_style page-item"><a href="<?= dirname(SCRIPTS) ?>/posts?page=<?= $params['pagination']['currentPage'] -
+                                                                                        1 ?>" class="<?= $params['pagination']['currentPage'] == 1
                                 ? 'disabled'
                                 : '' ?>">Précédente</a></li>
-            <?php for ($page = 1; $page <= $nbPages; $page++) : ?>
+            <?php for ($page = 1; $page <= $params['pagination']['nbPages']; $page++) : ?>
                 <li class="list_style page-item">
-                    <a href="?action=allArticles&amp;page=<?= $page ?>" class="page-link-<?= $currentPage ==
+                    <a href="<?= dirname(SCRIPTS) ?>/posts?page=<?= $page ?>" class="page-link-<?= $params['pagination']['currentPage'] ==
                                                                                                 $page
                                                                                                 ? 'active'
                                                                                                 : '' ?>"><?= $page ?>
                     </a>
                 </li>
             <?php endfor; ?>
-            <li class="list_style page-item"><a href="?action=allArticles&amp;page=<?= $currentPage +
-                                                                                        1 ?>" class="<?= $currentPage == $nbPages
+            <li class="list_style page-item"><a href="<?= dirname(SCRIPTS) ?>/posts?page=<?= $params['pagination']['currentPage'] +
+                                                                                        1 ?>" class="<?= $params['pagination']['currentPage'] == $params['pagination']['nbPages']
                                 ? 'disabled'
                                 : '' ?>">Suivante</a></li>
         </nav>
