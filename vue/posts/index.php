@@ -42,9 +42,9 @@
                                         ? 'Inconnu' 
                                         : $this->showNameAuthor($value->getArt_author()) ?></span>
                 le <em><?= $value->getDate_creation() ?></em> <span class="information"> dans la catégorie</span>
-                <strong><?= isset($category)
-                            ? $category->showNameCategory($value->getCategory_id())
-                            : '' ?></strong>
+                <strong><?= is_null($value->getCategory_id())
+                            ? 'Inconnue'
+                            : $this->showNameCategory($value->getCategory_id()) ?></strong>
             </p>
 
             <div id="detail_art" class="justify_article">
