@@ -1,7 +1,5 @@
 <?php
 
-use function PHPUnit\Framework\isNull;
-
 $title = 'Formulaire'; ?>
 <?php $description = 'Page du formulaire'; ?>
 <div class="container">
@@ -32,15 +30,15 @@ $title = 'Formulaire'; ?>
             <div class="form-create">
                 <label for="">Description de l'article
                     <p><textarea maxlength="100" minlength="5" required name="art_description" placeholder="Description de l'article" rows="5" cols="33"><?= isset($params['post'][0])
-                                                                                                                        ? $params['post'][0]->getArt_description()
-                                                                                                                        : '' ?></textarea></p>
+                                                                                                                                                                ? $params['post'][0]->getArt_description()
+                                                                                                                                                                : '' ?></textarea></p>
                 </label>
             </div>
             <div class="form-create">
                 <label for="">Contenu de l'article
-                    <p><textarea minlength="5" required id="editor" name="art_content" placeholder="Contenu de l'article" rows="5" cols="33"><?= isset($params['post'][0])
-                                                                                                                            ? $params['post'][0]->getArt_content()
-                                                                                                                            : '' ?></textarea></p>
+                    <p><textarea minlength="5" id="editor" name="art_content" placeholder="Contenu de l'article" rows="5" cols="33"><?= isset($params['post'][0])
+                                                                                                                                                    ? $params['post'][0]->getArt_content()
+                                                                                                                                                    : '' ?></textarea></p>
                 </label>
             </div>
             <?php if (isset($params['categories'])) : ?>
@@ -70,8 +68,8 @@ $title = 'Formulaire'; ?>
                 <?php endif; ?>
 
             </div>
-            <input type="hidden" name="art_author" value="<?= is_null(
-                                                                $params['post'][0]->getArt_author()
+            <input type="hidden" name="art_author" value="<?= isset(
+                                                                $params
                                                             )
                                                                 ? $_SESSION['id_user']
                                                                 : $params['post'][0]->getArt_author() ?>">
@@ -91,10 +89,10 @@ $title = 'Formulaire'; ?>
                 <p><input type="submit" value="<?= isset($params['post'][0])
                                                     ? 'Enregistrer les modifications'
                                                     : 'Enregistrer mon article' ?>" name="<?= isset(
-                                                                $params['post'][0]
-                                                            )
-                                                                ? 'updateArticle'
-                                                                : 'articleCreation' ?>"></p>
+                                                                                                $params['post'][0]
+                                                                                            )
+                                                                                                ? 'updateArticle'
+                                                                                                : 'articleCreation' ?>"></p>
                 <p><input type="reset" value="Annuler" /></p>
             </div>
         </fieldset>
