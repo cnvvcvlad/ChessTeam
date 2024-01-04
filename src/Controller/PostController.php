@@ -4,9 +4,10 @@ namespace Democvidev\ChessTeam\Controller;
 
 use Democvidev\ChessTeam\Model\ArticleManager;
 use Democvidev\ChessTeam\Model\CommentsManager;
+use Democvidev\ChessTeam\Controller\UserController;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Controller\CommentController;
 use Democvidev\ChessTeam\Controller\AbstractController;
-use Democvidev\ChessTeam\Exception\NotFoundException;
 
 class PostController extends AbstractController
 {
@@ -18,6 +19,7 @@ class PostController extends AbstractController
     private $postManager;
     private $commentManager;
     private $commentController;
+    private $user;
 
     /**
      * Initialise les instances necessaires pour l'affichage des articles
@@ -27,6 +29,7 @@ class PostController extends AbstractController
         parent::__construct();
         $this->postManager = new ArticleManager($this->getDatabase());
         $this->commentManager = new CommentsManager($this->getDatabase());
+        $this->user = new UserController($this->getDatabase());
         $this->commentController = new CommentController();
     }
 
@@ -37,9 +40,43 @@ class PostController extends AbstractController
      */
     public function index()
     {
+        // on determine sur quelle page des articles on se trouve en verifiant si la page n'est pas vide
+        if (isset($_GET['page']) && !empty($_GET['page']) && is_numeric($_GET['page'])) {
+            $currentPage = (int)strip_tags(trim($_GET['page']));
+        } else {
+            $currentPage = '1';
+        }
+
+        // on determine le nombre total d'articles
+        $nbPosts = $this->postManager->countArticles();
+
+        // on determine le nombre d'articles par page
+        $postsPerPage = 4;
+
+        // on calcule le nombre de pages totales
+        $nbPages = ceil($nbPosts / $postsPerPage);
+
+        // on verifie que la page courante est comprise entre 1 et le nombre de pages totales
+        if ($currentPage < 1 || $currentPage > $nbPages) {
+            throw new NotFoundException('Erreur 404');
+        }
+
+        // on calcule le premier article de la page courante
+        $firstPost = ($currentPage * $postsPerPage) - $postsPerPage;
+
+        // on recupère les articles de la page courante
+        $articles = $this->postManager->affichageArt($firstPost, $postsPerPage);
+
         return $this->view('posts.index', [
-            'posts' => $this->postManager->getAllPosts(),
-            'comment' => $this->commentController
+            // 'posts' => $this->postManager->getAllPosts(),
+            'posts' => $articles,
+            'comment' => $this->commentController,
+            'pagination' => [
+                'currentPage' => $currentPage,
+                'nbPages' => $nbPages,
+                'nbPosts' => $nbPosts,
+                'postsPerPage' => $postsPerPage
+            ]
         ]);
     }
 
