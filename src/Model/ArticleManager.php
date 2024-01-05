@@ -130,6 +130,16 @@ class ArticleManager extends AbstractModel
         return (int) $result['nb_art'];
     }
 
+    public function countMyArticles(int $id): int
+    {
+        $request = 'SELECT COUNT(*) AS nb_art FROM ' . $this->table . ' WHERE art_author = :id';
+        $stmt = $this->db->getPDO()->prepare($request);
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return (int) $result['nb_art'];
+    }
+
     /**
      * Récupère tous les articles de la base de données
      *
@@ -232,6 +242,30 @@ class ArticleManager extends AbstractModel
             LIMIT :firstArticle, :nbArticlesPerPage';
 
         $select = $this->db->getPDO()->prepare($query);
+        $select->bindValue(':firstArticle', $firstArticle, \PDO::PARAM_INT);
+        $select->bindValue(
+            ':nbArticlesPerPage',
+            $nbArticlesPerPage,
+            \PDO::PARAM_INT
+        );
+        $select->execute();
+        $posts = $this->returnPosts($select);
+        return $posts;
+    }
+
+    public function affichageMyArt($firstArticle, $nbArticlesPerPage, $id): array
+    {
+        $query =
+            'SELECT *, 
+            DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
+            AS date_creation 
+            FROM ' .
+            $this->table .
+            ' 
+            WHERE art_author = :id_user
+            LIMIT :firstArticle, :nbArticlesPerPage';
+        $select = $this->db->getPDO()->prepare($query);
+        $select->bindValue(':id_user', $id, \PDO::PARAM_INT);
         $select->bindValue(':firstArticle', $firstArticle, \PDO::PARAM_INT);
         $select->bindValue(
             ':nbArticlesPerPage',
