@@ -3,6 +3,11 @@
 <div class="container">
     <?php if ($this->isConnected() && $_SESSION['statut'] === 1) : ?>
         <h1>Voici tous les membres de ChessTeam</h1>
+        <div class="justify_article">
+            <a href="<?= dirname(
+                            SCRIPTS
+                        ) ?>/admin/members/create" class="">Créer un nouveau membre</a>
+        </div>
         <?php if (isset($params['members'])) : ?>
             <table class="all_members">
                 <?php foreach ($params['members'] as $key => $value) : ?>
@@ -31,4 +36,10 @@
             </table>
         <?php endif; ?>
     <?php endif; ?>
+    <div class="back-page">
+    <?= isset($_SERVER['HTTP_REFERER'])
+        ? '<a href="' . $_SERVER['HTTP_REFERER'] . '">Retour</a>'
+        : '' ?>
+    <a href="<?= dirname(SCRIPTS) ?>">Retour à l'accueil</a>
+</div>
 </div>
