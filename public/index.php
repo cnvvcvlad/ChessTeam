@@ -127,6 +127,7 @@ $router
         '/admin/members',
         'Democvidev\ChessTeam\Controller\Admin\UserController@members'
     )
+    ->get('/admin/members/create', 'Democvidev\ChessTeam\Controller\Admin\UserController@create')
 
     ->get(
         '/admin/comments',
