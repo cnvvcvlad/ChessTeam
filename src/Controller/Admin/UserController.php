@@ -22,4 +22,10 @@ class UserController extends AbstractController
             'members' => $members
         ]);
     }
+
+    public function create()
+    {
+        $this->isAdmin();
+        $this->view('admin.members.form');
+    }
 }
