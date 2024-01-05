@@ -97,6 +97,7 @@ class UserController extends AbstractController
                             'user_image' => $user_image,
                         ])
                     );
+                    $this->isAdmin() ? header('Location:' . dirname(SCRIPTS) . '/admin/members') :
                     header('Location:' . dirname(SCRIPTS) . '/login');
                     exit();
                 } else {
