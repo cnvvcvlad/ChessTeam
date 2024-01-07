@@ -705,7 +705,7 @@ input[type='reset']:active {
   box-shadow: 1px 1px 1px #d83f3d inset;
 }
 
-div.form-inscription:nth-child(5) > label:nth-child(1),
+/*div.form-inscription:nth-child(5) > label:nth-child(1),*/
 .form-create label.form-create,
 fieldset div.form-create label.form-inscription,
 form.form-inscription div.form-inscription label.form-inscription {
@@ -735,6 +735,10 @@ input[type='reset'] {
   cursor: pointer;
 }
 
+input.price {
+  max-width: 50%;
+}
+
 form.form-connexion > div:nth-child(1) {
   width: 100%;
   display: flex;
@@ -747,7 +751,9 @@ form.form-inscription > div:nth-child(3) {
   display: flex;
 }
 
-div.form-inscription:nth-child(5),
+div.form-inscription:nth-child(10),
+div.form-inscription:nth-child(9),
+div.form-inscription:nth-child(7),
 div.form-create:nth-child(n) {
   display: flex;
   align-items: center;
