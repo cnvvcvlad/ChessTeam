@@ -35,7 +35,13 @@
                     <li><a href="<?= dirname(SCRIPTS) ?>/admin/posts">administrer les articles</a></li>
                 </ul>
                 <ul>
-                    <li><a href="<?= dirname(SCRIPTS) ?>/admin/members/create">ajouter un nouveau membre</a></li>
+                    <li><a href="<?= dirname(SCRIPTS) ?>/admin/categories">administrer les catégories</a></li>
+                </ul>
+                <ul>
+                    <li><a href="<?= dirname(SCRIPTS) ?>/admin/comments">administrer les commentaires</a></li>
+                </ul>
+                <ul>
+                    <li><a href="<?= dirname(SCRIPTS) ?>/admin/coachs">administrer la liste des coachs</a></li>
                 </ul>
             <?php endif; ?>
         <?php endif; ?>
