@@ -147,10 +147,7 @@ class UserController extends AbstractController
                 if (strlen($user_image) > self::MAX_LENGTH_IMAGE) {
                     throw new NotFoundException('Le nom de l\'image est trop long');
                 }
-                $old_image = $_POST['old_image'];
-
-                var_dump($password);
-                exit;
+                $old_image = $_POST['old_image'];                
 
                 if ($_FILES['image_membre']['size'] <= self::MAX_SIZE_IMAGE) {
 
