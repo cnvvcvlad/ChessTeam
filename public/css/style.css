@@ -736,7 +736,7 @@ input[type='reset'] {
 }
 
 input.price {
-  max-width: 50%;
+  width: 50%;
 }
 
 form.form-connexion > div:nth-child(1) {
