@@ -112,7 +112,12 @@ $router
         '/admin/categories/delete/:id',
         'Democvidev\ChessTeam\Controller\Admin\CategoryController@delete'
     )
-
+    ->get('/admin/coachs/create', 'Democvidev\ChessTeam\Controller\Admin\CoachController@create')
+    ->post('/admin/coachs/create', 'Democvidev\ChessTeam\Controller\Admin\CoachController@createCoach')
+    ->get('/admin/coachs/edit/:id', 'Democvidev\ChessTeam\Controller\Admin\CoachController@edit')
+    ->post('/admin/coachs/update/:id', 'Democvidev\ChessTeam\Controller\Admin\CoachController@editCoach')
+    ->get('/admin/coachs', 'Democvidev\ChessTeam\Controller\Admin\CoachController@index')
+    ->post('/admin/coachs/delete/:id', 'Democvidev\ChessTeam\Controller\Admin\CoachController@delete')
     ->get('/coachs', 'Democvidev\ChessTeam\Controller\CoachController@index')
     ->get('/coachs/:id', 'Democvidev\ChessTeam\Controller\CoachController@show')
     ->post('/coachs/map', 'Democvidev\ChessTeam\Controller\CoachController@map')
