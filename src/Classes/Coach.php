@@ -10,9 +10,16 @@ class Coach extends Generique
     private $id;
     private $last_name;
     private $first_name;
+    private $email;
+    private $password;
     private $city;
     private $lat;
     private $lon;
+    private $coach_image;
+    private $price;
+    private $description;
+    private $nb_stars;
+    private $nb_coachings;
 
     public function __construct(array $data)
     {
@@ -136,6 +143,146 @@ class Coach extends Generique
     public function setLon($lon)
     {
         $this->lon = $lon;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of coach_image
+     */ 
+    public function getCoach_image()
+    {
+        return $this->coach_image;
+    }
+
+    /**
+     * Set the value of coach_image
+     *
+     * @return  self
+     */ 
+    public function setCoach_image($coach_image)
+    {
+        $this->coach_image = $coach_image;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of price
+     */ 
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set the value of price
+     *
+     * @return  self
+     */ 
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of description
+     */ 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set the value of description
+     *
+     * @return  self
+     */ 
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nb_stars
+     */ 
+    public function getNb_stars()
+    {
+        return $this->nb_stars;
+    }
+
+    /**
+     * Set the value of nb_stars
+     *
+     * @return  self
+     */ 
+    public function setNb_stars($nb_stars)
+    {
+        $this->nb_stars = $nb_stars;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nb_coachings
+     */ 
+    public function getNb_coachings()
+    {
+        return $this->nb_coachings;
+    }
+
+    /**
+     * Set the value of nb_coachings
+     *
+     * @return  self
+     */ 
+    public function setNb_coachings($nb_coachings)
+    {
+        $this->nb_coachings = $nb_coachings;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of email
+     */ 
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */ 
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password
+     */ 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @return  self
+     */ 
+    public function setPassword($password)
+    {
+        $this->password = $password;
 
         return $this;
     }

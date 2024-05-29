@@ -131,7 +131,7 @@ class PostController extends AbstractController
                         'Une erreur est survenue lors de l\'insertion de l\'article ! Veuillez réessayer.'
                     );
                 }
-                return header('Location:' . dirname(SCRIPTS) . '/posts');
+                return header('Location:' . dirname(SCRIPTS) . '/profile/posts');
             } else {
                 throw new NotFoundException('Erreur de l\'upload de l\'image!');
             }
@@ -213,7 +213,7 @@ class PostController extends AbstractController
                             $_FILES['art_image']['tmp_name'],
                             "$uploads_dir/$new_image"
                         );
-                        $art_image = $new_image;                        
+                        $art_image = $new_image;
                     } else {
                         throw new NotFoundException(
                             'Veuillez rééssayer avec un autre format !'
@@ -221,7 +221,7 @@ class PostController extends AbstractController
                     }
                 } else {
                     throw new NotFoundException(
-                        'Votre fichier ne doit pas dépasser 1 Mo !'
+                        'Votre fichier ne doit pas dépasser 2 Mo !'
                     );
                 }
             } else {

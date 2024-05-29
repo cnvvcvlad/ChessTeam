@@ -10,10 +10,28 @@ use Democvidev\ChessTeam\Controller\AbstractController;
 
 class UserController extends AbstractController
 {
-    private $memberManager;
+    /**
+     * @const int MAX_SIZE_IMAGE, 2 Mo
+     */
+    const MAX_SIZE_IMAGE = 2097152;
+
+    const MAX_LENGTH_IMAGE = 25;
+
+    /**
+     * @var array $extensions_valides
+     */
+    private $extensions_valides = ['jpg', 'jpeg', 'png', 'gif'];
+
+    /**
+     * Instance of MemberManager
+     *
+     * @var MemberManager
+     */
+    protected $memberManager;
 
     public function __construct()
     {
+        parent::__construct();
         $this->memberManager = new MemberManager($this->getDatabase());
     }
 
@@ -25,10 +43,14 @@ class UserController extends AbstractController
     public function loginUser()
     {
         $user = $this->memberManager->getByLogin($_POST['login']);
-        
-        if(password_verify($_POST['password'], $user->password)) {
+        if(!$user) {
+            throw new NotFoundException('L\'utilisateur n\'existe pas !');
+        }
+
+        if (password_verify($_POST['password'], $user->password)) {
             $_SESSION['id_user'] = (int) $user->id_user;
             $_SESSION['statut'] = (int) $user->statut;
+            $_SESSION['user_image'] = (string) $user->user_image;
             return header('Location:' . dirname(SCRIPTS) . '/');
         } else {
             throw new NotFoundException('Le mot de passe est invalide !');
@@ -42,9 +64,11 @@ class UserController extends AbstractController
 
     public function registerUser()
     {
-        if(isset($_POST['inscription']) and
-        isset($_FILES['image_membre']) and
-        $_FILES['image_membre']['error'] == 0) {
+        if (
+            isset($_POST['inscription']) and
+            isset($_FILES['image_membre']) and
+            $_FILES['image_membre']['error'] == 0
+        ) {
             extract($_POST);
             // TODO validation des données nord coders
 
@@ -52,19 +76,19 @@ class UserController extends AbstractController
 
             if ($_FILES['image_membre']['size'] <= 2000000) {
                 $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
-    
+
                 $info = pathinfo($_FILES['image_membre']['name']);
-    
+
                 $extension_uploadee = $info['extension'];
-    
+
                 if (in_array($extension_uploadee, $extension_autorisee)) {
                     $user_image = $_FILES['image_membre']['name'];
-    
+
                     //                $user_image = uniqid() . $user_image;
-                    $path = dirname(__FILE__, 3) .'/public/img/uploads/' . $user_image;
-    
+                    $path = dirname(__FILE__, 3) . '/public/img/uploads/' . $user_image;
+
                     move_uploaded_file($_FILES['image_membre']['tmp_name'], $path);
-    
+
                     $this->memberManager->insertMembre(
                         new Users([
                             'login' => $login,
@@ -72,7 +96,8 @@ class UserController extends AbstractController
                             'password' => $password,
                             'user_image' => $user_image,
                         ])
-                    );                        
+                    );
+                    $this->isAdmin() ? header('Location:' . dirname(SCRIPTS) . '/admin/members') :
                     header('Location:' . dirname(SCRIPTS) . '/login');
                     exit();
                 } else {
@@ -88,7 +113,8 @@ class UserController extends AbstractController
 
     public function profile()
     {
-        $user = $this->memberManager->showOneUser($_SESSION['id_user']);        
+        $this->isConnected();
+        $user = $this->memberManager->showOneUser($_SESSION['id_user']);
         $this->view('user.profile', [
             'user' => $user,
         ]);
@@ -96,6 +122,7 @@ class UserController extends AbstractController
 
     public function update($id)
     {
+        $this->isConnected();
         $user = $this->memberManager->showOneUser($id);
         $this->view('user.update', [
             'user' => $user,
@@ -104,50 +131,69 @@ class UserController extends AbstractController
 
     public function updateUser($id)
     {
-        
-        if(isset($_POST['update']) and
-        isset($_FILES['image_membre']) and
-        $_FILES['image_membre']['error'] == 0) {
+        $this->isConnected();
+
+        if (!empty($_POST) || !empty($_FILES)) {
             extract($_POST);
-            // TODO validation des données nord coders
-
             $password = password_hash($password, PASSWORD_DEFAULT);
-            
+            if ($_FILES['image_membre']['name'] == '') {
+                $user_image = $_POST['old_image'];
+            } elseif (
+                isset($_FILES['image_membre']) and
+                $_FILES['image_membre']['error'] == 0 and
+                !empty($_FILES['image_membre']['name'])
+            ) {
+                $user_image = $_FILES['image_membre']['name'];
+                if (strlen($user_image) > self::MAX_LENGTH_IMAGE) {
+                    throw new NotFoundException('Le nom de l\'image est trop long');
+                }
+                $old_image = $_POST['old_image'];                
 
-            if ($_FILES['image_membre']['size'] <= 2000000) {
-                $extension_autorisee = ['jpg', 'jpeg', 'png', 'gif'];
-    
-                $info = pathinfo($_FILES['image_membre']['name']);
-    
-                $extension_uploadee = $info['extension'];
-    
-                if (in_array($extension_uploadee, $extension_autorisee)) {
-                    $user_image = $_FILES['image_membre']['name'];
-    
-                    //                $user_image = uniqid() . $user_image;
-                    $path = dirname(__FILE__, 3) .'/public/img/uploads/' . $user_image;
-    
-                    move_uploaded_file($_FILES['image_membre']['tmp_name'], $path);
-    
-                    $this->memberManager->updateMembre(
-                        $id,
-                        new Users([
-                            'login' => $login,
-                            'email' => $email,
-                            'password' => $password,
-                            'user_image' => $user_image,
-                        ])
-                    );                        
-                    header('Location:' . dirname(SCRIPTS) . '/profile');
-                    exit();
+                if ($_FILES['image_membre']['size'] <= self::MAX_SIZE_IMAGE) {
+
+                    $info = pathinfo($_FILES['image_membre']['name']);
+
+                    $extension_uploadee = $info['extension'];
+                    $filename = $info['filename'];
+                    $upload_dir = dirname(__FILE__, 4) . '/public/img/uploads/';
+
+                    if (in_array($extension_uploadee, $this->$extensions_valides)) {
+                        // 1st Delete old image
+                        if (file_exists("$upload_dir/$old_image") and $old_image != '') {
+                            $isDeleted = unlink("$upload_dir/$old_image");
+                            if (!$isDeleted) {
+                                throw new NotFoundException('Une erreur est survenue lors de la suppression de l\'image ancienne ! Veuillez réessayer.');
+                            }
+                        }
+                        $new_image = $filename . md5(uniqid()) . '.' . $extension_uploadee;
+                        move_uploaded_file($_FILES['image_membre']['tmp_name'], $upload_dir . $new_image);
+                        $user_image = $new_image;
+                    } else {
+                        throw new NotFoundException(
+                            "Veuillez rééssayer avec un autre format d'image !"
+                        );
+                    }
                 } else {
-                    throw new NotFoundException(
-                        "Veuillez rééssayer avec un autre format d'image !"
-                    );
+                    throw new NotFoundException('Votre fichier ne doit pas dépasser 2 Mo !');
                 }
             } else {
-                throw new NotFoundException('Votre fichier ne doit pas dépasser 2 Mo !');
+                throw new NotFoundException('Erreur de l\'upload de l\'image!');
             }
+            $result = $this->memberManager->updateMembre(
+                $id,
+                new Users([
+                    'login' => $login,
+                    'email' => $email,
+                    'password' => $password,
+                    'user_image' => $user_image,
+                ])
+            );
+            if ($result) {
+                header('Location:' . dirname(SCRIPTS) . '/profile');
+                exit();
+            }
+        } else {
+            throw new NotFoundException('Aucune donnée reçue');
         }
     }
 
@@ -158,10 +204,10 @@ class UserController extends AbstractController
     }
 
     public function destroy($id)
-    {        
+    {
         $this->isConnected();
         $this->memberManager->deleteU($id);
-        if($_SESSION['statut'] == 1) {
+        if ($_SESSION['statut'] == 1) {
             header('Location:' . dirname(SCRIPTS) . '/admin/members');
         } else {
             session_destroy();
@@ -220,7 +266,7 @@ class UserController extends AbstractController
     {
         $this->memberManager->deleteU($user_id);
         $role = new RoleHandler();
-        if ($role->isAdmin()) {
+        if ($this->isConnected() && $_SESSION['statut'] === 1) {
             header('location:index.php?action=allMembers');
             exit;
         } else {

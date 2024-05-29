@@ -128,7 +128,7 @@ class CategoriesManager extends AbstractModel
         $request = 'DELETE FROM ' . $this->table . ' WHERE id = :id';
         $delete = $this->db->getPDO()->prepare($request);
         $delete->bindValue(':id', $id_category, \PDO::PARAM_INT);
-        $isDeketed = $delete->execute();
-        return $isDeketed;
+        $isDeleted = $delete->execute();
+        return $isDeleted;
     }
 }

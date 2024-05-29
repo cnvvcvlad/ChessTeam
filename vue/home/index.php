@@ -47,8 +47,8 @@
                     <img src="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'by_default' . DIRECTORY_SEPARATOR . 'ico_epingle.png' ?>" alt="Catégorie" class="ico_categorie" /><?= $value->getArt_title() ?>
                 </h1>
                 <div class="banniere_bouton">
-                    <?php if (isset($this->role) && $this->role->isAdmin()) : ?>
-                        <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a>
+                    <?php if (isset($_SESSION['statut']) && $_SESSION['statut'] === 1) : ?>
+                        <div class="bouton_commande"><a href="<?= dirname(SCRIPTS) ?>/admin/posts/edit/<?= $value->getId() ?>">Modifier</a>
                         </div>
                     <?php endif; ?>
                     <div class="bouton_commande">
@@ -59,13 +59,13 @@
                     </div>
                 </div>
                 <p><span class="information"> Ecrit par</span>
-                    <span class="mark"><?= isset($user) ? $user->showNameAuthor(
+                    <span class="mark"><?= isset($value) ? $this->articleManager->getNameAuthor(
                                             $value->getArt_author()
                                         ) : '' ?></span>
                     le <em><?= $value->getDate_creation() ?></em> <span class="information"> dans la catégorie</span>
-                    <strong><?= isset($category) ? $category->showNameCategory(
+                    <strong><?= isset($value) ? ($this->categorieManager->nameCategory(
                                 $value->getCategory_id()
-                            ) : '' ?></strong>
+                            ))['title'] : '' ?></strong>
                 </p>
                 <div id="detail_art" class="justify_article">
                     <a class="grand_image" href="<?= SCRIPTS . 'img' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $value->getArt_image() ?>">
@@ -78,9 +78,9 @@
                                 moins]</a></span>
                     </div>
                     <p>
-                        <a href="?action=allArticles&amp;id=<?= $value->getId() ?>">
-                            Commentaires(<?= isset($comment) ? count(
-                                                $comment->getAllCommentsOfArticle($value->getId())
+                        <a href="<?= dirname(SCRIPTS) ?>/posts/<?= $value->getId() ?>">
+                            Commentaires(<?= isset($params['commentsOfArticle']) ? count(
+                                                ($params['commentsOfArticle'])
                                             ) : '' ?>)</a>
                     </p>
                 </div>

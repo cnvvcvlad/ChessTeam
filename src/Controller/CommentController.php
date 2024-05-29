@@ -2,7 +2,9 @@
 
 namespace Democvidev\ChessTeam\Controller;
 
+use Democvidev\ChessTeam\Classes\Comment;
 use Democvidev\ChessTeam\Model\CommentsManager;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Controller\AbstractController;
 
 class CommentController extends AbstractController
@@ -11,7 +13,29 @@ class CommentController extends AbstractController
 
     public function __construct()
     {
+        parent::__construct();
         $this->commentManager = new CommentsManager($this->getDatabase());
+    }
+
+    public function addComment()
+    {
+        $this->isConnected();
+        if (!empty($_POST) && isset($_POST['commentCreation'])) {
+            extract($_POST);
+            $result = $this->commentManager->insertComment(
+                new Comment([
+                    'com_author' => $com_author,
+                    'com_content' => $com_content,
+                    'article_id' => $article_id,
+                ])
+            );            
+            if (!$result) {
+                throw new NotFoundException(
+                    'Une erreur est survenue lors de l\'insertion du commentaire'
+                );
+            }
+            return header('Location:' . dirname(SCRIPTS) . '/posts/' . $article_id);
+        }
     }
 
     /**

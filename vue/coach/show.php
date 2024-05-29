@@ -54,7 +54,8 @@
         <h1>Où est-ce que <?= $params['coach'][
             'first_name'
         ] ?> doit vous rejoindre ?</h1>
-        <form action="#" class="container">
+        <form action="<?= dirname(SCRIPTS) .
+            '/coachs/paiement' ?>" class="container" method="post">
             <div>
                 <input type="text" name="town" placeholder="Ville" id="" class="coach-input">
                 <input type="number" name="cp" placeholder="Code postal" id="" class="coach-input">

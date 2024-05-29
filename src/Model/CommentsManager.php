@@ -8,21 +8,22 @@ use Democvidev\ChessTeam\Model\AbstractModel;
 class CommentsManager extends AbstractModel
 {
     protected $table = 'comment';
-   /**
-    * Insère un commentaire dans la base de données
-    *
-    * @param Comment $comment
-    * @return void
-    */
-    public function insertComment(Comment $comment): void
+   
+    /**
+     * Insère un commentaire dans la base de données
+     *
+     * @param Comment $comment
+     * @return boolean
+     */
+    public function insertComment(Comment $comment): bool
     {
         $request = 'INSERT INTO ' . $this->table . '(com_author, com_content, article_id) VALUES(:com_author, :com_content, :article_id)';
-        $insert = $this->db->getPDO()->prepare($request);        
-        $insert = $insert->execute([
-            'com_author' => $comment->getCom_author(),
-            'com_content' => $comment->getCom_content(),
-            'article_id' => $comment->getArticle_id()
-        ]);
+        $insert = $this->db->getPDO()->prepare($request);  
+        $insert->bindValue(':com_author', $comment->getCom_author(), \PDO::PARAM_STR);
+        $insert->bindValue(':com_content', $comment->getCom_content(), \PDO::PARAM_STR);
+        $insert->bindValue(':article_id', $comment->getArticle_id(), \PDO::PARAM_INT);
+        $insert = $insert->execute();        
+        return $insert;
     }
 
     /**

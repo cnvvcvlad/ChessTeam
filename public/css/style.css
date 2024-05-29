@@ -705,7 +705,7 @@ input[type='reset']:active {
   box-shadow: 1px 1px 1px #d83f3d inset;
 }
 
-div.form-inscription:nth-child(5) > label:nth-child(1),
+/*div.form-inscription:nth-child(5) > label:nth-child(1),*/
 .form-create label.form-create,
 fieldset div.form-create label.form-inscription,
 form.form-inscription div.form-inscription label.form-inscription {
@@ -735,6 +735,10 @@ input[type='reset'] {
   cursor: pointer;
 }
 
+input.price {
+  width: 50%;
+}
+
 form.form-connexion > div:nth-child(1) {
   width: 100%;
   display: flex;
@@ -747,7 +751,9 @@ form.form-inscription > div:nth-child(3) {
   display: flex;
 }
 
-div.form-inscription:nth-child(5),
+div.form-inscription:nth-child(10),
+div.form-inscription:nth-child(9),
+div.form-inscription:nth-child(7),
 div.form-create:nth-child(n) {
   display: flex;
   align-items: center;
@@ -766,7 +772,8 @@ main.container_form div.bouton_commande {
   align-items: center;
   min-height: 75vh;
   /* min-width: 40vw; */
-  max-width: 80vw;
+  /* max-width: 80vw; */
+  width: 80vw;
   align-self: flex-start;
   flex: 1;
   margin: auto;
@@ -863,6 +870,8 @@ a.hidden-btn {
 }
 
 table {
+  margin-top: 10px;
+  margin-bottom: 5px;
   border-collapse: collapse;
   border: 2px solid rgb(200, 200, 200);
   letter-spacing: 1px;
@@ -1220,13 +1229,18 @@ ul li div.smenu a {
 
 .form-coach {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: start;
+  align-items: center;
   width: inherit;
 }
 
-.form-coach input {
+.form-coach input, .form-coach select {
   border: none;
+}
+
+.form-coach select{
+  font-size: 1.2rem;
 }
 
 .coach-button {
@@ -1267,6 +1281,14 @@ ul li div.smenu a {
   border-radius: 50%;
   height: 90px;
   float: left;
+}
+
+.coach-criteria {
+  display: none;
+}
+
+.switch {
+  display: initial;
 }
 
 /********** Styles CoachInfo ************/
