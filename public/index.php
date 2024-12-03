@@ -72,6 +72,7 @@ $router
         'profile/add-comment',
         'Democvidev\ChessTeam\Controller\CommentController@addComment'
     )
+    ->get('/questions', 'Democvidev\ChessTeam\Controller\HomeController@questions')
 
     ->post('/search', 'Democvidev\ChessTeam\Controller\PostController@search')
     ->get('/posts', 'Democvidev\ChessTeam\Controller\PostController@index')

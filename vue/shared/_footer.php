@@ -34,7 +34,7 @@
                     <a class="btn" href="#settings">FAQ / CGU / CONTACT</a>
 
                     <div class="smenu">
-                        <a href="?action=questions">Questions fréquentes</a>
+                        <a href="<?= dirname(SCRIPTS) ?>/questions">Questions fréquentes</a>
                         <a href="?action=conditions">Condition d'utilisation</a>
                         <a href="?action=mentions">Mentions légales</a>
                         <a href="?action=contact">Contactez-nous</a>

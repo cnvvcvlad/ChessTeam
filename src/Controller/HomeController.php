@@ -35,4 +35,9 @@ class HomeController extends AbstractController
             'commentsOfArticle' => $commentsOfArticle
         ]);
     }
+
+    public function questions()
+    {
+        return $this->view('home.questions');
+    }
 }
