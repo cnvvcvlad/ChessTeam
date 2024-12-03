@@ -1,7 +1,7 @@
 <?php $title = 'Questions'; ?>
 <?php $description = 'Exemples de questions'; ?>
 <div class="main-vue">
-    <h1>Questions et réponses</h1>
+    <h1 class="text-center">Questions et réponses</h1>
 
     <div class="accordion accordion-flush" id="accordionFlushExample">
   <div class="accordion-item">
