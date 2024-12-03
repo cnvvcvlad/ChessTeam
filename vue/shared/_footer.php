@@ -41,8 +41,8 @@
 
                     </div>
                 </li>
-                <?php if (isset($role) && $role->isConnected()) : ?>
-                    <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a>
+                <?php if (isset($_SESSION['id_user'])) : ?>
+                    <li class="item"><a href="<?= dirname(SCRIPTS) ?>/logout" class="btn">Déconnexion</a>
                         <div class="separate"></div><a class="btn" href="">#top</a>
                     </li>
                 <?php else : ?>
