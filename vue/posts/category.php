@@ -31,7 +31,11 @@
 
                     </div>
                     <?php if (isset($_SESSION['statut']) && $_SESSION['statut'] === 1): ?>
-                        <div class="bouton_commande"><a href="?action=allArticles&amp;updateA=<?= $value->getId() ?>">Modifier</a></div>
+                        <div class="bouton_commande"><a href="<?= dirname(
+                                                                        SCRIPTS
+                                                                    ) .
+                                                                        '/admin/posts/edit/' .
+                                                                        $value->getId() ?>">Modifier</a></div>
                     <?php endif; ?>
                 </div>
 
