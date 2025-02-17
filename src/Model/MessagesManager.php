@@ -12,9 +12,9 @@ class MessagesManager extends AbstractModel
      * Insère un message dans la base de données
      *
      * @param Messages $messages
-     * @return void
+     * @return bool
      */
-    public function insertMessage(Messages $messages): void
+    public function insertMessage(Messages $messages): bool
     {
         $request = 'INSERT INTO ' . $this->table . ' (author_name, mess_author, mess_subject, mess_content) VALUES(:author_name, :mess_author, :mess_subject, :mess_content)';
         $insert = $this->db->getPDO()->prepare($request);
@@ -24,5 +24,6 @@ class MessagesManager extends AbstractModel
             'mess_subject' => $messages->getMess_subject(),
             'mess_content' => $messages->getMess_content()
         ]);
+        return $insert;
     }
 }

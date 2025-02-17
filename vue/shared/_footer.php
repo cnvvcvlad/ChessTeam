@@ -34,15 +34,15 @@
                     <a class="btn" href="#settings">FAQ / CGU / CONTACT</a>
 
                     <div class="smenu">
-                        <a href="?action=questions">Questions fréquentes</a>
-                        <a href="?action=conditions">Condition d'utilisation</a>
-                        <a href="?action=mentions">Mentions légales</a>
-                        <a href="?action=contact">Contactez-nous</a>
+                        <a href="<?= dirname(SCRIPTS) ?>/questions">Questions fréquentes</a>
+                        <a href="<?= dirname(SCRIPTS) ?>/conditions">Condition d'utilisation</a>
+                        <a href="<?= dirname(SCRIPTS) ?>/mentions">Mentions légales</a>
+                        <a href="<?= dirname(SCRIPTS) ?>/contact">Contactez-nous</a>
 
                     </div>
                 </li>
-                <?php if (isset($role) && $role->isConnected()) : ?>
-                    <li class="item"><a href="?action=deconnect" class="btn">Déconnexion</a>
+                <?php if (isset($_SESSION['id_user'])) : ?>
+                    <li class="item"><a href="<?= dirname(SCRIPTS) ?>/logout" class="btn">Déconnexion</a>
                         <div class="separate"></div><a class="btn" href="">#top</a>
                     </li>
                 <?php else : ?>
