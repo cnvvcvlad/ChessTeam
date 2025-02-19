@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+  // Transition fluide effet
+  let article = document.querySelector(".top_article");
+  setTimeout(() => {
+    article.classList.add("top_article-visible");
+  }, 200); // Petit délai pour un effet plus fluide de 200ms
+
   // Recaptcha
   if (document.getElementById('recaptchaResponse')) {
     grecaptcha.ready(function () {
@@ -11,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
     })
   }
+
   // Ckeditor
   ClassicEditor.create(document.querySelector('#editor')).catch((error) => {
     // console.error(error)
@@ -24,11 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
     btnCriteria.setAttribute('value', 'Plus de critères')
     btnCriteria.addEventListener('click', (e) => {
       e.stopPropagation()
-      if(isHided){
+      if (isHided) {
         btnCriteria.removeAttribute('value')
         btnCriteria.setAttribute('value', 'Moins de critères')
         isHided = false
-      }else{
+      } else {
         btnCriteria.removeAttribute('value')
         btnCriteria.setAttribute('value', 'Plus de critères')
         isHided = true
@@ -37,5 +45,5 @@ document.addEventListener('DOMContentLoaded', function () {
         criteria.classList.toggle('switch')
       })
     })
-  }  
+  }
 })

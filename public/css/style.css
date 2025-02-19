@@ -206,11 +206,18 @@ article {
 }
 
 #cache {
-  display: none;
+  /* display: none; */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 2.6s ease-out, opacity 2.6s ease-out, padding 2.6s ease-out;
 }
 
 #cache:target {
-  display: block;
+  /* display: block; */
+  max-height: 200vh; /* Une valeur suffisamment grande pour le contenu */
+  opacity: 1;
+  overflow: inherit;
 }
 
 /*--------------------------------------------------------
@@ -530,6 +537,15 @@ div.bouton_commande:nth-child(n) > a:nth-child(1) {
   border-radius: 10px 10px;
   justify-content: flex-start;
   padding: 1px 1px 5px 1px;
+  opacity: 0; /* Invisible au départ */
+  transform: translateY(25px) scale(0.9); /* Décalé vers le bas et réduit */
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+ /* 🔹 Quand l'article est visible */
+ .top_article-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1); /* Reprend sa taille normale */
 }
 
 .ico_categorie {
