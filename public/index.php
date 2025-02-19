@@ -186,7 +186,9 @@ $router
     ->post(
         '/admin/posts/edit/:id',
         'Democvidev\ChessTeam\Controller\Admin\PostController@update'
-    );
+    )
+    ->post('/admin/posts/status/update', 
+        'Democvidev\ChessTeam\Controller\Admin\PostController@updateStatus');
 
 // on ratrappe les erreurs personnalisées dans le cas où l'action n'existe pas
 try {
