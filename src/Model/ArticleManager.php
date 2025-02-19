@@ -3,8 +3,9 @@
 namespace Democvidev\ChessTeam\Model;
 
 use Democvidev\ChessTeam\Classes\Article;
-use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Model\AbstractModel;
+use Democvidev\ChessTeam\Classes\ArticleStatut;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 
 class ArticleManager extends AbstractModel
 {
@@ -23,9 +24,9 @@ class ArticleManager extends AbstractModel
             $this->table .
             '(
                 art_title, art_description, art_content, 
-                art_image, art_author, category_id) 
+                art_image, art_author, category_id, art_statut) 
             VALUES(:art_title, :art_description, :art_content, 
-            :art_image, :art_author, :category_id)';
+            :art_image, :art_author, :category_id, :art_statut)';
         $insert = $this->db->getPDO()->prepare($request);
         $insert->bindValue(
             ':art_title',
@@ -56,6 +57,11 @@ class ArticleManager extends AbstractModel
             ':category_id',
             $article->getCategory_id(),
             \PDO::PARAM_INT
+        );
+        $insert->bindValue(
+            ':art_statut',
+            ArticleStatut::DRAFT,
+            \PDO::PARAM_STR
         );
         $insert = $insert->execute();
         return $insert;
@@ -121,12 +127,15 @@ class ArticleManager extends AbstractModel
      * Compter le nombre d'articles dans la base de données
      *
      * @return int
+     * @var mixed
      */
-    public function countArticles(): int
+    public function countArticles($art_statut): int
     {
-        $request = 'SELECT COUNT(*) AS nb_art FROM ' . $this->table;
-        $result = $this->db->getPDO()->query($request);
-        $result = $result->fetch();
+        $request = 'SELECT COUNT(*) AS nb_art FROM ' . $this->table . ' WHERE art_statut LIKE :art_statut';
+        $stmt = $this->db->getPDO()->prepare($request);
+        $stmt->bindValue(':art_statut', $art_statut, \PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch();
         return (int) $result['nb_art'];
     }
 
@@ -238,8 +247,8 @@ class ArticleManager extends AbstractModel
             AS date_creation 
             FROM ' .
             $this->table .
-            ' 
-            LIMIT :firstArticle, :nbArticlesPerPage';
+            ' WHERE art_statut LIKE :art_statut
+            LIMIT :firstArticle, :nbArticlesPerPage ';
 
         $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':firstArticle', $firstArticle, \PDO::PARAM_INT);
@@ -248,6 +257,7 @@ class ArticleManager extends AbstractModel
             $nbArticlesPerPage,
             \PDO::PARAM_INT
         );
+        $select->bindValue(':art_statut', ArticleStatut::PUBLISHED, \PDO::PARAM_STR);
         $select->execute();
         $posts = $this->returnPosts($select);
         return $posts;
@@ -315,9 +325,10 @@ class ArticleManager extends AbstractModel
             FROM ' .
             $this->table .
             ' 
-            WHERE category_id = :category_id';
+            WHERE category_id = :category_id AND art_statut LIKE :art_statut';
         $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':category_id', $category_id, \PDO::PARAM_INT);
+        $select->bindValue(':art_statut', ArticleStatut::PUBLISHED, \PDO::PARAM_STR);
         $select->execute();
         $posts = $this->returnPosts($select);
         return $posts;
@@ -410,5 +421,37 @@ class ArticleManager extends AbstractModel
         $select->execute(['search' => '%' . $search . '%']);
         $posts = $this->returnPosts($select);
         return $posts;
+    }
+
+    /**Récupérer les articles selon leur statut
+     * 
+     * @param string $status
+     * @return array
+     */
+    public function getArticlesByStatus($status): array
+    {
+        if (!in_array($status, ArticleStatut::getAllTypes())) {
+            return []; // Retourne un tableau vide si le statut est invalide
+        }
+
+        $query = 'SELECT * FROM ' . $this->table . ' WHERE art_statut = :status ORDER BY date_creation DESC';
+        $select = $this->db->getPDO()->prepare($query);
+        $select->execute(['status' => $status]);
+        $posts = $this->returnPosts($select);
+        return $posts;
+    }
+
+    /**
+     * Changer le statut d'un article
+     *
+     * @param int $id
+     * @param string $status
+     * @return void
+     */
+    public function changeStatus($id, $status): void
+    {
+        $query = 'UPDATE ' . $this->table . ' SET art_statut = :status WHERE id = :id';
+        $update = $this->db->getPDO()->prepare($query);
+        $update->execute(['status' => $status, 'id' => $id]);
     }
 }
