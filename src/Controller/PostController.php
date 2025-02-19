@@ -98,9 +98,15 @@ class PostController extends AbstractController
                 'post' => $post,
                 'commentsOfArticle' => $this->commentManager->showCommentsOfArticle($id)
             ]);
-        }
-        if($post[0]->getArt_statut() !== ArticleStatut::PUBLISHED && isset($_SESSION['id_user']) && $post[0]->getArt_author() !== $_SESSION['id_user']) {
-            throw new NotFoundException("L'article que vous recherchez n'est pas accessible.", 404);
+        }        
+        if(isset($_SESSION['id_user'])) {
+            if($post[0]->getArt_statut() !== ArticleStatut::PUBLISHED && $post[0]->getArt_author() !== $_SESSION['id_user']) {
+                throw new NotFoundException("L'article que vous recherchez n'est pas accessible.", 404);
+            }
+        } else if(!isset($_SESSION['id_user'])){
+            if($post[0]->getArt_statut() !== ArticleStatut::PUBLISHED) {
+                throw new NotFoundException("L'article que vous recherchez n'est pas accessible.", 404);
+            }
         }
         return $this->view('posts.show', [
             'postStatus' => ArticleStatut::getAllTypes(),
