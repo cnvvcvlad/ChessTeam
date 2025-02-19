@@ -131,36 +131,43 @@
     </div>
     <div class="menu-bg" id="menu-bg"></div>
     <div class="photo">
-        <?php if (empty($_SESSION['user_image'])): ?>
-            <a href="<?= SCRIPTS .
-                'img' .
-                DIRECTORY_SEPARATOR .
-                'logo' .
-                DIRECTORY_SEPARATOR .
-                'pawn_logo.jpg' ?>">
-                <img src="<?= SCRIPTS .
+        <?php if (empty($_SESSION['user_image'])): ?>            
+                <img class="profile-pic" src="<?= SCRIPTS .
                     'img' .
                     DIRECTORY_SEPARATOR .
                     'logo' .
                     DIRECTORY_SEPARATOR .
-                    'pawn_logo.jpg' ?>" alt="Photo de profil" title="Cliquez pour agrandir" />
-            </a>
-        <?php else: ?>
-            <a href="<?= SCRIPTS .
-                'img' .
-                DIRECTORY_SEPARATOR .
-                'uploads' .
-                DIRECTORY_SEPARATOR .
-                $_SESSION['user_image'] ?>">
-                <img src="<?= SCRIPTS .
+                    'pawn_logo.jpg' ?>" alt="Photo de profil" title="Cliquez pour agrandir" />            
+        <?php else: ?>            
+                <img class="profile-pic" src="<?= SCRIPTS .
                     'img' .
                     DIRECTORY_SEPARATOR .
                     'uploads' .
                     DIRECTORY_SEPARATOR .
                     $_SESSION[
                         'user_image'
-                    ] ?>" alt="Photo de profil" title="Cliquez pour agrandir" height="100em" />
-            </a>
+                    ] ?>" alt="Photo de profil" title="Cliquez pour agrandir" />            
+        <?php endif; ?>
+    </div>
+    <!-- Conteneur de l'image en plein écran -->
+    <div  class="fullscreen-bg" id="fullscreenBg">
+        <span class="close-btn" id="closeBtn">&times;</span>
+        <?php if (empty($_SESSION['user_image'])): ?>            
+                <img class="fullscreen-img" id="fullscreenImg" src="<?= SCRIPTS .
+                    'img' .
+                    DIRECTORY_SEPARATOR .
+                    'logo' .
+                    DIRECTORY_SEPARATOR .
+                    'pawn_logo.jpg' ?>" alt="Photo de profil" title="" />           
+        <?php else: ?>            
+                <img class="fullscreen-img" id="fullscreenImg" src="<?= SCRIPTS .
+                    'img' .
+                    DIRECTORY_SEPARATOR .
+                    'uploads' .
+                    DIRECTORY_SEPARATOR .
+                    $_SESSION[
+                        'user_image'
+                    ] ?>" alt="Photo de profil" title="" />           
         <?php endif; ?>
     </div>
 </div>
