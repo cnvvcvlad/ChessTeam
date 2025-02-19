@@ -4,6 +4,7 @@ namespace Democvidev\ChessTeam\Controller\Admin;
 
 use Democvidev\ChessTeam\Classes\Article;
 use Democvidev\ChessTeam\Model\ArticleManager;
+use Democvidev\ChessTeam\Classes\ArticleStatut;
 use Democvidev\ChessTeam\Model\CategoriesManager;
 use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Controller\AbstractController;
@@ -51,6 +52,7 @@ class PostController extends AbstractController
         $this->isAdmin();
         return $this->view('admin.posts.index', [
             'posts' => $this->postManager->getAllPosts(),
+            'status' => ArticleStatut::getAllTypes(),
         ]);
     }
 
@@ -259,6 +261,28 @@ class PostController extends AbstractController
         if ($post) {
             //    $result = $this->postManager->deleteArticle($id);
             $this->postManager->deleteArticle($id);
+        }
+        return header('Location:' . dirname(SCRIPTS) . '/admin/posts');
+    }
+
+    /**
+     * Met à jour le statut d'un article
+     *
+     * @return void
+     */
+    public function updateStatus()
+    {
+        $this->isAdmin();
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'], $_POST['status'])) {
+            $id = intval($_POST['id']);
+            $status = $_POST['status'];
+            if (in_array($status, ArticleStatut::getAllTypes())) {
+                $this->postManager->changeStatus($id, $status);
+            } else {
+                throw new NotFoundException('Erreur. Statut non valide');
+            }
+        } else {
+            throw new NotFoundException('Erreur. Aucune donnée reçue');
         }
         return header('Location:' . dirname(SCRIPTS) . '/admin/posts');
     }
