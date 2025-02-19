@@ -3,6 +3,7 @@
 namespace Democvidev\ChessTeam\Classes;
 
 use Democvidev\ChessTeam\Classes\Generique;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 
 class Article extends Generique
 {
@@ -14,6 +15,7 @@ class Article extends Generique
     private $date_creation;
     private $art_author;
     private $category_id;
+    private $art_statut;
 
     public function __construct(array $data)
     {
@@ -180,6 +182,29 @@ class Article extends Generique
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of art_statut
+     */
+    public function getArt_statut()
+    {
+        return $this->art_statut;
+    }
+
+    /**
+     * Set the value of art_statut
+     *
+     * @return  self
+     */
+    public function setArt_statut($art_statut)
+    {
+        if (!in_array($art_statut, ArticleStatut::getAllTypes())) {
+            throw new NotFoundException("Statut invalide !");
+        }
+        $this->art_statut = $art_statut;
 
         return $this;
     }
