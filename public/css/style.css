@@ -985,6 +985,7 @@ main div.back-page {
 .back-page a {
   display: flex;
   justify-content: flex-end;
+  align-items: baseline;
   background-color: cornflowerblue;
   text-decoration: none;
   color: cornsilk;

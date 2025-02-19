@@ -2,6 +2,7 @@
 
 namespace Democvidev\ChessTeam\Controller;
 
+use Democvidev\ChessTeam\Classes\ArticleStatut;
 use Democvidev\ChessTeam\Model\ArticleManager;
 use Democvidev\ChessTeam\Model\CommentsManager;
 use Democvidev\ChessTeam\Service\PaginatorHandler;
@@ -24,6 +25,8 @@ class PostController extends AbstractController
     private $userController;
     protected $categoryController;
     private $paginatorHandler;
+    // on determine le nombre d'articles par page
+    const POSTS_PER_PAGE = 3;
 
     /**
      * Initialise les instances necessaires pour l'affichage des articles
@@ -46,13 +49,12 @@ class PostController extends AbstractController
      */
     public function index()
     {
+        $postsPerPage = self::POSTS_PER_PAGE;
         $currentPage = $this->getCurrentPage();
-        // on determine le nombre d'articles par page
-        $postsPerPage = 4;
         // on calcule le nombre de toutes les articles
-        $nbPosts = $this->postManager->countArticles();
+        $nbPosts = $this->postManager->countArticles(ArticleStatut::PUBLISHED);
         // on calcule le premier article de la page courante
-        $posts = $this->paginatorHandler->paginate($currentPage, $postsPerPage, $nbPosts);
+        $posts = $this->paginatorHandler->paginate($currentPage, $postsPerPage, $nbPosts, ArticleStatut::PUBLISHED);
         return $this->view('posts.index', [
             // 'posts' => $this->postManager->getAllPosts(),
             'posts' => $posts,
@@ -86,10 +88,25 @@ class PostController extends AbstractController
             throw new NotFoundException('Erreur 404');
         }
         $post = $this->postManager->affichageOne($id);
-        $commentsOfArticle = $this->commentManager->showCommentsOfArticle($id);
-        // var_dump($post[0]->getCategory_id());
-        // exit;
-        return $this->view('posts.show', compact('post', 'commentsOfArticle'));
+        // Sécuriser l'affichage des articles pour empêcher les utilisateurs non autorisés d’accéder aux articles en brouillon (draft), privés, ou avec un statut non public.        
+        if(!$post) {
+            throw new NotFoundException("L'article que vous recherchez n'existe pas.", 404);
+        }   
+        if(isset($_SESSION['statut']) && $_SESSION['statut'] === 1) {
+            return $this->view('posts.show', [
+                'postStatus' => ArticleStatut::getAllTypes(),
+                'post' => $post,
+                'commentsOfArticle' => $this->commentManager->showCommentsOfArticle($id)
+            ]);
+        }
+        if($post[0]->getArt_statut() !== ArticleStatut::PUBLISHED && isset($_SESSION['id_user']) && $post[0]->getArt_author() !== $_SESSION['id_user']) {
+            throw new NotFoundException("L'article que vous recherchez n'est pas accessible.", 404);
+        }
+        return $this->view('posts.show', [
+            'postStatus' => ArticleStatut::getAllTypes(),
+            'post' => $post,
+            'commentsOfArticle' => $this->commentManager->showCommentsOfArticle($id)
+        ]);
     }
 
     public function showNameAuthor($id): string
@@ -115,11 +132,14 @@ class PostController extends AbstractController
 
     public function profilePosts()
     {
-        $this->isConnected();  
+        $this->isConnected();
         $currentPage = $this->getCurrentPage();
-        $postsPerPage = 2;
-        $nbPosts = $this->postManager->countMyArticles($_SESSION['id_user']);      
-        $posts = $this->paginatorHandler->paginate($currentPage, $postsPerPage, $nbPosts, $_SESSION['id_user']);
+        $postsPerPage = self::POSTS_PER_PAGE;
+        $nbPosts = $this->postManager->countMyArticles($_SESSION['id_user']);
+        if ($nbPosts == 0) {
+            Throw new NotFoundException("Vous n'avez pas des articles publiés");
+        }
+        $posts = $this->paginatorHandler->paginate($currentPage, $postsPerPage, $nbPosts, $art_statut = null, $_SESSION['id_user']);
         return $this->view('user.posts', [
             'posts' => $posts,
             'comment' => $this->commentController,
@@ -159,7 +179,7 @@ class PostController extends AbstractController
      */
     public function getNbArticles(): int
     {
-        $nbArticles = (int) $this->postManager->countArticles();
+        $nbArticles = (int) $this->postManager->countArticles(ArticleStatut::PUBLISHED);
         return $nbArticles;
     }
 

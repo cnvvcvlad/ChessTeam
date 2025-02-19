@@ -3,6 +3,7 @@
 namespace Democvidev\ChessTeam\Service;
 
 use Democvidev\ChessTeam\Model\ArticleManager;
+use Democvidev\ChessTeam\Classes\ArticleStatut;
 use Democvidev\ChessTeam\Exception\NotFoundException;
 
 class PaginatorHandler
@@ -22,15 +23,15 @@ class PaginatorHandler
      * @param integer $postsPerPage
      * @return array
      */
-    public function paginate(int $currentPage, int $postsPerPage, int $nbPosts, int $id = null): array
+    public function paginate(int $currentPage, int $postsPerPage, int $nbPosts, $art_statut, int $id = null): array
     {
         // $nbPosts = $this->postManager->countArticles();
         $nbPages = ceil($nbPosts / $postsPerPage);
         $this->validateCurrentPage($currentPage, $nbPages);
         $firstPost = ($currentPage - 1) * $postsPerPage;
-        return is_null($id) 
-        ? $this->postManager->affichageArt($firstPost, $postsPerPage)
-        : $this->postManager->affichageMyArt($firstPost, $postsPerPage, $id);
+        return is_null($id)
+            ? $this->postManager->affichageArt($firstPost, $postsPerPage, $art_statut)
+            : $this->postManager->affichageMyArt($firstPost, $postsPerPage, $id);
     }
 
     /**
@@ -65,6 +66,6 @@ class PaginatorHandler
      */
     public function getNumberOfPosts($id = null): int
     {
-        return is_null($id) ? $this->postManager->countArticles() : $this->postManager->countMyArticles($id);
+        return is_null($id) ? $this->postManager->countArticles(ArticleStatut::PUBLISHED) : $this->postManager->countMyArticles($id);
     }
 }

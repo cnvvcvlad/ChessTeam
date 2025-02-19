@@ -15,6 +15,21 @@
                                                                     ) .
                                                                         '/admin/posts/edit/' .
                                                                         $value->getId() ?>">Modifier</a></div>
+                    <form
+                        action="<?= dirname(
+                                    SCRIPTS
+                                ) ?>/admin/posts/status/update ?>"
+                        method="post">
+                        <select name="status">
+                            <?php foreach ($params['postStatus'] as $status): ?>
+                                <option value="<?= $status; ?>" <?= ($value->getArt_statut() === $status) ? 'selected' : ''; ?>>
+                                    <?= ucfirst($status); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <input type="hidden" name="id" value="<?= $value->getId() ?>">
+                        <input onclick="return(confirm('Etes-vous sûr de vouloir modifier le statut?'));" type="submit" value="Modifier le statut">
+                    </form>
                     <form method="POST" action="<?= dirname(SCRIPTS) .
                                                     '/admin/posts/delete/' .
                                                     $value->getId() ?>" class="bouton_commande">
@@ -70,7 +85,7 @@
                         </div>
                         <?php if (isset($_SESSION['statut']) && $_SESSION['statut'] === 1) : ?>
                             <div class="comment-modify">
-                                <a href="<?= dirname(SCRIPTS)?>/admin/comments/edit/<?= $values->getId() ?>" class="comment-modify">Modifier</a>
+                                <a href="<?= dirname(SCRIPTS) ?>/admin/comments/edit/<?= $values->getId() ?>" class="comment-modify">Modifier</a>
                             </div>
                         <?php endif; ?>
 
@@ -83,7 +98,7 @@
                             <fieldset>
                                 <legend>Ajouter un commentaire</legend>
                                 <form action="<?= dirname(SCRIPTS) .
-            '/profile/add-comment' ?>" method="POST" class="form-inscription">
+                                                    '/profile/add-comment' ?>" method="POST" class="form-inscription">
                                     <p><input type="hidden" name="com_author" value="<?= htmlspecialchars(
                                                                                             $_SESSION['id_user']
                                                                                         ) ?>"></p>
