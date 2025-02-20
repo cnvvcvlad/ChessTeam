@@ -286,11 +286,11 @@ class PostController extends AbstractController
      * @param string $element
      * @return array
      */
-    public function searchOneElement($element): array
+    public function searchOneElement($element, $statut): array
     {
         // On remplace les caractères indésirables par des chaines de caractères vides
         $element = preg_replace('#[^a-z çéèàùêôî?0-9]#i', '', $element);
-        $posts = $this->postManager->searchArticles($element);
+        $posts = $this->postManager->searchArticles($element, $statut);
         return $posts;
     }
 
@@ -300,9 +300,9 @@ class PostController extends AbstractController
      * @param string $search
      * @return array
      */
-    public function getPostsSearchResults($search): array
+    public function getPostsSearchResults($search, $statut): array
     {
-        $posts = $this->searchOneElement($search);
+        $posts = $this->searchOneElement($search, $statut);
 
         // On sépare la chaine en plusieurs éléments
         if (empty($posts)) {
@@ -315,7 +315,7 @@ class PostController extends AbstractController
                 return strlen($word) > 2;
             });
             foreach ($sortedArray as $key => $value) {
-                $posts += $this->searchOneElement($value);
+                $posts += $this->searchOneElement($value, $statut);
             }
         }
         return $posts;
@@ -324,7 +324,11 @@ class PostController extends AbstractController
     public function search()
     {
         $search = $_POST['search'];
-        $posts = $this->getPostsSearchResults($search);
+        // verifier qu'il y a au moins deux lettres dans la recherche
+        if (strlen($search) < 2) {
+            return header('Location:' . dirname(SCRIPTS) . '/');
+        }
+        $posts = $this->getPostsSearchResults($search, ArticleStatut::PUBLISHED);
         return $this->view('posts.search', compact('posts'));
-    }
+    }   
 }

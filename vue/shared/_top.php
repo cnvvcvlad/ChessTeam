@@ -123,7 +123,7 @@
             <form action="<?= dirname(
                 SCRIPTS
             ) ?>/search" method="post">
-                <input type="text" name="search" placeholder="Rechercher un article" required />
+                <input minlength="2" required type="text" name="search" placeholder="Rechercher un article" required />
                 <input type="submit" value="Rechercher" />
             </form>
         </div>
