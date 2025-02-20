@@ -411,12 +411,11 @@ class ArticleManager extends AbstractModel
             AS date_creation 
             FROM ' .
             $this->table .
-            ' 
-            WHERE art_statut = :status AND art_title 
+            ' WHERE art_statut = :status AND (art_title 
             LIKE :search OR art_description 
             LIKE :search OR art_content 
             LIKE :search OR art_author 
-            LIKE :search';
+            LIKE :search) ';
         $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':search', '%' . $search . '%', \PDO::PARAM_STR);
         $select->bindValue(':status', $status, \PDO::PARAM_STR);

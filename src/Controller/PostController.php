@@ -331,7 +331,7 @@ class PostController extends AbstractController
         }
         // verifier qu'il y a au moins deux lettres dans la recherche
         if (strlen($search) < 2) {
-            return header('Location:' . dirname(SCRIPTS) . '/');
+            throw new NotFoundException('Erreur 404. La recherche est trop courte.');
         }
         $posts = $this->getPostsSearchResults($search, ArticleStatut::PUBLISHED);
         return $this->view('posts.search', compact('posts'));
