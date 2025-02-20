@@ -89,22 +89,22 @@ class PostController extends AbstractController
         }
         $post = $this->postManager->affichageOne($id);
         // Sécuriser l'affichage des articles pour empêcher les utilisateurs non autorisés d’accéder aux articles en brouillon (draft), privés, ou avec un statut non public.        
-        if(!$post) {
+        if (!$post) {
             throw new NotFoundException("L'article que vous recherchez n'existe pas.", 404);
-        }   
-        if(isset($_SESSION['statut']) && $_SESSION['statut'] === 1) {
+        }
+        if (isset($_SESSION['statut']) && $_SESSION['statut'] === 1) {
             return $this->view('posts.show', [
                 'postStatus' => ArticleStatut::getAllTypes(),
                 'post' => $post,
                 'commentsOfArticle' => $this->commentManager->showCommentsOfArticle($id)
             ]);
-        }        
-        if(isset($_SESSION['id_user'])) {
-            if($post[0]->getArt_statut() !== ArticleStatut::PUBLISHED && $post[0]->getArt_author() !== $_SESSION['id_user']) {
+        }
+        if (isset($_SESSION['id_user'])) {
+            if ($post[0]->getArt_statut() !== ArticleStatut::PUBLISHED && $post[0]->getArt_author() !== $_SESSION['id_user']) {
                 throw new NotFoundException("L'article que vous recherchez n'est pas accessible.", 404);
             }
-        } else if(!isset($_SESSION['id_user'])){
-            if($post[0]->getArt_statut() !== ArticleStatut::PUBLISHED) {
+        } else if (!isset($_SESSION['id_user'])) {
+            if ($post[0]->getArt_statut() !== ArticleStatut::PUBLISHED) {
                 throw new NotFoundException("L'article que vous recherchez n'est pas accessible.", 404);
             }
         }
@@ -143,7 +143,7 @@ class PostController extends AbstractController
         $postsPerPage = self::POSTS_PER_PAGE;
         $nbPosts = $this->postManager->countMyArticles($_SESSION['id_user']);
         if ($nbPosts == 0) {
-            Throw new NotFoundException("Vous n'avez pas des articles publiés");
+            throw new NotFoundException("Vous n'avez pas des articles publiés");
         }
         $posts = $this->paginatorHandler->paginate($currentPage, $postsPerPage, $nbPosts, $art_statut = null, $_SESSION['id_user']);
         return $this->view('user.posts', [
@@ -323,12 +323,17 @@ class PostController extends AbstractController
 
     public function search()
     {
-        $search = $_POST['search'];
+        // verifier que la recherche ne contient pas de caractères indésirables
+        if (isset($_POST['search'])) {
+            $search = trim($_POST['search']);
+        } else {
+            throw new NotFoundException('Erreur 404. La recherche est vide.');
+        }
         // verifier qu'il y a au moins deux lettres dans la recherche
         if (strlen($search) < 2) {
             return header('Location:' . dirname(SCRIPTS) . '/');
         }
         $posts = $this->getPostsSearchResults($search, ArticleStatut::PUBLISHED);
         return $this->view('posts.search', compact('posts'));
-    }   
+    }
 }
