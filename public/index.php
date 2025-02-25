@@ -5,7 +5,8 @@ declare(strict_types=1);
 session_start();
 
 use Democvidev\ChessTeam\Core\Router;
-use Democvidev\ChessTeam\Model\MemberManager;
+use Democvidev\ChessTeam\Service\RoleHandler;
+use Democvidev\ChessTeam\Classes\ArticleStatut;
 use Democvidev\ChessTeam\Model\CategoriesManager;
 use Democvidev\ChessTeam\Database\DataBaseConnection;
 use Democvidev\ChessTeam\Exception\NotFoundException;
@@ -31,7 +32,10 @@ define('GOOGLE_SECRET', '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');
 
 $db = new DataBaseConnection();
 $categoryManager = new CategoriesManager($db);
-$allCategories = $categoryManager->showAllCategory();
+$handler = new RoleHandler();
+$handler->isAdmin() ?
+    $allCategories = $categoryManager->showAllCategory() :
+    $allCategories = $categoryManager->getCategoryByStatus(ArticleStatut::PUBLISHED);
 global $allCategories;
 
 $router = new Router($_GET['action']);
@@ -117,6 +121,10 @@ $router
         '/admin/categories/delete/:id',
         'Democvidev\ChessTeam\Controller\Admin\CategoryController@delete'
     )
+    ->post(
+        'admin/categories/status/update',
+        'Democvidev\ChessTeam\Controller\Admin\CategoryController@updateStatus'
+    )
     ->get('/admin/coachs/create', 'Democvidev\ChessTeam\Controller\Admin\CoachController@create')
     ->post('/admin/coachs/create', 'Democvidev\ChessTeam\Controller\Admin\CoachController@createCoach')
     ->get('/admin/coachs/edit/:id', 'Democvidev\ChessTeam\Controller\Admin\CoachController@edit')
@@ -187,8 +195,10 @@ $router
         '/admin/posts/edit/:id',
         'Democvidev\ChessTeam\Controller\Admin\PostController@update'
     )
-    ->post('/admin/posts/status/update', 
-        'Democvidev\ChessTeam\Controller\Admin\PostController@updateStatus');
+    ->post(
+        '/admin/posts/status/update',
+        'Democvidev\ChessTeam\Controller\Admin\PostController@updateStatus'
+    );
 
 // on ratrappe les erreurs personnalisées dans le cas où l'action n'existe pas
 try {

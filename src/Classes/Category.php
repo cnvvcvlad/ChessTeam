@@ -12,6 +12,7 @@ class Category extends Generique
     private $category_image;
     private $date_creation;
     private $cat_author;
+    private $cat_status;
 
     public function __construct(array $data)
     {
@@ -138,6 +139,26 @@ class Category extends Generique
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cat_status
+     */ 
+    public function getCat_status()
+    {
+        return $this->cat_status;
+    }
+
+    /**
+     * Set the value of cat_status
+     *
+     * @return  self
+     */ 
+    public function setCat_status($cat_status)
+    {
+        $this->cat_status = $cat_status;
 
         return $this;
     }

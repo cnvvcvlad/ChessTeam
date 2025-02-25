@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Democvidev\ChessTeam\Controller\Admin;
 
 use Democvidev\ChessTeam\Classes\Category;
+use Democvidev\ChessTeam\Classes\ArticleStatut;
 use Democvidev\ChessTeam\Model\CategoriesManager;
 use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Controller\AbstractController;
@@ -48,6 +49,7 @@ class CategoryController extends AbstractController
         $categories = $this->categoryManager->showAllCategory();
         return $this->view('admin.categories.index', [
             'categories' => $categories,
+            'status' => ArticleStatut::getAllTypes(),
         ]);
     }
 
@@ -285,5 +287,27 @@ class CategoryController extends AbstractController
         } else {
             throw new NotFoundException('Cette catégorie n\'existe pas');
         }
+    }
+
+    /**
+     * Mettre à jour le statut d'une catégorie
+     * @param int $id
+     * @param string $status
+     */
+    public function updateStatus()
+    {
+        $this->isAdmin();
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'], $_POST['status'])) {            
+            $id = intval($_POST['id']);
+            $status = $_POST['status'];
+            if (in_array($status, ArticleStatut::getAllTypes())) {
+                $this->categoryManager->changeStatus($id, $status);
+            } else {
+                throw new NotFoundException('Erreur. Statut non valide');
+            }
+        } else {
+            throw new NotFoundException('Erreur. Aucune donnée reçue');
+        }
+        return header('Location:' . dirname(SCRIPTS) . '/admin/categories');
     }
 }
