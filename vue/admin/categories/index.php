@@ -14,6 +14,7 @@
                 <th>Titre</th>
                 <th>Publié le</th>
                 <th>Actions</th>
+                <th>Statut</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,23 @@
                                             SCRIPTS
                                         ) ?>/admin/categories/delete/<?= $category->getId() ?>" method="post" onclick="return(confirm('Etes-vous sûr de vouloir supprimer?'));">
                             <input type="submit" value="Supprimer">
+                        </form>
+                    </td>
+                    <td>
+                        <form
+                            action="<?= dirname(
+                                        SCRIPTS
+                                    ) ?>/admin/categories/status/update ?>"
+                            method="post">
+                            <select name="status">
+                                <?php foreach ($params['status'] as $status): ?>
+                                    <option value="<?= $status; ?>" <?= ($category->getCat_status() === $status) ? 'selected' : ''; ?>>
+                                        <?= ucfirst($status); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <input type="hidden" name="id" value="<?= $category->getId() ?>">
+                            <input onclick="return(confirm('Etes-vous sûr de vouloir modifier le statut?'));" type="submit" value="Modifier le statut">
                         </form>
                     </td>
                 </tr>

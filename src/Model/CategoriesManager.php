@@ -2,6 +2,7 @@
 
 namespace Democvidev\ChessTeam\Model;
 
+use Democvidev\ChessTeam\Classes\ArticleStatut;
 use Democvidev\ChessTeam\Classes\Category;
 use Democvidev\ChessTeam\Exception\NotFoundException;
 use Democvidev\ChessTeam\Model\AbstractModel;
@@ -18,13 +19,14 @@ class CategoriesManager extends AbstractModel
     public function insertCategory(Category $category): bool
     {
         $request = 'INSERT INTO ' . $this->table . '(
-            title, description, category_image, cat_author) 
-            VALUES(:cat_title, :cat_description, :cat_image, :cat_author)';
+            title, description, category_image, cat_author, cat_status) 
+            VALUES(:cat_title, :cat_description, :cat_image, :cat_author, :cat_status)';
         $insert = $this->db->getPDO()->prepare($request);
         $insert->bindValue(':cat_title', $category->getTitle(), \PDO::PARAM_STR);
         $insert->bindValue(':cat_description', $category->getDescription(), \PDO::PARAM_STR);
         $insert->bindValue(':cat_image', $category->getCategory_image(), \PDO::PARAM_STR);
         $insert->bindValue(':cat_author', $category->getCat_author(), \PDO::PARAM_STR);
+        $insert->bindValue(':cat_status', ArticleStatut::DRAFT, \PDO::PARAM_STR);
         $insert = $insert->execute();
         return $insert;
     }
@@ -130,5 +132,35 @@ class CategoriesManager extends AbstractModel
         $delete->bindValue(':id', $id_category, \PDO::PARAM_INT);
         $isDeleted = $delete->execute();
         return $isDeleted;
+    }
+
+    /**
+     * Recuperer les categories selon le statut
+     *
+     * @param string $status
+     * @return array
+     */
+    public function getCategoryByStatus($status): array
+    {
+        $request = 'SELECT * FROM ' . $this->table . ' WHERE cat_status = :status';
+        $select = $this->db->getPDO()->prepare($request);
+        $select->bindValue(':status', $status, \PDO::PARAM_STR);
+        $select->execute();
+        $categories = $this->returnCategories($select);
+        return $categories;
+    }
+
+    /**
+     * Changer le statut d'une catégorie
+     * 
+     * @param int $id
+     * @param string $status
+     * @return void
+     */
+    public function changeStatus($id, $status): void
+    {
+        $request = 'UPDATE ' . $this->table . ' SET cat_status = :status WHERE id = :id';
+        $update = $this->db->getPDO()->prepare($request);
+        $update->execute(['status' => $status, 'id' => $id]);
     }
 }

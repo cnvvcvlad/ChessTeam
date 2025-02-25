@@ -2,6 +2,8 @@
 
 namespace Democvidev\ChessTeam\Controller;
 
+use Democvidev\ChessTeam\Service\RoleHandler;
+use Democvidev\ChessTeam\Classes\ArticleStatut;
 use Democvidev\ChessTeam\Model\CategoriesManager;
 use Democvidev\ChessTeam\Controller\AbstractController;
 
@@ -16,12 +18,20 @@ class CategoryController extends AbstractController
     private $categoryManager;
 
     /**
+     * Instance of RoleHandler
+     *
+     * @var RoleHandler
+     */
+    private $handler;
+
+    /**
      * Initialize the CategoryController
      */
     public function __construct()
     {
         parent::__construct();
         $this->categoryManager = new CategoriesManager($this->getDatabase());
+        $this->handler = new RoleHandler();
     }
 
     /**
@@ -31,7 +41,9 @@ class CategoryController extends AbstractController
      */
     public function index()
     {
-        $categories = $this->categoryManager->showAllCategory();
+        $this->handler->isAdmin() ?
+            $categories = $this->categoryManager->showAllCategory() :
+            $categories = $this->categoryManager->getCategoryByStatus(ArticleStatut::PUBLISHED);
         return $this->view('categories.index', ['categories' => $categories]);
     }
 
