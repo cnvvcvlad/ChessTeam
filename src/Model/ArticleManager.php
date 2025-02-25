@@ -403,7 +403,7 @@ class ArticleManager extends AbstractModel
      * @param string $search
      * @return array
      */
-    public function searchArticles($search): array
+    public function searchArticles($search, $status): array
     {
         $query =
             'SELECT *, 
@@ -411,15 +411,17 @@ class ArticleManager extends AbstractModel
             AS date_creation 
             FROM ' .
             $this->table .
-            ' 
-            WHERE art_title 
+            ' WHERE art_statut = :status AND (art_title 
             LIKE :search OR art_description 
             LIKE :search OR art_content 
             LIKE :search OR art_author 
-            LIKE :search';
+            LIKE :search) ';
         $select = $this->db->getPDO()->prepare($query);
-        $select->execute(['search' => '%' . $search . '%']);
+        $select->bindValue(':search', '%' . $search . '%', \PDO::PARAM_STR);
+        $select->bindValue(':status', $status, \PDO::PARAM_STR);
+        $select->execute();
         $posts = $this->returnPosts($select);
+        // var_dump($posts); exit;
         return $posts;
     }
 
