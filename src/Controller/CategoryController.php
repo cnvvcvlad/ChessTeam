@@ -6,6 +6,7 @@ use Democvidev\ChessTeam\Service\RoleHandler;
 use Democvidev\ChessTeam\Classes\ArticleStatut;
 use Democvidev\ChessTeam\Model\CategoriesManager;
 use Democvidev\ChessTeam\Controller\AbstractController;
+use Democvidev\ChessTeam\Exception\NotFoundException;
 
 class CategoryController extends AbstractController
 {
@@ -43,7 +44,7 @@ class CategoryController extends AbstractController
     {
         $this->handler->isAdmin() ?
             $categories = $this->categoryManager->showAllCategory() :
-            $categories = $this->categoryManager->getCategoryByStatus(ArticleStatut::PUBLISHED);
+            $categories = $this->categoryManager->getAllCategoriesByStatus(ArticleStatut::PUBLISHED);
         return $this->view('categories.index', ['categories' => $categories]);
     }
 
@@ -55,7 +56,18 @@ class CategoryController extends AbstractController
      */
     public function show($id)
     {
-        $category = $this->categoryManager->showCategory($id);
+        if (!preg_match("/^\d+$/", $id)) {
+            throw new NotFoundException('Erreur 404');
+        }
+        if (isset($_SESSION['statut']) && $_SESSION['statut'] === 1) {
+
+            $category = $this->categoryManager->showCategory($id);
+        } else {
+            $category = $this->categoryManager->getCategoryByStatus(ArticleStatut::PUBLISHED, $id);
+        }
+        if (!$category) {
+            throw new NotFoundException("La catégorie que vous recherchez n'existe pas.", 404);
+        }
         return $this->view('categories.show', ['category' => $category]);
     }
 

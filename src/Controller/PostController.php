@@ -158,11 +158,20 @@ class PostController extends AbstractController
         ]);
     }
 
-    public function showCategoryPosts(int $id)
+    public function showCategoryPosts($id)
     {
-        $posts = $this->postManager->affichageParCategorie($id);
+        if (!preg_match("/^\d+$/", $id)) {
+            throw new NotFoundException('Erreur 404');
+        }
+        if (isset($_SESSION['statut']) && $_SESSION['statut'] === 1) {
+            $posts = $this->postManager->affichageParCategorie($id, true);
+        } else {
+            $posts = $this->postManager->affichageParCategorie($id);
+        }
         $comment = $this->commentController;
-        return $this->view('posts.category', compact('posts', 'comment'));
+        $user = $this->userController;
+        $category = $this->categoryController;
+        return $this->view('posts.category', compact('posts', 'comment', 'user', 'category'));
     }
 
     /**
