@@ -35,7 +35,7 @@ $categoryManager = new CategoriesManager($db);
 $handler = new RoleHandler();
 $handler->isAdmin() ?
     $allCategories = $categoryManager->showAllCategory() :
-    $allCategories = $categoryManager->getCategoryByStatus(ArticleStatut::PUBLISHED);
+    $allCategories = $categoryManager->getAllCategoriesByStatus(ArticleStatut::PUBLISHED);
 global $allCategories;
 
 $router = new Router($_GET['action']);

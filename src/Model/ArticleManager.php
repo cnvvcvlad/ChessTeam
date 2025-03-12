@@ -316,7 +316,7 @@ class ArticleManager extends AbstractModel
      * @param int $category_id
      * @return array
      */
-    public function affichageParCategorie($category_id): array
+    public function affichageParCategorie($category_id, $isAdmin = false): array
     {
         $query =
             'SELECT *, 
@@ -325,10 +325,15 @@ class ArticleManager extends AbstractModel
             FROM ' .
             $this->table .
             ' 
-            WHERE category_id = :category_id AND art_statut LIKE :art_statut';
+            WHERE category_id = :category_id';
+        if (!$isAdmin) {
+            $query .= ' AND art_statut = :art_statut';
+        }
         $select = $this->db->getPDO()->prepare($query);
         $select->bindValue(':category_id', $category_id, \PDO::PARAM_INT);
-        $select->bindValue(':art_statut', ArticleStatut::PUBLISHED, \PDO::PARAM_STR);
+        if (!$isAdmin) {
+            $select->bindValue(':art_statut', ArticleStatut::PUBLISHED, \PDO::PARAM_STR);
+        }
         $select->execute();
         $posts = $this->returnPosts($select);
         return $posts;

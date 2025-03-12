@@ -91,16 +91,15 @@ class CategoriesManager extends AbstractModel
     {
         $request = 'SELECT *, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') 
         AS date_creation FROM ' . $this->table . ' WHERE id = :id';
-        $select = $this->db->getPDO()->prepare($request);        
+        $select = $this->db->getPDO()->prepare($request);
         $select->bindValue(':id', $id_category, \PDO::PARAM_INT);
-        $select->execute();        
-        if($select->rowCount() > 0) {
-            $cat[] = new Category($select->fetch());        
-        return $cat;
+        $select->execute();
+        if ($select->rowCount() > 0) {
+            $cat[] = new Category($select->fetch());
+            return $cat;
         } else {
             throw new NotFoundException('Cette catégorie n\'existe pas');
         }
-        
     }
 
     /**
@@ -140,10 +139,28 @@ class CategoriesManager extends AbstractModel
      * @param string $status
      * @return array
      */
-    public function getCategoryByStatus($status): array
+    public function getAllCategoriesByStatus($status): array
     {
         $request = 'SELECT * FROM ' . $this->table . ' WHERE cat_status = :status';
         $select = $this->db->getPDO()->prepare($request);
+        $select->bindValue(':status', $status, \PDO::PARAM_STR);
+        $select->execute();
+        $categories = $this->returnCategories($select);
+        return $categories;
+    }
+
+    /**
+     * Recuperer une catégorie selon le statut
+     *
+     * @param string $status
+     * @param int $id_category
+     * @return array
+     */
+    public function getCategoryByStatus($status, $id_category): array
+    {
+        $request = 'SELECT * FROM ' . $this->table . ' WHERE id = :id AND cat_status = :status';
+        $select = $this->db->getPDO()->prepare($request);
+        $select->bindValue(':id', $id_category, \PDO::PARAM_INT);
         $select->bindValue(':status', $status, \PDO::PARAM_STR);
         $select->execute();
         $categories = $this->returnCategories($select);
